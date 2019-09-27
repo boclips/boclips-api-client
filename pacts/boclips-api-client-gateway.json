@@ -1,0 +1,43 @@
+{
+  "consumer": {
+    "name": "boclips-api-client"
+  },
+  "provider": {
+    "name": "gateway"
+  },
+  "interactions": [
+    {
+      "description": "GET legal restrictions",
+      "request": {
+        "method": "GET",
+        "path": "/v1/legal-restrictions"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/hal+json;charset=UTF-8"
+        },
+        "body": {
+          "_embedded": {
+            "legalRestrictions": [
+              {
+                "id": "2",
+                "text": "No restrictions"
+              }
+            ]
+          }
+        },
+        "matchingRules": {
+          "$.body._embedded.legalRestrictions[0]": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

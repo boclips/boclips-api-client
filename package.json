@@ -1,0 +1,37 @@
+{
+  "name": "boclips-video-client",
+  "version": "1.0.0",
+  "description": "Boclips API client",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc -p . --noEmit",
+    "pactTest": "export NODE_ENV=pactTest && jest --runInBand --config jest.pact-config.json",
+    "pactVerify": "jest --runInBand --config jest.pact-verify-config.json",
+    "lint": "tslint -c tslint.json -p .",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boclips/boclips-api-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boclips/boclips-api-client/issues"
+  },
+  "homepage": "https://github.com/boclips/boclips-api-client#readme",
+  "devDependencies": {
+    "@pact-foundation/pact": "^9.1.1",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.9",
+    "axios": "^0.19.0",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "request-promise-native": "^1.0.7",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.6.3"
+  }
+}

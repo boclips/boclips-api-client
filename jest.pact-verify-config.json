@@ -1,0 +1,6 @@
+{
+  "testRegex": "/(verify.ts)",
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  }
+}

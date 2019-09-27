@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cwd="$(cd "$(dirname $0)" && pwd)"
+
+docker run \
+    -v ${cwd}/pacts:/tmp/pacts \
+    -e pact_urls=/tmp/pacts/boclips-api-client-gateway.json \
+    -e provider_base_url=https://api.staging-boclips.com \
+    dius/pact-provider-verifier-docker@sha256:75f5015a37da8d8369cebb398861afe991ce917cd490bad4a113c7b91c3397ca
