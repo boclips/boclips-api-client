@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -eu
+
+cwd="$(cd "$(dirname "$0")" && pwd)"
+
+fly --target ci \
+    set-pipeline \
+    --pipeline boclips-api-client \
+    --config "$cwd/pipeline.yml"

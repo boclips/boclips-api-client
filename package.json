@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc -p . --noEmit",
+    "build": "tsc",
     "pactTest": "export NODE_ENV=pactTest && jest --runInBand --config jest.pact-config.json",
     "pactVerify": "jest --runInBand --config jest.pact-verify-config.json",
     "lint": "tslint -c tslint.json -p .",
