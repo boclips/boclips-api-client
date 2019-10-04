@@ -1,10 +1,7 @@
 import { AxiosInstance } from 'axios';
+import { BoclipsApiClient } from './BoclipsApiClient';
 import { LegalRestrictionsConverter } from './converters/LegalRestrictionsConverter';
 import { LegalRestrictions } from './LegalRestrictions';
-
-export interface BoclipsApiClient {
-  getAllLegalRestrictions(): Promise<LegalRestrictions[]>;
-}
 
 export class HttpBoclipsApiClient implements BoclipsApiClient {
   private axios: AxiosInstance;

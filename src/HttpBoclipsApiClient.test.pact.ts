@@ -1,7 +1,7 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import axios from 'axios';
 import { provider } from '../pactSetup';
-import { HttpBoclipsApiClient } from './client';
+import { HttpBoclipsApiClient } from './HttpBoclipsApiClient';
 
 const { eachLike } = Matchers;
 
