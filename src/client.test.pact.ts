@@ -3,7 +3,7 @@ import axios from 'axios';
 import { provider } from '../pactSetup';
 import { HttpBoclipsApiClient } from './client';
 
-const { like } = Matchers;
+const { eachLike } = Matchers;
 
 beforeEach(() => {
   return provider.addInteraction({
@@ -20,7 +20,7 @@ beforeEach(() => {
       },
       body: {
         _embedded: {
-          legalRestrictions: [like({ id: '2', text: 'No restrictions' })],
+          legalRestrictions: eachLike({ id: '2', text: 'No restrictions' }),
         },
       },
     },

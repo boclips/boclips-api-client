@@ -28,7 +28,10 @@
           }
         },
         "matchingRules": {
-          "$.body._embedded.legalRestrictions[0]": {
+          "$.body._embedded.legalRestrictions": {
+            "min": 1
+          },
+          "$.body._embedded.legalRestrictions[*].*": {
             "match": "type"
           }
         }
