@@ -1,7 +1,3 @@
-import { HttpBoclipsApiClient } from './HttpBoclipsApiClient';
-import { TestBoclipsApiClient } from './TestBoclipsApiClient';
+import BoclipsApiClient from './BoclipsApiClient';
 
-export default {
-  TestBoclipsApiClient,
-  HttpBoclipsApiClient,
-};
+export default BoclipsApiClient;
