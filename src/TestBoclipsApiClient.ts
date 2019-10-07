@@ -1,5 +1,5 @@
 import { BoclipsApiClient } from './BoclipsApiClient';
-import { LegalRestrictions } from './LegalRestrictions';
+import { LegalRestrictions } from './types/LegalRestrictions';
 
 const randomId = (): string =>
   `${Math.floor((Math.random() * 100000) % 100000)}`;

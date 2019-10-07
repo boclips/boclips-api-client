@@ -1,4 +1,4 @@
-import { LegalRestrictions } from '../LegalRestrictions';
+import { LegalRestrictions } from '../types/LegalRestrictions';
 
 export class LegalRestrictionsConverter {
   public static convert(response: any): LegalRestrictions[] {
