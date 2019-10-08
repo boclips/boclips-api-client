@@ -7,6 +7,158 @@
   },
   "interactions": [
     {
+      "description": "GET Backoffice Links",
+      "request": {
+        "method": "GET",
+        "path": "/v1/admin"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/hal+json"
+        },
+        "body": {
+          "_links": {
+            "collection": {
+              "href": "href",
+              "templated": false
+            },
+            "createCollection": {
+              "href": "href",
+              "templated": false
+            },
+            "adminCollectionSearch": {
+              "href": "href",
+              "templated": false
+            },
+            "jobs": {
+              "href": "href",
+              "templated": false
+            },
+            "jobDetails": {
+              "href": "href",
+              "templated": false
+            },
+            "adminSearch": {
+              "href": "href",
+              "templated": false
+            },
+            "videos": {
+              "href": "href",
+              "templated": false
+            },
+            "orders": {
+              "href": "href",
+              "templated": false
+            },
+            "exportOrders": {
+              "href": "href",
+              "templated": false
+            },
+            "order": {
+              "href": "href",
+              "templated": false
+            },
+            "httpFeeds": {
+              "href": "href",
+              "templated": false
+            },
+            "contentPartners": {
+              "href": "href",
+              "templated": false
+            },
+            "contentPartner": {
+              "href": "href",
+              "templated": false
+            },
+            "legalRestrictions": {
+              "href": "/v1/legal-restrictions",
+              "templated": false
+            },
+            "youtubeFeeds": {
+              "href": "href",
+              "templated": false
+            },
+            "createHttpFeed": {
+              "href": "href",
+              "templated": false
+            },
+            "distributionMethods": {
+              "href": "href",
+              "templated": false
+            },
+            "subjects": {
+              "href": "href",
+              "templated": false
+            },
+            "searchContracts": {
+              "href": "href",
+              "templated": false
+            }
+          }
+        },
+        "matchingRules": {
+          "$.body._links.collection": {
+            "match": "type"
+          },
+          "$.body._links.createCollection": {
+            "match": "type"
+          },
+          "$.body._links.adminCollectionSearch": {
+            "match": "type"
+          },
+          "$.body._links.jobs": {
+            "match": "type"
+          },
+          "$.body._links.jobDetails": {
+            "match": "type"
+          },
+          "$.body._links.adminSearch": {
+            "match": "type"
+          },
+          "$.body._links.videos": {
+            "match": "type"
+          },
+          "$.body._links.orders": {
+            "match": "type"
+          },
+          "$.body._links.exportOrders": {
+            "match": "type"
+          },
+          "$.body._links.order": {
+            "match": "type"
+          },
+          "$.body._links.httpFeeds": {
+            "match": "type"
+          },
+          "$.body._links.contentPartners": {
+            "match": "type"
+          },
+          "$.body._links.contentPartner": {
+            "match": "type"
+          },
+          "$.body._links.legalRestrictions": {
+            "match": "type"
+          },
+          "$.body._links.youtubeFeeds": {
+            "match": "type"
+          },
+          "$.body._links.createHttpFeed": {
+            "match": "type"
+          },
+          "$.body._links.distributionMethods": {
+            "match": "type"
+          },
+          "$.body._links.subjects": {
+            "match": "type"
+          },
+          "$.body._links.searchContracts": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
       "description": "GET legal restrictions",
       "request": {
         "method": "GET",

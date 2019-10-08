@@ -6,7 +6,6 @@ export default interface BackofficeLinks {
   adminCollectionSearch: Link;
   jobs: Link;
   jobDetails: Link;
-  search: Link;
   adminSearch: Link;
   videos: Link;
   orders: Link;

@@ -1,19 +1,22 @@
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { BoclipsApiClient } from './BoclipsApiClient';
+import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
 import { LegalRestrictionsConverter } from './converters/LegalRestrictionsConverter';
 import BackofficeLinks from './types/BackofficeLinks';
 import { LegalRestrictions } from './types/LegalRestrictions';
 
 export class HttpBoclipsApiClient implements BoclipsApiClient {
   private axios: AxiosInstance;
+  private baseUrl: string;
   private backofficeLinks: BackofficeLinks;
 
-  private constructor(axios: AxiosInstance) {
+  private constructor(axios: AxiosInstance, baseUrl: string) {
     this.axios = axios;
+    this.baseUrl = baseUrl;
   }
 
-  public static initalize = async (axios: AxiosInstance) => {
-    const instance = new HttpBoclipsApiClient(axios);
+  public static initalize = async (axios: AxiosInstance, baseUrl: string) => {
+    const instance = new HttpBoclipsApiClient(axios, baseUrl);
 
     await instance.setBackofficeLinks();
 
@@ -22,7 +25,7 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
 
   public async getAllLegalRestrictions(): Promise<LegalRestrictions[]> {
     if (this.backofficeLinks && this.backofficeLinks.legalRestrictions) {
-      const response = await this.axios.get(
+      const response = await this.get(
         this.backofficeLinks.legalRestrictions.href,
       );
       return LegalRestrictionsConverter.convert(response.data);
@@ -32,6 +35,16 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
   }
 
   private async setBackofficeLinks() {
-    this.backofficeLinks = await this.axios.get('/v1/admin');
+    const backofficeLinksResponse = await this.get('/v1/admin');
+    this.backofficeLinks = BackofficeLinksConverter.convert(
+      backofficeLinksResponse.data,
+    );
+  }
+
+  private get<T = any, R = AxiosResponse<T>>(
+    url: string,
+    config?: AxiosRequestConfig,
+  ): Promise<R> {
+    return this.axios.get<T, R>(this.baseUrl + url, config);
   }
 }

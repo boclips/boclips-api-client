@@ -1,5 +1,5 @@
 import pact from '@pact-foundation/pact-node';
-import path from 'path';
+import { resolve } from 'path';
 import request from 'request-promise-native';
 
 it('Contracts verification', async () => {
@@ -18,7 +18,7 @@ it('Contracts verification', async () => {
     validateSSL: false,
     customProviderHeaders: [`authorization: Bearer ${token}`],
     pactUrls: [
-      path.resolve(process.cwd(), './pacts/boclips-api-client-gateway.json'),
+      resolve(process.cwd(), './pacts/boclips-api-client-gateway.json'),
     ],
   };
 
