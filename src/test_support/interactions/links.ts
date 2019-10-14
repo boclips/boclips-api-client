@@ -4,7 +4,7 @@ import Link from '../../types/Link';
 
 const { like } = Matchers;
 
-const sampleLink: Link = { href: 'href', templated: false };
+export const sampleLink: Link = { href: 'href', templated: false };
 
 export const getBackofficeLinks = (): InteractionObject => ({
   state: undefined,
@@ -31,8 +31,14 @@ export const getBackofficeLinks = (): InteractionObject => ({
         exportOrders: like(sampleLink),
         order: like(sampleLink),
         httpFeeds: like(sampleLink),
-        contentPartners: like(sampleLink),
-        contentPartner: like(sampleLink),
+        contentPartners: like({
+          href: `${provider.mockService.baseUrl}/v1/content-partners`,
+          templated: false,
+        }),
+        contentPartner: like({
+          href: `${provider.mockService.baseUrl}/v1/content-partners/{id}`,
+          templated: true,
+        }),
         legalRestrictions: like({
           href: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
           templated: false,
