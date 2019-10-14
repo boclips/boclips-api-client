@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosInstance } from 'axios';
 import { BoclipsApiClient } from './BoclipsApiClient';
 import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
 import { LegalRestrictionsConverter } from './converters/LegalRestrictionsConverter';
@@ -25,7 +25,7 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
 
   public async getAllLegalRestrictions(): Promise<LegalRestrictions[]> {
     if (this.backofficeLinks && this.backofficeLinks.legalRestrictions) {
-      const response = await this.get(
+      const response = await this.axios.get(
         this.backofficeLinks.legalRestrictions.href,
       );
       return LegalRestrictionsConverter.convert(response.data);
@@ -35,16 +35,11 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
   }
 
   private async setBackofficeLinks() {
-    const backofficeLinksResponse = await this.get('/v1/admin');
+    const backofficeLinksResponse = await this.axios.get(
+      `${this.baseUrl}/v1/admin`,
+    );
     this.backofficeLinks = BackofficeLinksConverter.convert(
       backofficeLinksResponse.data,
     );
-  }
-
-  private get<T = any, R = AxiosResponse<T>>(
-    url: string,
-    config?: AxiosRequestConfig,
-  ): Promise<R> {
-    return this.axios.get<T, R>(this.baseUrl + url, config);
   }
 }

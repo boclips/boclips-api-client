@@ -37,7 +37,7 @@ beforeAll(() => {
           contentPartners: like(sampleLink),
           contentPartner: like(sampleLink),
           legalRestrictions: like({
-            href: '/v1/legal-restrictions',
+            href: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
             templated: false,
           }),
           youtubeFeeds: like(sampleLink),
