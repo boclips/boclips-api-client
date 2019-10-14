@@ -7,7 +7,7 @@
   "scripts": {
     "compile": "tsc -p . --noEmit",
     "build": "tsc",
-    "test": "export NODE_ENV=pactTest && jest --runInBand --config jest.pact-config.json",
+    "test": "jest --runInBand --config jest.pact-config.json",
     "verify": "npm run test && jest --runInBand --config jest.pact-verify-config.json",
     "lint": "tslint -c tslint.json -p .",
     "lint:fix": "npm run lint -- --fix"

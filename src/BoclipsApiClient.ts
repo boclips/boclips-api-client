@@ -1,5 +1,5 @@
-import { LegalRestrictions } from './types/LegalRestrictions';
+import { LegalRestrictionsController } from './controllers/legal_restrictions/LegalRestrictionsController';
 
 export interface BoclipsApiClient {
-  getAllLegalRestrictions(): Promise<LegalRestrictions[]>;
+  legalRestrictionsController: LegalRestrictionsController;
 }

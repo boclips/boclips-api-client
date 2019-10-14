@@ -1,14 +1,15 @@
 import { AxiosInstance } from 'axios';
 import { BoclipsApiClient } from './BoclipsApiClient';
+import { HttpLegalRestrictionsController } from './controllers/legal_restrictions/HttpLegalRestrictionsController';
 import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
-import { LegalRestrictionsConverter } from './converters/LegalRestrictionsConverter';
 import BackofficeLinks from './types/BackofficeLinks';
-import { LegalRestrictions } from './types/LegalRestrictions';
 
 export class HttpBoclipsApiClient implements BoclipsApiClient {
   private axios: AxiosInstance;
   private baseUrl: string;
   private backofficeLinks: BackofficeLinks;
+
+  public legalRestrictionsController: HttpLegalRestrictionsController;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     this.axios = axios;
@@ -23,23 +24,17 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
     return instance;
   };
 
-  public async getAllLegalRestrictions(): Promise<LegalRestrictions[]> {
-    if (this.backofficeLinks && this.backofficeLinks.legalRestrictions) {
-      const response = await this.axios.get(
-        this.backofficeLinks.legalRestrictions.href,
-      );
-      return LegalRestrictionsConverter.convert(response.data);
-    } else {
-      throw new Error('Not authorized for method');
-    }
-  }
-
   private async setBackofficeLinks() {
     const backofficeLinksResponse = await this.axios.get(
       `${this.baseUrl}/v1/admin`,
     );
     this.backofficeLinks = BackofficeLinksConverter.convert(
       backofficeLinksResponse.data,
+    );
+
+    this.legalRestrictionsController = new HttpLegalRestrictionsController(
+      this.backofficeLinks,
+      this.axios,
     );
   }
 }

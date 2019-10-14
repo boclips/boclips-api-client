@@ -1,0 +1,48 @@
+import { InteractionObject, Matchers } from '@pact-foundation/pact';
+import { provider } from '../../../pactSetup';
+import Link from '../../types/Link';
+
+const { like } = Matchers;
+
+const sampleLink: Link = { href: 'href', templated: false };
+
+export const getBackofficeLinks = (): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET Backoffice Links',
+  withRequest: {
+    method: 'GET',
+    path: '/v1/admin',
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json',
+    },
+    body: {
+      _links: {
+        collection: like(sampleLink),
+        createCollection: like(sampleLink),
+        adminCollectionSearch: like(sampleLink),
+        jobs: like(sampleLink),
+        jobDetails: like(sampleLink),
+        adminSearch: like(sampleLink),
+        videos: like(sampleLink),
+        orders: like(sampleLink),
+        exportOrders: like(sampleLink),
+        order: like(sampleLink),
+        httpFeeds: like(sampleLink),
+        contentPartners: like(sampleLink),
+        contentPartner: like(sampleLink),
+        legalRestrictions: like({
+          href: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
+          templated: false,
+        }),
+        youtubeFeeds: like(sampleLink),
+        createHttpFeed: like(sampleLink),
+        distributionMethods: like(sampleLink),
+        subjects: like(sampleLink),
+        searchContracts: like(sampleLink),
+      },
+    },
+  },
+});
