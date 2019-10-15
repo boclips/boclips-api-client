@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { provider } from '../pactSetup';
 import { HttpBoclipsApiClient } from './HttpBoclipsApiClient';
 import {
   getContentPartnerInteraction,
@@ -7,6 +6,7 @@ import {
 } from './test_support/interactions/contentPartnersInteractions';
 import { getLegalRestrictions } from './test_support/interactions/legalRestrictions';
 import { getBackofficeLinks } from './test_support/interactions/links';
+import { provider } from './test_support/pactSetup';
 
 beforeEach(async () => {
   await provider.addInteraction(getBackofficeLinks());
