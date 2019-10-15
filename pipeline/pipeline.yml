@@ -26,6 +26,9 @@ jobs:
         trigger: true
       - task: test
         file: source/pipeline/test.yml
+        params:
+          CONTRACT_TEST_PASSWORD: ((boclips-api-client.contract-test-password))
+          CONTRACT_TEST_USERNAME: ((boclips-api-client.contract-test-username))
 
   - name: pre-release
     plan:
