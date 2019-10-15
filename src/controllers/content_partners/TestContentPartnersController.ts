@@ -14,7 +14,7 @@ export class TestContentPartnersController
       ageRange: contentPartner.ageRange,
       currency: contentPartner.currency,
       legalRestrictions: contentPartner.legalRestrictions,
-      selfLink: contentPartner.selfLink,
+      _links: contentPartner._links,
       distributionMethods: contentPartner.distributionMethods,
     });
   }
