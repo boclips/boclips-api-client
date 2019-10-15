@@ -2,8 +2,8 @@ import { AxiosInstance } from 'axios';
 import { ContentPartnersConverter } from '../../converters/ContentPartnersConverter';
 import BackofficeLinks from '../../types/BackofficeLinks';
 import ContentPartner from '../../types/ContentPartner';
-import { ContentPartnersController } from './ContentPartnersController';
 import expandUrlTemplate from '../../utils/expandUrlTemplate';
+import { ContentPartnersController } from './ContentPartnersController';
 
 export class HttpContentPartnersController
   implements ContentPartnersController {
@@ -24,7 +24,7 @@ export class HttpContentPartnersController
     }
   }
 
-  public async get(id: string) {
+  public async get(id: string): Promise<ContentPartner> {
     if (this.backofficeLinks && this.backofficeLinks.contentPartner) {
       const contentPartnerUrl = expandUrlTemplate(
         this.backofficeLinks.contentPartner.href,

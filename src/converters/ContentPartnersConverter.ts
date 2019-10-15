@@ -31,7 +31,7 @@ export class ContentPartnersConverter {
       ageRange,
       currency,
       legalRestrictions,
-      selfLink: _links.self,
+      _links,
       distributionMethods,
     };
   }

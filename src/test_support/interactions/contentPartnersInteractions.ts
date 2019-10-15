@@ -3,23 +3,18 @@ import { provider } from '../../../pactSetup';
 
 const { eachLike, like } = Matchers;
 
-const createContentPartner = (id: string) => ({
-  id,
+const createContentPartnerWithMandatoryFields = (id: string) => ({
+  id: like(id),
   name: 'a name',
-  ageRange: like({ min: 10, max: 15 }),
   official: true,
-  currency: 'USD',
-  legalRestrictions: eachLike({ id: '2', text: 'No restrictions' }),
-  distributionMethods: eachLike('STREAM'),
   _links: like({
     self: {
-      href: `${provider.mockService.baseUrl}/v1/content-partners/2`,
-      templated: false,
+      href: `${provider.mockService.baseUrl}/v1/content-partners/${id}`,
     },
   }),
 });
 
-export const getContentPartners = (): InteractionObject => ({
+export const getContentPartnersInteraction = (): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET content partners',
   withRequest: {
@@ -33,13 +28,15 @@ export const getContentPartners = (): InteractionObject => ({
     },
     body: {
       _embedded: {
-        contentPartners: eachLike(createContentPartner('1')),
+        contentPartners: eachLike(createContentPartnerWithMandatoryFields('1')),
       },
     },
   },
 });
 
-export const getContentPartner = (id: string): InteractionObject => ({
+export const getContentPartnerInteraction = (
+  id: string,
+): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET content partner',
   withRequest: {
@@ -51,6 +48,21 @@ export const getContentPartner = (id: string): InteractionObject => ({
     headers: {
       'Content-Type': 'application/hal+json;charset=UTF-8',
     },
-    body: like(createContentPartner(id)),
+    body: like({
+      ...createContentPartnerWithMandatoryFields(id),
+      ...{
+        currency: 'USD',
+        distributionMethods: eachLike('STREAM', { min: 1 }),
+        ageRange: {
+          min: 10,
+          max: 20,
+          label: '10-20',
+        },
+        legalRestrictions: {
+          text: 'a legal restriction',
+          id: '2',
+        },
+      },
+    }),
   },
 });
