@@ -10,6 +10,6 @@ export default interface ContentPartner {
   ageRange?: AgeRange;
   currency?: string;
   legalRestrictions?: LegalRestrictions;
-  _links: { self: Link };
+  _links?: { self: Link };
   distributionMethods: DistributionMethod[];
 }
