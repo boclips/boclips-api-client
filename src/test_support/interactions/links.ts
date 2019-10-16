@@ -31,9 +31,10 @@ export const getBackofficeLinks = (): InteractionObject => ({
         exportOrders: like(sampleLink),
         order: like(sampleLink),
         httpFeeds: like(sampleLink),
+        // TODO we should not use like here, but instead use a regexp
         contentPartners: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partners`,
-          templated: false,
+          href: `${provider.mockService.baseUrl}/v1/content-partners{?name,official,accreditedToYtChannelId}`,
+          templated: true,
         }),
         contentPartner: like({
           href: `${provider.mockService.baseUrl}/v1/content-partners/{id}`,

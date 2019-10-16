@@ -15,7 +15,7 @@ export class HttpContentPartnersController
   public async getAll(): Promise<ContentPartner[]> {
     if (this.backofficeLinks && this.backofficeLinks.contentPartners) {
       const response = await this.axios.get(
-        this.backofficeLinks.contentPartners.href,
+        expandUrlTemplate(this.backofficeLinks.contentPartners.href, {}),
       );
 
       return ContentPartnersConverter.convertEmbeddedResources(response);
