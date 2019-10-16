@@ -1,4 +1,4 @@
-import ContentPartner from '../../types/ContentPartner';
+import { ContentPartner } from '../../types';
 
 export interface ContentPartnersController {
   get(id: string): Promise<ContentPartner>;

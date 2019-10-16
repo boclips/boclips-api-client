@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import ContentPartner from '../types/ContentPartner';
+import { ContentPartner } from '../types/ContentPartner';
 
 export class ContentPartnersConverter {
   public static convertEmbeddedResources(

@@ -1,6 +1,6 @@
-import Link from './Link';
+import { Link } from './Link';
 
-export default interface BackofficeLinks {
+export interface BackofficeLinks {
   collection: Link;
   createCollection: Link;
   adminCollectionSearch: Link;

@@ -1,9 +1,9 @@
 import { AgeRange } from './AgeRange';
 import { DistributionMethod } from './DistributionMethod';
 import { LegalRestrictions } from './LegalRestrictions';
-import Link from './Link';
+import { Link } from './Link';
 
-export default interface ContentPartner {
+export interface ContentPartner {
   id: string;
   name: string;
   official: boolean;

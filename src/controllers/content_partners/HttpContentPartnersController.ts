@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { ContentPartnersConverter } from '../../converters/ContentPartnersConverter';
-import BackofficeLinks from '../../types/BackofficeLinks';
-import ContentPartner from '../../types/ContentPartner';
+import { ContentPartner } from '../../types';
+import { BackofficeLinks } from '../../types';
 import expandUrlTemplate from '../../utils/expandUrlTemplate';
 import { ContentPartnersController } from './ContentPartnersController';
 

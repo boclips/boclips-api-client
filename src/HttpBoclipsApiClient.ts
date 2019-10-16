@@ -3,7 +3,7 @@ import { BoclipsApiClient } from './BoclipsApiClient';
 import { HttpContentPartnersController } from './controllers/content_partners/HttpContentPartnersController';
 import { HttpLegalRestrictionsController } from './controllers/legal_restrictions/HttpLegalRestrictionsController';
 import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
-import BackofficeLinks from './types/BackofficeLinks';
+import { BackofficeLinks } from './types';
 
 export class HttpBoclipsApiClient implements BoclipsApiClient {
   private axios: AxiosInstance;

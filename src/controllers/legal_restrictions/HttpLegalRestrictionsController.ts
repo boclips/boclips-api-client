@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { LegalRestrictionsConverter } from '../../converters/LegalRestrictionsConverter';
-import BackofficeLinks from '../../types/BackofficeLinks';
+import { BackofficeLinks } from '../../types';
 import { LegalRestrictionsController } from './LegalRestrictionsController';
 
 export class HttpLegalRestrictionsController

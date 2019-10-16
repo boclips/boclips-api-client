@@ -1,4 +1,4 @@
-import BackofficeLinks from '../types/BackofficeLinks';
+import { BackofficeLinks } from '../types';
 
 export class BackofficeLinksConverter {
   public static convert(response: any): BackofficeLinks {

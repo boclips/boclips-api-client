@@ -1,5 +1,5 @@
 import { randomId } from '../../test_support/utils/idGenerator';
-import ContentPartner from '../../types/ContentPartner';
+import { ContentPartner } from '../../types';
 import { ContentPartnersController } from './ContentPartnersController';
 
 export class TestContentPartnersController
