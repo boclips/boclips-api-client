@@ -6,8 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "compile": "tsc -p . --noEmit",
-    "clean": "rm -rf dist/",
+    "clean": "rm -rf dist/*",
     "build": "npm run clean && tsc",
+    "link": "npm run build && cp package.json dist/ && npm link",
     "test": "jest --runInBand --config jest.pact-config.json",
     "verify": "npm run test && jest --runInBand --config jest.pact-verify-config.json",
     "lint": "tslint -c tslint.json -p .",
