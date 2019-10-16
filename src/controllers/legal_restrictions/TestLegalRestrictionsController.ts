@@ -1,8 +1,9 @@
 import { LegalRestrictions } from '../../types';
+import { Clearable } from '../../utils/Clearable';
 import { LegalRestrictionsController } from './LegalRestrictionsController';
 
 export class TestLegalRestrictionsController
-  implements LegalRestrictionsController {
+  implements LegalRestrictionsController, Clearable {
   private legalRestrictions: LegalRestrictions[] = [];
 
   public insertLegalRestrictionsFixture(legalRestrictions: LegalRestrictions) {
@@ -11,5 +12,9 @@ export class TestLegalRestrictionsController
 
   public getAll(): Promise<LegalRestrictions[]> {
     return Promise.resolve(this.legalRestrictions);
+  }
+
+  public clear() {
+    this.legalRestrictions = [];
   }
 }

@@ -1,8 +1,9 @@
 import { ContentPartner, ContentPartnerFactory } from '../../types';
+import { Clearable } from '../../utils/Clearable';
 import { ContentPartnersController } from './ContentPartnersController';
 
 export class TestContentPartnersController
-  implements ContentPartnersController {
+  implements ContentPartnersController, Clearable {
   private contentPartners: ContentPartner[] = [];
 
   public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
@@ -15,5 +16,9 @@ export class TestContentPartnersController
 
   public get(id: string): Promise<ContentPartner> {
     return Promise.resolve(this.contentPartners.find(i => i.id === id));
+  }
+
+  public clear() {
+    this.contentPartners = [];
   }
 }
