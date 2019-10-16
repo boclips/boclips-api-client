@@ -3,7 +3,7 @@ import { ContentPartnersController } from './ContentPartnersController';
 
 export class TestContentPartnersController
   implements ContentPartnersController {
-  private contentPartners: ContentPartner[];
+  private contentPartners: ContentPartner[] = [];
 
   public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
     this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));
