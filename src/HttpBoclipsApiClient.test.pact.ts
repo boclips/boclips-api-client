@@ -20,7 +20,7 @@ describe('legalRestrictions contract test', () => {
   it('can fetch all legal restrictions', async () => {
     const axiosInstance = axios.create();
 
-    const client = await HttpBoclipsApiClient.initalize(
+    const client = await HttpBoclipsApiClient.initialize(
       axiosInstance,
       provider.mockService.baseUrl,
     );
@@ -41,7 +41,7 @@ describe('contentPartners contract test', () => {
     it('can fetch all content partners', async () => {
       const axiosInstance = axios.create();
 
-      const client = await HttpBoclipsApiClient.initalize(
+      const client = await HttpBoclipsApiClient.initialize(
         axiosInstance,
         provider.mockService.baseUrl,
       );
@@ -66,7 +66,7 @@ describe('contentPartners contract test', () => {
     it('can fetch a content partner', async () => {
       const axiosInstance = axios.create();
 
-      const client = await HttpBoclipsApiClient.initalize(
+      const client = await HttpBoclipsApiClient.initialize(
         axiosInstance,
         provider.mockService.baseUrl,
       );

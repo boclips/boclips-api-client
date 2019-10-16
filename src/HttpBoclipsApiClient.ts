@@ -18,7 +18,7 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
     this.baseUrl = baseUrl;
   }
 
-  public static initalize = async (axios: AxiosInstance, baseUrl: string) => {
+  public static initialize = async (axios: AxiosInstance, baseUrl: string) => {
     const instance = new HttpBoclipsApiClient(axios, baseUrl);
 
     await instance.setBackofficeLinks();
