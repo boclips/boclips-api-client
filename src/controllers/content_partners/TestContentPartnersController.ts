@@ -1,22 +1,12 @@
-import { randomId } from '../../test_support/utils/idGenerator';
-import { ContentPartner } from '../../types';
+import { ContentPartner, ContentPartnerFactory } from '../../types';
 import { ContentPartnersController } from './ContentPartnersController';
 
 export class TestContentPartnersController
   implements ContentPartnersController {
   private contentPartners: ContentPartner[];
 
-  public createContentPartner(contentPartner: Partial<ContentPartner>) {
-    this.contentPartners.push({
-      id: randomId(),
-      name: contentPartner.name || 'test content partner name ',
-      official: contentPartner.official,
-      ageRange: contentPartner.ageRange,
-      currency: contentPartner.currency,
-      legalRestrictions: contentPartner.legalRestrictions,
-      _links: contentPartner._links,
-      distributionMethods: contentPartner.distributionMethods,
-    });
+  public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
+    this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));
   }
 
   public getAll(): Promise<ContentPartner[]> {

@@ -13,3 +13,25 @@ export interface ContentPartner {
   _links?: { self: Link };
   distributionMethods: DistributionMethod[];
 }
+
+export class ContentPartnerFactory {
+  public static sample(
+    contentPartner: Partial<ContentPartner> = {},
+  ): ContentPartner {
+    const id = contentPartner.id || '123';
+    return {
+      id,
+      name: contentPartner.name || 'Test name',
+      official: contentPartner.official || true,
+      ageRange: contentPartner.ageRange,
+      currency: contentPartner.currency,
+      legalRestrictions: contentPartner.legalRestrictions,
+      _links: contentPartner._links || {
+        self: {
+          href: `/v1/content-partners/${id}`,
+        },
+      },
+      distributionMethods: contentPartner.distributionMethods || [],
+    };
+  }
+}

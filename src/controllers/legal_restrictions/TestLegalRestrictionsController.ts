@@ -1,16 +1,11 @@
-import { randomId } from '../../test_support/utils/idGenerator';
-import { LegalRestrictions } from '../../types/LegalRestrictions';
+import { LegalRestrictions } from '../../types';
 import { LegalRestrictionsController } from './LegalRestrictionsController';
 
 export class TestLegalRestrictionsController
   implements LegalRestrictionsController {
   private legalRestrictions: LegalRestrictions[] = [];
 
-  public createLegalRestrictions(text: string) {
-    const legalRestrictions: LegalRestrictions = {
-      id: randomId(),
-      text,
-    };
+  public insertLegalRestrictionsFixture(legalRestrictions: LegalRestrictions) {
     this.legalRestrictions.push(legalRestrictions);
   }
 
