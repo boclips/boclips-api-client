@@ -2,7 +2,7 @@ import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { Link } from '../../types';
 import { provider } from '../pactSetup';
 
-const { like } = Matchers;
+const { like, term } = Matchers;
 
 export const sampleLink: Link = { href: 'href', templated: false };
 
@@ -31,19 +31,28 @@ export const getBackofficeLinks = (): InteractionObject => ({
         exportOrders: like(sampleLink),
         order: like(sampleLink),
         httpFeeds: like(sampleLink),
-        // TODO we should not use like here, but instead use a regexp
-        contentPartners: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partners{?name,official,accreditedToYtChannelId}`,
+        contentPartners: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/content-partners{?name,official,accreditedToYtChannelId}`,
+            matcher:
+              '.*/v1/content-partners{\\?name,official,accreditedToYtChannelId}',
+          }),
           templated: true,
-        }),
-        contentPartner: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partners/{id}`,
+        },
+        contentPartner: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/content-partners/{id}`,
+            matcher: '.*/v1/content-partners/{id}',
+          }),
           templated: true,
-        }),
-        legalRestrictions: like({
-          href: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
+        },
+        legalRestrictions: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
+            matcher: '.*/v1/legal-restrictions',
+          }),
           templated: false,
-        }),
+        },
         youtubeFeeds: like(sampleLink),
         createHttpFeed: like(sampleLink),
         distributionMethods: like(sampleLink),
