@@ -3,10 +3,12 @@ import { HttpBoclipsApiClient } from './HttpBoclipsApiClient';
 import {
   getContentPartnerInteraction,
   getContentPartnersInteraction,
+  updateContentPartner,
 } from './test_support/interactions/contentPartnersInteractions';
 import { getLegalRestrictions } from './test_support/interactions/legalRestrictions';
 import { getBackofficeLinks } from './test_support/interactions/links';
 import { provider } from './test_support/pactSetup';
+import { ContentPartnerFactory } from './types/ContentPartner';
 
 beforeEach(async () => {
   await provider.addInteraction(getBackofficeLinks());
@@ -87,6 +89,34 @@ describe('contentPartners contract test', () => {
         'a legal restriction',
       );
       expect(contentPartner.distributionMethods).toEqual(['STREAM']);
+    });
+  });
+
+  describe('update one', () => {
+    beforeEach(async () => {
+      await provider.addInteraction(
+        updateContentPartner('5cf140c4c1475c47f7178678'),
+      );
+    });
+
+    it('can update a content partner', async () => {
+      const axiosInstance = axios.create();
+
+      const client = await HttpBoclipsApiClient.initialize(
+        axiosInstance,
+        provider.mockService.baseUrl,
+      );
+
+      await client.contentPartnersController.update(
+        ContentPartnerFactory.sample({
+          id: '5cf140c4c1475c47f7178678',
+          _links: {
+            self: {
+              href: `${provider.mockService.baseUrl}/v1/content-partners/5cf140c4c1475c47f7178678`,
+            },
+          },
+        }),
+      );
     });
   });
 });

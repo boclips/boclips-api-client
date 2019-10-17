@@ -10,7 +10,7 @@ export interface ContentPartner {
   ageRange?: AgeRange;
   currency?: string;
   legalRestrictions?: LegalRestrictions;
-  _links?: { self: Link };
+  _links: { self: Link };
   distributionMethods: DistributionMethod[];
 }
 
@@ -23,15 +23,18 @@ export class ContentPartnerFactory {
       id,
       name: contentPartner.name || 'Test name',
       official: contentPartner.official || true,
-      ageRange: contentPartner.ageRange,
-      currency: contentPartner.currency,
-      legalRestrictions: contentPartner.legalRestrictions,
+      ageRange: contentPartner.ageRange || { min: 10, max: 11 },
+      currency: contentPartner.currency || 'GBP',
+      legalRestrictions: contentPartner.legalRestrictions || {
+        id: '1',
+        text: 'hello',
+      },
       _links: contentPartner._links || {
         self: {
           href: `/v1/content-partners/${id}`,
         },
       },
-      distributionMethods: contentPartner.distributionMethods || [],
+      distributionMethods: contentPartner.distributionMethods || ['STREAM'],
     };
   }
 }

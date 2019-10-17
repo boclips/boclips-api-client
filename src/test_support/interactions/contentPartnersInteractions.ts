@@ -34,6 +34,34 @@ export const getContentPartnersInteraction = (): InteractionObject => ({
   },
 });
 
+export const updateContentPartner = (id: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'PUT content partner',
+  withRequest: {
+    method: 'PUT',
+    path: `/v1/content-partners/${id}`,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: like({
+      name: 'hi',
+      legalRestrictions: like({
+        id: '5cf140c4c1475c47f7178678',
+        text: '1',
+      }),
+      ageRange: like({
+        min: 3,
+        max: 4,
+      }),
+      distributionMethods: eachLike('STREAM'),
+      currency: 'USD',
+    }),
+  },
+  willRespondWith: {
+    status: 204,
+  },
+});
+
 export const getContentPartnerInteraction = (
   id: string,
 ): InteractionObject => ({

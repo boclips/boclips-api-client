@@ -38,4 +38,30 @@ export class HttpContentPartnersController
       throw new Error('Not authorized for method');
     }
   }
+  public async update(contentPartner: ContentPartner): Promise<void> {
+    console.log(contentPartner._links.self.href);
+    const {
+      ageRange,
+      name,
+      legalRestrictions,
+      distributionMethods,
+      currency,
+    } = contentPartner;
+
+    await this.axios.put(
+      contentPartner._links.self.href,
+      {
+        ageRange,
+        name,
+        legalRestrictions,
+        distributionMethods,
+        currency,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      },
+    );
+  }
 }

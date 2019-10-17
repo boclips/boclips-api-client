@@ -18,6 +18,20 @@ export class TestContentPartnersController
     return Promise.resolve(this.contentPartners.find(i => i.id === id));
   }
 
+  public update(contentPartner: ContentPartner) {
+    const index = this.contentPartners.findIndex(
+      i => i.id === contentPartner.id,
+    );
+
+    if (index < 0) {
+      return Promise.reject();
+    }
+
+    this.contentPartners[index] = contentPartner;
+
+    return Promise.resolve();
+  }
+
   public clear() {
     this.contentPartners = [];
   }
