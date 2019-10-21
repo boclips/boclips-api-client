@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BoclipsApiClient } from './BoclipsApiClient';
 import { HttpBoclipsApiClient } from './HttpBoclipsApiClient';
 import {
   getContentPartnerInteraction,
@@ -8,10 +9,12 @@ import {
 import { getLegalRestrictions } from './test_support/interactions/legalRestrictions';
 import { getBackofficeLinks } from './test_support/interactions/links';
 import {
+  existingSubjectFromStaging,
   getSubjects,
   updateSubject,
 } from './test_support/interactions/subjects';
 import { provider } from './test_support/pactSetup';
+import { TestBoclipsApiClient } from './TestBoclipsApiClient';
 import { ContentPartnerFactory } from './types';
 
 beforeEach(async () => {
@@ -22,6 +25,8 @@ describe('legalRestrictions contract test', () => {
   beforeEach(async () => {
     await provider.addInteraction(getLegalRestrictions);
   });
+
+  afterEach(() => provider.verify());
 
   it('can fetch all legal restrictions', async () => {
     const axiosInstance = axios.create();
@@ -39,6 +44,8 @@ describe('legalRestrictions contract test', () => {
 });
 
 describe('contentPartners contract test', () => {
+  afterEach(() => provider.verify());
+
   describe('all', () => {
     beforeEach(async () => {
       await provider.addInteraction(getContentPartnersInteraction());
@@ -126,61 +133,73 @@ describe('contentPartners contract test', () => {
 });
 
 describe('SubjectsController', () => {
-  describe('subjects contract test', () => {
-    it('can fetch all subjects', async () => {
-      await provider.addInteraction(getSubjects());
+  describe.each([['Real client', true], ['Fake client', false]])(
+    'contract test using %s',
+    (_: string, shouldUseRealClient: boolean) => {
+      let client: BoclipsApiClient;
 
-      const client = HttpBoclipsApiClient.initialize(
-        axios.create(),
-        provider.mockService.baseUrl,
-      );
+      beforeEach(async () => {
+        if (shouldUseRealClient) {
+          client = await HttpBoclipsApiClient.initialize(
+            axios.create(),
+            provider.mockService.baseUrl,
+          );
+        } else {
+          client = new TestBoclipsApiClient();
+          (client as TestBoclipsApiClient).subjectsController.insertSubject({
+            id: existingSubjectFromStaging,
+            name: 'Subject Sample',
+            updateLink: `/v1/subjects/${existingSubjectFromStaging}`,
+          });
+        }
+      });
 
-      const resolvedClient = await client;
-      const response = await resolvedClient.subjectsController.getAll();
+      afterEach(() => {
+        if (shouldUseRealClient) {
+          return provider.verify();
+        }
+      });
 
-      expect(response).toHaveLength(1);
-      expect(response[0].id).toEqual('2');
-      expect(response[0].name).toEqual('Subject Sample');
-      expect(response[0].updateLink).toMatch(new RegExp('.*/v1/subjects/2$'));
-    });
+      it(`can fetch all subjects `, async () => {
+        await provider.addInteraction(getSubjects());
 
-    it('can update subjects', async () => {
-      const existingSubjectFromStaging = '5cb499c9fd5beb428189454f';
-      await provider.addInteraction(updateSubject(existingSubjectFromStaging));
+        const response = await client.subjectsController.getAll();
 
-      const client = HttpBoclipsApiClient.initialize(
-        axios.create(),
-        provider.mockService.baseUrl,
-      );
+        expect(response).toHaveLength(1);
+        expect(response[0].id).toEqual(existingSubjectFromStaging);
+        expect(response[0].name).toEqual('Subject Sample');
+        expect(response[0].updateLink).toMatch(
+          new RegExp(`.*/v1/subjects/${existingSubjectFromStaging}$`),
+        );
+      });
 
-      const resolvedClient = await client;
-      await resolvedClient.subjectsController.update(
-        {
-          id: existingSubjectFromStaging,
-          name: 'Old name',
-          updateLink: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
-        },
-        'Design',
-      );
-    });
+      it('can update subjects', async () => {
+        await provider.addInteraction(
+          updateSubject(existingSubjectFromStaging),
+        );
 
-    it('cannot update subject without an updateLink', async () => {
-      const client = HttpBoclipsApiClient.initialize(
-        axios.create(),
-        provider.mockService.baseUrl,
-      );
-
-      const resolvedClient = await client;
-      const updateCall = async () =>
-        await resolvedClient.subjectsController.update(
+        await client.subjectsController.update(
           {
-            id: '123',
-            name: 'Old Design',
+            id: existingSubjectFromStaging,
+            name: 'Old name',
+            updateLink: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
           },
           'Design',
         );
+      });
 
-      await expect(updateCall()).rejects.toThrow(Error);
-    });
-  });
+      it('cannot update subject without an updateLink', async () => {
+        const updateCall = async () =>
+          await client.subjectsController.update(
+            {
+              id: existingSubjectFromStaging,
+              name: 'Old Design',
+            },
+            'Design',
+          );
+
+        await expect(updateCall()).rejects.toThrow(Error);
+      });
+    },
+  );
 });

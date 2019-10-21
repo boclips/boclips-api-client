@@ -12,6 +12,10 @@ export class TestSubjectsController implements SubjectsController {
   }
 
   public async update(currentSubject: Subject, newName: string): Promise<void> {
+    if (!currentSubject.updateLink) {
+      throw new Error('Update link not available');
+    }
+
     const subject = this.subjects.find(it => it.id === currentSubject.id);
     subject.name = newName;
   }

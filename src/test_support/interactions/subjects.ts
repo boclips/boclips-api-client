@@ -3,6 +3,8 @@ import { provider } from '../pactSetup';
 
 const { eachLike, like } = Matchers;
 
+export const existingSubjectFromStaging = '5cb499c9fd5beb428189454f';
+
 export const getSubjects = (): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET subjects',
@@ -18,14 +20,14 @@ export const getSubjects = (): InteractionObject => ({
     body: {
       _embedded: {
         subjects: eachLike({
-          id: '2',
+          id: existingSubjectFromStaging,
           name: 'Subject Sample',
           _links: like({
             self: {
-              href: `${provider.mockService.baseUrl}/v1/subjects/2`,
+              href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
             },
             update: {
-              href: `${provider.mockService.baseUrl}/v1/subjects/2`,
+              href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
             },
           }),
         }),
