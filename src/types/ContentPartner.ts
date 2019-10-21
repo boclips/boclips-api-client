@@ -23,11 +23,11 @@ export class ContentPartnerFactory {
       id,
       name: contentPartner.name || 'Test name',
       official: contentPartner.official || true,
-      ageRange: contentPartner.ageRange || { min: 10, max: 11 },
-      currency: contentPartner.currency || 'GBP',
+      ageRange: contentPartner.ageRange || { min: 10, max: 20, label: '10-20' },
+      currency: contentPartner.currency || 'USD',
       legalRestrictions: contentPartner.legalRestrictions || {
-        id: '1',
-        text: 'hello',
+        id: '2',
+        text: 'a legal restriction',
       },
       _links: contentPartner._links || {
         self: {
