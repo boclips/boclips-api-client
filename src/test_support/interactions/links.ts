@@ -56,7 +56,13 @@ export const getBackofficeLinks = (): InteractionObject => ({
         youtubeFeeds: like(sampleLink),
         createHttpFeed: like(sampleLink),
         distributionMethods: like(sampleLink),
-        subjects: like(sampleLink),
+        subjects: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/subjects`,
+            matcher: '.*/v1/subjects',
+          }),
+          templated: false,
+        },
         searchContracts: like(sampleLink),
       },
     },

@@ -1,0 +1,6 @@
+{
+  "testRegex": "/*(.test.ts)",
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  }
+}

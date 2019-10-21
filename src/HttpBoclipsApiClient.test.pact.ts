@@ -7,8 +7,9 @@ import {
 } from './test_support/interactions/contentPartnersInteractions';
 import { getLegalRestrictions } from './test_support/interactions/legalRestrictions';
 import { getBackofficeLinks } from './test_support/interactions/links';
+import { getSubjects } from './test_support/interactions/subjects';
 import { provider } from './test_support/pactSetup';
-import { ContentPartnerFactory } from './types/ContentPartner';
+import { ContentPartnerFactory } from './types';
 
 beforeEach(async () => {
   await provider.addInteraction(getBackofficeLinks());
@@ -117,6 +118,29 @@ describe('contentPartners contract test', () => {
           },
         }),
       );
+    });
+  });
+});
+
+describe('SubjectsController', () => {
+  beforeEach(async () => {
+    await provider.addInteraction(getSubjects());
+  });
+
+  describe('subjects contract test with %s', () => {
+    it('can fetch all subjects', async () => {
+      const client = HttpBoclipsApiClient.initialize(
+        axios.create(),
+        provider.mockService.baseUrl,
+      );
+
+      const resolvedClient = await client;
+      const response = await resolvedClient.subjectsController.getAll();
+
+      expect(response).toHaveLength(1);
+      expect(response[0].id).toEqual('2');
+      expect(response[0].name).toEqual('Subject Sample');
+      expect(response[0].updateLink).toMatch(new RegExp('.*/v1/subjects/2$'));
     });
   });
 });

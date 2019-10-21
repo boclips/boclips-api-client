@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import { BoclipsApiClient } from './BoclipsApiClient';
 import { HttpContentPartnersController } from './controllers/content_partners/HttpContentPartnersController';
 import { HttpLegalRestrictionsController } from './controllers/legal_restrictions/HttpLegalRestrictionsController';
+import { HttpSubjectsController } from './controllers/subjects/HttpSubjectsController';
 import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
 import { BackofficeLinks } from './types';
 
@@ -12,6 +13,7 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
 
   public legalRestrictionsController: HttpLegalRestrictionsController;
   public contentPartnersController: HttpContentPartnersController;
+  public subjectsController: HttpSubjectsController;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     this.axios = axios;
@@ -41,6 +43,11 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
     );
 
     this.contentPartnersController = new HttpContentPartnersController(
+      this.backofficeLinks,
+      this.axios,
+    );
+
+    this.subjectsController = new HttpSubjectsController(
       this.backofficeLinks,
       this.axios,
     );
