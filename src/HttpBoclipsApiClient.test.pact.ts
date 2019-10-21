@@ -7,7 +7,10 @@ import {
 } from './test_support/interactions/contentPartnersInteractions';
 import { getLegalRestrictions } from './test_support/interactions/legalRestrictions';
 import { getBackofficeLinks } from './test_support/interactions/links';
-import { getSubjects } from './test_support/interactions/subjects';
+import {
+  getSubjects,
+  updateSubject,
+} from './test_support/interactions/subjects';
 import { provider } from './test_support/pactSetup';
 import { ContentPartnerFactory } from './types';
 
@@ -123,12 +126,10 @@ describe('contentPartners contract test', () => {
 });
 
 describe('SubjectsController', () => {
-  beforeEach(async () => {
-    await provider.addInteraction(getSubjects());
-  });
-
-  describe('subjects contract test with %s', () => {
+  describe('subjects contract test', () => {
     it('can fetch all subjects', async () => {
+      await provider.addInteraction(getSubjects());
+
       const client = HttpBoclipsApiClient.initialize(
         axios.create(),
         provider.mockService.baseUrl,
@@ -141,6 +142,45 @@ describe('SubjectsController', () => {
       expect(response[0].id).toEqual('2');
       expect(response[0].name).toEqual('Subject Sample');
       expect(response[0].updateLink).toMatch(new RegExp('.*/v1/subjects/2$'));
+    });
+
+    it('can update subjects', async () => {
+      const existingSubjectFromStaging = '5cb499c9fd5beb428189454f';
+      await provider.addInteraction(updateSubject(existingSubjectFromStaging));
+
+      const client = HttpBoclipsApiClient.initialize(
+        axios.create(),
+        provider.mockService.baseUrl,
+      );
+
+      const resolvedClient = await client;
+      await resolvedClient.subjectsController.update(
+        {
+          id: existingSubjectFromStaging,
+          name: 'Old name',
+          updateLink: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
+        },
+        'Design',
+      );
+    });
+
+    it('cannot update subject without an updateLink', async () => {
+      const client = HttpBoclipsApiClient.initialize(
+        axios.create(),
+        provider.mockService.baseUrl,
+      );
+
+      const resolvedClient = await client;
+      const updateCall = async () =>
+        await resolvedClient.subjectsController.update(
+          {
+            id: '123',
+            name: 'Old Design',
+          },
+          'Design',
+        );
+
+      await expect(updateCall()).rejects.toThrow(Error);
     });
   });
 });

@@ -33,3 +33,21 @@ export const getSubjects = (): InteractionObject => ({
     },
   },
 });
+
+export const updateSubject = (id: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'PUT subject',
+  withRequest: {
+    method: 'PUT',
+    path: `/v1/subjects/${id}`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: like({
+      name: 'Design',
+    }),
+  },
+  willRespondWith: {
+    status: 204,
+  },
+});
