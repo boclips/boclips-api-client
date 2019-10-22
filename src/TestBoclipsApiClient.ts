@@ -1,6 +1,6 @@
 import { BoclipsApiClient } from './BoclipsApiClient';
-import { TestContentPartnersController } from './controllers/content_partners/TestContentPartnersController';
-import { TestLegalRestrictionsController } from './controllers/legal_restrictions/TestLegalRestrictionsController';
+import { TestContentPartnersController } from './controllers/contentPartners/TestContentPartnersController';
+import { TestLegalRestrictionsController } from './controllers/legalRestrictions/TestLegalRestrictionsController';
 import { TestSubjectsController } from './controllers/subjects/TestSubjectsController';
 import { Clearable } from './utils/Clearable';
 

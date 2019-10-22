@@ -6,15 +6,15 @@ import {
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
-} from './test_support/interactions/contentPartnersInteractions';
-import { getLegalRestrictions } from './test_support/interactions/legalRestrictions';
-import { getBackofficeLinks } from './test_support/interactions/links';
+} from './test-support/interactions/contentPartnersInteractions';
+import { getLegalRestrictions } from './test-support/interactions/legalRestrictions';
+import { getBackofficeLinks } from './test-support/interactions/links';
 import {
   existingSubjectFromStaging,
   getSubjects,
   updateSubject,
-} from './test_support/interactions/subjects';
-import { provider } from './test_support/pactSetup';
+} from './test-support/interactions/subjects';
+import { provider } from './test-support/pactSetup';
 import { TestBoclipsApiClient } from './TestBoclipsApiClient';
 import { ContentPartnerFactory } from './types';
 

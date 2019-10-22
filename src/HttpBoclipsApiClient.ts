@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { BoclipsApiClient } from './BoclipsApiClient';
-import { HttpContentPartnersController } from './controllers/content_partners/HttpContentPartnersController';
-import { HttpLegalRestrictionsController } from './controllers/legal_restrictions/HttpLegalRestrictionsController';
+import { HttpContentPartnersController } from './controllers/contentPartners/HttpContentPartnersController';
+import { HttpLegalRestrictionsController } from './controllers/legalRestrictions/HttpLegalRestrictionsController';
 import { HttpSubjectsController } from './controllers/subjects/HttpSubjectsController';
 import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
 import { BackofficeLinks } from './types';
