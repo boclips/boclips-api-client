@@ -1,0 +1,25 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: node
+    tag: '10'
+
+inputs:
+- name: source
+
+outputs:
+- name: pacts
+
+params:
+  CONTRACT_TEST_USERNAME:
+  CONTRACT_TEST_PASSWORD:
+
+run:
+  path: source/pipeline/verify
+
+caches:
+- path: ../../../root/.cache
+- path: ../../../root/.npm

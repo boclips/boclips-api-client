@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+app=source
+npm="npm --prefix $app"
+
+$npm ci
+$npm run verify
+
+cp ${app}/pacts/* pacts/
