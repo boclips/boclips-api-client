@@ -62,7 +62,7 @@ describe('Pact tests', () => {
         xit('can create new feed', async () => {
           await provider.addInteraction(createHttpFeed);
 
-          await client.feedsController.create({name: 'Feed Test', url: 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=AIzaSyB4NJuzPNSbhqvuebzKV8XmqKY4YNmcPRk&playlistId=PLMNah2hiP1MzYKN_aDNK31Pl8_ytbSiVm&maxResults=50',
+          await client.feedsController.create({name: 'Feed Test', url: 'https://www.test.com/',
             provider: 'Youtube', format: 'YOUTUBE'});
         });
 

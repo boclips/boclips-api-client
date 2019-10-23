@@ -13,8 +13,7 @@ export const createHttpFeed: InteractionObject = {
     },
     body: like({
       name: 'Feed Test',
-      url:
-        'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=AIzaSyB4NJuzPNSbhqvuebzKV8XmqKY4YNmcPRk&playlistId=PLMNah2hiP1MzYKN_aDNK31Pl8_ytbSiVm&maxResults=50',
+      url: 'url',
       provider: 'Youtube',
       format: 'YOUTUBE',
     }),
