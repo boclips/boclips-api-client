@@ -1,66 +1,50 @@
-import { AxiosInstance } from 'axios';
 import { ContentPartnersConverter } from '../../converters/ContentPartnersConverter';
 import { ContentPartner } from '../../types';
-import { BackofficeLinks } from '../../types';
 import expandUrlTemplate from '../../utils/expandUrlTemplate';
+import { HttpController } from '../HttpController';
 import { ContentPartnersController } from './ContentPartnersController';
 
-export class HttpContentPartnersController
+export class HttpContentPartnersController extends HttpController
   implements ContentPartnersController {
-  public constructor(
-    private backofficeLinks: BackofficeLinks,
-    private axios: AxiosInstance,
-  ) {}
-
   public async getAll(): Promise<ContentPartner[]> {
-    if (this.backofficeLinks && this.backofficeLinks.contentPartners) {
+    return this.requestWithAdminLink('contentPartners', async () => {
       const response = await this.axios.get(
-        expandUrlTemplate(this.backofficeLinks.contentPartners.href, {}),
+        expandUrlTemplate(this.adminLinks.contentPartners.href, {}),
       );
-
       return ContentPartnersConverter.convertEmbeddedResources(response);
-    } else {
-      throw new Error('Not authorized for method');
-    }
+    });
   }
 
   public async get(id: string): Promise<ContentPartner> {
-    if (this.backofficeLinks && this.backofficeLinks.contentPartner) {
+    return this.requestWithAdminLink('contentPartner', async () => {
       const contentPartnerUrl = expandUrlTemplate(
-        this.backofficeLinks.contentPartner.href,
+        this.adminLinks.contentPartner.href,
         { id },
       );
 
       const response = await this.axios.get(contentPartnerUrl);
-
       return ContentPartnersConverter.convertResource(response);
-    } else {
-      throw new Error('Not authorized for method');
-    }
+    });
   }
   public async update(contentPartner: ContentPartner): Promise<void> {
-    const {
-      ageRange,
-      name,
-      legalRestrictions,
-      distributionMethods,
-      currency,
-    } = contentPartner;
-
-    await this.axios.put(
-      contentPartner._links.self.href,
-      {
-        ageRange,
-        name,
-        legalRestrictions,
-        distributionMethods,
-        currency,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+    if (contentPartner && contentPartner._links && contentPartner._links.self) {
+      await this.axios.put(
+        contentPartner._links.self.href,
+        {
+          ageRange: contentPartner.ageRange,
+          name: contentPartner.name,
+          legalRestrictions: contentPartner.legalRestrictions,
+          distributionMethods: contentPartner.distributionMethods,
+          currency: contentPartner.currency,
         },
-      },
-    );
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        },
+      );
+    } else {
+      throw new Error('Update link not available');
+    }
   }
 }

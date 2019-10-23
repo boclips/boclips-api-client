@@ -1,23 +1,15 @@
-import { AxiosInstance } from 'axios';
 import { LegalRestrictionsConverter } from '../../converters/LegalRestrictionsConverter';
-import { BackofficeLinks } from '../../types';
+import { HttpController } from '../HttpController';
 import { LegalRestrictionsController } from './LegalRestrictionsController';
 
-export class HttpLegalRestrictionsController
+export class HttpLegalRestrictionsController extends HttpController
   implements LegalRestrictionsController {
-  public constructor(
-    private backofficeLinks: BackofficeLinks,
-    private axios: AxiosInstance,
-  ) {}
-
   public async getAll() {
-    if (this.backofficeLinks && this.backofficeLinks.legalRestrictions) {
+    return this.requestWithAdminLink('legalRestrictions', async () => {
       const response = await this.axios.get(
-        this.backofficeLinks.legalRestrictions.href,
+        this.adminLinks.legalRestrictions.href,
       );
       return LegalRestrictionsConverter.convert(response.data);
-    } else {
-      throw new Error('Not authorized for method');
-    }
+    });
   }
 }

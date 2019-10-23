@@ -4,13 +4,13 @@ import { HttpContentPartnersController } from './controllers/contentPartners/Htt
 import { HttpFeedsController } from './controllers/httpFeeds/HttpFeedsController';
 import { HttpLegalRestrictionsController } from './controllers/legalRestrictions/HttpLegalRestrictionsController';
 import { HttpSubjectsController } from './controllers/subjects/HttpSubjectsController';
-import { BackofficeLinksConverter } from './converters/BackofficeLinksConverter';
-import { BackofficeLinks } from './types';
+import { AdminLinksConverter } from './converters/AdminLinksConverter';
+import { AdminLinks } from './types';
 
 export class HttpBoclipsApiClient implements BoclipsApiClient {
   private axios: AxiosInstance;
   private baseUrl: string;
-  private backofficeLinks: BackofficeLinks;
+  private adminLinks: AdminLinks;
 
   public legalRestrictionsController: HttpLegalRestrictionsController;
   public contentPartnersController: HttpContentPartnersController;
@@ -25,38 +25,29 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
   public static initialize = async (axios: AxiosInstance, baseUrl: string) => {
     const instance = new HttpBoclipsApiClient(axios, baseUrl);
 
-    await instance.setBackofficeLinks();
+    await instance.setUpAdminLinks();
+    instance.setUpControllers();
 
     return instance;
   };
 
-  private async setBackofficeLinks() {
-    const backofficeLinksResponse = await this.axios.get(
-      `${this.baseUrl}/v1/admin`,
-    );
+  private async setUpAdminLinks() {
+    const response = await this.axios.get(`${this.baseUrl}/v1/admin`);
 
-    this.backofficeLinks = BackofficeLinksConverter.convert(
-      backofficeLinksResponse.data,
-    );
+    this.adminLinks = AdminLinksConverter.convert(response.data);
+  }
 
-    this.legalRestrictionsController = new HttpLegalRestrictionsController(
-      this.backofficeLinks,
-      this.axios,
-    );
+  private setUpControllers() {
+    this.legalRestrictionsController = new HttpLegalRestrictionsController();
+    this.contentPartnersController = new HttpContentPartnersController();
+    this.subjectsController = new HttpSubjectsController();
+    this.feedsController = new HttpFeedsController();
 
-    this.contentPartnersController = new HttpContentPartnersController(
-      this.backofficeLinks,
-      this.axios,
-    );
-
-    this.subjectsController = new HttpSubjectsController(
-      this.backofficeLinks,
-      this.axios,
-    );
-
-    this.feedsController = new HttpFeedsController(
-      this.backofficeLinks,
-      this.axios,
-    );
+    [
+      this.legalRestrictionsController,
+      this.contentPartnersController,
+      this.subjectsController,
+      this.feedsController,
+    ].forEach(controller => controller.initialize(this.adminLinks, this.axios));
   }
 }

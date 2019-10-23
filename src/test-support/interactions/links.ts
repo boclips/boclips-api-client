@@ -6,9 +6,9 @@ const { like, term } = Matchers;
 
 export const sampleLink: Link = { href: 'href', templated: false };
 
-export const getBackofficeLinks = (): InteractionObject => ({
+export const getAdminLinks = (): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET Backoffice Links',
+  uponReceiving: 'GET Admin Links',
   withRequest: {
     method: 'GET',
     path: '/v1/admin',

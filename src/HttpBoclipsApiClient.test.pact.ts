@@ -9,7 +9,7 @@ import {
 } from './test-support/interactions/contentPartnersInteractions';
 import { getLegalRestrictions } from './test-support/interactions/legalRestrictions';
 import { getHttpFeeds, createHttpFeed } from './test-support/interactions/httpFeeds';
-import { getBackofficeLinks } from './test-support/interactions/links';
+import { getAdminLinks } from './test-support/interactions/links';
 import {
   existingSubjectFromStaging,
   getSubjects,
@@ -20,7 +20,7 @@ import { TestBoclipsApiClient } from './TestBoclipsApiClient';
 import { ContentPartnerFactory } from './types';
 
 beforeEach(async () => {
-  await provider.addInteraction(getBackofficeLinks());
+  await provider.addInteraction(getAdminLinks());
 });
 
 describe('Pact tests', () => {

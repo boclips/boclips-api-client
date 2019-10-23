@@ -1,5 +1,5 @@
 export * from './AgeRange';
-export * from './BackofficeLinks';
+export * from './AdminLinks';
 export * from './ContentPartner';
 export * from './DistributionMethod';
 export * from './LegalRestrictions';
