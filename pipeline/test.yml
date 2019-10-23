@@ -13,10 +13,6 @@ inputs:
 run:
   path: source/pipeline/test.sh
 
-params:
-  CONTRACT_TEST_USERNAME:
-  CONTRACT_TEST_PASSWORD:
-
 caches:
   - path: ../../../root/.cache
   - path: ../../../root/.npm
