@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+cwd="$(cd "$(dirname "$0")" && pwd)"
+dir=$(mktemp -d -t fly-release-boclips-api-client.XXXXX)
+
+tidy () {
+    rm -rf "$dir"
+}
+
+trap tidy EXIT
+
+mkdir "$dir/version"
+echo "1.2.3" > "$dir/version/version"
+
+CONTRACT_TEST_PASSWORD="$(get-k8s-concourse-secret boclips-api-client boclips-api-client contract-test-password)"
+CONTRACT_TEST_USERNAME="$(get-k8s-concourse-secret boclips-api-client boclips-api-client contract-test-username)"
+
+export CONTRACT_TEST_PASSWORD
+export CONTRACT_TEST_USERNAME
+
+fly --target ci \
+    execute \
+    --config pipeline/release.yml \
+    --input source="$cwd" \
+    --input version="$dir/version" \
+    --output pacts="$cwd/fly-pacts"
