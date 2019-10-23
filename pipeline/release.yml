@@ -8,16 +8,16 @@ image_resource:
     tag: '10'
 
 inputs:
-  - name: source
-  - name: version
+- name: source
+- name: version
 
 outputs:
-  - name: dist
-  - name: release
+- name: dist
+- name: release
 
 run:
   path: source/pipeline/release.sh
 
 caches:
-  - path: ../../../root/.cache
-  - path: ../../../root/.npm
+- path: ../../../root/.cache
+- path: ../../../root/.npm
