@@ -14,11 +14,6 @@ inputs:
 outputs:
 - name: dist
 - name: release
-- name: pacts
-
-params:
-  CONTRACT_TEST_USERNAME:
-  CONTRACT_TEST_PASSWORD:
 
 run:
   path: source/pipeline/release.sh
