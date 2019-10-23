@@ -30,7 +30,13 @@ export const getBackofficeLinks = (): InteractionObject => ({
         orders: like(sampleLink),
         exportOrders: like(sampleLink),
         order: like(sampleLink),
-        httpFeeds: like(sampleLink),
+        httpFeeds: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/http-feeds{?provider}`,
+            matcher: '/v1/http-feeds{\\?provider}',
+          }),
+          templated: true,
+        },
         contentPartners: {
           href: term({
             generate: `${provider.mockService.baseUrl}/v1/content-partners{?name,official,accreditedToYtChannelId}`,
@@ -53,8 +59,20 @@ export const getBackofficeLinks = (): InteractionObject => ({
           }),
           templated: false,
         },
-        youtubeFeeds: like(sampleLink),
-        createHttpFeed: like(sampleLink),
+        youtubeFeeds: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/http-feeds?provider=youtube}`,
+            matcher: '/v1/http-feeds\\?provider=youtube',
+          }),
+          templated: false,
+        },
+        createHttpFeed: {
+          href: term({
+            generate: `${provider.mockService.baseUrl}/v1/http-feeds`,
+            matcher: '/v1/http-feeds',
+          }),
+          templated: false,
+        },
         distributionMethods: like(sampleLink),
         subjects: {
           href: term({

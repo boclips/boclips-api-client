@@ -8,6 +8,7 @@ import {
   updateContentPartner,
 } from './test-support/interactions/contentPartnersInteractions';
 import { getLegalRestrictions } from './test-support/interactions/legalRestrictions';
+import { getHttpFeeds, createHttpFeed } from './test-support/interactions/httpFeeds';
 import { getBackofficeLinks } from './test-support/interactions/links';
 import {
   existingSubjectFromStaging,
@@ -43,6 +44,38 @@ describe('Pact tests', () => {
         if (shouldUseRealClient) {
           return provider.verify();
         }
+      });
+
+      describe('FeedController', () => {
+
+        beforeEach(async () => {
+            if (!shouldUseRealClient) {
+              (client as TestBoclipsApiClient).feedsController.insert(
+                { name: 'test name', url: 'test url', provider: 'youtube' },
+              );
+            }
+         });
+
+        /* TODO remove created test feed after verification, so the next time we can create it again
+            currently this would fail when testing against staging, because the feed is duplicate
+        */
+        xit('can create new feed', async () => {
+          await provider.addInteraction(createHttpFeed);
+
+          await client.feedsController.create({name: 'Feed Test', url: 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=AIzaSyB4NJuzPNSbhqvuebzKV8XmqKY4YNmcPRk&playlistId=PLMNah2hiP1MzYKN_aDNK31Pl8_ytbSiVm&maxResults=50',
+            provider: 'Youtube', format: 'YOUTUBE'});
+        });
+
+        it('can fetch all feeds', async () => {
+            await provider.addInteraction(getHttpFeeds('youtube'));
+
+            const response = await client.feedsController.getAll('youtube');
+
+            expect(response).toHaveLength(1);
+            expect(response[0].name).toEqual('test name');
+            expect(response[0].url).toEqual('test url');
+            expect(response[0].provider).toEqual('youtube');
+        });
       });
 
       describe('LegalRestrictionsController', () => {

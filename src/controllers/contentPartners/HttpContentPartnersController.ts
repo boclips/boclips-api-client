@@ -39,7 +39,6 @@ export class HttpContentPartnersController
     }
   }
   public async update(contentPartner: ContentPartner): Promise<void> {
-    console.log(contentPartner._links.self.href);
     const {
       ageRange,
       name,
