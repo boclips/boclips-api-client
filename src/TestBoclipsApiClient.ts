@@ -1,4 +1,5 @@
 import { BoclipsApiClient } from './BoclipsApiClient';
+import { TestCollectionsController } from './collections/TestCollectionsController';
 import { TestContentPartnersController } from './controllers/contentPartners/TestContentPartnersController';
 import { TestFeedsController } from './controllers/httpFeeds/TestFeedsController';
 import { TestLegalRestrictionsController } from './controllers/legalRestrictions/TestLegalRestrictionsController';
@@ -10,6 +11,7 @@ export class TestBoclipsApiClient implements BoclipsApiClient, Clearable {
   public contentPartnersController: TestContentPartnersController = new TestContentPartnersController();
   public subjectsController: TestSubjectsController = new TestSubjectsController();
   public feedsController: TestFeedsController = new TestFeedsController();
+  public collectionsController: TestCollectionsController = new TestCollectionsController();
 
   public clear() {
     this.legalRestrictionsController.clear();

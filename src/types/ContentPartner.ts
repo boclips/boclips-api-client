@@ -1,7 +1,7 @@
 import { AgeRange } from './AgeRange';
 import { DistributionMethod } from './DistributionMethod';
 import { LegalRestrictions } from './LegalRestrictions';
-import { Link } from './Link';
+import { LinkEntity } from './LinkEntity';
 
 export interface ContentPartner {
   id: string;
@@ -10,7 +10,7 @@ export interface ContentPartner {
   ageRange?: AgeRange;
   currency?: string;
   legalRestrictions?: LegalRestrictions;
-  _links: { self: Link };
+  _links: { self: LinkEntity };
   distributionMethods: DistributionMethod[];
 }
 

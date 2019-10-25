@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z $1 ]]; then
+  echo "Usage: make-api-request /path/to/resource"
+  exit 1
+fi
+
+export ENVIRONMENT=staging
+export CLIENT_ID=teachers
+export USERNAME=$(get-k8s-concourse-secret boclips contract-tests api-client-username)
+export PASSWORD=$(get-k8s-concourse-secret boclips contract-tests api-client-password)
+
+token=$(create-keycloak-token-custom-user)
+
+uri="https://api.staging-boclips.com${1}"
+
+curl "${uri}" \
+  -H "Accept: application/json, text/plain, */*" \
+  -H "Authorization: Bearer ${token}" 2>/dev/null \
+  | jq

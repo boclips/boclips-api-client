@@ -9,7 +9,7 @@ export const provider = new Pact({
   dir: resolve(process.cwd(), 'pacts'),
   spec: 2,
   cors: true,
-  pactfileWriteMode: 'overwrite',
+  pactfileWriteMode: 'merge',
   consumer: 'boclips-api-client',
   provider: 'gateway',
 });

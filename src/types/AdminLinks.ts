@@ -1,23 +1,23 @@
-import { Link } from './Link';
+import { LinkEntity } from './LinkEntity';
 
 export interface AdminLinks {
-  collection: Link;
-  createCollection: Link;
-  adminCollectionSearch: Link;
-  jobs: Link;
-  jobDetails: Link;
-  adminSearch: Link;
-  videos: Link;
-  orders: Link;
-  exportOrders: Link;
-  order: Link;
-  httpFeeds: Link;
-  contentPartners: Link;
-  contentPartner: Link;
-  legalRestrictions: Link;
-  youtubeFeeds: Link;
-  createHttpFeed: Link;
-  distributionMethods: Link;
-  subjects: Link;
-  searchContracts: Link;
+  collection: LinkEntity;
+  createCollection: LinkEntity;
+  adminCollectionSearch: LinkEntity;
+  jobs: LinkEntity;
+  jobDetails: LinkEntity;
+  adminSearch: LinkEntity;
+  videos: LinkEntity;
+  orders: LinkEntity;
+  exportOrders: LinkEntity;
+  order: LinkEntity;
+  httpFeeds: LinkEntity;
+  contentPartners: LinkEntity;
+  contentPartner: LinkEntity;
+  legalRestrictions: LinkEntity;
+  youtubeFeeds: LinkEntity;
+  createHttpFeed: LinkEntity;
+  distributionMethods: LinkEntity;
+  subjects: LinkEntity;
+  searchContracts: LinkEntity;
 }

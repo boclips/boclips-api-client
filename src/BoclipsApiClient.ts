@@ -1,3 +1,4 @@
+import { CollectionsController } from './collections/CollectionsController';
 import { ContentPartnersController } from './controllers/contentPartners/ContentPartnersController';
 import { FeedsController } from './controllers/httpFeeds/FeedsController';
 import { LegalRestrictionsController } from './controllers/legalRestrictions/LegalRestrictionsController';
@@ -8,4 +9,5 @@ export interface BoclipsApiClient {
   contentPartnersController: ContentPartnersController;
   subjectsController: SubjectsController;
   feedsController: FeedsController;
+  collectionsController: CollectionsController;
 }

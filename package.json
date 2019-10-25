@@ -9,7 +9,7 @@
     "clean": "rm -rf dist/*",
     "build": "npm run clean && tsc",
     "link": "npm run build && cp package.json dist/ && npm link",
-    "test:pact": "jest --runInBand --config jest.pact-config.json",
+    "test:pact": "rm -f pacts/* && jest --runInBand --config jest.pact-config.json",
     "test": "jest --runInBand --config jest.config.json",
     "verify": "npm run test:pact && jest --runInBand --config jest.pact-verify-config.json",
     "lint": "tslint -c tslint.json -p .",

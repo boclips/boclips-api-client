@@ -4,5 +4,7 @@ export * from './ContentPartner';
 export * from './DistributionMethod';
 export * from './LegalRestrictions';
 export * from './Subject';
-export * from './Link';
+export * from './LinkEntity';
 export * from './HttpFeed';
+export * from '../collections/types';
+export * from './Video';
