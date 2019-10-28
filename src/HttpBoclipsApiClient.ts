@@ -25,10 +25,6 @@ export class HttpBoclipsApiClient implements BoclipsApiClient {
     this.baseUrl = baseUrl;
   }
 
-  public autoCompleteForHttp = () => {
-    return false;
-  };
-
   public static initialize = async (axios: AxiosInstance, baseUrl: string) => {
     if (!HttpBoclipsApiClient.instance) {
       const client = new HttpBoclipsApiClient(axios, baseUrl);

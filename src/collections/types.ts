@@ -63,7 +63,3 @@ export interface Collection extends ModelWithLinks {
     unbookmark?: Link;
   };
 }
-
-// export interface CollectionWithContracts extends CollectionEntity {
-//   contractIds: string[];
-// }

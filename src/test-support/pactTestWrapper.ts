@@ -13,7 +13,6 @@ export const withClients = (callTheTests: (client) => void) => {
   describe.each([['Real client', true], ['Fake client', false]])(
     'contract test using %s',
     (_: string, shouldUseRealClient: boolean) => {
-
       beforeAll(() => {
         if (shouldUseRealClient) {
           return provider.addInteraction(getAdminLinks());
