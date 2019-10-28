@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { HttpBoclipsApiClient } from '../HttpBoclipsApiClient';
-import { TestBoclipsApiClient } from '../TestBoclipsApiClient';
-import { getAdminLinks } from './interactions/links';
+import { ApiBoclipsClient } from '../ApiBoclipsClient';
+import { getAdminLinks } from '../clients/adminLinks/pact/AdminLinksInteractions';
+import { FakeBoclipsClient } from '../FakeBoclipsClient';
 import { provider } from './pactSetup';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; // This is to give the pact mock server time to start
@@ -27,12 +27,12 @@ export const withClients = (callTheTests: (client) => void) => {
 
       const getClient = async () => {
         if (shouldUseRealClient) {
-          return await HttpBoclipsApiClient.initialize(
+          return await ApiBoclipsClient.initialize(
             axios.create(),
             provider.mockService.baseUrl,
           );
         } else {
-          return new TestBoclipsApiClient();
+          return new FakeBoclipsClient();
         }
       };
 
@@ -43,7 +43,7 @@ export const withClients = (callTheTests: (client) => void) => {
 };
 
 export const isATestClient = (
-  client: TestBoclipsApiClient | HttpBoclipsApiClient,
-): client is TestBoclipsApiClient => {
-  return (client as TestBoclipsApiClient).clear !== undefined;
+  client: FakeBoclipsClient | ApiBoclipsClient,
+): client is FakeBoclipsClient => {
+  return (client as FakeBoclipsClient).clear !== undefined;
 };
