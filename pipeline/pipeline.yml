@@ -27,12 +27,9 @@ jobs:
   - in_parallel:
     - task: test
       file: source/pipeline/test.yml
-    - &verify_and_create_contracts
-      task: verify
-      file: source/pipeline/verify-and-create-contracts.yml
-      params:
-        CONTRACT_TEST_PASSWORD: ((boclips-api-client.contract-test-password))
-        CONTRACT_TEST_USERNAME: ((boclips-api-client.contract-test-username))
+        params:
+          CONTRACT_TEST_PASSWORD: ((boclips-api-client.contract-test-password))
+          CONTRACT_TEST_USERNAME: ((boclips-api-client.contract-test-username))
 
 - name: pre-release
   plan:
@@ -85,8 +82,11 @@ jobs:
   - put: version
     params:
       bump: patch
-  - <<: *verify_and_create_contracts
-    task: create-contracts
+  - task: create-contracts
+    file: source/pipeline/verify-and-create-contracts.yml
+    params:
+      CONTRACT_TEST_PASSWORD: ((boclips-api-client.contract-test-password))
+      CONTRACT_TEST_USERNAME: ((boclips-api-client.contract-test-username))
   - put: github-release
     params:
       name: release/name
