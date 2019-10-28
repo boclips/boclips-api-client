@@ -6,6 +6,7 @@ app=source
 npm="npm --prefix $app"
 
 $npm ci
-$npm run verify
+$npm run test:client # Generate the pact json
+$npm run test:verify # Verify the pact json
 
 cp ${app}/pacts/* pacts/

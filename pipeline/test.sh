@@ -8,4 +8,5 @@ cd ${app}
 
 npm ci
 npm run compile
+npm run test
 )
