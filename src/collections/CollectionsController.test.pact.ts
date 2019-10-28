@@ -1,5 +1,8 @@
 import { CollectionFactory } from '../test-support/Collections/factories';
-import { getCollectionById } from '../test-support/Collections/interactions';
+import {
+  existingCollectionFromStaging,
+  getCollectionById,
+} from '../test-support/Collections/interactions';
 import { provider } from '../test-support/pactSetup';
 import { isATestClient, withClients } from '../test-support/pactTestWrapper';
 import { Collection } from '../types';
@@ -15,19 +18,21 @@ describe('CollectionsController', () => {
       // given:
       if (isATestClient(client)) {
         client.collectionsController.add(
-          CollectionFactory.sample({ id: 'test-id' }),
+          CollectionFactory.sample({ id: existingCollectionFromStaging }),
         );
       } else {
-        await provider.addInteraction(getCollectionById('test-id'));
+        await provider.addInteraction(
+          getCollectionById(existingCollectionFromStaging),
+        );
       }
 
       // when:
       const response: Collection = await client.collectionsController.get(
-        'test-id',
+        existingCollectionFromStaging,
       );
 
       // then:
-      expect(response.id).toEqual('test-id');
+      expect(response.id).toEqual(existingCollectionFromStaging);
       expect(response.title).toEqual('My Videos edited');
       expect(response.owner).toEqual('owner-id');
       expect(response.updatedAt).toEqual(new Date('2019-10-21T09:11:19.074Z'));
@@ -36,7 +41,7 @@ describe('CollectionsController', () => {
       expect(response.createdBy).toEqual('Teacher');
       expect(response.links).toBeTruthy();
       expect(response.links.self.getOriginalLink()).toContain(
-        '/v1/collections/test-id',
+        `/v1/collections/${existingCollectionFromStaging}`,
       );
     });
   });

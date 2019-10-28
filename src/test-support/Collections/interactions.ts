@@ -6,7 +6,11 @@ import {
 import { provider } from '../pactSetup';
 const { like } = Matchers;
 
-export const getCollectionById = (id: string): InteractionObject => ({
+export const existingCollectionFromStaging = '5cfa8941943b723f4563b3bb';
+
+export const getCollectionById = (
+  id: string = existingCollectionFromStaging,
+): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET collection',
   withRequest: {
