@@ -1,6 +1,6 @@
 import { HttpBoclipsApiClient } from './HttpBoclipsApiClient';
 import {
-  existingRestrictionFromStaging,
+  existingContentPartnerFromStaging,
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
@@ -21,7 +21,7 @@ describe('ContentPartnersController', () => {
         if (isATestClient(client)) {
           (client as TestBoclipsApiClient).contentPartnersController.insertContentPartnerFixture(
             ContentPartnerFactory.sample({
-              id: existingRestrictionFromStaging,
+              id: existingContentPartnerFromStaging,
               name: 'a name',
               official: true,
             }),
@@ -34,23 +34,23 @@ describe('ContentPartnersController', () => {
         const response = await client.contentPartnersController.getAll();
 
         expect(response).toHaveLength(1);
-        expect(response[0].id).toEqual(existingRestrictionFromStaging);
+        expect(response[0].id).toEqual(existingContentPartnerFromStaging);
         expect(response[0].name).toEqual('a name');
         expect(response[0].official).toEqual(true);
         expect(response[0]._links.self.href).toContain(
-          `/v1/content-partners/${existingRestrictionFromStaging}`,
+          `/v1/content-partners/${existingContentPartnerFromStaging}`,
         );
       });
 
       it('can fetch a content partner', async () => {
         await provider.addInteraction(
-          getContentPartnerInteraction(existingRestrictionFromStaging),
+          getContentPartnerInteraction(existingContentPartnerFromStaging),
         );
         const contentPartner = await client.contentPartnersController.get(
-          existingRestrictionFromStaging,
+          existingContentPartnerFromStaging,
         );
 
-        expect(contentPartner.id).toEqual(existingRestrictionFromStaging);
+        expect(contentPartner.id).toEqual(existingContentPartnerFromStaging);
         expect(contentPartner.name).toEqual('a name');
         expect(contentPartner.official).toEqual(true);
         expect(contentPartner.currency).toEqual('USD');
@@ -66,14 +66,14 @@ describe('ContentPartnersController', () => {
 
       it('can update a content partner', async () => {
         await provider.addInteraction(
-          updateContentPartner(existingRestrictionFromStaging),
+          updateContentPartner(existingContentPartnerFromStaging),
         );
         await client.contentPartnersController.update(
           ContentPartnerFactory.sample({
-            id: existingRestrictionFromStaging,
+            id: existingContentPartnerFromStaging,
             _links: {
               self: {
-                href: `${provider.mockService.baseUrl}/v1/content-partners/${existingRestrictionFromStaging}`,
+                href: `${provider.mockService.baseUrl}/v1/content-partners/${existingContentPartnerFromStaging}`,
               },
             },
           }),

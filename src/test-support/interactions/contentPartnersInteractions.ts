@@ -3,7 +3,7 @@ import { provider } from '../pactSetup';
 
 const { eachLike, like } = Matchers;
 
-export const existingRestrictionFromStaging = '5cf140c4c1475c47f7178678';
+export const existingContentPartnerFromStaging = '5cf140c4c1475c47f7178678';
 
 const createContentPartnerWithMandatoryFields = (id: string) => ({
   id: like(id),
@@ -32,7 +32,7 @@ export const getContentPartnersInteraction = (): InteractionObject => ({
       _embedded: {
         contentPartners: eachLike(
           createContentPartnerWithMandatoryFields(
-            existingRestrictionFromStaging,
+            existingContentPartnerFromStaging,
           ),
         ),
       },
@@ -52,7 +52,7 @@ export const updateContentPartner = (id: string): InteractionObject => ({
     body: like({
       name: 'hi',
       legalRestrictions: like({
-        id: existingRestrictionFromStaging,
+        id: existingContentPartnerFromStaging,
         text: '1',
       }),
       ageRange: like({
