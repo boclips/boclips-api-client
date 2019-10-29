@@ -1,10 +1,10 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
-import { FakeBoclipsClient } from '../../../FakeBoclipsClient';
-import { provider } from '../../../test-support/pactSetup';
+import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
+import { provider } from '../../../pact-support/pactSetup';
 import {
   isATestClient,
   withClients,
-} from '../../../test-support/pactTestWrapper';
+} from '../../../pact-support/pactTestWrapper';
 import { getLegalRestrictions } from '../pact/legalRestrictions';
 
 describe('LegalRestrictionsClient', () => {

@@ -1,6 +1,6 @@
 import { ApiBoclipsClient } from './ApiBoclipsClient';
 import { BoclipsClient } from './BoclipsClient';
-import { FakeBoclipsClient } from './FakeBoclipsClient';
-import * as Types from './types/index';
+import * as TestSupport from './test-support';
+import * as Types from './types';
 
-export { FakeBoclipsClient, ApiBoclipsClient, BoclipsClient, Types };
+export { ApiBoclipsClient, BoclipsClient, Types, TestSupport };

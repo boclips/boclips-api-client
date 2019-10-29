@@ -1,9 +1,9 @@
 import { CollectionFactory } from '../../../test-support/CollectionsFactory';
-import { provider } from '../../../test-support/pactSetup';
+import { provider } from '../../../pact-support/pactSetup';
 import {
   isATestClient,
   withClients,
-} from '../../../test-support/pactTestWrapper';
+} from '../../../pact-support/pactTestWrapper';
 import { Collection } from '../model/Collection';
 import {
   existingCollectionFromStaging,

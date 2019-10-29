@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ApiBoclipsClient } from '../ApiBoclipsClient';
 import { getAdminLinks } from '../clients/adminLinks/pact/AdminLinksInteractions';
-import { FakeBoclipsClient } from '../FakeBoclipsClient';
+import { FakeBoclipsClient } from '../test-support/FakeBoclipsClient';
 import { provider } from './pactSetup';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; // This is to give the pact mock server time to start

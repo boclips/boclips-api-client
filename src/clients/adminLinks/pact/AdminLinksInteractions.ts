@@ -1,5 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { provider } from '../../../test-support/pactSetup';
+import { provider } from '../../../pact-support/pactSetup';
 import { LinkEntity } from '../../common/model/LinkEntity';
 
 const { like } = Matchers;

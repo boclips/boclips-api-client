@@ -1,10 +1,10 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
-import { provider } from '../../../test-support/pactSetup';
+import { provider } from '../../../pact-support/pactSetup';
 import {
   isATestClient,
   withClients,
-} from '../../../test-support/pactTestWrapper';
-import { FakeBoclipsClient } from '../../../FakeBoclipsClient';
+} from '../../../pact-support/pactTestWrapper';
+import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
 import { createHttpFeed, getHttpFeeds } from '../pact/HttpFeedsInteraction';
 
 describe('HttpFeedsClient', () => {

@@ -1,11 +1,11 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
-import { FakeBoclipsClient } from '../../../FakeBoclipsClient';
+import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
 import { ContentPartnerEntityFactory } from '../../../test-support/ContentPartnersFactory';
-import { provider } from '../../../test-support/pactSetup';
+import { provider } from '../../../pact-support/pactSetup';
 import {
   isATestClient,
   withClients,
-} from '../../../test-support/pactTestWrapper';
+} from '../../../pact-support/pactTestWrapper';
 import {
   existingContentPartnerFromStaging,
   getContentPartnerInteraction,

@@ -3,7 +3,7 @@ import {
   ISO8601_DATETIME_WITH_MILLIS_FORMAT,
   term,
 } from '@pact-foundation/pact/dsl/matchers';
-import { provider } from '../../../test-support/pactSetup';
+import { provider } from '../../../pact-support/pactSetup';
 const { like } = Matchers;
 
 export const existingCollectionFromStaging = '5cfa8941943b723f4563b3bb';
