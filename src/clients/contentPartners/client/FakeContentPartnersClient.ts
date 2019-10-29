@@ -1,29 +1,25 @@
-import { ContentPartnerEntityFactory } from '../../../test-support/ContentPartnersFactory';
+import { ContentPartnerFactory } from '../../../test-support';
 import { Clearable } from '../../common/utils/Clearable';
-import { ContentPartnerEntity } from '../model/ContentPartnerEntity';
+import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class FakeContentPartnersClient
   implements ContentPartnersClient, Clearable {
-  private contentPartners: ContentPartnerEntity[] = [];
+  private contentPartners: ContentPartner[] = [];
 
-  public insertContentPartnerFixture(
-    contentPartner: Partial<ContentPartnerEntity>,
-  ) {
-    this.contentPartners.push(
-      ContentPartnerEntityFactory.sample(contentPartner),
-    );
+  public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
+    this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));
   }
 
-  public getAll(): Promise<ContentPartnerEntity[]> {
+  public getAll(): Promise<ContentPartner[]> {
     return Promise.resolve(this.contentPartners);
   }
 
-  public get(id: string): Promise<ContentPartnerEntity> {
+  public get(id: string): Promise<ContentPartner> {
     return Promise.resolve(this.contentPartners.find(i => i.id === id));
   }
 
-  public update(contentPartner: ContentPartnerEntity) {
+  public update(contentPartner: ContentPartner) {
     const index = this.contentPartners.findIndex(
       i => i.id === contentPartner.id,
     );

@@ -5,8 +5,8 @@ export { Link } from '../clients/common/model/LinkEntity';
 export { AdminLinks } from '../clients/adminLinks/model/AdminLinks';
 export { Collection } from '../clients/collections/model/Collection';
 export {
-  ContentPartnerEntity as ContentPartner,
-} from '../clients/contentPartners/model/ContentPartnerEntity';
+  ContentPartner,
+} from '../clients/contentPartners/model/ContentPartner';
 export { HttpFeed } from '../clients/httpFeeds/model/HttpFeed';
 export {
   LegalRestrictions,

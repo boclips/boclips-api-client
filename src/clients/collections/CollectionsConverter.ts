@@ -25,7 +25,7 @@ export class CollectionsConverter {
   private static convertLinks<
     E extends EntityWithLinks,
     R extends { [rel in keyof E['_links']]: Link }
-  >(entity: EntityWithLinks): R {
+  >(entity: E): R {
     // Use the links we received from the API
     const rels = Object.keys(entity._links);
 

@@ -1,11 +1,12 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
-import { ContentPartnerEntityFactory } from '../../../test-support/ContentPartnersFactory';
 import { provider } from '../../../pact-support/pactSetup';
 import {
   isATestClient,
   withClients,
 } from '../../../pact-support/pactTestWrapper';
+import { ContentPartnerFactory } from '../../../test-support';
+import { FakeBoclipsClient } from '../../../test-support';
+import { Link } from '../../common/model/LinkEntity';
 import {
   existingContentPartnerFromStaging,
   getContentPartnerInteraction,
@@ -23,7 +24,7 @@ describe('ContentPartnersClient', () => {
 
         if (isATestClient(client)) {
           (client as FakeBoclipsClient).contentPartnersClient.insertContentPartnerFixture(
-            ContentPartnerEntityFactory.sample({
+            ContentPartnerFactory.sample({
               id: existingContentPartnerFromStaging,
               name: 'a name',
               official: true,
@@ -40,7 +41,7 @@ describe('ContentPartnersClient', () => {
         expect(response[0].id).toEqual(existingContentPartnerFromStaging);
         expect(response[0].name).toEqual('a name');
         expect(response[0].official).toEqual(true);
-        expect(response[0]._links.self.href).toContain(
+        expect(response[0].links.self.getOriginalLink()).toContain(
           `/v1/content-partners/${existingContentPartnerFromStaging}`,
         );
       });
@@ -72,12 +73,12 @@ describe('ContentPartnersClient', () => {
           updateContentPartner(existingContentPartnerFromStaging),
         );
         await client.contentPartnersClient.update(
-          ContentPartnerEntityFactory.sample({
+          ContentPartnerFactory.sample({
             id: existingContentPartnerFromStaging,
-            _links: {
-              self: {
+            links: {
+              self: new Link({
                 href: `${provider.mockService.baseUrl}/v1/content-partners/${existingContentPartnerFromStaging}`,
-              },
+              }),
             },
           }),
         );

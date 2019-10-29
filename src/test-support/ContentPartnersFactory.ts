@@ -1,9 +1,9 @@
-import { ContentPartnerEntity } from '../clients/contentPartners/model/ContentPartnerEntity';
+import { ContentPartner, Link } from '../types';
 
-export class ContentPartnerEntityFactory {
+export class ContentPartnerFactory {
   public static sample(
-    contentPartner: Partial<ContentPartnerEntity> = {},
-  ): ContentPartnerEntity {
+    contentPartner: Partial<ContentPartner> = {},
+  ): ContentPartner {
     const id = contentPartner.id || '123';
     return {
       id,
@@ -15,10 +15,10 @@ export class ContentPartnerEntityFactory {
         id: '2',
         text: 'a legal restriction',
       },
-      _links: contentPartner._links || {
-        self: {
+      links: contentPartner.links || {
+        self: new Link({
           href: `/v1/content-partners/${id}`,
-        },
+        }),
       },
       distributionMethods: contentPartner.distributionMethods || ['STREAM'],
     };

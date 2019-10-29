@@ -1,20 +1,21 @@
 import { AxiosResponse } from 'axios';
-import { ContentPartnerEntity } from './model/ContentPartnerEntity';
+import { Link } from '../common/model/LinkEntity';
+import { ContentPartner } from './model/ContentPartner';
 
 export class ContentPartnersConverter {
   public static convertEmbeddedResources(
     response: AxiosResponse,
-  ): ContentPartnerEntity[] {
+  ): ContentPartner[] {
     return response.data._embedded.contentPartners.map(
       ContentPartnersConverter.convert,
     );
   }
 
-  public static convertResource(response: AxiosResponse): ContentPartnerEntity {
+  public static convertResource(response: AxiosResponse): ContentPartner {
     return ContentPartnersConverter.convert(response.data);
   }
 
-  private static convert(resource: any): ContentPartnerEntity {
+  private static convert(resource: any): ContentPartner {
     const {
       id,
       name,
@@ -33,7 +34,9 @@ export class ContentPartnersConverter {
       ageRange,
       currency,
       legalRestrictions,
-      _links,
+      links: {
+        self: new Link(_links.self),
+      },
       distributionMethods,
     };
   }
