@@ -1,9 +1,7 @@
-import { ApiClient } from '../../common/client/ApiClient';
 import { Collection } from '../model/Collection';
 import { CollectionsClient } from './CollectionsClient';
 
-export class FakeCollectionsClient extends ApiClient
-  implements CollectionsClient {
+export class FakeCollectionsClient implements CollectionsClient {
   private collections: Collection[] = [];
 
   public add(collection: Collection) {

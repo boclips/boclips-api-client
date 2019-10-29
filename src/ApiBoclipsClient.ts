@@ -46,18 +46,19 @@ export class ApiBoclipsClient implements BoclipsClient {
   }
 
   private setUpClients() {
-    this.legalRestrictionsClient = new ApiLegalRestrictionsClient();
-    this.contentPartnersClient = new ApiContentPartnersClient();
-    this.subjectsClient = new ApiSubjectsClient();
-    this.feedsClient = new ApiHttpFeedsClient();
-    this.collectionsClient = new ApiCollectionsClient();
-
-    [
-      this.legalRestrictionsClient,
-      this.contentPartnersClient,
-      this.subjectsClient,
-      this.feedsClient,
-      this.collectionsClient,
-    ].forEach(controller => controller.initialize(this.adminLinks, this.axios));
+    this.legalRestrictionsClient = new ApiLegalRestrictionsClient(
+      this.adminLinks,
+      this.axios,
+    );
+    this.contentPartnersClient = new ApiContentPartnersClient(
+      this.adminLinks,
+      this.axios,
+    );
+    this.subjectsClient = new ApiSubjectsClient(this.adminLinks, this.axios);
+    this.feedsClient = new ApiHttpFeedsClient(this.adminLinks, this.axios);
+    this.collectionsClient = new ApiCollectionsClient(
+      this.adminLinks,
+      this.axios,
+    );
   }
 }

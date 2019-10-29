@@ -5,7 +5,7 @@ export abstract class ApiClient {
   protected adminLinks: AdminLinks;
   protected axios: AxiosInstance;
 
-  public initialize(adminLinks: AdminLinks, axios: AxiosInstance) {
+  constructor(adminLinks: AdminLinks, axios: AxiosInstance) {
     this.adminLinks = adminLinks;
     this.axios = axios;
   }
