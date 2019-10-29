@@ -4,12 +4,11 @@ import { LegalRestrictionsClient } from './LegalRestrictionsClient';
 
 export class ApiLegalRestrictionsClient extends ApiClient
   implements LegalRestrictionsClient {
-  public async getAll() {
-    return this.requestWithAdminLink('legalRestrictions', async () => {
-      const response = await this.axios.get(
-        this.adminLinks.legalRestrictions.href,
-      );
-      return LegalRestrictionsConverter.convert(response.data);
-    });
+  public getAll() {
+    const legalRestrictionsLink = this.getLinkOrThrow('legalRestrictions');
+
+    return this.axios
+      .get(legalRestrictionsLink.href)
+      .then(response => LegalRestrictionsConverter.convert(response.data));
   }
 }

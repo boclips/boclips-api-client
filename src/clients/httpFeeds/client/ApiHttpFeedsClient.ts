@@ -5,17 +5,16 @@ import { HttpFeedsClient } from './HttpFeedsClient';
 
 export class ApiHttpFeedsClient extends ApiClient implements HttpFeedsClient {
   public async create(request: CreateHttpFeedRequest): Promise<void> {
-    return this.requestWithAdminLink('createHttpFeed', async () => {
-      return this.axios.post(this.adminLinks.createHttpFeed.href, request);
-    });
+    const createLink = this.getLinkOrThrow('createHttpFeed');
+
+    return this.axios.post(createLink.href, request);
   }
 
   public async getAll(provider?: string): Promise<HttpFeed[]> {
-    return this.requestWithAdminLink('httpFeeds', async () => {
-      const response = await this.axios.get(
-        expandUrlTemplate(this.adminLinks.httpFeeds.href, { provider }),
-      );
-      return response.data._embedded.httpFeeds;
-    });
+    const httpFeedsLink = this.getLinkOrThrow('httpFeeds');
+
+    return this.axios
+      .get(expandUrlTemplate(httpFeedsLink.href, { provider }))
+      .then(response => response.data._embedded.httpFeeds);
   }
 }

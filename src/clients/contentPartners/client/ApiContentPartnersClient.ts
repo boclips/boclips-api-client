@@ -7,44 +7,43 @@ import { ContentPartnersClient } from './ContentPartnersClient';
 export class ApiContentPartnersClient extends ApiClient
   implements ContentPartnersClient {
   public async getAll(): Promise<ContentPartnerEntity[]> {
-    return this.requestWithAdminLink('contentPartners', async () => {
-      const response = await this.axios.get(
-        expandUrlTemplate(this.adminLinks.contentPartners.href, {}),
-      );
-      return ContentPartnersConverter.convertEmbeddedResources(response);
-    });
+    const contentPartnersLink = this.getLinkOrThrow('contentPartners');
+
+    return this.axios
+      .get(expandUrlTemplate(contentPartnersLink.href, {}))
+      .then(ContentPartnersConverter.convertEmbeddedResources);
   }
 
   public async get(id: string): Promise<ContentPartnerEntity> {
-    return this.requestWithAdminLink('contentPartner', async () => {
-      const contentPartnerUrl = expandUrlTemplate(
-        this.adminLinks.contentPartner.href,
-        { id },
-      );
+    const contentPartnerLink = this.getLinkOrThrow('contentPartner');
 
-      const response = await this.axios.get(contentPartnerUrl);
-      return ContentPartnersConverter.convertResource(response);
-    });
+    return this.axios
+      .get(expandUrlTemplate(contentPartnerLink.href, { id }))
+      .then(ContentPartnersConverter.convertResource);
   }
+
   public async update(contentPartner: ContentPartnerEntity): Promise<void> {
-    if (contentPartner && contentPartner._links && contentPartner._links.self) {
-      await this.axios.put(
-        contentPartner._links.self.href,
-        {
-          ageRange: contentPartner.ageRange,
-          name: contentPartner.name,
-          legalRestrictions: contentPartner.legalRestrictions,
-          distributionMethods: contentPartner.distributionMethods,
-          currency: contentPartner.currency,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
-        },
-      );
-    } else {
-      throw new Error('Update link not available');
+    const validSelfLink =
+      contentPartner && contentPartner._links && contentPartner._links.self;
+
+    if (!validSelfLink) {
+      throw new Error('Update content partner is not available');
     }
+
+    await this.axios.put(
+      contentPartner._links.self.href,
+      {
+        ageRange: contentPartner.ageRange,
+        name: contentPartner.name,
+        legalRestrictions: contentPartner.legalRestrictions,
+        distributionMethods: contentPartner.distributionMethods,
+        currency: contentPartner.currency,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      },
+    );
   }
 }

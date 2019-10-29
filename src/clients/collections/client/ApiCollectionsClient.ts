@@ -8,12 +8,11 @@ import { CollectionsClient } from './CollectionsClient';
 export class ApiCollectionsClient extends ApiClient
   implements CollectionsClient {
   public get(id: string): Promise<Collection> {
-    return this.requestWithAdminLink('collection', async () => {
-      const response = await this.axios.get<CollectionEntity>(
-        expandUrlTemplate(this.adminLinks.collection.href, { id }),
-      );
-      return CollectionsConverter.convert(response.data);
-    });
+    const collectionLink = this.getLinkOrThrow('collection');
+
+    return this.axios
+      .get<CollectionEntity>(expandUrlTemplate(collectionLink.href, { id }))
+      .then(response => CollectionsConverter.convert(response.data));
   }
 
   public getAll(): Promise<Collection[]> {

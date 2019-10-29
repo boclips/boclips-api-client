@@ -5,20 +5,23 @@ import { SubjectsClient } from './SubjectsClient';
 
 export class ApiSubjectsClient extends ApiClient implements SubjectsClient {
   public async getAll(): Promise<Subject[]> {
-    return this.requestWithAdminLink('subjects', async () => {
-      const response = await this.axios.get(this.adminLinks.subjects.href);
+    const subjectsLink = this.getLinkOrThrow('subjects');
 
-      return response.data._embedded.subjects.map(it =>
-        SubjectsConverter.convert(it),
+    return this.axios
+      .get(subjectsLink.href)
+      .then(response =>
+        response.data._embedded.subjects.map(it =>
+          SubjectsConverter.convert(it),
+        ),
       );
-    });
   }
 
   public async update(currentSubject: Subject, newName: string): Promise<void> {
-    if (currentSubject && currentSubject.updateLink) {
-      await this.axios.put(currentSubject.updateLink, { name: newName });
-    } else {
+    const validUpdateLink = currentSubject && currentSubject.updateLink;
+    if (!validUpdateLink) {
       throw new Error('Update link not available');
     }
+
+    await this.axios.put(currentSubject.updateLink, { name: newName });
   }
 }

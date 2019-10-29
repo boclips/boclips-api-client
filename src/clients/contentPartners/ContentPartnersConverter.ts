@@ -5,11 +5,13 @@ export class ContentPartnersConverter {
   public static convertEmbeddedResources(
     response: AxiosResponse,
   ): ContentPartnerEntity[] {
-    return response.data._embedded.contentPartners.map(this.convert);
+    return response.data._embedded.contentPartners.map(
+      ContentPartnersConverter.convert,
+    );
   }
 
   public static convertResource(response: AxiosResponse): ContentPartnerEntity {
-    return this.convert(response.data);
+    return ContentPartnersConverter.convert(response.data);
   }
 
   private static convert(resource: any): ContentPartnerEntity {

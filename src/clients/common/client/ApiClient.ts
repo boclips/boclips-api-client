@@ -1,20 +1,15 @@
 import { AxiosInstance } from 'axios';
 import { AdminLinks } from '../../adminLinks/model/AdminLinks';
+import { LinkEntity } from '../model/LinkEntity';
 
 export abstract class ApiClient {
-  protected adminLinks: AdminLinks;
-  protected axios: AxiosInstance;
+  constructor(private adminLinks: AdminLinks, protected axios: AxiosInstance) {}
 
-  constructor(adminLinks: AdminLinks, axios: AxiosInstance) {
-    this.adminLinks = adminLinks;
-    this.axios = axios;
-  }
-
-  protected requestWithAdminLink(adminLinkKey: string, fn: () => Promise<any>) {
+  protected getLinkOrThrow(adminLinkKey: keyof AdminLinks): LinkEntity {
     if (this.adminLinks && this.adminLinks[adminLinkKey]) {
-      return fn();
+      return this.adminLinks[adminLinkKey];
     } else {
-      throw new Error('Not authorized for method');
+      throw new Error(`Not authorized for ${adminLinkKey}`);
     }
   }
 }
