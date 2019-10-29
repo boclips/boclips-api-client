@@ -4,7 +4,7 @@ export interface VideoLinks {
   update: string | null;
 }
 
-export default interface Video {
+export interface Video {
   id: string;
   title: string;
   description: string;

@@ -1,5 +1,5 @@
-import { LegalRestrictionsEntity } from '../model/LegalRestrictionsEntity';
+import { LegalRestrictions } from '../model/LegalRestrictions';
 
 export interface LegalRestrictionsClient {
-  getAll(): Promise<LegalRestrictionsEntity[]>;
+  getAll(): Promise<LegalRestrictions[]>;
 }

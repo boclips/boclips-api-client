@@ -1,18 +1,16 @@
 import { Clearable } from '../../common/utils/Clearable';
-import { LegalRestrictionsEntity } from '../model/LegalRestrictionsEntity';
+import { LegalRestrictions } from '../model/LegalRestrictions';
 import { LegalRestrictionsClient } from './LegalRestrictionsClient';
 
 export class FakeLegalRestrictionsClient
   implements LegalRestrictionsClient, Clearable {
-  private legalRestrictions: LegalRestrictionsEntity[] = [];
+  private legalRestrictions: LegalRestrictions[] = [];
 
-  public insertLegalRestrictionsFixture(
-    legalRestrictions: LegalRestrictionsEntity,
-  ) {
+  public insertLegalRestrictionsFixture(legalRestrictions: LegalRestrictions) {
     this.legalRestrictions.push(legalRestrictions);
   }
 
-  public getAll(): Promise<LegalRestrictionsEntity[]> {
+  public getAll(): Promise<LegalRestrictions[]> {
     return Promise.resolve(this.legalRestrictions);
   }
 

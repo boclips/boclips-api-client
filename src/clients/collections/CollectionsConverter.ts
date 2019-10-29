@@ -1,10 +1,9 @@
 import { EntityWithLinks } from '../common/model/common';
 import { Link } from '../common/model/LinkEntity';
 import { Collection } from './model/Collection';
-import { CollectionEntity } from './model/CollectionEntity';
 
 export class CollectionsConverter {
-  public static convert(entity: CollectionEntity): Collection {
+  public static convert(entity): Collection {
     const links = this.convertLinks(entity);
     return {
       id: entity.id,

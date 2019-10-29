@@ -1,7 +1,7 @@
 import { AgeRange } from '../../common/model/AgeRange';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { LinkEntity } from '../../common/model/LinkEntity';
-import { LegalRestrictionsEntity } from '../../legalRestrictions/model/LegalRestrictionsEntity';
+import { LegalRestrictions } from '../../legalRestrictions/model/LegalRestrictions';
 
 export interface ContentPartnerEntity {
   id: string;
@@ -9,7 +9,7 @@ export interface ContentPartnerEntity {
   official: boolean;
   ageRange?: AgeRange;
   currency?: string;
-  legalRestrictions?: LegalRestrictionsEntity;
+  legalRestrictions?: LegalRestrictions;
   _links: { self: LinkEntity };
   distributionMethods: DistributionMethod[];
 }
