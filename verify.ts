@@ -9,9 +9,9 @@ it('Contracts verification', async () => {
     form: `grant_type=password&username=${process.env.CONTRACT_TEST_USERNAME}&password=${process.env.CONTRACT_TEST_PASSWORD}&client_id=teachers`,
   });
 
-   const token = JSON.parse(tokenResponse).access_token;
+  const token = JSON.parse(tokenResponse).access_token;
 
-   const opts = {
+  const opts = {
     provider: 'Gateway',
     logLevel: 'debug',
     providerBaseUrl: 'https://api.staging-boclips.com',

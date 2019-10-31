@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ApiBoclipsClient } from '../ApiBoclipsClient';
-import { getAdminLinks } from '../clients/adminLinks/pact/AdminLinksInteractions';
+import { getAdminLinks } from '../sub-clients/adminLinks/pact/AdminLinksInteractions';
 import { FakeBoclipsClient } from '../test-support/FakeBoclipsClient';
 import { provider } from './pactSetup';
 

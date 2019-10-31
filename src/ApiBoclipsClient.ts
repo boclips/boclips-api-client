@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
-import { AdminLinksConverter } from './clients/adminLinks/AdminLinksConverter';
-import { AdminLinks } from './clients/adminLinks/model/AdminLinks';
-import { ApiCollectionsClient } from './clients/collections/client/ApiCollectionsClient';
-import { ApiContentPartnersClient } from './clients/contentPartners/client/ApiContentPartnersClient';
-import { ApiHttpFeedsClient } from './clients/httpFeeds/client/ApiHttpFeedsClient';
-import { ApiLegalRestrictionsClient } from './clients/legalRestrictions/client/ApiLegalRestrictionsClient';
-import { ApiSubjectsClient } from './clients/subjects/client/ApiSubjectsClient';
+import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverter';
+import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
+import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
+import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
+import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsClient';
+import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/client/ApiLegalRestrictionsClient';
+import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClient';
 
 export class ApiBoclipsClient implements BoclipsClient {
   private static instance: ApiBoclipsClient;
@@ -30,7 +30,7 @@ export class ApiBoclipsClient implements BoclipsClient {
       const client = new ApiBoclipsClient(axios, baseUrl);
 
       await client.setUpAdminLinks();
-      client.setUpClients();
+      client.setUpSubClients();
 
       ApiBoclipsClient.instance = client;
     }
@@ -45,7 +45,7 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.adminLinks = AdminLinksConverter.convert(response.data);
   }
 
-  private setUpClients() {
+  private setUpSubClients() {
     this.legalRestrictionsClient = new ApiLegalRestrictionsClient(
       this.adminLinks,
       this.axios,

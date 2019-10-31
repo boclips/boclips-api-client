@@ -1,6 +1,8 @@
-import { Collection } from '../clients/collections/model/Collection';
-import { CollectionEntity } from '../clients/collections/model/CollectionEntity';
-import { Link } from '../clients/common/model/LinkEntity';
+import { Collection } from '../sub-clients/collections/model/Collection';
+import { CollectionEntity } from '../sub-clients/collections/model/CollectionEntity';
+import CollectionFilter from '../sub-clients/collections/model/CollectionFilter';
+import { Link } from '../sub-clients/common/model/LinkEntity';
+import { PageableEntity } from '../sub-clients/common/model/PageableEntity';
 
 export class CollectionEntityFactory {
   public static sample(
@@ -29,6 +31,60 @@ export class CollectionEntityFactory {
         },
         bookmark: {
           href: `/v1/collections/${id}/bookmark`,
+        },
+      },
+    };
+  }
+}
+
+export const getFilteredCollectionsQuery = (
+  filters: CollectionFilter,
+  projection: string,
+) => {
+  const { query, page, size } = filters;
+  return `${
+    query ? `query=${query}&` : ''
+  }projection=${projection}&page=${page}&size=${size}`;
+};
+
+export class PageableCollectionsEntityFactory {
+  public static sample(
+    filters: CollectionFilter = { page: 0, size: 25, projection: 'details' },
+    collections: CollectionEntity[] = [],
+  ): PageableEntity<CollectionEntity> {
+    const { page, size, projection } = filters;
+    return {
+      page: {
+        number: page,
+        size,
+        totalElements: collections.length,
+        totalPages: Math.floor(collections.length / size),
+      },
+      _embedded: { collections },
+      _links: {
+        details: {
+          href: `/v1/collections?${getFilteredCollectionsQuery(
+            filters,
+            'details',
+          )}`,
+        },
+        list: {
+          href: `/v1/collections?${getFilteredCollectionsQuery(
+            filters,
+            'list',
+          )}`,
+        },
+        next: {
+          href: `/v1/collections?${getFilteredCollectionsQuery(
+            filters,
+            projection,
+          )}`,
+        },
+        self: {
+          href: `/v1/collections?${getFilteredCollectionsQuery(
+            filters,
+            projection,
+          )}`,
         },
       },
     };
