@@ -92,10 +92,28 @@ export class PageableCollectionsEntityFactory {
 }
 
 export class CollectionFactory {
-  public static sample(
+  public static sampleFromId = (
     collection: Pick<Collection, 'id'> = { id: '123' },
-  ): Collection {
+  ): Collection => {
     const id = collection.id;
+    return {
+      ...CollectionFactory.defaultFields(),
+      id,
+      links: {
+        self: new Link({
+          href: `/v1/collections/${id}`,
+        }),
+      },
+    };
+  };
+
+  public static sample = (collection: Partial<Collection>): Collection => ({
+    ...CollectionFactory.defaultFields(),
+    ...collection,
+  });
+
+  private static defaultFields(): Collection {
+    const id = '123';
     return {
       id,
       owner: 'owner-id',

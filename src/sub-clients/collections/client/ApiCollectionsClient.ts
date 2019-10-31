@@ -6,6 +6,7 @@ import { CollectionsConverter } from '../CollectionsConverter';
 import { Collection } from '../model/Collection';
 import { CollectionEntity } from '../model/CollectionEntity';
 import CollectionFilter from '../model/CollectionFilter';
+import { CreateCollectionRequest } from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
 
 export class ApiCollectionsClient extends ApiSubClient
@@ -36,5 +37,10 @@ export class ApiCollectionsClient extends ApiSubClient
         }),
       )
       .then(response => CollectionsConverter.convertAll(response.data));
+  }
+
+  public create(request: CreateCollectionRequest): Promise<{}> {
+    const createCollectionLink = this.getLinkOrThrow('createCollection');
+    return this.axios.post(createCollectionLink.href, request);
   }
 }

@@ -7,6 +7,8 @@ import {
 import { provider } from '../../../pact-support/pactSetup';
 import { getFilteredCollectionsQuery } from '../../../test-support';
 import CollectionFilter from '../model/CollectionFilter';
+import { CreateCollectionRequest } from '../model/CollectionRequest';
+
 const { like } = Matchers;
 
 export const existingCollectionFromStaging = '5cfa8941943b723f4563b3bb';
@@ -117,3 +119,26 @@ export const getFilteredCollections = (
     },
   };
 };
+
+export const createCollection = (
+  request: CreateCollectionRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST collection',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/collections`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      title: request.title,
+      description: request.description,
+      videos: request.videos,
+      public: request.public,
+    },
+  },
+  willRespondWith: {
+    status: 201,
+  },
+});

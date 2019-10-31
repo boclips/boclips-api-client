@@ -5,7 +5,7 @@ import {
   isATestClient,
   withClients,
 } from '../../../pact-support/pactTestWrapper';
-import { getLegalRestrictions } from '../pact/legalRestrictions';
+import { getLegalRestrictions } from '../pact/LegalRestrictionsInteractions';
 
 describe('LegalRestrictionsClient', () => {
   withClients(

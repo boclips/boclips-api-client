@@ -9,6 +9,7 @@ import { CollectionFactory } from '../../../test-support/CollectionsFactory';
 import Pageable from '../../common/model/Pageable';
 import { Collection } from '../model/Collection';
 import {
+  createCollection,
   existingCollectionFromStaging,
   getCollectionById,
   getFilteredCollections,
@@ -26,7 +27,9 @@ describe('CollectionsClient', () => {
         // given:
         if (isATestClient(client)) {
           client.collectionsClient.addToFake(
-            CollectionFactory.sample({ id: existingCollectionFromStaging }),
+            CollectionFactory.sampleFromId({
+              id: existingCollectionFromStaging,
+            }),
           );
         } else {
           await provider.addInteraction(
@@ -62,7 +65,9 @@ describe('CollectionsClient', () => {
 
         if (isATestClient(client)) {
           client.collectionsClient.addToFake(
-            CollectionFactory.sample({ id: existingCollectionFromStaging }),
+            CollectionFactory.sampleFromId({
+              id: existingCollectionFromStaging,
+            }),
           );
         } else {
           await provider.addInteraction(
@@ -86,6 +91,24 @@ describe('CollectionsClient', () => {
         expect(response.pageSpec.totalElements).toEqual(1);
         expect(response.pageSpec.totalPages).toEqual(0);
         expect(response.page).toHaveLength(1);
+      });
+
+      it('can create a collection', async () => {
+        const request = {
+          title: 'A title',
+          description: 'Description of collection',
+          videos: [],
+          public: true,
+        };
+
+        await provider.addInteraction(createCollection(request));
+        await client.collectionsClient.create(request);
+
+        if (isATestClient(client)) {
+          expect(client.collectionsClient.peekFakeCollections()).toHaveLength(
+            1,
+          );
+        }
       });
     },
   );
