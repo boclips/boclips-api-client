@@ -94,20 +94,35 @@ describe('CollectionsClient', () => {
       });
 
       it('can create a collection', async () => {
-        const request = {
-          title: 'A title',
-          description: 'Description of collection',
-          videos: [],
-          public: true,
-        };
-
-        await provider.addInteraction(createCollection(request));
-        await client.collectionsClient.create(request);
+        const title = 'A title';
+        const description = 'Description of collection';
+        const videos = [];
+        const isPublic = true;
+        const expectedId = 'abc123-id';
 
         if (isATestClient(client)) {
-          expect(client.collectionsClient.peekFakeCollections()).toHaveLength(
-            1,
+          client.collectionsClient.setNextIdForFake(expectedId);
+        }
+
+        const request = {
+          title,
+          description,
+          videos,
+          public: isPublic,
+        };
+
+        await provider.addInteraction(createCollection(request, expectedId));
+        const collectionId = await client.collectionsClient.create(request);
+        expect(collectionId).toEqual(expectedId);
+
+        if (isATestClient(client)) {
+          const newCollection = await client.collectionsClient.get(
+            collectionId,
           );
+          expect(newCollection.title).toEqual(title);
+          expect(newCollection.description).toEqual(description);
+          expect(newCollection.videos).toEqual(videos);
+          expect(newCollection.public).toEqual(isPublic);
         }
       });
     },

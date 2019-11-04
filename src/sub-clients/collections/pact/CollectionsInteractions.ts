@@ -122,6 +122,7 @@ export const getFilteredCollections = (
 
 export const createCollection = (
   request: CreateCollectionRequest,
+  expectedId: string,
 ): InteractionObject => ({
   state: undefined,
   uponReceiving: 'POST collection',
@@ -140,5 +141,11 @@ export const createCollection = (
   },
   willRespondWith: {
     status: 201,
+    headers: {
+      location: term({
+        generate: `${provider.mockService.baseUrl}/v1/collections/${expectedId}`,
+        matcher: `.*/v1/collections/.+`,
+      }),
+    },
   },
 });

@@ -8,5 +8,5 @@ export interface CollectionsClient {
 
   get(id: string): Promise<Collection>;
 
-  create(request: CreateCollectionRequest): Promise<{}>;
+  create(request: CreateCollectionRequest): Promise<string>;
 }

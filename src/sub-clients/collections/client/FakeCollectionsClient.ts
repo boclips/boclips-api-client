@@ -8,13 +8,15 @@ import { CollectionsClient } from './CollectionsClient';
 
 export class FakeCollectionsClient implements CollectionsClient {
   private collections: Collection[] = [];
+  private nextId: string = '123';
 
+  // todo: group these fake-related methods in some way
   public addToFake(collection: Collection) {
     this.collections.push(collection);
   }
 
-  public peekFakeCollections() {
-    return this.collections;
+  public setNextIdForFake(id: string) {
+    this.nextId = id;
   }
 
   public get(id: string): Promise<Collection> {
@@ -37,17 +39,17 @@ export class FakeCollectionsClient implements CollectionsClient {
     });
   }
 
-  public create(request: CreateCollectionRequest): Promise<{}> {
+  public create(request: CreateCollectionRequest): Promise<string> {
     const { title, description, public: isPublic, videos } = request;
-    this.addToFake(
-      CollectionFactory.sample({
-        title,
-        description,
-        videos: videos.map(id => VideoFactory.sample({ id })),
-        public: isPublic,
-      }),
-    );
+    const collection = CollectionFactory.sample({
+      id: this.nextId,
+      title,
+      description,
+      videos: videos.map(id => VideoFactory.sample({ id })),
+      public: isPublic,
+    });
+    this.addToFake(collection);
 
-    return Promise.resolve({});
+    return Promise.resolve(collection.id);
   }
 }

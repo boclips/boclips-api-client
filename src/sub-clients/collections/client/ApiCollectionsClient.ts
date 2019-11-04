@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import Pageable from '../../common/model/Pageable';
 import { PageableEntity } from '../../common/model/PageableEntity';
@@ -39,8 +40,15 @@ export class ApiCollectionsClient extends ApiSubClient
       .then(response => CollectionsConverter.convertAll(response.data));
   }
 
-  public create(request: CreateCollectionRequest): Promise<{}> {
+  public create(request: CreateCollectionRequest): Promise<string> {
     const createCollectionLink = this.getLinkOrThrow('createCollection');
-    return this.axios.post(createCollectionLink.href, request);
+    return this.axios
+      .post(createCollectionLink.href, request)
+      .then(response => ApiCollectionsClient.extractIdFromLocation(response));
+  }
+
+  private static extractIdFromLocation(response: AxiosResponse) {
+    const link = response.headers.location;
+    return link.substr(link.lastIndexOf('/') + 1);
   }
 }
