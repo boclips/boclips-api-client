@@ -14,7 +14,7 @@ export interface CollectionEntity extends EntityWithLinks {
   subjects: any[];
   ageRange: AgeRange | null;
   description: string | null;
-  attachments: any[];
+  attachments: AttachmentEntity[];
   _links: {
     self: LinkEntity;
     edit?: LinkEntity;
@@ -24,5 +24,14 @@ export interface CollectionEntity extends EntityWithLinks {
     bookmark?: LinkEntity;
     unbookmark?: LinkEntity;
     myLatestRel?: LinkEntity;
+  };
+}
+
+export interface AttachmentEntity {
+  id: string;
+  type: string;
+  description?: string;
+  _links: {
+    download: LinkEntity;
   };
 }

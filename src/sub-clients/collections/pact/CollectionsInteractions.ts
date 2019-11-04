@@ -7,7 +7,10 @@ import {
 import { provider } from '../../../pact-support/pactSetup';
 import { getFilteredCollectionsQuery } from '../../../test-support';
 import CollectionFilter from '../model/CollectionFilter';
-import { CreateCollectionRequest } from '../model/CollectionRequest';
+import {
+  CreateCollectionRequest,
+  UpdateCollectionRequest,
+} from '../model/CollectionRequest';
 
 const { like } = Matchers;
 
@@ -147,5 +150,24 @@ export const createCollection = (
         matcher: `.*/v1/collections/.+`,
       }),
     },
+  },
+});
+
+export const updateCollection = (
+  id: string,
+  updateCollectionRequest: UpdateCollectionRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'PATCH collection',
+  withRequest: {
+    method: 'PATCH',
+    path: `/v1/collections/${id}`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: updateCollectionRequest,
+  },
+  willRespondWith: {
+    status: 204,
   },
 });

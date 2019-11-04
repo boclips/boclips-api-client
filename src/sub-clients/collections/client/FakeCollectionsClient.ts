@@ -1,9 +1,13 @@
 import { CollectionFactory } from '../../../test-support';
+import { SubjectFactory } from '../../../test-support/SubjectsFactory';
 import { VideoFactory } from '../../../test-support/VideosFactory';
 import Pageable from '../../common/model/Pageable';
-import { Collection } from '../model/Collection';
+import { Collection, getAttachmentType } from '../model/Collection';
 import CollectionFilter from '../model/CollectionFilter';
-import { CreateCollectionRequest } from '../model/CollectionRequest';
+import {
+  CreateCollectionRequest,
+  UpdateCollectionRequest,
+} from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
 
 export class FakeCollectionsClient implements CollectionsClient {
@@ -51,5 +55,74 @@ export class FakeCollectionsClient implements CollectionsClient {
     this.addToFake(collection);
 
     return Promise.resolve(collection.id);
+  }
+
+  public update(id: string, request: UpdateCollectionRequest): Promise<{}> {
+    this.collections = this.collections.map(it =>
+      it.id === id
+        ? {
+            ...it,
+            ...FakeCollectionsClient.mapUpdateRequestToFields(request),
+          }
+        : it,
+    );
+    return Promise.resolve({});
+  }
+
+  private static mapUpdateRequestToFields(
+    request: UpdateCollectionRequest,
+  ): Partial<Collection> {
+    const partialCollection: Partial<Collection> = {};
+
+    if (request.hasOwnProperty('title')) {
+      partialCollection.title = request.title;
+    }
+
+    if (request.hasOwnProperty('public')) {
+      partialCollection.public = request.public;
+    }
+
+    if (request.hasOwnProperty('subjects')) {
+      partialCollection.subjects = request.subjects.map(id =>
+        SubjectFactory.sample({ id }),
+      );
+    }
+
+    if (request.hasOwnProperty('description')) {
+      partialCollection.description = request.description;
+    }
+
+    if (request.hasOwnProperty('videos')) {
+      partialCollection.videos = request.videos.map(id =>
+        VideoFactory.sample({ id }),
+      );
+    }
+
+    if (request.hasOwnProperty('attachment')) {
+      const attachmentType = getAttachmentType(request.attachment.type);
+      if (attachmentType === undefined) {
+        throw new Error(
+          `${request.attachment.type} is not a valid attachment type`,
+        );
+      }
+
+      partialCollection.attachments = [
+        {
+          type: attachmentType,
+          description: request.attachment.description,
+          linkToResource: request.attachment.linkToResource,
+        },
+      ];
+    }
+
+    if (request.hasOwnProperty('ageRange')) {
+      const { min, max } = request.ageRange;
+      partialCollection.ageRange = {
+        ...request.ageRange,
+        label: min ? (max ? `${min}-${max}` : `${min}+`) : '',
+      };
+    }
+
+    return partialCollection;
   }
 }

@@ -16,7 +16,7 @@ export interface Collection extends ModelWithLinks {
   subjects: Subject[];
   ageRange?: AgeRange;
   description?: string;
-  attachments?: any[];
+  attachments?: Attachment[];
   links: {
     self: Link;
     edit?: Link;
@@ -27,3 +27,20 @@ export interface Collection extends ModelWithLinks {
     unbookmark?: Link;
   };
 }
+
+export interface Attachment {
+  type: AttachmentType;
+  description?: string;
+  linkToResource: string;
+}
+
+export enum AttachmentType {
+  LESSON_PLAN = 'LESSON_PLAN',
+}
+
+export const getAttachmentType = (
+  value: string,
+): AttachmentType | undefined => {
+  const matchedKey = Object.keys(AttachmentType).find(type => type === value);
+  return matchedKey && AttachmentType[matchedKey];
+};

@@ -7,7 +7,10 @@ import { CollectionsConverter } from '../CollectionsConverter';
 import { Collection } from '../model/Collection';
 import { CollectionEntity } from '../model/CollectionEntity';
 import CollectionFilter from '../model/CollectionFilter';
-import { CreateCollectionRequest } from '../model/CollectionRequest';
+import {
+  CreateCollectionRequest,
+  UpdateCollectionRequest,
+} from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
 
 export class ApiCollectionsClient extends ApiSubClient
@@ -45,6 +48,15 @@ export class ApiCollectionsClient extends ApiSubClient
     return this.axios
       .post(createCollectionLink.href, request)
       .then(response => ApiCollectionsClient.extractIdFromLocation(response));
+  }
+
+  public update(id: string, request: UpdateCollectionRequest): Promise<{}> {
+    const updateCollectionLink = this.getLinkOrThrow('collection');
+
+    return this.axios.patch(
+      expandUrlTemplate(updateCollectionLink.href, { id }),
+      request,
+    );
   }
 
   private static extractIdFromLocation(response: AxiosResponse) {

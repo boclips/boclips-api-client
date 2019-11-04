@@ -9,10 +9,15 @@ import { CollectionFactory } from '../../../test-support/CollectionsFactory';
 import Pageable from '../../common/model/Pageable';
 import { Collection } from '../model/Collection';
 import {
+  AttachmentRequest,
+  UpdateCollectionRequest,
+} from '../model/CollectionRequest';
+import {
   createCollection,
   existingCollectionFromStaging,
   getCollectionById,
   getFilteredCollections,
+  updateCollection,
 } from '../pact/CollectionsInteractions';
 
 describe('CollectionsClient', () => {
@@ -123,6 +128,51 @@ describe('CollectionsClient', () => {
           expect(newCollection.description).toEqual(description);
           expect(newCollection.videos).toEqual(videos);
           expect(newCollection.public).toEqual(isPublic);
+        }
+      });
+
+      it('can update a collection', async () => {
+        const collectionId = existingCollectionFromStaging;
+        const updatedFields: UpdateCollectionRequest = {
+          title: 'new title',
+          description: 'new description',
+          attachment: {
+            linkToResource: 'http://link.test.com/test',
+            description: 'This is a description',
+            type: 'LESSON_PLAN',
+          },
+        };
+
+        if (isATestClient(client)) {
+          client.collectionsClient.addToFake(
+            CollectionFactory.sample({ id: collectionId }),
+          );
+        }
+
+        await provider.addInteraction(
+          updateCollection(collectionId, updatedFields),
+        );
+
+        await client.collectionsClient.update(collectionId, updatedFields);
+
+        if (isATestClient(client)) {
+          const updatedCollection = await client.collectionsClient.get(
+            collectionId,
+          );
+          expect(updatedCollection.title).toEqual(updatedFields.title);
+          expect(updatedCollection.description).toEqual(
+            updatedFields.description,
+          );
+          expect(updatedCollection.attachments).toHaveLength(1);
+          const newAttachment: AttachmentRequest =
+            updatedCollection.attachments[0];
+          expect(newAttachment.description).toEqual(
+            updatedFields.attachment.description,
+          );
+          expect(newAttachment.linkToResource).toEqual(
+            updatedFields.attachment.linkToResource,
+          );
+          expect(newAttachment.type).toEqual(updatedFields.attachment.type);
         }
       });
     },

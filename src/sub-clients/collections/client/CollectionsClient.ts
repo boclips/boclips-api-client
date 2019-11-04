@@ -1,7 +1,10 @@
 import Pageable from '../../common/model/Pageable';
 import { Collection } from '../model/Collection';
 import CollectionFilter from '../model/CollectionFilter';
-import { CreateCollectionRequest } from '../model/CollectionRequest';
+import {
+  CreateCollectionRequest,
+  UpdateCollectionRequest,
+} from '../model/CollectionRequest';
 
 export interface CollectionsClient {
   getAllFiltered(filter: CollectionFilter): Promise<Pageable<Collection>>;
@@ -9,4 +12,6 @@ export interface CollectionsClient {
   get(id: string): Promise<Collection>;
 
   create(request: CreateCollectionRequest): Promise<string>;
+
+  update(id: string, request: UpdateCollectionRequest): Promise<{}>;
 }

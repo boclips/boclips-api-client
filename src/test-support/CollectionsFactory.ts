@@ -1,15 +1,21 @@
-import { Collection } from '../sub-clients/collections/model/Collection';
-import { CollectionEntity } from '../sub-clients/collections/model/CollectionEntity';
+import {
+  AttachmentType,
+  Collection,
+} from '../sub-clients/collections/model/Collection';
+import {
+  AttachmentEntity,
+  CollectionEntity,
+} from '../sub-clients/collections/model/CollectionEntity';
 import CollectionFilter from '../sub-clients/collections/model/CollectionFilter';
 import { Link } from '../sub-clients/common/model/LinkEntity';
 import { PageableEntity } from '../sub-clients/common/model/PageableEntity';
 
 export class CollectionEntityFactory {
   public static sample(
-    collection: Pick<CollectionEntity, 'id'> = { id: '123' },
+    collection: Partial<CollectionEntity>,
   ): CollectionEntity {
-    const id = collection.id;
-    return {
+    const id = '123';
+    const defaults = {
       id,
       owner: 'owner-id',
       title: 'My Videos edited',
@@ -33,6 +39,10 @@ export class CollectionEntityFactory {
           href: `/v1/collections/${id}/bookmark`,
         },
       },
+    };
+    return {
+      ...defaults,
+      ...collection,
     };
   }
 }
@@ -133,5 +143,22 @@ export class CollectionFactory {
         }),
       },
     };
+  }
+}
+
+export class AttachmentEntityFactory {
+  public static sample(entity: Partial<AttachmentEntity>): AttachmentEntity {
+    const defaults: AttachmentEntity = {
+      id: 'test-id',
+      type: AttachmentType.LESSON_PLAN,
+      description: null,
+      _links: {
+        download: {
+          href: 'externallink.com',
+          templated: false,
+        },
+      },
+    };
+    return { ...defaults, ...entity };
   }
 }

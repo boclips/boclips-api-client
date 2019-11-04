@@ -5,4 +5,23 @@ export interface CreateCollectionRequest {
   public?: boolean;
 }
 
-export type UpdateCollectionRequest = Partial<CreateCollectionRequest>;
+export interface UpdateCollectionRequest {
+  title?: string;
+  public?: boolean;
+  subjects?: string[];
+  description?: string;
+  videos?: string[];
+  attachment?: AttachmentRequest;
+  ageRange?: AgeRangeRequest;
+}
+
+export interface AttachmentRequest {
+  linkToResource: string;
+  description?: string;
+  type: string;
+}
+
+export interface AgeRangeRequest {
+  min?: number;
+  max?: number;
+}
