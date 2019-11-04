@@ -2,6 +2,10 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnersConverter } from '../ContentPartnersConverter';
 import { ContentPartner } from '../model/ContentPartner';
+import {
+  UpdateContentPartnerRequest,
+  WithSelfLink,
+} from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class ApiContentPartnersClient extends ApiSubClient
@@ -22,23 +26,13 @@ export class ApiContentPartnersClient extends ApiSubClient
       .then(ContentPartnersConverter.convertResource);
   }
 
-  public async update(contentPartner: ContentPartner): Promise<void> {
-    const validSelfLink =
-      contentPartner && contentPartner.links && contentPartner.links.self;
-
-    if (!validSelfLink) {
-      throw new Error('Update content partner is not available');
-    }
-
+  public async update(
+    _: string,
+    contentPartner: WithSelfLink<UpdateContentPartnerRequest>,
+  ): Promise<void> {
     await this.axios.put(
-      contentPartner.links.self.getOriginalLink(),
-      {
-        ageRange: contentPartner.ageRange,
-        name: contentPartner.name,
-        legalRestrictions: contentPartner.legalRestrictions,
-        distributionMethods: contentPartner.distributionMethods,
-        currency: contentPartner.currency,
-      },
+      contentPartner.self.getOriginalLink(),
+      contentPartner.data,
       {
         headers: {
           'Content-Type': 'application/json; charset=utf-8',

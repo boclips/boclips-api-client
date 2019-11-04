@@ -17,7 +17,7 @@ import {
 describe('ContentPartnersClient', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
-      let client;
+      let client: FakeBoclipsClient | ApiBoclipsClient;
 
       beforeEach(async () => {
         client = await getClient();
@@ -73,14 +73,16 @@ describe('ContentPartnersClient', () => {
           updateContentPartner(existingContentPartnerFromStaging),
         );
         await client.contentPartnersClient.update(
-          ContentPartnerFactory.sample({
-            id: existingContentPartnerFromStaging,
-            links: {
-              self: new Link({
-                href: `${provider.mockService.baseUrl}/v1/content-partners/${existingContentPartnerFromStaging}`,
-              }),
+          existingContentPartnerFromStaging,
+          {
+            self: new Link({
+              href: `${provider.mockService.baseUrl}/v1/content-partners/${existingContentPartnerFromStaging}`,
+            }),
+            data: {
+              name: 'TED',
+              ageRange: { min: 3, max: 12 },
             },
-          }),
+          },
         );
       });
     },

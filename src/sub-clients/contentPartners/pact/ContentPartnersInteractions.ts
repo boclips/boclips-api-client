@@ -49,20 +49,13 @@ export const updateContentPartner = (id: string): InteractionObject => ({
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
-    body: like({
-      name: 'hi',
-      legalRestrictions: like({
-        id: existingContentPartnerFromStaging,
-        text: '1',
-      }),
-      ageRange: like({
+    body: {
+      name: 'TED',
+      ageRange: {
         min: 3,
-        max: 4,
-        label: '3-4',
-      }),
-      distributionMethods: eachLike('STREAM'),
-      currency: 'USD',
-    }),
+        max: 12,
+      },
+    },
   },
   willRespondWith: {
     status: 204,
