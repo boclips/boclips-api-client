@@ -8,7 +8,7 @@ export interface UpdateContentPartnerRequest {
   accreditedToYtChannelId?: string;
   legalRestrictions?: LegalRestrictionsRequest;
   ageRange?: AgeRangeRequest;
-  distributionMethods?: Set<DistributionMethod>;
+  distributionMethods?: DistributionMethod[];
   currency?: string;
 }
 
