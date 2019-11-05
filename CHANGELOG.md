@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [2.2.0] - 2019-11-05
+
+### Changed
+- `ContentPartnersClient`'s `update` method no longer needs a self link in the `UpdateContentPartnerRequest` object
+
 ## [2.1.0] - 2019-11-04
 
 ### Added
