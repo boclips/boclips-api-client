@@ -1,10 +1,7 @@
 import { ContentPartnerFactory } from '../../../test-support';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentPartner } from '../model/ContentPartner';
-import {
-  UpdateContentPartnerRequest,
-  WithSelfLink,
-} from '../model/UpdateContentPartnerRequest';
+import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class FakeContentPartnersClient
@@ -23,10 +20,7 @@ export class FakeContentPartnersClient
     return Promise.resolve(this.contentPartners.find(i => i.id === id));
   }
 
-  public update(
-    id: string,
-    contentPartner: WithSelfLink<UpdateContentPartnerRequest>,
-  ) {
+  public update(id: string, contentPartner: UpdateContentPartnerRequest) {
     const index = this.contentPartners.findIndex(i => i.id === id);
 
     if (index < 0) {
@@ -35,8 +29,8 @@ export class FakeContentPartnersClient
 
     const updatedFields: Partial<ContentPartner> = {};
 
-    if (contentPartner.data.ageRange) {
-      const { min, max } = contentPartner.data.ageRange;
+    if (contentPartner.ageRange) {
+      const { min, max } = contentPartner.ageRange;
       updatedFields.ageRange = {
         min,
         max,
@@ -44,9 +38,9 @@ export class FakeContentPartnersClient
       };
     }
 
-    Object.keys(contentPartner.data).forEach(key => {
+    Object.keys(contentPartner).forEach(key => {
       if (key !== 'ageRange') {
-        updatedFields[key] = contentPartner.data[key];
+        updatedFields[key] = contentPartner[key];
       }
     });
 

@@ -6,7 +6,6 @@ import {
 } from '../../../pact-support/pactTestWrapper';
 import { ContentPartnerFactory } from '../../../test-support';
 import { FakeBoclipsClient } from '../../../test-support';
-import { Link } from '../../common/model/LinkEntity';
 import {
   existingContentPartnerFromStaging,
   getContentPartnerInteraction,
@@ -75,13 +74,8 @@ describe('ContentPartnersClient', () => {
         await client.contentPartnersClient.update(
           existingContentPartnerFromStaging,
           {
-            self: new Link({
-              href: `${provider.mockService.baseUrl}/v1/content-partners/${existingContentPartnerFromStaging}`,
-            }),
-            data: {
-              name: 'TED',
-              ageRange: { min: 3, max: 12 },
-            },
+            name: 'TED',
+            ageRange: { min: 3, max: 12 },
           },
         );
       });

@@ -2,10 +2,7 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnersConverter } from '../ContentPartnersConverter';
 import { ContentPartner } from '../model/ContentPartner';
-import {
-  UpdateContentPartnerRequest,
-  WithSelfLink,
-} from '../model/UpdateContentPartnerRequest';
+import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class ApiContentPartnersClient extends ApiSubClient
@@ -27,12 +24,14 @@ export class ApiContentPartnersClient extends ApiSubClient
   }
 
   public async update(
-    _: string,
-    contentPartner: WithSelfLink<UpdateContentPartnerRequest>,
+    id: string,
+    contentPartner: UpdateContentPartnerRequest,
   ): Promise<void> {
+    const contentPartnerLink = this.getLinkOrThrow('contentPartner');
+
     await this.axios.put(
-      contentPartner.self.getOriginalLink(),
-      contentPartner.data,
+      expandUrlTemplate(contentPartnerLink.href, { id }),
+      contentPartner,
       {
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
