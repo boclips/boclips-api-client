@@ -2,6 +2,7 @@ import { CollectionFactory } from '../../../test-support';
 import { SubjectFactory } from '../../../test-support/SubjectsFactory';
 import { VideoFactory } from '../../../test-support/VideosFactory';
 import Pageable from '../../common/model/Pageable';
+import { Clearable } from '../../common/utils/Clearable';
 import { Collection, getAttachmentType } from '../model/Collection';
 import CollectionFilter from '../model/CollectionFilter';
 import {
@@ -10,7 +11,7 @@ import {
 } from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
 
-export class FakeCollectionsClient implements CollectionsClient {
+export class FakeCollectionsClient implements CollectionsClient, Clearable {
   private collections: Collection[] = [];
   private nextId: string = '123';
 
@@ -124,5 +125,9 @@ export class FakeCollectionsClient implements CollectionsClient {
     }
 
     return partialCollection;
+  }
+
+  public clear() {
+    this.collections = [];
   }
 }

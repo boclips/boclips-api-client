@@ -1,7 +1,8 @@
+import { Clearable } from '../../common/utils/Clearable';
 import { CreateHttpFeedRequest, HttpFeed } from '../model/HttpFeed';
 import { HttpFeedsClient } from './HttpFeedsClient';
 
-export class FakeHttpFeedsClient implements HttpFeedsClient {
+export class FakeHttpFeedsClient implements HttpFeedsClient, Clearable {
   private feeds: HttpFeed[] = [];
 
   public insert(feed: HttpFeed) {
@@ -18,5 +19,9 @@ export class FakeHttpFeedsClient implements HttpFeedsClient {
       ? this.feeds.filter(e => e.provider === provider)
       : this.feeds;
     return Promise.resolve(feeds);
+  }
+
+  public clear() {
+    this.feeds = [];
   }
 }

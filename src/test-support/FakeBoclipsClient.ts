@@ -16,5 +16,8 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public clear() {
     this.legalRestrictionsClient.clear();
     this.contentPartnersClient.clear();
+    this.subjectsClient.clear();
+    this.feedsClient.clear();
+    this.collectionsClient.clear();
   }
 }

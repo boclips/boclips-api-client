@@ -1,7 +1,8 @@
+import { Clearable } from '../../common/utils/Clearable';
 import { Subject } from '../model/Subject';
 import { SubjectsClient } from './SubjectsClient';
 
-export class FakeSubjectsClient implements SubjectsClient {
+export class FakeSubjectsClient implements SubjectsClient, Clearable {
   private subjects: Subject[] = [];
 
   public insertSubject(subject: Subject) {
@@ -18,5 +19,9 @@ export class FakeSubjectsClient implements SubjectsClient {
 
     const subject = this.subjects.find(it => it.id === currentSubject.id);
     subject.name = newName;
+  }
+
+  public clear() {
+    this.subjects = [];
   }
 }
