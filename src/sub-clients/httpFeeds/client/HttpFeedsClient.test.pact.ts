@@ -1,21 +1,22 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
-import {
-  isATestClient,
-  withClients,
-} from '../../../pact-support/pactTestWrapper';
+import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
 import { createHttpFeed, getHttpFeeds } from '../pact/HttpFeedsInteraction';
+import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('HttpFeedsClient', () => {
   withClients(
-    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
+    (
+      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
+      options: WithClientsOptions,
+    ) => {
       let client;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (isATestClient(client)) {
+        if (!options.isRealClient) {
           (client as FakeBoclipsClient).feedsClient.insert({
             name: 'test name',
             url: 'test url',
@@ -39,9 +40,7 @@ describe('HttpFeedsClient', () => {
       });
 
       it('can fetch all feeds', async () => {
-        if (!isATestClient(client)) {
-          await provider.addInteraction(getHttpFeeds('youtube'));
-        }
+        await provider.addInteraction(getHttpFeeds('youtube'));
 
         const response = await client.feedsClient.getAll('youtube');
 

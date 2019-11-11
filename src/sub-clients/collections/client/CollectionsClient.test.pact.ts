@@ -1,9 +1,6 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
-import {
-  isATestClient,
-  withClients,
-} from '../../../pact-support/pactTestWrapper';
+import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient } from '../../../test-support';
 import { CollectionFactory } from '../../../test-support/CollectionsFactory';
 import Pageable from '../../common/model/Pageable';
@@ -19,19 +16,26 @@ import {
   getFilteredCollections,
   updateCollection,
 } from '../pact/CollectionsInteractions';
+import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
+import { FakeCollectionsClient } from './FakeCollectionsClient';
 
 describe('CollectionsClient', () => {
+  let isATestClientRun: boolean;
   withClients(
-    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
+    (
+      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
+      options: WithClientsOptions,
+    ) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
       beforeEach(async () => {
         client = await getClient();
+        isATestClientRun = !options.isRealClient;
       });
 
       it('can fetch a collection', async () => {
         // given:
-        if (isATestClient(client)) {
-          client.collectionsClient.addToFake(
+        if (isATestClientRun) {
+          (client.collectionsClient as FakeCollectionsClient).addToFake(
             CollectionFactory.sampleFromId({
               id: existingCollectionFromStaging,
             }),
@@ -68,8 +72,8 @@ describe('CollectionsClient', () => {
         const size = 25;
         const projection = 'details';
 
-        if (isATestClient(client)) {
-          client.collectionsClient.addToFake(
+        if (isATestClientRun) {
+          (client.collectionsClient as FakeCollectionsClient).addToFake(
             CollectionFactory.sampleFromId({
               id: existingCollectionFromStaging,
             }),
@@ -105,8 +109,10 @@ describe('CollectionsClient', () => {
         const isPublic = true;
         const expectedId = 'abc123-id';
 
-        if (isATestClient(client)) {
-          client.collectionsClient.setNextIdForFake(expectedId);
+        if (isATestClientRun) {
+          (client.collectionsClient as FakeCollectionsClient).setNextIdForFake(
+            expectedId,
+          );
         }
 
         const request = {
@@ -120,7 +126,7 @@ describe('CollectionsClient', () => {
         const collectionId = await client.collectionsClient.create(request);
         expect(collectionId).toEqual(expectedId);
 
-        if (isATestClient(client)) {
+        if (isATestClientRun) {
           const newCollection = await client.collectionsClient.get(
             collectionId,
           );
@@ -143,8 +149,8 @@ describe('CollectionsClient', () => {
           },
         };
 
-        if (isATestClient(client)) {
-          client.collectionsClient.addToFake(
+        if (isATestClientRun) {
+          (client.collectionsClient as FakeCollectionsClient).addToFake(
             CollectionFactory.sample({ id: collectionId }),
           );
         }
@@ -155,7 +161,7 @@ describe('CollectionsClient', () => {
 
         await client.collectionsClient.update(collectionId, updatedFields);
 
-        if (isATestClient(client)) {
+        if (isATestClientRun) {
           const updatedCollection = await client.collectionsClient.get(
             collectionId,
           );

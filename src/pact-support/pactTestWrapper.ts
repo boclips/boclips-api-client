@@ -9,7 +9,15 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; // This is to give the pact mock serve
 beforeAll(() => provider.setup()); // Create mock provider
 afterAll(() => provider.finalize()); // Tear down the mock and write the pact
 
-export const withClients = (callTheTests: (client) => void) => {
+export interface WithClientsOptions {
+  isRealClient: boolean;
+}
+export const withClients = (
+  callTheTests: (
+    client: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
+    options: WithClientsOptions,
+  ) => void,
+) => {
   describe.each([['Real client', true], ['Fake client', false]])(
     'contract test using %s',
     (_: string, shouldUseRealClient: boolean) => {
@@ -32,18 +40,11 @@ export const withClients = (callTheTests: (client) => void) => {
             provider.mockService.baseUrl,
           );
         } else {
-          return new FakeBoclipsClient();
+          return Promise.resolve(new FakeBoclipsClient());
         }
       };
 
-      // noinspection JSUnusedAssignment
-      callTheTests(getClient);
+      callTheTests(getClient, { isRealClient: shouldUseRealClient });
     },
   );
-};
-
-export const isATestClient = (
-  client: FakeBoclipsClient | ApiBoclipsClient,
-): client is FakeBoclipsClient => {
-  return (client as FakeBoclipsClient).clear !== undefined;
 };

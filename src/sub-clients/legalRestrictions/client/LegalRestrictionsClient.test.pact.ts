@@ -1,21 +1,22 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
-import {
-  isATestClient,
-  withClients,
-} from '../../../pact-support/pactTestWrapper';
+import { withClients } from '../../../pact-support/pactTestWrapper';
+import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
 import { getLegalRestrictions } from '../pact/LegalRestrictionsInteractions';
+import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('LegalRestrictionsClient', () => {
   withClients(
-    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
+    (
+      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
+      options: WithClientsOptions,
+    ) => {
       let client;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (isATestClient(client)) {
+        if (!options.isRealClient) {
           client.legalRestrictionsClient.insertLegalRestrictionsFixture({
             id: '2',
             text: 'No restrictions',
@@ -24,10 +25,7 @@ describe('LegalRestrictionsClient', () => {
       });
 
       it('can fetch all legal restrictions', async () => {
-        if (!isATestClient(client)) {
-          await provider.addInteraction(getLegalRestrictions);
-        }
-
+        await provider.addInteraction(getLegalRestrictions);
         const response = await client.legalRestrictionsClient.getAll();
 
         expect(response).toHaveLength(1);

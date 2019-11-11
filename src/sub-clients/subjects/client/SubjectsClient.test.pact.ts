@@ -1,25 +1,26 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
+import { provider } from '../../../pact-support/pactSetup';
+import { withClients } from '../../../pact-support/pactTestWrapper';
+import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
 import {
   existingSubjectFromStaging,
   getSubjects,
   updateSubject,
 } from '../pact/SubjectsInteractions';
-import { provider } from '../../../pact-support/pactSetup';
-import {
-  isATestClient,
-  withClients,
-} from '../../../pact-support/pactTestWrapper';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
+import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('SubjectsClient', () => {
   withClients(
-    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
+    (
+      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
+      options: WithClientsOptions,
+    ) => {
       let client;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (isATestClient(client)) {
+        if (!options.isRealClient) {
           (client as FakeBoclipsClient).subjectsClient.insertSubject({
             id: existingSubjectFromStaging,
             name: 'Subject Sample',
