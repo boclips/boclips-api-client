@@ -13,6 +13,7 @@ import {
   getOrderInteraction,
   getOrdersInteraction,
 } from '../pact/OrderInteractions';
+import { updateOrderCurrency } from './../pact/OrderInteractions';
 import { FakeOrdersClient } from './FakeOrdersClient';
 
 describe('OrdersClient', () => {
@@ -133,6 +134,20 @@ describe('OrdersClient', () => {
         expect(item.license.duration).toEqual('5 Years');
         expect(item.license.territory).toEqual('World Wide');
         expect(item.transcriptRequested).toBeFalsy();
+      });
+
+      it('can update the currency of an order', async () => {
+        await provider.addInteraction(
+          updateOrderCurrency(existingOrderIdFromStaging, 'GBP'),
+        );
+
+        const updatedOrder = await client.ordersClient.updateCurrency(
+          existingOrderIdFromStaging,
+          'GBP',
+        );
+
+        assertOnMandatoryOrderFields(updatedOrder);
+        expect(updatedOrder.totalPrice.currency).toEqual('GBP');
       });
     },
   );

@@ -21,9 +21,24 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
       return OrderConverter.convertEmbeddedResource(response);
     });
   }
-  public updateCurrency(_: string, __: string) {
-    throw new Error('Method not implemented.');
+  public updateCurrency(id: string, currency: string): Promise<Order> {
+    const orderLink = this.getLinkOrThrow('order');
+
+    return this.axios
+      .patch(
+        `${expandUrlTemplate(orderLink.href, { id })}?currency=${currency}`, // TODO this should be a HATEOS link on the order
+        null,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        },
+      )
+      .then((response: AxiosResponse) => {
+        return OrderConverter.convertResource(response);
+      });
   }
+
   public updateItem(
     _: string,
     __: import('../model/OrderItemUpdateRequest').OrderItemUpdateRequest,

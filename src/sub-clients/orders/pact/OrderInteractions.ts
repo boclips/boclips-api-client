@@ -1,6 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { like } from '@pact-foundation/pact/dsl/matchers';
-// import { provider } from '../../../pact-support/pactSetup';
 
 const { eachLike } = Matchers;
 
@@ -111,6 +110,32 @@ export const getOrderInteraction = (
           },
         }),
       },
+    }),
+  },
+});
+
+export const updateOrderCurrency = (
+  id: string,
+  currency: string,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'Patch order',
+  withRequest: {
+    method: 'PATCH',
+    path: `/v1/orders/${id}`,
+    query: `currency=${currency}`,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: like({
+      ...createOrderWithMandatoryFields(id),
+      ...{ totalPrice: { currency, value: 123, displayValue: 'USD 123' } },
     }),
   },
 });

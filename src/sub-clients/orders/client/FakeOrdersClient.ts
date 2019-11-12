@@ -16,8 +16,18 @@ export class FakeOrdersClient implements OrdersClient {
   public getAll(): Promise<Order[]> {
     return Promise.resolve(this.orders);
   }
-  public updateCurrency(_: string, __: string) {
-    throw new Error('Method not implemented.');
+  public updateCurrency(id: string, currency: string): Promise<Order> {
+    return this.get(id).then(order => {
+      return {
+        ...order,
+        ...{
+          totalPrice: {
+            ...order.totalPrice,
+            currency,
+          },
+        },
+      };
+    });
   }
   public updateItem(_: string, __: OrderItemUpdateRequest) {
     throw new Error('Method not implemented.');
