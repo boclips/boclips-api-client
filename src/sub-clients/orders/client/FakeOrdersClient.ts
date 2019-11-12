@@ -10,8 +10,8 @@ export class FakeOrdersClient implements OrdersClient {
     this.orders.push(OrderFactory.sample(order));
   }
 
-  public get(_: string): Promise<Order> {
-    throw new Error('Method not implemented.');
+  public get(id: string): Promise<Order | null> {
+    return Promise.resolve(this.orders.find(order => order.id === id));
   }
   public getAll(): Promise<Order[]> {
     return Promise.resolve(this.orders);

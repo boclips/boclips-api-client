@@ -7,6 +7,10 @@ export class OrderConverter {
     return response.data._embedded.orders.map(OrderConverter.convert);
   }
 
+  public static convertResource(response: AxiosResponse): Order {
+    return OrderConverter.convert(response.data);
+  }
+
   private static convert(resource: any): Order {
     const {
       id,

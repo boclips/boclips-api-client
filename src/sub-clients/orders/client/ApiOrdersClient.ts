@@ -1,14 +1,18 @@
 import { AxiosResponse } from 'axios';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
+import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { Order } from '../model/Order';
 import { OrderConverter } from '../OrderConverter';
 import { OrdersClient } from './OrdersClient';
 
 export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
-  public get(_: string): Promise<Order> {
+  public get(id: string): Promise<Order> {
     const orderLink = this.getLinkOrThrow('order');
-
-    return this.axios.get(orderLink.href);
+    return this.axios
+      .get(expandUrlTemplate(orderLink.href, { id }))
+      .then((response: AxiosResponse) => {
+        return OrderConverter.convertResource(response);
+      });
   }
   public getAll(): Promise<Array<import('../model/Order').Order>> {
     const ordersLink = this.getLinkOrThrow('orders');
