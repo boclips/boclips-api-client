@@ -35,6 +35,7 @@ export class OrderItemFactory {
   public static sample(item: Partial<OrderItem>): OrderItem {
     return {
       ...{
+        id: 'order-id',
         video: {
           id: '123',
           type: 'NEWS',

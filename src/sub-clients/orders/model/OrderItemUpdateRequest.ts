@@ -1,5 +1,5 @@
 export interface OrderItemUpdateRequest {
-  price?: string;
+  price?: number;
   license?: {
     duration: string;
     territory: string;

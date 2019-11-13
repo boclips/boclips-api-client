@@ -1,6 +1,7 @@
 import { OrderFactory } from '../../../test-support/OrderFactory';
 import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
+import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 
 export class FakeOrdersClient implements OrdersClient {
@@ -29,7 +30,36 @@ export class FakeOrdersClient implements OrdersClient {
       };
     });
   }
-  public updateItem(_: string, __: OrderItemUpdateRequest) {
-    throw new Error('Method not implemented.');
+  public updateItem(
+    item: OrderItem,
+    request: OrderItemUpdateRequest,
+  ): Promise<Order> {
+    return Promise.resolve(
+      this.orders
+        .map(order => {
+          const index = order.items.findIndex(it => it.id === item.id);
+
+          if (index < 0) {
+            return null;
+          }
+
+          const itemToUpdate = order.items[index];
+
+          if (request.price) {
+            itemToUpdate.price = {
+              currency: itemToUpdate.price.currency,
+              value: request.price,
+              displayValue: `${itemToUpdate.price.currency} ${request.price}`,
+            };
+
+            if (request.license) {
+              itemToUpdate.license = request.license;
+            }
+          }
+
+          return order;
+        })
+        .find(o => o != null),
+    );
   }
 }

@@ -1,11 +1,14 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { like } from '@pact-foundation/pact/dsl/matchers';
+import { OrderItemUpdateRequest } from './../model/OrderItemUpdateRequest';
 
-const { eachLike } = Matchers;
+const { eachLike, like } = Matchers;
 
 export const existingOrderIdFromStaging = '5d8cec1a05d668000157f7e1';
+export const exisitngOrderItemIdForStaging =
+  '493105a2-ee4b-4d10-9916-58cca5944c02';
 
-const createOrderItemWithMandatoryFields = () => ({
+const createOrderItemWithMandatoryFields = (id: string) => ({
+  id,
   video: {
     id: '123',
     type: 'NEWS',
@@ -47,7 +50,9 @@ const createOrderWithMandatoryFields = (id: string) => ({
       href: '/v1/orders/123',
     },
   },
-  items: eachLike(createOrderItemWithMandatoryFields()),
+  items: eachLike(
+    createOrderItemWithMandatoryFields(exisitngOrderItemIdForStaging),
+  ),
 });
 
 export const getOrdersInteraction = (): InteractionObject => ({
@@ -97,7 +102,7 @@ export const getOrderInteraction = (
         throughPlatform: true,
         isbnNumber: 'isbn-number',
         items: eachLike({
-          ...createOrderItemWithMandatoryFields(),
+          ...createOrderItemWithMandatoryFields(exisitngOrderItemIdForStaging),
           ...{
             price: {
               value: 123,
@@ -119,7 +124,7 @@ export const updateOrderCurrency = (
   currency: string,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'Patch order',
+  uponReceiving: 'Patch order currency',
   withRequest: {
     method: 'PATCH',
     path: `/v1/orders/${id}`,
@@ -136,6 +141,46 @@ export const updateOrderCurrency = (
     body: like({
       ...createOrderWithMandatoryFields(id),
       ...{ totalPrice: { currency, value: 123, displayValue: 'USD 123' } },
+    }),
+  },
+});
+
+export const updateOrderItem = (
+  orderId: string,
+  orderItemId,
+  request: OrderItemUpdateRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'Patch order',
+  withRequest: {
+    method: 'PATCH',
+    path: `/v1/orders/${orderId}/items/${orderItemId}`,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: request,
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: like({
+      ...createOrderWithMandatoryFields(orderId),
+      ...{
+        items: [
+          {
+            ...createOrderItemWithMandatoryFields(
+              exisitngOrderItemIdForStaging,
+            ),
+            ...{
+              price: { value: request.price },
+              licenseDuration: request.license.duration,
+              licenseTerritory: request.license.territory,
+            },
+          },
+        ],
+      },
     }),
   },
 });

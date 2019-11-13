@@ -2,6 +2,7 @@ import { Link } from '../../../types';
 import { OrderPrice } from './OrderPrice';
 
 export interface OrderItem {
+  id: string;
   links: {
     updatePrice: Link;
     update: Link;

@@ -2,7 +2,9 @@ import { AxiosResponse } from 'axios';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { Order } from '../model/Order';
+import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrderConverter } from '../OrderConverter';
+import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 
 export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
@@ -40,9 +42,17 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
   }
 
   public updateItem(
-    _: string,
-    __: import('../model/OrderItemUpdateRequest').OrderItemUpdateRequest,
-  ) {
-    throw new Error('Method not implemented.');
+    item: OrderItem,
+    updateRequest: OrderItemUpdateRequest,
+  ): Promise<Order> {
+    return this.axios
+      .patch(item.links.update.getOriginalLink(), updateRequest, {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      })
+      .then((response: AxiosResponse) => {
+        return OrderConverter.convertResource(response);
+      });
   }
 }

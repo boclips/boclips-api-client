@@ -51,6 +51,7 @@ export class OrderConverter {
   private static orderItemsConverter(items: any): OrderItem[] {
     return items.map(item => {
       const {
+        id,
         contentPartner,
         licenseDuration,
         licenseTerritory,
@@ -61,6 +62,7 @@ export class OrderConverter {
       } = item;
 
       return {
+        id,
         contentPartner,
         license: { duration: licenseDuration, territory: licenseTerritory },
         price,

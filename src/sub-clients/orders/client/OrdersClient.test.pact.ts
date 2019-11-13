@@ -9,11 +9,15 @@ import { OrderItemFactory } from '../../../test-support/OrderFactory';
 import { Link } from '../../../types';
 import { Order } from '../model/Order';
 import {
+  exisitngOrderItemIdForStaging,
   existingOrderIdFromStaging,
   getOrderInteraction,
   getOrdersInteraction,
 } from '../pact/OrderInteractions';
-import { updateOrderCurrency } from './../pact/OrderInteractions';
+import {
+  updateOrderCurrency,
+  updateOrderItem,
+} from './../pact/OrderInteractions';
 import { FakeOrdersClient } from './FakeOrdersClient';
 
 describe('OrdersClient', () => {
@@ -46,6 +50,7 @@ describe('OrdersClient', () => {
             },
             items: [
               OrderItemFactory.sample({
+                id: exisitngOrderItemIdForStaging,
                 video: {
                   id: '123',
                   type: 'NEWS',
@@ -93,6 +98,7 @@ describe('OrdersClient', () => {
         expect(order.items).toHaveLength(1);
         const firstOrderItem = order.items[0];
 
+        expect(firstOrderItem.id).toEqual(exisitngOrderItemIdForStaging);
         expect(firstOrderItem.contentPartner).toEqual({
           id: 'content-partner id',
           name: 'content-partner name',
@@ -148,6 +154,43 @@ describe('OrdersClient', () => {
 
         assertOnMandatoryOrderFields(updatedOrder);
         expect(updatedOrder.totalPrice.currency).toEqual('GBP');
+      });
+
+      it('can update the price of an order item', async () => {
+        const updateRequest = {
+          price: 100,
+          license: { duration: '10 years', territory: 'Europe' },
+        };
+        const orderItemToUpdate = OrderItemFactory.sample({
+          id: exisitngOrderItemIdForStaging,
+          links: {
+            update: new Link({
+              href: `${provider.mockService.baseUrl}/v1/orders/${existingOrderIdFromStaging}/items/${exisitngOrderItemIdForStaging}`,
+            }),
+            updatePrice: new Link({
+              href: '',
+            }),
+          },
+        });
+
+        await provider.addInteraction(
+          updateOrderItem(
+            existingOrderIdFromStaging,
+            exisitngOrderItemIdForStaging,
+            updateRequest,
+          ),
+        );
+
+        const updatedOrder = await client.ordersClient.updateItem(
+          orderItemToUpdate,
+          updateRequest,
+        );
+
+        expect(updatedOrder.id).toEqual(existingOrderIdFromStaging);
+        const updatedItem = updatedOrder.items[0];
+
+        expect(updatedItem.price.value).toEqual(updateRequest.price);
+        expect(updatedItem.license).toEqual(updateRequest.license);
       });
     },
   );
