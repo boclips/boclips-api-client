@@ -1,10 +1,11 @@
 import { OrderFactory } from '../../../test-support/OrderFactory';
+import { Clearable } from '../../common/utils/Clearable';
 import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 
-export class FakeOrdersClient implements OrdersClient {
+export class FakeOrdersClient implements OrdersClient, Clearable {
   private orders: Order[] = [];
 
   public insertOrderFixture(order: Partial<Order>) {
@@ -17,17 +18,20 @@ export class FakeOrdersClient implements OrdersClient {
   public getAll(): Promise<Order[]> {
     return Promise.resolve(this.orders);
   }
-  public updateCurrency(id: string, currency: string): Promise<Order> {
-    return this.get(id).then(order => {
-      return {
-        ...order,
-        ...{
-          totalPrice: {
-            ...order.totalPrice,
-            currency,
-          },
+  public async updateCurrency(id: string, currency: string): Promise<Order> {
+    const order = await this.get(id);
+
+    if (!order) {
+      throw new Error(`Cannot update order: ${id}`);
+    }
+    return Promise.resolve({
+      ...order,
+      ...{
+        totalPrice: {
+          ...order.totalPrice,
+          currency,
         },
-      };
+      },
     });
   }
   public updateItem(
@@ -61,5 +65,9 @@ export class FakeOrdersClient implements OrdersClient {
         })
         .find(o => o != null),
     );
+  }
+
+  public clear() {
+    this.orders = [];
   }
 }

@@ -14,3 +14,8 @@ export {
   LegalRestrictions,
 } from '../sub-clients/legalRestrictions/model/LegalRestrictions';
 export { Subject } from '../sub-clients/subjects/model/Subject';
+export { Order } from '../sub-clients/orders/model/Order';
+export { OrderItem } from '../sub-clients/orders/model/OrderItem';
+export {
+  OrderItemUpdateRequest,
+} from '../sub-clients/orders/model/OrderItemUpdateRequest';
