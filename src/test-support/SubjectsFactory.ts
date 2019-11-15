@@ -6,11 +6,12 @@ export class SubjectFactory {
     ...subject,
   });
 
-  private static defaultSubject() {
+  private static defaultSubject(): Subject {
     return {
       id: 'subject-id',
       name: 'Subject Name',
-      updateLink: null,
+      lessonPlan: false,
+      links: {},
     };
   }
 }

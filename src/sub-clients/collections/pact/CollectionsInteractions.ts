@@ -1,9 +1,6 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import {
-  eachLike,
-  ISO8601_DATETIME_WITH_MILLIS_FORMAT,
-  term,
-} from '@pact-foundation/pact/dsl/matchers';
+import { eachLike, term } from '@pact-foundation/pact/dsl/matchers';
+import { CustomMatchers } from '../../../pact-support/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { getFilteredCollectionsQuery } from '../../../test-support';
 import CollectionFilter from '../model/CollectionFilter';
@@ -36,7 +33,7 @@ export const getCollectionById = (
       title: like('My Videos edited'),
       updatedAt: term({
         generate: '2019-10-21T09:11:19.074Z',
-        matcher: ISO8601_DATETIME_WITH_MILLIS_FORMAT,
+        matcher: CustomMatchers.ISO8601_DATETIME_RELAXED,
       }),
       public: like(false),
 
@@ -82,7 +79,7 @@ export const getFilteredCollections = (
             title: 'My Videos edited',
             updatedAt: term({
               generate: '2019-10-21T09:11:19.074Z',
-              matcher: ISO8601_DATETIME_WITH_MILLIS_FORMAT,
+              matcher: CustomMatchers.ISO8601_DATETIME_RELAXED,
             }),
             public: false,
 

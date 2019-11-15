@@ -1,6 +1,6 @@
-import { Subject } from '../model/Subject';
+import { Subject, UpdateSubjectRequest } from '../model/Subject';
 
 export interface SubjectsClient {
   getAll(): Promise<Subject[]>;
-  update(currentSubject: Subject, newName: string): Promise<void>;
+  update(subject: Subject, updateRequest: UpdateSubjectRequest): Promise<void>;
 }

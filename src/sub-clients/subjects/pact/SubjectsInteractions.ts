@@ -3,7 +3,7 @@ import { provider } from '../../../pact-support/pactSetup';
 
 const { eachLike, like } = Matchers;
 
-export const existingSubjectFromStaging = '5cb499c9fd5beb428189454f';
+export const existingSubjectIdFromStaging = '5cb499c9fd5beb428189454f';
 
 export const getSubjects = (): InteractionObject => ({
   state: undefined,
@@ -20,14 +20,15 @@ export const getSubjects = (): InteractionObject => ({
     body: {
       _embedded: {
         subjects: eachLike({
-          id: existingSubjectFromStaging,
+          id: existingSubjectIdFromStaging,
           name: 'Subject Sample',
+          lessonPlan: false,
           _links: like({
             self: {
-              href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
+              href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectIdFromStaging}`,
             },
             update: {
-              href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
+              href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectIdFromStaging}`,
             },
           }),
         }),
@@ -36,7 +37,10 @@ export const getSubjects = (): InteractionObject => ({
   },
 });
 
-export const updateSubject = (id: string): InteractionObject => ({
+export const updateSubject = (
+  id: string,
+  newName: string,
+): InteractionObject => ({
   state: undefined,
   uponReceiving: 'PUT subject',
   withRequest: {
@@ -46,7 +50,7 @@ export const updateSubject = (id: string): InteractionObject => ({
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: like({
-      name: 'Design',
+      name: newName,
     }),
   },
   willRespondWith: {

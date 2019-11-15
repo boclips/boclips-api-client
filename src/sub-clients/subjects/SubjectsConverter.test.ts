@@ -1,3 +1,4 @@
+import { Link } from '../common/model/LinkEntity';
 import { SubjectsConverter } from './SubjectsConverter';
 
 describe('SubjectsConverter', () => {
@@ -5,6 +6,7 @@ describe('SubjectsConverter', () => {
     const subject = SubjectsConverter.convert({
       id: '1',
       name: 'Fine Arts',
+      lessonPlan: false,
       _links: {
         update: {
           href: '/v1/subjects/1',
@@ -15,7 +17,10 @@ describe('SubjectsConverter', () => {
     expect(subject).toEqual({
       id: '1',
       name: 'Fine Arts',
-      updateLink: '/v1/subjects/1',
+      lessonPlan: false,
+      links: {
+        update: new Link({ href: '/v1/subjects/1' }),
+      },
     });
   });
 
@@ -23,12 +28,15 @@ describe('SubjectsConverter', () => {
     const subject = SubjectsConverter.convert({
       id: '1',
       name: 'Fine Arts',
+      lessonPlan: true,
       _links: {},
     });
 
     expect(subject).toEqual({
       id: '1',
       name: 'Fine Arts',
+      lessonPlan: true,
+      links: {},
     });
   });
 });

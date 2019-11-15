@@ -1,11 +1,11 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
+import { withClients } from '../../../pact-support/pactTestWrapper';
 import {
-  withClients,
-  WithClientsOptions,
-} from '../../../pact-support/pactTestWrapper';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
-import { OrderItemFactory } from '../../../test-support/OrderFactory';
+  FakeBoclipsClient,
+  isATestClient,
+  OrderItemFactory,
+} from '../../../test-support';
 import { Link } from '../../../types';
 import { Order } from '../model/Order';
 import {
@@ -13,26 +13,20 @@ import {
   existingOrderIdFromStaging,
   getOrderInteraction,
   getOrdersInteraction,
-} from '../pact/OrderInteractions';
-import {
   updateOrderCurrency,
   updateOrderItem,
-} from './../pact/OrderInteractions';
-import { FakeOrdersClient } from './FakeOrdersClient';
+} from '../pact/OrderInteractions';
 
 describe('OrdersClient', () => {
   withClients(
-    (
-      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
-      options: WithClientsOptions,
-    ) => {
+    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (!options.isRealClient) {
-          const fake = client.ordersClient as FakeOrdersClient;
+        if (isATestClient(client)) {
+          const fake = client.ordersClient;
           fake.insertOrderFixture({
             id: existingOrderIdFromStaging,
             createdAt: new Date('2019-11-06T18:48:51.061Z'),

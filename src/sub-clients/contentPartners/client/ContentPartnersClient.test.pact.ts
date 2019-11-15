@@ -1,29 +1,28 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
-import { ContentPartnerFactory } from '../../../test-support';
-import { FakeBoclipsClient } from '../../../test-support';
+import {
+  ContentPartnerFactory,
+  FakeBoclipsClient,
+  isATestClient,
+} from '../../../test-support';
 import {
   existingContentPartnerFromStaging,
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
 } from '../pact/ContentPartnersInteractions';
-import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('ContentPartnersClient', () => {
   withClients(
-    (
-      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
-      options: WithClientsOptions,
-    ) => {
+    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (!options.isRealClient) {
-          (client as FakeBoclipsClient).contentPartnersClient.insertContentPartnerFixture(
+        if (isATestClient(client)) {
+          client.contentPartnersClient.insertContentPartnerFixture(
             ContentPartnerFactory.sample({
               id: existingContentPartnerFromStaging,
               name: 'a name',

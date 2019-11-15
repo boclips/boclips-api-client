@@ -1,30 +1,34 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
+import { FakeBoclipsClient, isATestClient } from '../../../test-support';
+import { SubjectFactory } from '../../../test-support/SubjectsFactory';
+import { Link } from '../../common/model/LinkEntity';
+import { Subject } from '../model/Subject';
 import {
-  existingSubjectFromStaging,
+  existingSubjectIdFromStaging,
   getSubjects,
   updateSubject,
 } from '../pact/SubjectsInteractions';
-import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('SubjectsClient', () => {
   withClients(
-    (
-      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
-      options: WithClientsOptions,
-    ) => {
-      let client;
+    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
+      let client: FakeBoclipsClient | ApiBoclipsClient;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (!options.isRealClient) {
-          (client as FakeBoclipsClient).subjectsClient.insertSubject({
-            id: existingSubjectFromStaging,
+        if (isATestClient(client)) {
+          client.subjectsClient.insertSubject({
+            id: existingSubjectIdFromStaging,
             name: 'Subject Sample',
-            updateLink: `/v1/subjects/${existingSubjectFromStaging}`,
+            lessonPlan: false,
+            links: {
+              update: new Link({
+                href: `/v1/subjects/${existingSubjectIdFromStaging}`,
+              }),
+            },
           });
         }
       });
@@ -32,39 +36,40 @@ describe('SubjectsClient', () => {
       it(`can fetch all subjects `, async () => {
         await provider.addInteraction(getSubjects());
 
-        const response = await client.subjectsClient.getAll();
+        const response: Subject[] = await client.subjectsClient.getAll();
 
         expect(response).toHaveLength(1);
-        expect(response[0].id).toEqual(existingSubjectFromStaging);
+        expect(response[0].id).toEqual(existingSubjectIdFromStaging);
         expect(response[0].name).toEqual('Subject Sample');
-        expect(response[0].updateLink).toMatch(
-          new RegExp(`.*/v1/subjects/${existingSubjectFromStaging}$`),
+        expect(response[0].lessonPlan).toEqual(false);
+        expect(response[0].links.update.getOriginalLink()).toMatch(
+          new RegExp(`.*/v1/subjects/${existingSubjectIdFromStaging}$`),
         );
       });
 
       it('can update subjects', async () => {
         await provider.addInteraction(
-          updateSubject(existingSubjectFromStaging),
+          updateSubject(existingSubjectIdFromStaging, 'Design'),
         );
 
         await client.subjectsClient.update(
-          {
-            id: existingSubjectFromStaging,
-            name: 'Old name',
-            updateLink: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectFromStaging}`,
-          },
-          'Design',
+          SubjectFactory.sample({
+            id: existingSubjectIdFromStaging,
+            links: {
+              update: new Link({
+                href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectIdFromStaging}`,
+              }),
+            },
+          }),
+          { name: 'Design' },
         );
       });
 
       it('cannot update subject without an updateLink', async () => {
         const updateCall = async () =>
           await client.subjectsClient.update(
-            {
-              id: existingSubjectFromStaging,
-              name: 'Old Design',
-            },
-            'Design',
+            SubjectFactory.sample({ id: existingSubjectIdFromStaging }),
+            { name: 'Design' },
           );
 
         await expect(updateCall()).rejects.toThrow(Error);

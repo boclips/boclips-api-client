@@ -1,5 +1,5 @@
 import { ApiSubClient } from '../../common/client/ApiSubClient';
-import { Subject } from '../model/Subject';
+import { Subject, UpdateSubjectRequest } from '../model/Subject';
 import { SubjectsConverter } from '../SubjectsConverter';
 import { SubjectsClient } from './SubjectsClient';
 
@@ -16,12 +16,15 @@ export class ApiSubjectsClient extends ApiSubClient implements SubjectsClient {
       );
   }
 
-  public async update(currentSubject: Subject, newName: string): Promise<void> {
-    const validUpdateLink = currentSubject && currentSubject.updateLink;
+  public async update(
+    subject: Subject,
+    updateRequest: UpdateSubjectRequest,
+  ): Promise<void> {
+    const validUpdateLink = subject && subject.links.update;
     if (!validUpdateLink) {
       throw new Error('Update link not available');
     }
 
-    await this.axios.put(currentSubject.updateLink, { name: newName });
+    await this.axios.put(subject.links.update.getOriginalLink(), updateRequest);
   }
 }

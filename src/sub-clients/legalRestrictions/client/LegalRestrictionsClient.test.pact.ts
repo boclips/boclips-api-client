@@ -1,22 +1,18 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
+import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { getLegalRestrictions } from '../pact/LegalRestrictionsInteractions';
-import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('LegalRestrictionsClient', () => {
   withClients(
-    (
-      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
-      options: WithClientsOptions,
-    ) => {
+    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (!options.isRealClient) {
+        if (isATestClient(client)) {
           client.legalRestrictionsClient.insertLegalRestrictionsFixture({
             id: '2',
             text: 'No restrictions',

@@ -1,23 +1,19 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
-import { FakeBoclipsClient } from '../../../test-support/FakeBoclipsClient';
+import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { createHttpFeed, getHttpFeeds } from '../pact/HttpFeedsInteraction';
-import { WithClientsOptions } from './../../../pact-support/pactTestWrapper';
 
 describe('HttpFeedsClient', () => {
   withClients(
-    (
-      getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>,
-      options: WithClientsOptions,
-    ) => {
+    (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client;
 
       beforeEach(async () => {
         client = await getClient();
 
-        if (!options.isRealClient) {
-          (client as FakeBoclipsClient).feedsClient.insert({
+        if (isATestClient(client)) {
+          client.feedsClient.insert({
             name: 'test name',
             url: 'test url',
             provider: 'youtube',
@@ -25,9 +21,10 @@ describe('HttpFeedsClient', () => {
         }
       });
 
-      /* TODO remove created test feed after verification, so the next time we can create it again
-                    currently this would fail when testing against staging, because the feed is duplicate
-                */
+      /**
+       * TODO remove created test feed after verification, so the next time we can create it again
+       * currently this would fail when testing against staging, because the feed is duplicate
+       */
       xit('can create new feed', async () => {
         await provider.addInteraction(createHttpFeed); // TODO(AO): Is it possible to skip verification of this interaction?
 
