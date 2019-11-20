@@ -18,6 +18,7 @@ export interface AdminLinks {
   youtubeFeeds: LinkEntity;
   createHttpFeed: LinkEntity;
   distributionMethods: LinkEntity;
+  trackPageRendered: LinkEntity;
   subjects: LinkEntity;
   searchContracts: LinkEntity;
 }

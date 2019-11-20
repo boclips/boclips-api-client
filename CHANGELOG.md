@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- A new `Events` subclient is added and expose:
+    - `trackPageRendered` to be able to track user navigation
+
 ## [2.2.2] - 2019-11-18
 
 ### Added

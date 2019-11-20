@@ -4,6 +4,7 @@ import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverte
 import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
 import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
+import { ApiEventsClient } from './sub-clients/events/client/ApiEventsClient';
 import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsClient';
 import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/client/ApiLegalRestrictionsClient';
 import { ApiOrdersClient } from './sub-clients/orders/client/ApiOrdersClient';
@@ -21,6 +22,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public feedsClient: ApiHttpFeedsClient;
   public collectionsClient: ApiCollectionsClient;
   public ordersClient: ApiOrdersClient;
+  public eventsClient: ApiEventsClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     this.axios = axios;
@@ -63,5 +65,6 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axios,
     );
     this.ordersClient = new ApiOrdersClient(this.adminLinks, this.axios);
+    this.eventsClient = new ApiEventsClient(this.adminLinks, this.axios);
   }
 }

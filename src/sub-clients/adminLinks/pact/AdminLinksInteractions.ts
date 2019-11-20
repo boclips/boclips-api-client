@@ -75,6 +75,10 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: false,
         }),
         searchContracts: like(sampleLink),
+        trackPageRendered: like({
+          href: `${provider.mockService.baseUrl}/v1/events/page-render`,
+          templated: false,
+        }),
       },
     },
   },
