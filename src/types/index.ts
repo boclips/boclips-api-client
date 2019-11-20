@@ -19,3 +19,6 @@ export { OrderItem } from '../sub-clients/orders/model/OrderItem';
 export {
   OrderItemUpdateRequest,
 } from '../sub-clients/orders/model/OrderItemUpdateRequest';
+export {
+  PageRenderedRequest,
+} from '../sub-clients/events/model/PageRenderedRequest';

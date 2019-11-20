@@ -6,9 +6,9 @@ import { EventsClient } from './EventsClient';
 export class FakeEventsClient implements EventsClient, Clearable {
   private events: EventRequest[] = [];
 
-  public trackPageRendered(request: PageRenderedRequest): Promise<{}> {
+  public trackPageRendered(request: PageRenderedRequest): Promise<void> {
     this.events.push(request);
-    return Promise.resolve({});
+    return Promise.resolve();
   }
 
   public clear() {
