@@ -3,7 +3,7 @@ import 'urijs/src/URITemplate';
 
 export default function expandUrlTemplate(
   template: string,
-  params: { [key: string]: string | number },
+  params: { [key: string]: string | number | string[] | number[] },
 ) {
   return URI.expand(template, params)
     .normalize()
