@@ -1,0 +1,6 @@
+export enum JobStatus {
+  ERROR = 'ERROR',
+  SUCCESS = 'SUCCESS',
+  INGESTING = 'INGESTING',
+  DUPLICATE = 'DUPLICATE',
+}
