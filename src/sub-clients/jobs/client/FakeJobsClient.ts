@@ -1,3 +1,4 @@
+import { Link } from '../../../types';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
 import { Job } from '../model/Job';
@@ -20,8 +21,14 @@ export class FakeJobsClient implements JobsClient, Clearable {
       pageSpec: {
         number: page.page,
         size: page.size,
-        totalElements: 0,
-        totalPages: 0,
+        totalElements: this.jobs.length,
+        totalPages: Math.floor(this.jobs.length / page.size),
+        nextPage: new Link({
+          href: `/v1/jobs?size=${page.size}&page=${page.page + 1}`,
+        }),
+        previousPage: new Link({
+          href: `/v1/jobs?size=${page.size}&page=${page.page - 1}`,
+        }),
       },
     });
   }

@@ -10,7 +10,7 @@ export const getJobsInteraction = (): InteractionObject => ({
   withRequest: {
     method: 'GET',
     path: '/v1/jobs',
-    query: 'size=5&page=0',
+    query: 'size=5&page=1',
   },
   willRespondWith: {
     status: 200,
@@ -18,7 +18,7 @@ export const getJobsInteraction = (): InteractionObject => ({
       'Content-Type': 'application/hal+json;charset=UTF-8',
     },
     body: {
-      page: like({ size: 5, totalElements: 1, totalPages: 1, number: 0 }),
+      page: like({ size: 5, totalElements: 1, totalPages: 1, number: 1 }),
       _embedded: {
         jobs: eachLike({
           id: exisitingJobIdFromStaging,
@@ -37,6 +37,10 @@ export const getJobsInteraction = (): InteractionObject => ({
           }),
         }),
       },
+      _links: like({
+        next: { href: 'https://api.staging-boclips.com/v1/jobs?page=1&size=5' },
+        prev: { href: 'https://api.staging-boclips.com/v1/jobs?page=1&size=5' },
+      }),
     },
   },
 });

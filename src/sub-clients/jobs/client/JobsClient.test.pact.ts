@@ -1,11 +1,11 @@
 import { provider } from '../../../pact-support/pactSetup';
 import { FakeBoclipsClient } from '../../../test-support';
+import { JobsFactory } from '../../../test-support/JobsFactory';
 import { Link } from '../../../types';
 import { JobStatus } from '../model/JobStatus';
 import { ApiBoclipsClient } from './../../../ApiBoclipsClient';
 import { withClients } from './../../../pact-support/pactTestWrapper';
 import { isATestClient } from './../../../test-support/index';
-import { JobsFactory } from '../../../test-support/JobsFactory';
 import {
   exisitingJobIdFromStaging,
   getJobInteraction,
@@ -56,12 +56,14 @@ describe('JobsCleint', () => {
       it('can fetch all jobs', async () => {
         await provider.addInteraction(getJobsInteraction());
 
-        const jobs = await client.jobsClient.getAll({ page: 0, size: 5 });
+        const jobs = await client.jobsClient.getAll({ page: 1, size: 5 });
         const pageSpec = jobs.pageSpec;
         const firstJob = jobs.page[0];
 
         expect(pageSpec.size).toEqual(5);
-        expect(pageSpec.number).toEqual(0);
+        expect(pageSpec.number).toEqual(1);
+        expect(pageSpec.nextPage.getOriginalLink()).toBeDefined();
+        expect(pageSpec.previousPage.getOriginalLink()).toBeDefined();
 
         expect(firstJob.id).toEqual(exisitingJobIdFromStaging);
         expect(firstJob.createdAt).toEqual(new Date('2019-11-21T17:00:00.908'));

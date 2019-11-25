@@ -27,12 +27,20 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
           status: filter === undefined ? undefined : filter.statuses,
         }),
       )
-      .then((response: AxiosResponse) => ({
-        page: response.data._embedded.jobs.map(jobs =>
-          this.convertJobResponse(jobs),
-        ),
-        pageSpec: response.data.page,
-      }));
+      .then(
+        (response: AxiosResponse): Pageable<Job> => ({
+          page: response.data._embedded.jobs.map(jobs =>
+            this.convertJobResponse(jobs),
+          ),
+          pageSpec: {
+            ...response.data.page,
+            nextPage:
+              response.data._links.next && new Link(response.data._links.next),
+            previousPage:
+              response.data._links.prev && new Link(response.data._links.next),
+          },
+        }),
+      );
   }
 
   public async get(id: string): Promise<Job> {
