@@ -1,8 +1,8 @@
+import { Job } from '../sub-clients/jobs/model/Job';
 import { JobStatus } from '../sub-clients/jobs/model/JobStatus';
 import { Link } from '../types';
-import { Job } from './../sub-clients/jobs/model/Job';
 
-export class JobFactory {
+export class JobsFactory {
   public static sample(job: Partial<Job>): Job {
     return {
       id: 'THE-ID',

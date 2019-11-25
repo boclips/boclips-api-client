@@ -3,7 +3,7 @@ import { OrderItem } from '../sub-clients/orders/model/OrderItem';
 import { OrderPrice } from '../sub-clients/orders/model/OrderPrice';
 import { Link } from '../types';
 
-export class OrderFactory {
+export class OrdersFactory {
   public static sample(order: Partial<Order>): Order {
     return {
       ...{

@@ -4,8 +4,9 @@ import { FakeBoclipsClient } from './FakeBoclipsClient';
 export * from './FakeBoclipsClient';
 export * from './CollectionsFactory';
 export * from './ContentPartnersFactory';
-export * from './OrderFactory';
+export * from './OrdersFactory';
 export * from './SubjectsFactory';
+export * from './JobsFactory';
 
 export const isATestClient = (
   client: FakeBoclipsClient | ApiBoclipsClient,

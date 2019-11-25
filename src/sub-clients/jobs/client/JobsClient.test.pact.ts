@@ -5,7 +5,7 @@ import { JobStatus } from '../model/JobStatus';
 import { ApiBoclipsClient } from './../../../ApiBoclipsClient';
 import { withClients } from './../../../pact-support/pactTestWrapper';
 import { isATestClient } from './../../../test-support/index';
-import { JobFactory } from './../../../test-support/JobFactory';
+import { JobsFactory } from '../../../test-support/JobsFactory';
 import {
   exisitingJobIdFromStaging,
   getJobInteraction,
@@ -22,7 +22,7 @@ describe('JobsCleint', () => {
 
         if (isATestClient(client)) {
           client.jobsClient.insertJobFixture(
-            JobFactory.sample({
+            JobsFactory.sample({
               id: exisitingJobIdFromStaging,
               createdAt: new Date('2019-11-21T17:00:00.908'),
               provider: 'Getty',

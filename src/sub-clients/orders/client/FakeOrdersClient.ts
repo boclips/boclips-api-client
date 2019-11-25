@@ -1,4 +1,4 @@
-import { OrderFactory } from '../../../test-support/OrderFactory';
+import { OrdersFactory } from '../../../test-support/OrdersFactory';
 import { Clearable } from '../../common/utils/Clearable';
 import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
@@ -9,7 +9,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
   private orders: Order[] = [];
 
   public insertOrderFixture(order: Partial<Order>) {
-    this.orders.push(OrderFactory.sample(order));
+    this.orders.push(OrdersFactory.sample(order));
   }
 
   public get(id: string): Promise<Order | null> {
