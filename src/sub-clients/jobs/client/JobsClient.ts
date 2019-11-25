@@ -5,4 +5,5 @@ import { PageRequest } from './../../common/model/PageRequest';
 
 export interface JobsClient {
   getAll(page: PageRequest, filter?: JobsFilterRequest): Promise<Pageable<Job>>;
+  get(id: string): Promise<Job | null>;
 }

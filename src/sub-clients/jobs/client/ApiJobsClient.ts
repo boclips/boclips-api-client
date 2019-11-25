@@ -35,8 +35,30 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
       }));
   }
 
+  public async get(id: string): Promise<Job> {
+    const jobDetailsLinks = await this.getLinkOrThrow('jobDetails');
+
+    if (!jobDetailsLinks) {
+      throw Error('Not authorized to view an individual job');
+    }
+
+    return this.axios
+      .get(expandUrlTemplate(jobDetailsLinks.href, { id }))
+      .then((response: AxiosResponse) => {
+        return this.convertJobResponse(response.data);
+      });
+  }
+
   private convertJobResponse(response: any): Job {
-    const { id, createdAt, provider, status, videoSummary, _links } = response;
+    const {
+      id,
+      createdAt,
+      provider,
+      status,
+      videoSummary,
+      _links,
+      videos,
+    } = response;
 
     return {
       id,
@@ -44,6 +66,7 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
       provider,
       status,
       videoSummary,
+      videos,
       links: {
         self: new Link(_links.self),
         errorsMetadata: _links.errorsMetadata && new Link(_links.self),

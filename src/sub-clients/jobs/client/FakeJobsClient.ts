@@ -28,4 +28,8 @@ export class FakeJobsClient implements JobsClient, Clearable {
   public clear() {
     this.jobs = [];
   }
+
+  public get(id: string): Promise<Job> {
+    return Promise.resolve(this.jobs.find(job => job.id === id));
+  }
 }
