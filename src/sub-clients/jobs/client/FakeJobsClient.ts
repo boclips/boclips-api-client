@@ -14,14 +14,15 @@ export class FakeJobsClient implements JobsClient, Clearable {
   }
   public getAll(
     page: PageRequest,
-    _?: JobsFilterRequest,
+    filter?: JobsFilterRequest,
   ): Promise<Pageable<Job>> {
     return Promise.resolve({
-      page: this.jobs,
+      page: this.filterJobs(filter),
       pageSpec: {
         number: page.page,
         size: page.size,
         totalElements: this.jobs.length,
+
         totalPages: Math.floor(this.jobs.length / page.size),
         nextPage: new Link({
           href: `/v1/jobs?size=${page.size}&page=${page.page + 1}`,
@@ -32,6 +33,14 @@ export class FakeJobsClient implements JobsClient, Clearable {
       },
     });
   }
+  private filterJobs(filter: JobsFilterRequest): Job[] {
+    return filter && filter.statuses.length > 0
+      ? this.jobs.filter(job => {
+          return filter.statuses.indexOf(job.status) >= 0;
+        })
+      : this.jobs;
+  }
+
   public clear() {
     this.jobs = [];
   }

@@ -8,6 +8,7 @@ import { withClients } from './../../../pact-support/pactTestWrapper';
 import { isATestClient } from './../../../test-support/index';
 import {
   exisitingJobIdFromStaging,
+  getFilteredJobsInteraction,
   getJobInteraction,
   getJobsInteraction,
 } from './../pact/JobsInteraction';
@@ -76,6 +77,26 @@ describe('JobsCleint', () => {
         expect(firstJob.links.self.getOriginalLink()).toEqual(
           `v1/jobs/${exisitingJobIdFromStaging}`,
         );
+      });
+
+      it('can fetch all jobs filtering by status', async () => {
+        await provider.addInteraction(
+          getFilteredJobsInteraction({ statuses: [JobStatus.ERROR] }),
+        );
+
+        if (isATestClient(client)) {
+          client.jobsClient.insertJobFixture(
+            JobsFactory.sample({ status: JobStatus.ERROR }),
+          );
+        }
+
+        const jobs = await client.jobsClient.getAll(
+          { page: 1, size: 5 },
+          { statuses: [JobStatus.ERROR] },
+        );
+
+        const firstJob = jobs.page[0];
+        expect(firstJob.status).toEqual('ERROR');
       });
 
       it('can fetch a job', async () => {
