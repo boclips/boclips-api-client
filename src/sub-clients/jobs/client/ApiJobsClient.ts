@@ -24,7 +24,7 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
         expandUrlTemplate(jobsLink.href, {
           page: pageRequest.page,
           size: pageRequest.size,
-          status: filter === undefined ? undefined : filter.statuses,
+          status: filter == null ? undefined : filter.statuses,
         }),
       )
       .then(
