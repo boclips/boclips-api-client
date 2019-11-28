@@ -25,6 +25,7 @@ export interface Collection extends ModelWithLinks {
     removeVideo?: Link;
     bookmark?: Link;
     unbookmark?: Link;
+    interactedWith?: Link;
   };
 }
 

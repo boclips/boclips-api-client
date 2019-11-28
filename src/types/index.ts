@@ -22,3 +22,6 @@ export {
 export {
   PageRenderedRequest,
 } from '../sub-clients/events/model/PageRenderedRequest';
+export {
+  CollectionInteractedWithRequest,
+} from '../sub-clients/events/model/CollectionInteractedWithRequest';
