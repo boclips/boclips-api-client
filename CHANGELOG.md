@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `getAll` to fetch all **jobs**, this can also be filtered by status
   - `get` to fetch a single **job** by id
 - New event `trackUserExpired` for when an expired user has logged in 
+- `Events` subclient expose new method:
+  - `trackCollectionInteraction` to track collection usage
 
 ## [2.2.3] - 2019-11-20
 
