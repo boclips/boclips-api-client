@@ -25,6 +25,18 @@ export const trackPageRendered = (
   },
 });
 
+export const trackUserExpired = (): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST trackUserExpired event',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/events/expired-user-access`,
+  },
+  willRespondWith: {
+    status: 201,
+  },
+});
+
 export const trackCollectionInteraction = (
   collection: Collection,
   request: CollectionInteractedWithRequest,

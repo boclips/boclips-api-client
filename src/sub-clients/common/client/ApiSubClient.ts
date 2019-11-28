@@ -12,4 +12,12 @@ export abstract class ApiSubClient {
       throw new Error(`Not authorized for ${adminLinkKey}`);
     }
   }
+
+  protected getLink(adminLinkKey: keyof AdminLinks): LinkEntity | null {
+    if (this.adminLinks && this.adminLinks[adminLinkKey]) {
+      return this.adminLinks[adminLinkKey];
+    } else {
+      return null;
+    }
+  }
 }

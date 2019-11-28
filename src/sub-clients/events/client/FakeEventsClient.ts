@@ -21,6 +21,11 @@ export class FakeEventsClient implements EventsClient, Clearable {
     return Promise.resolve();
   }
 
+  public trackUserExpired(): Promise<void> {
+    this.events.push('USER_EXPIRED');
+    return Promise.resolve();
+  }
+
   public clear() {
     this.events = [];
   }

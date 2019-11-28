@@ -21,4 +21,5 @@ export interface AdminLinks {
   trackPageRendered: LinkEntity;
   subjects: LinkEntity;
   searchContracts: LinkEntity;
+  reportAccessExpired: LinkEntity;
 }

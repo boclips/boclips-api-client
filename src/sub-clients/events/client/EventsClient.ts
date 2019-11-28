@@ -8,4 +8,5 @@ export interface EventsClient {
     collection: Collection,
     request: CollectionInteractedWithRequest,
   ): Promise<void>;
+  trackUserExpired(): Promise<void>;
 }

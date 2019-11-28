@@ -21,4 +21,14 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
     }
     return this.axios.post(validInteractionLink.getOriginalLink(), request);
   }
+
+  public trackUserExpired(): Promise<void> {
+    const trackPageRenderedLink = this.getLink('reportAccessExpired');
+
+    if (!trackPageRenderedLink) {
+      return Promise.resolve();
+    }
+
+    return this.axios.post(trackPageRenderedLink.href);
+  }
 }

@@ -31,7 +31,21 @@ describe('EventsClient', () => {
         if (!isATestClient(client)) {
           await provider.addInteraction(trackPageRendered(request));
         }
+
         await client.eventsClient.trackPageRendered(request);
+
+        if (isATestClient(client)) {
+          const events = client.eventsClient.getEvents();
+          expect(events.length).toEqual(1);
+        }
+      });
+
+      it('can track user expired events', async () => {
+        // if (!isATestClient(client)) {
+        //   await provider.addInteraction(trackUserExpired());
+        // }
+
+        await client.eventsClient.trackUserExpired();
 
         if (isATestClient(client)) {
           const events = client.eventsClient.getEvents();
@@ -62,7 +76,10 @@ describe('EventsClient', () => {
           );
         }
 
-        await client.eventsClient.trackCollectionInteraction(collection, request);
+        await client.eventsClient.trackCollectionInteraction(
+          collection,
+          request,
+        );
 
         if (isATestClient(client)) {
           const events = client.eventsClient.getEvents();
