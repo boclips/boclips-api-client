@@ -12,7 +12,7 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
   }
 
   public trackCollectionInteraction(
-    collection: Collection,
+    collection: Pick<Collection, 'id' | 'links'>,
     request: CollectionInteractedWithRequest,
   ): Promise<void> {
     const validInteractionLink = collection && collection.links.interactedWith;

@@ -14,7 +14,7 @@ export class FakeEventsClient implements EventsClient, Clearable {
   }
 
   public trackCollectionInteraction(
-    _: Collection,
+    _: Pick<Collection, 'id' | 'links'>,
     request: CollectionInteractedWithRequest,
   ): Promise<void> {
     this.events.push(request);

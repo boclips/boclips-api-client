@@ -77,7 +77,7 @@ describe('EventsClient', () => {
         }
 
         await client.eventsClient.trackCollectionInteraction(
-          collection,
+          { id: collection.id, links: collection.links },
           request,
         );
 

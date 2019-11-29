@@ -5,7 +5,7 @@ import { PageRenderedRequest } from '../model/PageRenderedRequest';
 export interface EventsClient {
   trackPageRendered(request: PageRenderedRequest): Promise<void>;
   trackCollectionInteraction(
-    collection: Collection,
+    collection: Pick<Collection, 'id' | 'links'>,
     request: CollectionInteractedWithRequest,
   ): Promise<void>;
   trackUserExpired(): Promise<void>;
