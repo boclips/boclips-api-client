@@ -27,5 +27,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.collectionsClient.clear();
     this.ordersClient.clear();
     this.jobsClient.clear();
+    this.eventsClient.clear();
   }
 }
