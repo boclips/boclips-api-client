@@ -9,9 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `eventsClient.trackCollectionInteraction` now expects a partial `Collection` argument
-  - only the `id` and the `links` are needed
-
+- `eventsClient.trackCollectionInteraction` 
+  - now expects a partial `Collection` argument, only the `id` and the `links` are required
+  - `CollectionInteractedWithRequest` now contains `CollectionInteractionType` instead of a string
+ 
 
 ## [2.2.4] - 2019-11-28
 

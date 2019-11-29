@@ -24,4 +24,5 @@ export {
 } from '../sub-clients/events/model/PageRenderedRequest';
 export {
   CollectionInteractedWithRequest,
+  CollectionInteractionType,
 } from '../sub-clients/events/model/CollectionInteractedWithRequest';
