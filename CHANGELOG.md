@@ -7,14 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2019-12-05
+
+- Fix collection contracts
+
+### Changed
+
 ## [2.2.5] - 2019-11-29
 
 ### Changed
 
-- `eventsClient.trackCollectionInteraction` 
+- `eventsClient.trackCollectionInteraction`
   - now expects a partial `Collection` argument, only the `id` and the `links` are required
   - `CollectionInteractedWithRequest` now contains `CollectionInteractionType` instead of a string
- 
+
 ## [2.2.4] - 2019-11-28
 
 ### Added
@@ -22,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A new `Job's` subclient that exposes these methods:
   - `getAll` to fetch all **jobs**, this can also be filtered by status
   - `get` to fetch a single **job** by id
-- New event `trackUserExpired` for when an expired user has logged in 
+- New event `trackUserExpired` for when an expired user has logged in
 - `Events` subclient expose new method:
   - `trackCollectionInteraction` to track collection usage
 
