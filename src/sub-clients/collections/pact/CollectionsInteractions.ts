@@ -11,7 +11,7 @@ import {
 
 const { like } = Matchers;
 
-export const existingCollectionFromStaging = '5cfa8941943b723f4563b3bb';
+export const existingCollectionFromStaging = '5c55697a60fef77aa4af323f';
 
 export const getCollectionById = (
   id: string = existingCollectionFromStaging,
