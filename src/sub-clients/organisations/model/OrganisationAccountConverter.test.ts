@@ -1,3 +1,4 @@
+import Pageable from '../../common/model/Pageable';
 import { OrganisationAccount } from './OrganisationAccount';
 import { OrganisationAccountConverter } from './OrganisationAccountConverter';
 import { OrganisationAccountEntityFactory } from './OrganisationAccountFactory';
@@ -105,5 +106,34 @@ describe('OrganisationAccountConverter', () => {
     );
 
     expect(convertedOrganisation.organisation.type).toEqual('DISTRICT');
+  });
+
+  it('can convert a page of OrganisationAccounts, and page metadata', () => {
+    const pageResponse = {
+      _embedded: {
+        organisationAccount: [
+          OrganisationAccountEntityFactory.sample({ id: 'my-org-account-id' }),
+        ],
+      },
+      page: {
+        size: 30,
+        totalElements: 1,
+        totalPages: 1,
+        number: 0,
+      },
+      _links: {},
+    };
+
+    const convertedPage: Pageable<
+      OrganisationAccount
+    > = OrganisationAccountConverter.convertPage(pageResponse);
+
+    expect(convertedPage.pageSpec.size).toEqual(30);
+    expect(convertedPage.pageSpec.totalElements).toEqual(1);
+    expect(convertedPage.pageSpec.totalPages).toEqual(1);
+    expect(convertedPage.pageSpec.number).toEqual(0);
+
+    expect(convertedPage.page).toHaveLength(1);
+    expect(convertedPage.page[0].id).toEqual('my-org-account-id');
   });
 });

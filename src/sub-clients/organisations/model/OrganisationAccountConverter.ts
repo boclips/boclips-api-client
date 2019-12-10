@@ -1,4 +1,7 @@
 import { Link } from '../../common/model/LinkEntity';
+import Pageable from '../../common/model/Pageable';
+import { PageableConverter } from '../../common/model/PageableConverter';
+import { PageableEntity } from '../../common/model/PageableEntity';
 import {
   Country,
   Organisation,
@@ -22,9 +25,21 @@ export class OrganisationAccountConverter {
       accessExpiresOn: entity.accessExpiresOn
         ? new Date(entity.accessExpiresOn)
         : null,
-      organisation: this.convertOrganisation(entity.organisation),
-      links: this.convertLinks(entity._links),
+      organisation: OrganisationAccountConverter.convertOrganisation(
+        entity.organisation,
+      ),
+      links: OrganisationAccountConverter.convertLinks(entity._links),
     };
+  }
+
+  public static convertPage(
+    entity: PageableEntity<OrganisationAccountEntity>,
+  ): Pageable<OrganisationAccount> {
+    return PageableConverter.convert(
+      entity,
+      'organisationAccount',
+      OrganisationAccountConverter.convert,
+    );
   }
 
   private static convertOrganisation(entity: OrganisationEntity): Organisation {
@@ -35,8 +50,8 @@ export class OrganisationAccountConverter {
     return {
       type: entity.type,
       name: entity.name,
-      country: this.convertCountry(entity.country),
-      state: this.convertState(entity.state),
+      country: OrganisationAccountConverter.convertCountry(entity.country),
+      state: OrganisationAccountConverter.convertState(entity.state),
     };
   }
 

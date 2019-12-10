@@ -53,7 +53,7 @@ describe('Collections converter', () => {
       secondCollectionEntity,
     ]);
 
-    const converted = CollectionsConverter.convertAll(entity);
+    const converted = CollectionsConverter.convertPage(entity);
 
     expect(converted.page).toHaveLength(2);
     expect(converted.pageSpec.size).toEqual(25);

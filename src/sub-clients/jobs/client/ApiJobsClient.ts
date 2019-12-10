@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import { Link } from '../../../types';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import Pageable from '../../common/model/Pageable';
+import { PageableConverter } from '../../common/model/PageableConverter';
 import { PageRequest } from '../../common/model/PageRequest';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { Job } from '../model/Job';
@@ -28,18 +29,13 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
         }),
       )
       .then(
-        (response: AxiosResponse): Pageable<Job> => ({
-          page: response.data._embedded.jobs.map(jobs =>
-            this.convertJobResponse(jobs),
-          ),
-          pageSpec: {
-            ...response.data.page,
-            nextPage:
-              response.data._links.next && new Link(response.data._links.next),
-            previousPage:
-              response.data._links.prev && new Link(response.data._links.next),
-          },
-        }),
+        (response: AxiosResponse): Pageable<Job> => {
+          return PageableConverter.convert(
+            response.data,
+            'jobs',
+            this.convertJobResponse,
+          );
+        },
       );
   }
 

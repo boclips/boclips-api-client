@@ -1,6 +1,7 @@
 import { EntityWithLinks } from '../common/model/common';
 import { Link } from '../common/model/LinkEntity';
 import Pageable from '../common/model/Pageable';
+import { PageableConverter } from '../common/model/PageableConverter';
 import { PageableEntity } from '../common/model/PageableEntity';
 import { Attachment, Collection, getAttachmentType } from './model/Collection';
 import { AttachmentEntity, CollectionEntity } from './model/CollectionEntity';
@@ -42,20 +43,14 @@ export class CollectionsConverter {
     };
   };
 
-  public static convertAll(
+  public static convertPage(
     entity: PageableEntity<CollectionEntity>,
   ): Pageable<Collection> {
-    const { number: pageNumber, size, totalElements, totalPages } = entity.page;
-
-    return {
-      pageSpec: {
-        number: pageNumber,
-        size,
-        totalElements,
-        totalPages,
-      },
-      page: entity._embedded.collections.map(CollectionsConverter.convert),
-    };
+    return PageableConverter.convert(
+      entity,
+      'collections',
+      CollectionsConverter.convert,
+    );
   }
 
   private static convertLinks<

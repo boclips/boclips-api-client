@@ -40,7 +40,7 @@ export class ApiCollectionsClient extends ApiSubClient
           projection,
         }),
       )
-      .then(response => CollectionsConverter.convertAll(response.data));
+      .then(response => CollectionsConverter.convertPage(response.data));
   }
 
   public create(request: CreateCollectionRequest): Promise<string> {
