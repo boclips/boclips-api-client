@@ -22,4 +22,5 @@ export interface AdminLinks {
   subjects: LinkEntity;
   searchContracts: LinkEntity;
   reportAccessExpired: LinkEntity;
+  independentOrganisations: LinkEntity;
 }
