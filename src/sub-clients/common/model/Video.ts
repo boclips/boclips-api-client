@@ -1,3 +1,4 @@
+import { Subject } from '../../subjects/model/Subject';
 import { DistributionMethod } from './DistributionMethod';
 
 export interface VideoLinks {
@@ -10,5 +11,6 @@ export interface Video {
   description: string;
   contentPartner: string;
   disabledDistributionMethods: DistributionMethod[];
+  subjects: Subject[];
   links: VideoLinks;
 }

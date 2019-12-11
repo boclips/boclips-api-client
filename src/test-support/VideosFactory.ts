@@ -15,5 +15,6 @@ export class VideoFactory {
     links: {
       update: null,
     },
+    subjects: [],
   });
 }
