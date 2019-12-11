@@ -9,6 +9,7 @@ import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsC
 import { ApiJobsClient } from './sub-clients/jobs/client/ApiJobsClient';
 import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/client/ApiLegalRestrictionsClient';
 import { ApiOrdersClient } from './sub-clients/orders/client/ApiOrdersClient';
+import { ApiOrganisationAccountsClient } from './sub-clients/organisations/client/ApiOrganisationAccountsClient';
 import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClient';
 
 export class ApiBoclipsClient implements BoclipsClient {
@@ -25,6 +26,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public ordersClient: ApiOrdersClient;
   public eventsClient: ApiEventsClient;
   public jobsClient: ApiJobsClient;
+  public organisationAccountsClient: ApiOrganisationAccountsClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     this.axios = axios;
@@ -69,5 +71,9 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.ordersClient = new ApiOrdersClient(this.adminLinks, this.axios);
     this.eventsClient = new ApiEventsClient(this.adminLinks, this.axios);
     this.jobsClient = new ApiJobsClient(this.adminLinks, this.axios);
+    this.organisationAccountsClient = new ApiOrganisationAccountsClient(
+      this.adminLinks,
+      this.axios,
+    );
   }
 }

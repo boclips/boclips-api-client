@@ -56,14 +56,14 @@ export class OrganisationAccountConverter {
   }
 
   private static convertLinks(
-    _links: OrganisationAccountEntity['_links'],
+    linkEntities: OrganisationAccountEntity['_links'],
   ): OrganisationAccount['links'] {
     const links: OrganisationAccount['links'] = {
-      self: new Link(_links.self),
+      self: new Link(linkEntities.self),
     };
 
-    if (_links.edit) {
-      links.edit = new Link(_links.edit);
+    if (linkEntities.edit) {
+      links.edit = new Link(linkEntities.edit);
     }
 
     return links;
