@@ -7,6 +7,7 @@ export * from './ContentPartnersFactory';
 export * from './OrdersFactory';
 export * from './SubjectsFactory';
 export * from './JobsFactory';
+export * from './AccountFactory';
 
 export const isATestClient = (
   client: FakeBoclipsClient | ApiBoclipsClient,

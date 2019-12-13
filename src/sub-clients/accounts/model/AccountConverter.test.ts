@@ -1,6 +1,6 @@
 import Pageable from '../../common/model/Pageable';
 import { Account } from './Account';
-import { AccountEntityFactory } from './AccountFactory';
+import { AccountEntityFactory } from '../../../test-support/AccountFactory';
 import { AccountsConverter } from './AccountsConverter';
 
 describe('AccountConverter', () => {

@@ -2,7 +2,7 @@ import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
-import { AccountFactory } from '../model/AccountFactory';
+import { AccountFactory } from '../../../test-support/AccountFactory';
 import { getIndependentAccountsByCountryCode } from '../pact/AccountInteractions';
 
 const ACCOUNT_ID_FROM_STAGING = '5de5369d1617b3000142c08f';

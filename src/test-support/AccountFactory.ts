@@ -1,5 +1,5 @@
-import { Account, Organisation } from './Account';
-import { AccountEntity } from './AccountEntity';
+import { Account, Organisation } from '../sub-clients/accounts/model/Account';
+import { AccountEntity } from '../sub-clients/accounts/model/AccountEntity';
 
 export class AccountEntityFactory {
   public static sample(args: Partial<AccountEntity> = {}): AccountEntity {
@@ -43,7 +43,7 @@ export class AccountFactory {
   }
 }
 
-class OrganisationFactory {
+export class OrganisationFactory {
   public static sample(args: Partial<Organisation> = {}): Organisation {
     return {
       country: {
