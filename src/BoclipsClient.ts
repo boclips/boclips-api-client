@@ -1,3 +1,4 @@
+import { AccountsClient } from './sub-clients/accounts/client/AccountsClient';
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
 import { ContentPartnersClient } from './sub-clients/contentPartners/client/ContentPartnersClient';
 import { EventsClient } from './sub-clients/events/client/EventsClient';
@@ -5,7 +6,6 @@ import { HttpFeedsClient } from './sub-clients/httpFeeds/client/HttpFeedsClient'
 import { JobsClient } from './sub-clients/jobs/client/JobsClient';
 import { LegalRestrictionsClient } from './sub-clients/legalRestrictions/client/LegalRestrictionsClient';
 import { OrdersClient } from './sub-clients/orders/client/OrdersClient';
-import { OrganisationAccountsClient } from './sub-clients/organisations/client/OrganisationAccountsClient';
 import { SubjectsClient } from './sub-clients/subjects/client/SubjectsClient';
 
 export interface BoclipsClient {
@@ -17,5 +17,5 @@ export interface BoclipsClient {
   ordersClient: OrdersClient;
   eventsClient: EventsClient;
   jobsClient: JobsClient;
-  organisationAccountsClient: OrganisationAccountsClient;
+  accountsClient: AccountsClient;
 }

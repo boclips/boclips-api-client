@@ -85,8 +85,8 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/events/page-render`,
           templated: false,
         }),
-        independentOrganisations: like({
-          href: `${provider.mockService.baseUrl}/v1/independent-organisations{?countryCode,page,size}`,
+        independentAccounts: like({
+          href: `${provider.mockService.baseUrl}/v1/independent-accounts{?countryCode,page,size}`,
           templated: true,
         }),
       },

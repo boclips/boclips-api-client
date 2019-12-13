@@ -1,4 +1,5 @@
 import { BoclipsClient } from '../BoclipsClient';
+import { FakeAccountsClient } from '../sub-clients/accounts/client/FakeAccountClient';
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
 import { Clearable } from '../sub-clients/common/utils/Clearable';
 import { FakeContentPartnersClient } from '../sub-clients/contentPartners/client/FakeContentPartnersClient';
@@ -7,7 +8,6 @@ import { FakeHttpFeedsClient } from '../sub-clients/httpFeeds/client/FakeHttpFee
 import { FakeJobsClient } from '../sub-clients/jobs/client/FakeJobsClient';
 import { FakeLegalRestrictionsClient } from '../sub-clients/legalRestrictions/client/FakeLegalRestrictionsClient';
 import { FakeOrdersClient } from '../sub-clients/orders/client/FakeOrdersClient';
-import { FakeOrganisationAccountsClient } from '../sub-clients/organisations/client/FakeOrganisationAccountClient';
 import { FakeSubjectsClient } from '../sub-clients/subjects/client/FakeSubjectsClient';
 
 export class FakeBoclipsClient implements BoclipsClient, Clearable {
@@ -19,7 +19,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public ordersClient: FakeOrdersClient = new FakeOrdersClient();
   public eventsClient: FakeEventsClient = new FakeEventsClient();
   public jobsClient: FakeJobsClient = new FakeJobsClient();
-  public organisationAccountsClient: FakeOrganisationAccountsClient = new FakeOrganisationAccountsClient();
+  public accountsClient: FakeAccountsClient = new FakeAccountsClient();
 
   public clear() {
     this.legalRestrictionsClient.clear();
@@ -30,6 +30,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.ordersClient.clear();
     this.jobsClient.clear();
     this.eventsClient.clear();
-    this.organisationAccountsClient.clear();
+    this.accountsClient.clear();
   }
 }

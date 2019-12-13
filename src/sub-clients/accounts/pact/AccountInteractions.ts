@@ -2,15 +2,15 @@ import { InteractionObject } from '@pact-foundation/pact';
 import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 
-export const getOrganisationAccountsByCountryCode = (
+export const getIndependentAccountsByCountryCode = (
   id: string,
   countryCode: string,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET organisationAccounts by country code',
+  uponReceiving: 'GET Independent Accounts by country code',
   withRequest: {
     method: 'GET',
-    path: `/v1/independent-organisations`,
+    path: `/v1/independent-accounts`,
     query: {
       countryCode: 'USA',
       page: '0',
@@ -30,7 +30,7 @@ export const getOrganisationAccountsByCountryCode = (
         totalPages: like(1),
       },
       _embedded: {
-        organisationAccount: eachLike({
+        account: eachLike({
           id: like(id),
           /**
            * The accessExpiresOn field should be described here, but since it's optional in
@@ -49,20 +49,16 @@ export const getOrganisationAccountsByCountryCode = (
             }),
           }),
           _links: like({
-            self: {
-              href:
-                'https://api.boclips.com/v1/organisations/5daa05af7e5bb50001ead980',
-            },
             edit: {
               href:
-                'https://api.boclips.com/v1/organisations/5daa05af7e5bb50001ead980',
+                'https://api.boclips.com/v1/accounts/5daa05af7e5bb50001ead980',
             },
           }),
         }),
       },
       _links: like({
         next: {
-          href: `${provider.mockService.baseUrl}/v1/independent-organisations?countryCode=${countryCode}`,
+          href: `${provider.mockService.baseUrl}/v1/independent-accounts?countryCode=${countryCode}`,
         },
       }),
     },

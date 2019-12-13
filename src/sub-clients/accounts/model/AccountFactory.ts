@@ -1,11 +1,8 @@
-import { Link } from '../../common/model/LinkEntity';
-import { Organisation, OrganisationAccount } from './OrganisationAccount';
-import { OrganisationAccountEntity } from './OrganisationAccountEntity';
+import { Account, Organisation } from './Account';
+import { AccountEntity } from './AccountEntity';
 
-export class OrganisationAccountEntityFactory {
-  public static sample(
-    args: Partial<OrganisationAccountEntity> = {},
-  ): OrganisationAccountEntity {
+export class AccountEntityFactory {
+  public static sample(args: Partial<AccountEntity> = {}): AccountEntity {
     return {
       id: '5db06aec7c6c020001339eb2',
       contractIds: ['contract-123'],
@@ -24,13 +21,8 @@ export class OrganisationAccountEntityFactory {
         },
       },
       _links: {
-        self: {
-          href:
-            'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2',
-        },
         edit: {
-          href:
-            'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2',
+          href: 'https://api.boclips.com/v1/accounts/5db06aec7c6c020001339eb2',
         },
       },
       ...args,
@@ -38,20 +30,14 @@ export class OrganisationAccountEntityFactory {
   }
 }
 
-export class OrganisationAccountFactory {
-  public static sample(
-    args: Partial<OrganisationAccount> = {},
-  ): OrganisationAccount {
+export class AccountFactory {
+  public static sample(args: Partial<Account> = {}): Account {
     return {
       organisation: OrganisationFactory.sample(),
       accessExpiresOn: new Date(Date.parse('2019-12-10')),
       contractIds: [],
       id: 'org-account-id',
-      links: {
-        self: new Link({
-          href: '',
-        }),
-      },
+      links: {},
       ...args,
     };
   }

@@ -26,6 +26,4 @@ export {
   CollectionInteractedWithRequest,
   CollectionInteractionType,
 } from '../sub-clients/events/model/CollectionInteractedWithRequest';
-export {
-  OrganisationAccount,
-} from '../sub-clients/organisations/model/OrganisationAccount';
+export { Account } from '../sub-clients/accounts/model/Account';

@@ -1,12 +1,11 @@
 import { Link } from '../../common/model/LinkEntity';
 
-export interface OrganisationAccount {
+export interface Account {
   id: string;
   contractIds: string[];
   accessExpiresOn: Date | null;
   organisation: Organisation;
   links: {
-    self: Link;
     edit?: Link;
   };
 }

@@ -2,43 +2,34 @@ import { Link } from '../../common/model/LinkEntity';
 import Pageable from '../../common/model/Pageable';
 import { PageableConverter } from '../../common/model/PageableConverter';
 import { PageableEntity } from '../../common/model/PageableEntity';
+import { Account, Country, Organisation, State } from './Account';
 import {
-  Country,
-  Organisation,
-  OrganisationAccount,
-  State,
-} from './OrganisationAccount';
-import {
+  AccountEntity,
   CountryEntity,
-  OrganisationAccountEntity,
   OrganisationEntity,
   StateEntity,
-} from './OrganisationAccountEntity';
+} from './AccountEntity';
 
-export class OrganisationAccountConverter {
-  public static convert(
-    entity: OrganisationAccountEntity,
-  ): OrganisationAccount {
+export class AccountsConverter {
+  public static convert(entity: AccountEntity): Account {
     return {
       id: entity.id,
       contractIds: entity.contractIds,
       accessExpiresOn: entity.accessExpiresOn
         ? new Date(entity.accessExpiresOn)
         : null,
-      organisation: OrganisationAccountConverter.convertOrganisation(
-        entity.organisation,
-      ),
-      links: OrganisationAccountConverter.convertLinks(entity._links),
+      organisation: AccountsConverter.convertOrganisation(entity.organisation),
+      links: AccountsConverter.convertLinks(entity._links),
     };
   }
 
   public static convertPage(
-    entity: PageableEntity<OrganisationAccountEntity>,
-  ): Pageable<OrganisationAccount> {
+    entity: PageableEntity<AccountEntity>,
+  ): Pageable<Account> {
     return PageableConverter.convert(
       entity,
-      'organisationAccount',
-      OrganisationAccountConverter.convert,
+      'account',
+      AccountsConverter.convert,
     );
   }
 
@@ -50,17 +41,15 @@ export class OrganisationAccountConverter {
     return {
       type: entity.type,
       name: entity.name,
-      country: OrganisationAccountConverter.convertCountry(entity.country),
-      state: OrganisationAccountConverter.convertState(entity.state),
+      country: AccountsConverter.convertCountry(entity.country),
+      state: AccountsConverter.convertState(entity.state),
     };
   }
 
   private static convertLinks(
-    linkEntities: OrganisationAccountEntity['_links'],
-  ): OrganisationAccount['links'] {
-    const links: OrganisationAccount['links'] = {
-      self: new Link(linkEntities.self),
-    };
+    linkEntities: AccountEntity['_links'],
+  ): Account['links'] {
+    const links: Account['links'] = {};
 
     if (linkEntities.edit) {
       links.edit = new Link(linkEntities.edit);
