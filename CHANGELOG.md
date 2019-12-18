@@ -7,14 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.1] - 2019-12-18
+
+- Fixed bug to do with jobs pages not being parsed properly
+
 ## [2.4.0] - 2019-12-17
 
 ### Removed
+
 - videos link used for bulk updates of videos
 
 ## [2.3.1] - 2019-12-13
 
 ### Added
+
 - Independent Accounts Client
 
 ## [2.3.0] - 2019-12-05
