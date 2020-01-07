@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.2] - 2020-01-07
+
 - Remove `lessonPlan` from `Subject` model
 
 ## [2.4.1] - 2019-12-18
