@@ -22,7 +22,6 @@ export const getSubjects = (): InteractionObject => ({
         subjects: eachLike({
           id: existingSubjectIdFromStaging,
           name: 'Subject Sample',
-          lessonPlan: false,
           _links: like({
             self: {
               href: `${provider.mockService.baseUrl}/v1/subjects/${existingSubjectIdFromStaging}`,

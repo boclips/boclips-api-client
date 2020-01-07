@@ -14,7 +14,6 @@ export class SubjectsConverter {
     return {
       id: response.id,
       name: response.name,
-      lessonPlan: response.lessonPlan,
       links,
     };
   }

@@ -10,7 +10,6 @@ export class SubjectFactory {
     return {
       id: 'subject-id',
       name: 'Subject Name',
-      lessonPlan: false,
       links: {},
     };
   }
