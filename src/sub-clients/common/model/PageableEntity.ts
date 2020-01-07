@@ -3,7 +3,7 @@ import { LinkEntity } from './LinkEntity';
 export interface PageableEntity<T> {
   page: PageSpecEntity;
   _embedded: { [key: string]: T[] };
-  _links: { [key: string]: LinkEntity };
+  _links?: { [key: string]: LinkEntity };
 }
 
 export interface PageSpecEntity {

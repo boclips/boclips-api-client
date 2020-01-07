@@ -15,9 +15,13 @@ export class PageableConverter {
         totalElements: pageableEntity.page.totalElements,
         totalPages: pageableEntity.page.totalPages,
         nextPage:
-          pageableEntity._links.next && new Link(pageableEntity._links.next),
+          pageableEntity._links &&
+          pageableEntity._links.next &&
+          new Link(pageableEntity._links.next),
         previousPage:
-          pageableEntity._links.prev && new Link(pageableEntity._links.prev),
+          pageableEntity._links &&
+          pageableEntity._links.prev &&
+          new Link(pageableEntity._links.prev),
       },
       page: pageableEntity._embedded[key].map(embeddedConverter),
     };
