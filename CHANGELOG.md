@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Remove `lessonPlan` from `Subject` model
+
 ## [2.4.1] - 2019-12-18
 
 - Fixed bug to do with jobs pages not being parsed properly
