@@ -8,11 +8,17 @@ export class FakeAccountsClient implements AccountsClient, Clearable {
   private accounts: Account[] = [];
 
   public getIndependentAccounts(
-    filter: AccountsFilter,
+    filter: AccountsFilter = {
+      size: 30,
+      page: 0,
+      countryCode: undefined,
+    },
   ): Promise<Pageable<Account> | null> {
-    const filteredAccounts = this.accounts.filter(
-      account => account.organisation.country.id === filter.countryCode,
-    );
+    const filteredAccounts = !!filter.countryCode
+      ? this.accounts.filter(
+          account => account.organisation.country.id === filter.countryCode,
+        )
+      : this.accounts;
 
     const pageOfAccounts = filteredAccounts.slice(
       filter.size * filter.page,

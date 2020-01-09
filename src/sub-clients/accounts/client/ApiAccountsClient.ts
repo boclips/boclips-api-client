@@ -7,15 +7,15 @@ import { AccountsClient, AccountsFilter } from './AccountsClient';
 
 export class ApiAccountsClient extends ApiSubClient implements AccountsClient {
   public async getIndependentAccounts(
-    filter: AccountsFilter,
+    filter?: AccountsFilter,
   ): Promise<Pageable<Account> | null> {
     const link = this.getLinkOrThrow('independentAccounts');
 
     const response = await this.axios.get(
       expandUrlTemplate(link.href, {
-        countryCode: filter.countryCode,
-        page: filter.page,
-        size: filter.size,
+        countryCode: filter && filter.countryCode,
+        page: filter && filter.page,
+        size: filter && filter.size,
       }),
     );
 
