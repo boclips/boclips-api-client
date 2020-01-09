@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Calculation of PageSpec for FakeAccountsClient
+
 ## [2.4.3] - 2020-01-07
 
 ### Fixed

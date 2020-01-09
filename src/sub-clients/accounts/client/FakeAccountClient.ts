@@ -14,9 +14,15 @@ export class FakeAccountsClient implements AccountsClient, Clearable {
       account => account.organisation.country.id === filter.countryCode,
     );
 
-    const pageable = PageableFactory.sample(filteredAccounts, {
+    const pageOfAccounts = filteredAccounts.slice(
+      filter.size * filter.page,
+      filter.size * (filter.page + 1),
+    );
+
+    const pageable = PageableFactory.sample(pageOfAccounts, {
       size: filter.size,
       number: filter.page,
+      totalElements: filteredAccounts.length,
     });
 
     return Promise.resolve(pageable);

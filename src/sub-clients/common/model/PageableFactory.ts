@@ -6,12 +6,15 @@ export class PageableFactory {
     elements: T[],
     pageSpec: Partial<PageSpec> = {},
   ): Pageable<T> {
+    const size = pageSpec.size || 30;
+    const totalElements = pageSpec.totalElements || elements.length;
+
     return {
       pageSpec: {
         number: 0,
-        size: 30,
-        totalPages: 1,
-        totalElements: elements.length,
+        totalPages: Math.ceil(totalElements / size),
+        size,
+        totalElements,
         ...pageSpec,
       },
       page: [...elements],
