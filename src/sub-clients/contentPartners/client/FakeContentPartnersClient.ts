@@ -16,7 +16,7 @@ export class FakeContentPartnersClient
       id,
       name: request.name,
       official: request.accreditedToYtChannelId == null,
-      ageRange: {
+      ageRange: request.ageRange && {
         ...request.ageRange,
         label: `${request.ageRange.min}-${request.ageRange.max}`,
       },
