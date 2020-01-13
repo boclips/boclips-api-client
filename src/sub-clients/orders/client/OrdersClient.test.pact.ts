@@ -29,8 +29,8 @@ describe('OrdersClient', () => {
           const fake = client.ordersClient;
           fake.insertOrderFixture({
             id: existingOrderIdFromStaging,
-            createdAt: new Date('2019-11-06T18:48:51.061Z'),
-            updatedAt: new Date('2019-11-06T18:48:51.061Z'),
+            createdAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)),
+            updatedAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)),
             status: 'COMPLETED',
             userDetails: {
               authorisingUser: 'Authoriser Dobinson <authoriser@gmail.com>',
@@ -73,11 +73,11 @@ describe('OrdersClient', () => {
 
       const assertOnMandatoryOrderFields = (order: Order) => {
         expect(order.id).toEqual(existingOrderIdFromStaging);
-        expect(order.createdAt.toISOString()).toEqual(
-          '2019-11-06T18:48:51.061Z',
+        expect(order.createdAt.toUTCString()).toEqual(
+          'Sun, 02 Feb 2020 03:04:05 GMT',
         );
-        expect(order.updatedAt.toISOString()).toEqual(
-          '2019-11-06T18:48:51.061Z',
+        expect(order.updatedAt.toUTCString()).toEqual(
+          'Sun, 02 Feb 2020 03:04:05 GMT',
         );
         expect(order.legacyOrderId).toEqual('legacy-order-id');
         expect(order.status).toEqual('COMPLETED');

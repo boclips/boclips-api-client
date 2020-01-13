@@ -32,8 +32,8 @@ const createOrderItemWithMandatoryFields = (id: string) => ({
 
 const createOrderWithMandatoryFields = (id: string) => ({
   id,
-  createdAt: '2019-11-06T18:48:51.061',
-  updatedAt: '2019-11-06T18:48:51.061',
+  createdAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)).toUTCString(),
+  updatedAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)).toUTCString(),
   legacyOrderId: 'legacy-order-id',
   status: 'COMPLETED',
   totalPrice: like({
