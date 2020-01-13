@@ -15,6 +15,7 @@ import {
 } from '../pact/ContentPartnersInteractions';
 
 describe('ContentPartnersClient', () => {
+  const date = Date.now();
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
@@ -81,8 +82,11 @@ describe('ContentPartnersClient', () => {
         );
       });
 
-      it('can create a client', async () => {
-        const request = ContentPartnerFactory.createRequest();
+      it('can create a content partner', async () => {
+        const request = ContentPartnerFactory.createRequest({
+          name: `CP-${date}`,
+        });
+
         await provider.addInteraction(createContentPartner(request));
 
         await expect(
