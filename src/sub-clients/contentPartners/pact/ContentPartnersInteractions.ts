@@ -1,5 +1,6 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { provider } from '../../../pact-support/pactSetup';
+import { ContentPartnerRequest } from './../model/ContentPartnerRequest';
 
 const { eachLike, like } = Matchers;
 
@@ -92,5 +93,30 @@ export const getContentPartnerInteraction = (
         },
       },
     }),
+  },
+});
+
+export const createContentPartner = (
+  request: ContentPartnerRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST content-partners',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/content-partners`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      name: request.name,
+      accreditedToYtChannelId: request.accreditedToYtChannelId,
+      legalRestrictions: request.legalRestrictions,
+      ageRange: request.ageRange,
+      distributionMethods: request.distributionMethods,
+      currency: request.currency,
+    },
+  },
+  willRespondWith: {
+    status: 201,
   },
 });

@@ -1,12 +1,33 @@
 import { ContentPartnerFactory } from '../../../test-support';
+import { Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentPartner } from '../model/ContentPartner';
+import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class FakeContentPartnersClient
   implements ContentPartnersClient, Clearable {
   private contentPartners: ContentPartner[] = [];
+
+  public create(request: ContentPartnerRequest): Promise<void> {
+    const id = request.name + Date.now();
+    this.contentPartners.push({
+      id,
+      name: request.name,
+      official: request.accreditedToYtChannelId == null,
+      ageRange: {
+        ...request.ageRange,
+        label: `${request.ageRange.min}-${request.ageRange.max}`,
+      },
+      currency: request.currency,
+      legalRestrictions: request.legalRestrictions,
+      distributionMethods: request.distributionMethods,
+      links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
+    });
+
+    return Promise.resolve();
+  }
 
   public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
     this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));

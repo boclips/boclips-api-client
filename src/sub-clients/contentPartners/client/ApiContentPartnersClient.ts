@@ -2,11 +2,20 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnersConverter } from '../ContentPartnersConverter';
 import { ContentPartner } from '../model/ContentPartner';
+import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class ApiContentPartnersClient extends ApiSubClient
   implements ContentPartnersClient {
+  public async create(request: ContentPartnerRequest): Promise<void> {
+    const contentPartnersLink = this.getLinkOrThrow('contentPartners');
+
+    return this.axios.post(
+      expandUrlTemplate(contentPartnersLink.href, {}),
+      request,
+    );
+  }
   public async getAll(): Promise<ContentPartner[]> {
     const contentPartnersLink = this.getLinkOrThrow('contentPartners');
 

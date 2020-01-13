@@ -9,6 +9,9 @@ export { Collection } from '../sub-clients/collections/model/Collection';
 export {
   ContentPartner,
 } from '../sub-clients/contentPartners/model/ContentPartner';
+export {
+  ContentPartnerRequest,
+} from '../sub-clients/contentPartners/model/ContentPartnerRequest';
 export { HttpFeed } from '../sub-clients/httpFeeds/model/HttpFeed';
 export {
   LegalRestrictions,

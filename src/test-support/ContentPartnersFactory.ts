@@ -1,4 +1,5 @@
 import { ContentPartner, Link } from '../types';
+import { ContentPartnerRequest } from './../sub-clients/contentPartners/model/ContentPartnerRequest';
 
 export class ContentPartnerFactory {
   public static sample(
@@ -21,6 +22,25 @@ export class ContentPartnerFactory {
         }),
       },
       distributionMethods: contentPartner.distributionMethods || ['STREAM'],
+    };
+  }
+
+  public static createRequest(
+    request: Partial<ContentPartnerRequest> = {},
+  ): ContentPartnerRequest {
+    return {
+      name: request.name || 'Partner McPartnerFace',
+      accreditedToYtChannelId: request.accreditedToYtChannelId || 'YT-2345678',
+      legalRestrictions: request.legalRestrictions || {
+        id: 'legal-123',
+        text: 'Legal McLegalFace',
+      },
+      ageRange: request.ageRange || {
+        min: 10,
+        max: 11,
+      },
+      distributionMethods: [],
+      currency: 'GBP',
     };
   }
 }

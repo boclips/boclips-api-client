@@ -1,3 +1,4 @@
+import { createContentPartner } from './../pact/ContentPartnersInteractions';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
@@ -78,6 +79,15 @@ describe('ContentPartnersClient', () => {
             ageRange: { min: 3, max: 12 },
           },
         );
+      });
+
+      it('can create a client', async () => {
+        const request = ContentPartnerFactory.createRequest();
+        await provider.addInteraction(createContentPartner(request));
+
+        expect(
+          client.contentPartnersClient.create(request),
+        ).resolves.toBeTruthy();
       });
     },
   );
