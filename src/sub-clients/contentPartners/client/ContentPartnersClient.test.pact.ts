@@ -85,9 +85,9 @@ describe('ContentPartnersClient', () => {
         const request = ContentPartnerFactory.createRequest();
         await provider.addInteraction(createContentPartner(request));
 
-        expect(
+        await expect(
           client.contentPartnersClient.create(request),
-        ).resolves.toBeTruthy();
+        ).resolves.not.toThrow();
       });
     },
   );
