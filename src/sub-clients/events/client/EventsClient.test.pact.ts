@@ -1,11 +1,22 @@
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
-import { CollectionFactory, FakeBoclipsClient, isATestClient } from '../../../test-support';
+import {
+  CollectionFactory,
+  FakeBoclipsClient,
+  isATestClient,
+} from '../../../test-support';
 import { Link } from '../../common/model/LinkEntity';
-import { CollectionInteractedWithRequest, CollectionInteractionType } from '../model/CollectionInteractedWithRequest';
+import {
+  CollectionInteractedWithRequest,
+  CollectionInteractionType,
+} from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
-import { collectionID, trackCollectionInteraction, trackPageRendered } from '../pact/EventsInteractions';
+import {
+  collectionID,
+  trackCollectionInteraction,
+  trackPageRendered,
+} from '../pact/EventsInteractions';
 
 describe('EventsClient', () => {
   withClients(
