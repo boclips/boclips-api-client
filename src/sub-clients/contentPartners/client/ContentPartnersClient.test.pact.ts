@@ -1,4 +1,3 @@
-import { createContentPartner } from './../pact/ContentPartnersInteractions';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
@@ -15,7 +14,6 @@ import {
 } from '../pact/ContentPartnersInteractions';
 
 describe('ContentPartnersClient', () => {
-  const date = Date.now();
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
@@ -80,18 +78,6 @@ describe('ContentPartnersClient', () => {
             ageRange: { min: 3, max: 12 },
           },
         );
-      });
-
-      it('can create a content partner', async () => {
-        const request = ContentPartnerFactory.createRequest({
-          name: `CP-${date}`,
-        });
-
-        await provider.addInteraction(createContentPartner(request));
-
-        await expect(
-          client.contentPartnersClient.create(request),
-        ).resolves.not.toThrow();
       });
     },
   );
