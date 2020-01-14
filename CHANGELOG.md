@@ -7,34 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.7] - 2020-01-14
+
+### Changed
+
+- Remove verification of content partners endpoint
+
 ## [2.4.6] - 2020-01-09
 
 ### Changed
+
 - Add manually creating content partners
 
 ## [2.4.5] - 2020-01-09
 
 ### Changed
+
 - Filter for independent accounts is now optional
 
 ## [2.4.4] - 2020-01-09
 
 ### Fixed
+
 - Calculation of PageSpec for FakeAccountsClient
 
 ## [2.4.3] - 2020-01-07
 
 ### Fixed
+
 - Make PageableEntity links optional
 
 ## [2.4.2] - 2020-01-07
 
 ### Changed
+
 - Remove `lessonPlan` from `Subject` model
 
 ## [2.4.1] - 2019-12-18
 
 ### Fixed
+
 - Fixed bug to do with jobs pages not being parsed properly
 
 ## [2.4.0] - 2019-12-17
