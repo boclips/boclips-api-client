@@ -16,7 +16,7 @@ export const getJobsInteraction = (): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': 'application/hal+json',
     },
     body: {
       page: like({ size: 5, totalElements: 1, totalPages: 1, number: 1 }),
@@ -61,7 +61,7 @@ export const getFilteredJobsInteraction = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': 'application/hal+json',
     },
     body: {
       page: like({ size: 5, totalElements: 1, totalPages: 1, number: 1 }),
@@ -101,7 +101,7 @@ export const getJobInteraction = (id: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': 'application/hal+json',
     },
     body: like({
       id,

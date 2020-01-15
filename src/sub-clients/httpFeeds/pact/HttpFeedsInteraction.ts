@@ -9,7 +9,7 @@ export const createHttpFeed: InteractionObject = {
     method: 'POST',
     path: `/v1/http-feeds`,
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': 'application/hal+json',
     },
     body: like({
       name: 'Feed Test',
@@ -34,7 +34,7 @@ export const getHttpFeeds = (provider: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': 'application/hal+json',
     },
     body: {
       _embedded: {
