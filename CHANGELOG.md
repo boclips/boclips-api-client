@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.10] - 2020-01-22
+
+### Added
+
+- Add video types endpoint to Boclips API interface
+
 ### Added
 
 - Add `accountsClient.updateAccount` method to be able to set `accessExpiresOn` on organisations
