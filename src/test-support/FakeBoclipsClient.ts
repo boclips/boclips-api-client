@@ -1,3 +1,4 @@
+import { FakeVideoTypesClient } from '../sub-clients/videoTypes/client/FakeVideoTypesClient';
 import { BoclipsClient } from '../BoclipsClient';
 import { FakeAccountsClient } from '../sub-clients/accounts/client/FakeAccountClient';
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
@@ -20,6 +21,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public eventsClient: FakeEventsClient = new FakeEventsClient();
   public jobsClient: FakeJobsClient = new FakeJobsClient();
   public accountsClient: FakeAccountsClient = new FakeAccountsClient();
+  public videoTypesClient: FakeVideoTypesClient = new FakeVideoTypesClient();
 
   public clear() {
     this.legalRestrictionsClient.clear();
@@ -31,5 +33,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.jobsClient.clear();
     this.eventsClient.clear();
     this.accountsClient.clear();
+    this.videoTypesClient.clear();
   }
 }

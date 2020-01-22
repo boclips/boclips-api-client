@@ -88,6 +88,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/accounts{?countryCode,page,size}`,
           templated: true,
         }),
+        videoTypes: like({
+          href: `${provider.mockService.baseUrl}/v1/video-types`,
+          templated: false,
+        }),
       },
     },
   },

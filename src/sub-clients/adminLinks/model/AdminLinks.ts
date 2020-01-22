@@ -22,4 +22,5 @@ export interface AdminLinks {
   searchContracts: LinkEntity;
   reportAccessExpired: LinkEntity;
   independentAccounts: LinkEntity;
+  videoTypes: LinkEntity;
 }
