@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `accountsClient.updateAccount` method to be able to set `accessExpiresOn` on organisations
+
 ## [2.4.9] - 2020-01-22
 
 ### Changed

@@ -30,3 +30,6 @@ export {
   CollectionInteractionType,
 } from '../sub-clients/events/model/CollectionInteractedWithRequest';
 export { Account } from '../sub-clients/accounts/model/Account';
+export {
+  UpdateAccountRequest,
+} from '../sub-clients/accounts/model/UpdateAccountRequest';

@@ -2,6 +2,7 @@ import Pageable from '../../common/model/Pageable';
 import { PageableFactory } from '../../common/model/PageableFactory';
 import { Clearable } from '../../common/utils/Clearable';
 import { Account } from '../model/Account';
+import { UpdateAccountRequest } from '../model/UpdateAccountRequest';
 import { AccountsClient, AccountsFilter } from './AccountsClient';
 
 export class FakeAccountsClient implements AccountsClient, Clearable {
@@ -32,6 +33,22 @@ export class FakeAccountsClient implements AccountsClient, Clearable {
     });
 
     return Promise.resolve(pageable);
+  }
+
+  public async updateAccount(
+    account: Account,
+    updateAccountRequest: UpdateAccountRequest,
+  ): Promise<Account> {
+    const index = this.accounts.findIndex(it => it.id === account.id);
+
+    if (index > -1) {
+      this.accounts[index].accessExpiresOn =
+        updateAccountRequest.accessExpiresOn;
+
+      return Promise.resolve(this.accounts[index]);
+    } else {
+      return Promise.reject();
+    }
   }
 
   public insertAccountFixture(account: Account) {
