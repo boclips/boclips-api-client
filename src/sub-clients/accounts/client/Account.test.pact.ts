@@ -3,7 +3,7 @@ import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { AccountFactory } from '../../../test-support/AccountFactory';
-import { getIndependentAccountsByCountryCode } from '../pact/AccountInteractions';
+import { getAccountsByCountryCode } from '../pact/AccountInteractions';
 
 const USA_ACCOUNT_ID_FROM_STAGING = '5de5369d1617b3000142c08f';
 const GBR_ACCOUNT_ID_FROM_STAGING = '5d7b606e861a170001e11dc9';
@@ -30,16 +30,15 @@ describe('Account', () => {
         }
       });
 
-      it('can fetch all independent accounts from USA', async () => {
+      it('can fetch all accounts from USA', async () => {
         await provider.addInteraction(
-          getIndependentAccountsByCountryCode(
-            USA_ACCOUNT_ID_FROM_STAGING,
-            'USA',
-          ),
+          getAccountsByCountryCode(USA_ACCOUNT_ID_FROM_STAGING, 'USA'),
         );
-        const accountsPage = await client.accountsClient.getIndependentAccounts(
-          { countryCode: 'USA', page: 0, size: 30 },
-        );
+        const accountsPage = await client.accountsClient.getAccounts({
+          countryCode: 'USA',
+          page: 0,
+          size: 30,
+        });
 
         expect(accountsPage.page.length).toBeGreaterThanOrEqual(1);
         expect(
@@ -49,9 +48,9 @@ describe('Account', () => {
         ).toBeTruthy();
       });
 
-      it('can fetch all independent accounts', async () => {
+      it('can fetch all accounts', async () => {
         if (isATestClient(await client)) {
-          const accountsPage = await client.accountsClient.getIndependentAccounts();
+          const accountsPage = await client.accountsClient.getAccounts();
 
           expect(accountsPage.page.length).toBeGreaterThanOrEqual(2);
           expect(

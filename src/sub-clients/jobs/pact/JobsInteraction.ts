@@ -3,7 +3,7 @@ import { JobsFilterRequest } from './../model/JobsFilterRequest';
 
 const { eachLike, like } = Matchers;
 
-export const exisitingJobIdFromStaging = 'CSV_190917_1455_2';
+export const existingJobIdFromStaging = 'CSV_200120_1212_4';
 
 export const getJobsInteraction = (): InteractionObject => ({
   state: undefined,
@@ -11,7 +11,7 @@ export const getJobsInteraction = (): InteractionObject => ({
   withRequest: {
     method: 'GET',
     path: '/v1/jobs',
-    query: 'size=5&page=1',
+    query: 'size=2&page=1',
   },
   willRespondWith: {
     status: 200,
@@ -19,10 +19,10 @@ export const getJobsInteraction = (): InteractionObject => ({
       'Content-Type': 'application/hal+json',
     },
     body: {
-      page: like({ size: 5, totalElements: 1, totalPages: 1, number: 1 }),
+      page: like({ size: 2, totalElements: 1, totalPages: 1, number: 1 }),
       _embedded: {
         jobs: eachLike({
-          id: exisitingJobIdFromStaging,
+          id: existingJobIdFromStaging,
           createdAt: '2019-11-21T17:00:00.908',
           provider: 'Getty',
           status: 'INGESTING',
@@ -34,13 +34,13 @@ export const getJobsInteraction = (): InteractionObject => ({
           }),
           videos: [],
           _links: like({
-            self: { href: `v1/jobs/${exisitingJobIdFromStaging}` },
+            self: { href: `v1/jobs/${existingJobIdFromStaging}` },
           }),
         }),
       },
       _links: like({
-        next: { href: 'https://api.staging-boclips.com/v1/jobs?page=1&size=5' },
-        prev: { href: 'https://api.staging-boclips.com/v1/jobs?page=1&size=5' },
+        next: { href: 'https://api.staging-boclips.com/v1/jobs?page=1&size=2' },
+        prev: { href: 'https://api.staging-boclips.com/v1/jobs?page=1&size=2' },
       }),
     },
   },
@@ -54,7 +54,7 @@ export const getFilteredJobsInteraction = (
   withRequest: {
     method: 'GET',
     path: '/v1/jobs',
-    query: `size=5&page=1${fitlerRequest.statuses.map(
+    query: `size=2&page=1${fitlerRequest.statuses.map(
       status => `&status=${status}`,
     )}`,
   },
@@ -64,10 +64,10 @@ export const getFilteredJobsInteraction = (
       'Content-Type': 'application/hal+json',
     },
     body: {
-      page: like({ size: 5, totalElements: 1, totalPages: 1, number: 1 }),
+      page: like({ size: 2, totalElements: 1, totalPages: 1, number: 1 }),
       _embedded: {
         jobs: eachLike({
-          id: exisitingJobIdFromStaging,
+          id: existingJobIdFromStaging,
           createdAt: '2019-11-21T17:00:00.908',
           provider: 'Getty',
           status: 'ERROR',
@@ -79,7 +79,7 @@ export const getFilteredJobsInteraction = (
           }),
           videos: [],
           _links: like({
-            self: { href: `v1/jobs/${exisitingJobIdFromStaging}` },
+            self: { href: `v1/jobs/${existingJobIdFromStaging}` },
           }),
         }),
       },
@@ -105,9 +105,9 @@ export const getJobInteraction = (id: string): InteractionObject => ({
     },
     body: like({
       id,
-      createdAt: '2019-11-21T17:00:00.908',
-      provider: 'Getty',
-      status: 'INGESTING',
+      createdAt: like('2019-11-21T17:00:00.908'),
+      provider: like('Getty'),
+      status: like('INGESTING'),
       videoSummary: like({
         totalErrors: 1,
         totalErroredVideos: 1,
@@ -118,7 +118,7 @@ export const getJobInteraction = (id: string): InteractionObject => ({
         id: 'a video id',
         title: 'Why did the banana cross the road?',
         status: 'SUCCESS',
-        errors: [],
+        errors: eachLike('error description'),
       }),
       _links: like({ self: { href: `v1/jobs/${id}` } }),
     }),

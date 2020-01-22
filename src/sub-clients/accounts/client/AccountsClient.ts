@@ -8,7 +8,7 @@ export interface AccountsFilter {
 }
 
 export interface AccountsClient {
-  getIndependentAccounts(
-    independentAccountFilter?: AccountsFilter,
+  getAccounts(
+    accountsFilter?: AccountsFilter,
   ): Promise<Pageable<Account> | null>;
 }

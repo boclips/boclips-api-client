@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.9] - 2020-01-22
+
+### Changed
+
+- `/independent-accounts` are upgraded to `/accounts`
+- no longer expecting `next` page link from `/accounts`
+
 ## [2.4.8] - 2020-01-15
 
 ### Changed

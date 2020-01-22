@@ -1,18 +1,17 @@
 import { InteractionObject } from '@pact-foundation/pact';
 import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
-import { provider } from '../../../pact-support/pactSetup';
 
-export const getIndependentAccountsByCountryCode = (
+export const getAccountsByCountryCode = (
   id: string,
   countryCode: string,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET Independent Accounts by country code',
+  uponReceiving: 'GET Accounts by country code',
   withRequest: {
     method: 'GET',
-    path: `/v1/independent-accounts`,
+    path: `/v1/accounts`,
     query: {
-      countryCode: 'USA',
+      countryCode: `${countryCode}`,
       page: '0',
       size: '30',
     },
@@ -43,7 +42,7 @@ export const getIndependentAccountsByCountryCode = (
             name: like('1st Football High School'),
             type: like('SCHOOL'),
             country: like({
-              id: 'USA',
+              id: `${countryCode}`,
               name: 'United States',
               states: null,
             }),
@@ -56,11 +55,6 @@ export const getIndependentAccountsByCountryCode = (
           }),
         }),
       },
-      _links: like({
-        next: {
-          href: `${provider.mockService.baseUrl}/v1/independent-accounts?countryCode=${countryCode}`,
-        },
-      }),
     },
   },
 });

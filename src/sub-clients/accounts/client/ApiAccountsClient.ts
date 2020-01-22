@@ -6,7 +6,7 @@ import { AccountsConverter } from '../model/AccountsConverter';
 import { AccountsClient, AccountsFilter } from './AccountsClient';
 
 export class ApiAccountsClient extends ApiSubClient implements AccountsClient {
-  public async getIndependentAccounts(
+  public async getAccounts(
     filter?: AccountsFilter,
   ): Promise<Pageable<Account> | null> {
     const link = this.getLinkOrThrow('independentAccounts');

@@ -7,13 +7,13 @@ import { ApiBoclipsClient } from './../../../ApiBoclipsClient';
 import { withClients } from './../../../pact-support/pactTestWrapper';
 import { isATestClient } from './../../../test-support/index';
 import {
-  exisitingJobIdFromStaging,
+  existingJobIdFromStaging,
   getFilteredJobsInteraction,
   getJobInteraction,
   getJobsInteraction,
 } from './../pact/JobsInteraction';
 
-describe('JobsCleint', () => {
+describe('JobsClient', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
@@ -24,7 +24,7 @@ describe('JobsCleint', () => {
         if (isATestClient(client)) {
           client.jobsClient.insertJobFixture(
             JobsFactory.sample({
-              id: exisitingJobIdFromStaging,
+              id: existingJobIdFromStaging,
               createdAt: new Date('2019-11-21T17:00:00.908'),
               provider: 'Getty',
               status: JobStatus.INGESTING,
@@ -45,7 +45,7 @@ describe('JobsCleint', () => {
               ],
               links: {
                 self: new Link({
-                  href: `v1/jobs/${exisitingJobIdFromStaging}`,
+                  href: `v1/jobs/${existingJobIdFromStaging}`,
                   templated: false,
                 }),
               },
@@ -57,16 +57,16 @@ describe('JobsCleint', () => {
       it('can fetch all jobs', async () => {
         await provider.addInteraction(getJobsInteraction());
 
-        const jobs = await client.jobsClient.getAll({ page: 1, size: 5 });
+        const jobs = await client.jobsClient.getAll({ page: 1, size: 2 });
         const pageSpec = jobs.pageSpec;
         const firstJob = jobs.page[0];
 
-        expect(pageSpec.size).toEqual(5);
+        expect(pageSpec.size).toEqual(2);
         expect(pageSpec.number).toEqual(1);
         expect(pageSpec.nextPage.getOriginalLink()).toBeDefined();
         expect(pageSpec.previousPage.getOriginalLink()).toBeDefined();
 
-        expect(firstJob.id).toEqual(exisitingJobIdFromStaging);
+        expect(firstJob.id).toEqual(existingJobIdFromStaging);
         expect(firstJob.createdAt).toEqual(new Date('2019-11-21T17:00:00.908'));
         expect(firstJob.provider).toEqual('Getty');
         expect(firstJob.status).toEqual('INGESTING');
@@ -75,7 +75,7 @@ describe('JobsCleint', () => {
         expect(firstJob.videoSummary.totalSuccessfulVideos).toEqual(1);
         expect(firstJob.videoSummary.totalIgnoredVideos).toEqual(0);
         expect(firstJob.links.self.getOriginalLink()).toEqual(
-          `v1/jobs/${exisitingJobIdFromStaging}`,
+          `v1/jobs/${existingJobIdFromStaging}`,
         );
       });
 
@@ -91,7 +91,7 @@ describe('JobsCleint', () => {
         }
 
         const jobs = await client.jobsClient.getAll(
-          { page: 1, size: 5 },
+          { page: 1, size: 2 },
           { statuses: [JobStatus.ERROR] },
         );
 
@@ -101,11 +101,11 @@ describe('JobsCleint', () => {
 
       it('can fetch a job', async () => {
         await provider.addInteraction(
-          getJobInteraction(exisitingJobIdFromStaging),
+          getJobInteraction(existingJobIdFromStaging),
         );
 
-        const job = await client.jobsClient.get(exisitingJobIdFromStaging);
-        expect(job.id).toEqual(exisitingJobIdFromStaging);
+        const job = await client.jobsClient.get(existingJobIdFromStaging);
+        expect(job.id).toEqual(existingJobIdFromStaging);
         expect(job.createdAt).toEqual(new Date('2019-11-21T17:00:00.908'));
         expect(job.provider).toEqual('Getty');
         expect(job.status).toEqual('INGESTING');
@@ -122,7 +122,7 @@ describe('JobsCleint', () => {
         expect(firstVideo.status).toEqual(JobStatus.SUCCESS);
 
         expect(job.links.self.getOriginalLink()).toEqual(
-          `v1/jobs/${exisitingJobIdFromStaging}`,
+          `v1/jobs/${existingJobIdFromStaging}`,
         );
       });
     },

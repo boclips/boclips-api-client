@@ -4,8 +4,8 @@ import { AccountEntityFactory } from '../../../test-support/AccountFactory';
 import { AccountsConverter } from './AccountsConverter';
 
 describe('AccountConverter', () => {
-  it('converts an independent school to an Account', () => {
-    const independentSchoolEntity = AccountEntityFactory.sample({
+  it('converts a school to an Account', () => {
+    const schoolEntity = AccountEntityFactory.sample({
       id: '5db06aec7c6c020001339eb2',
       organisation: {
         name: 'Towle Institute',
@@ -22,9 +22,7 @@ describe('AccountConverter', () => {
       },
     });
 
-    const convertedAccount: Account = AccountsConverter.convert(
-      independentSchoolEntity,
-    );
+    const convertedAccount: Account = AccountsConverter.convert(schoolEntity);
 
     expect(convertedAccount.id).toEqual('5db06aec7c6c020001339eb2');
     expect(convertedAccount.contractIds).toContainEqual('contract-123');

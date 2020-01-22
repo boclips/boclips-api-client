@@ -7,7 +7,7 @@ import { AccountsClient, AccountsFilter } from './AccountsClient';
 export class FakeAccountsClient implements AccountsClient, Clearable {
   private accounts: Account[] = [];
 
-  public getIndependentAccounts(
+  public getAccounts(
     filter: AccountsFilter = {
       size: 30,
       page: 0,
