@@ -77,7 +77,10 @@ export const getContentCategories = (): InteractionObject => ({
     },
     body: {
       _embedded: {
-        contentCategories: eachLike('first category', { min: 1 }),
+        contentCategories: eachLike(
+          { key: 'key 1', label: 'label 1' },
+          { min: 1 },
+        ),
       },
     },
   },

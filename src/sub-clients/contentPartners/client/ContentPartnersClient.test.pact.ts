@@ -86,7 +86,8 @@ describe('ContentPartnersClient', () => {
 
         const contentCategories = await client.contentPartnersClient.getContentCategories();
 
-        expect(contentCategories.categories).toContain('first category');
+        expect(contentCategories.categories[0].key).toContain('key 1');
+        expect(contentCategories.categories[0].label).toContain('label 1');
       });
     },
   );

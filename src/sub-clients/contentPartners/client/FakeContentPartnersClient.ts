@@ -12,7 +12,10 @@ export class FakeContentPartnersClient
   private contentPartners: ContentPartner[] = [];
 
   private contentCategories = {
-    categories: ['first category', 'second category'],
+    categories: [
+      { key: 'key 1', label: 'label 1' },
+      { key: 'key 2', label: 'label 2' },
+    ],
   };
 
   public create(request: ContentPartnerRequest): Promise<void> {
