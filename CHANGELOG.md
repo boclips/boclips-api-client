@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.11] - 2020-01-27
+
+### Added
+
+- Add `contentCategories` method to retrieve categories of content provided by partners
+- Rename from `legalRestrictions` to `legalRestriction` on `ContentPartner`
+
 ## [2.4.10] - 2020-01-22
 
 ### Added
