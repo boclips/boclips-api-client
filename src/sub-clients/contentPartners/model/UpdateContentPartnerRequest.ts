@@ -1,11 +1,11 @@
 import { AgeRangeRequest } from '../../collections/model/CollectionRequest';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
-import { LegalRestrictionsRequest } from '../../legalRestrictions/model/LegalRestrictions';
+import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
 
 export interface UpdateContentPartnerRequest {
   name?: string;
   accreditedToYtChannelId?: string;
-  legalRestrictions?: LegalRestrictionsRequest;
+  legalRestrictions?: LegalRestrictionRequest;
   ageRange?: AgeRangeRequest;
   distributionMethods?: DistributionMethod[];
   currency?: string;

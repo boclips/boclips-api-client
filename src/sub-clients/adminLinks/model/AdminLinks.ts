@@ -23,4 +23,5 @@ export interface AdminLinks {
   reportAccessExpired: LinkEntity;
   independentAccounts: LinkEntity;
   videoTypes: LinkEntity;
+  contentCategories: LinkEntity;
 }

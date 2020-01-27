@@ -11,6 +11,7 @@ import {
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
+  getContentCategories,
 } from '../pact/ContentPartnersInteractions';
 
 describe('ContentPartnersClient', () => {
@@ -60,8 +61,8 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.ageRange.min).toEqual(10);
         expect(contentPartner.ageRange.max).toEqual(20);
         expect(contentPartner.ageRange.label).toEqual('10-20');
-        expect(contentPartner.legalRestrictions.id).toEqual('2');
-        expect(contentPartner.legalRestrictions.text).toEqual(
+        expect(contentPartner.legalRestriction.id).toEqual('2');
+        expect(contentPartner.legalRestriction.text).toEqual(
           'a legal restriction',
         );
         expect(contentPartner.distributionMethods).toEqual(['STREAM']);
@@ -78,6 +79,14 @@ describe('ContentPartnersClient', () => {
             ageRange: { min: 3, max: 12 },
           },
         );
+      });
+
+      it('can get content partner categories', async () => {
+        await provider.addInteraction(getContentCategories());
+
+        const contentCategories = await client.contentPartnersClient.getContentCategories();
+
+        expect(contentCategories.categories).toContain('first category');
       });
     },
   );

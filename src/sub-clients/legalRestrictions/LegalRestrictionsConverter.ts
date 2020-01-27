@@ -1,7 +1,7 @@
-import { LegalRestrictions } from './model/LegalRestrictions';
+import { LegalRestriction } from './model/LegalRestriction';
 
 export class LegalRestrictionsConverter {
-  public static convert(response: any): LegalRestrictions[] {
+  public static convert(response: any): LegalRestriction[] {
     return response._embedded.legalRestrictions.map(({ id, text }) => ({
       id,
       text,

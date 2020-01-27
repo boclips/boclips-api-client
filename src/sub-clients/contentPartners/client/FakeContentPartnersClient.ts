@@ -1,3 +1,4 @@
+import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartnerFactory } from '../../../test-support';
 import { Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
@@ -10,6 +11,10 @@ export class FakeContentPartnersClient
   implements ContentPartnersClient, Clearable {
   private contentPartners: ContentPartner[] = [];
 
+  private contentCategories = {
+    categories: ['first category', 'second category'],
+  };
+
   public create(request: ContentPartnerRequest): Promise<void> {
     const id = request.name + Date.now();
     this.contentPartners.push({
@@ -21,7 +26,7 @@ export class FakeContentPartnersClient
         label: `${request.ageRange.min}-${request.ageRange.max}`,
       },
       currency: request.currency,
-      legalRestrictions: request.legalRestrictions,
+      legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods,
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
@@ -31,6 +36,10 @@ export class FakeContentPartnersClient
 
   public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
     this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));
+  }
+
+  public getContentCategories(): Promise<ContentCategories> {
+    return Promise.resolve(this.contentCategories);
   }
 
   public getAll(): Promise<ContentPartner[]> {

@@ -1,3 +1,4 @@
+import { ContentCategories } from './../model/ContentCategories';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnersConverter } from '../ContentPartnersConverter';
@@ -30,6 +31,14 @@ export class ApiContentPartnersClient extends ApiSubClient
     return this.axios
       .get(expandUrlTemplate(contentPartnerLink.href, { id }))
       .then(ContentPartnersConverter.convertResource);
+  }
+
+  public async getContentCategories(): Promise<ContentCategories> {
+    const contentCategories = this.getLinkOrThrow('contentCategories');
+
+    return this.axios.get(contentCategories.href).then(res => ({
+      categories: res.data._embedded.contentCategories,
+    }));
   }
 
   public async update(

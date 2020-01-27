@@ -14,7 +14,8 @@
     "test:client": "rm -f pacts/* && jest --runInBand --config jest.pact-config.json",
     "test:verify": "jest --runInBand --config jest.pact-verify-config.json",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix && prettier --write ./**/*.ts"
+    "lint:fix": "npm run lint -- --fix && prettier --write ./**/*.ts",
+    "check": "npm run compile && npm run lint && npm test"
   },
   "repository": {
     "type": "git",

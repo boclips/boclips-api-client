@@ -14,8 +14,8 @@ export {
 } from '../sub-clients/contentPartners/model/ContentPartnerRequest';
 export { HttpFeed } from '../sub-clients/httpFeeds/model/HttpFeed';
 export {
-  LegalRestrictions,
-} from '../sub-clients/legalRestrictions/model/LegalRestrictions';
+  LegalRestriction,
+} from '../sub-clients/legalRestrictions/model/LegalRestriction';
 export { Subject } from '../sub-clients/subjects/model/Subject';
 export { Order } from '../sub-clients/orders/model/Order';
 export { OrderItem } from '../sub-clients/orders/model/OrderItem';

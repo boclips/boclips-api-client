@@ -1,5 +1,5 @@
 import { ContentPartner, Link } from '../types';
-import { ContentPartnerRequest } from './../sub-clients/contentPartners/model/ContentPartnerRequest';
+import { ContentPartnerRequest } from '../sub-clients/contentPartners/model/ContentPartnerRequest';
 
 export class ContentPartnerFactory {
   public static sample(
@@ -12,7 +12,7 @@ export class ContentPartnerFactory {
       official: contentPartner.official || true,
       ageRange: contentPartner.ageRange || { min: 10, max: 20, label: '10-20' },
       currency: contentPartner.currency || 'USD',
-      legalRestrictions: contentPartner.legalRestrictions || {
+      legalRestriction: contentPartner.legalRestriction || {
         id: '2',
         text: 'a legal restriction',
       },

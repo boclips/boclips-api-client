@@ -1,5 +1,5 @@
-import { LegalRestrictions } from '../model/LegalRestrictions';
+import { LegalRestriction } from '../model/LegalRestriction';
 
 export interface LegalRestrictionsClient {
-  getAll(): Promise<LegalRestrictions[]>;
+  getAll(): Promise<LegalRestriction[]>;
 }

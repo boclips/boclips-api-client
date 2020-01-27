@@ -1,6 +1,6 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { provider } from '../../../pact-support/pactSetup';
-import { ContentPartnerRequest } from './../model/ContentPartnerRequest';
+import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 
 const { eachLike, like } = Matchers;
 
@@ -63,6 +63,26 @@ export const updateContentPartner = (id: string): InteractionObject => ({
   },
 });
 
+export const getContentCategories = (): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET content categories',
+  withRequest: {
+    method: 'GET',
+    path: `/v1/content-categories`,
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: {
+      _embedded: {
+        contentCategories: eachLike('first category', { min: 1 }),
+      },
+    },
+  },
+});
+
 export const getContentPartnerInteraction = (
   id: string,
 ): InteractionObject => ({
@@ -87,7 +107,7 @@ export const getContentPartnerInteraction = (
           max: 20,
           label: '10-20',
         },
-        legalRestrictions: {
+        legalRestriction: {
           text: 'a legal restriction',
           id: '2',
         },

@@ -1,6 +1,7 @@
 import { ContentPartner } from '../model/ContentPartner';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
-import { ContentPartnerRequest } from './../model/ContentPartnerRequest';
+import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
+import { ContentCategories } from '../model/ContentCategories';
 
 export interface ContentPartnersClient {
   get(id: string): Promise<ContentPartner>;
@@ -10,4 +11,5 @@ export interface ContentPartnersClient {
     contentPartner: UpdateContentPartnerRequest,
   ): Promise<void>;
   create(request: ContentPartnerRequest): Promise<void>;
+  getContentCategories(): Promise<ContentCategories>;
 }

@@ -22,7 +22,7 @@ export class ContentPartnersConverter {
       official,
       ageRange,
       currency,
-      legalRestrictions,
+      legalRestriction,
       _links,
       distributionMethods,
     } = resource;
@@ -33,7 +33,7 @@ export class ContentPartnersConverter {
       official,
       ageRange,
       currency,
-      legalRestrictions,
+      legalRestriction: legalRestriction,
       links: {
         self: new Link(_links.self),
       },
