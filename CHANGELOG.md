@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.12] - 2020-01-27
+
+### Added
+
+- Change `contentCategories` interface to return key and value
+
 ## [2.4.11] - 2020-01-27
 
 ### Added
