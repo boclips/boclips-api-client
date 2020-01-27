@@ -1,3 +1,8 @@
 export interface ContentCategories {
-  categories: string[];
+  categories: ContentCategoriesItem[];
+}
+
+export interface ContentCategoriesItem {
+  key: string;
+  label: string;
 }
