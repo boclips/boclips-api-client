@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.13] - 2020-01-29
+
+### Added
+
+- Add ingestVideos client
+
+### Removed
+
+- Remove jobs status filter, add manual filter
+
 ## [2.4.12] - 2020-01-27
 
 ### Added
