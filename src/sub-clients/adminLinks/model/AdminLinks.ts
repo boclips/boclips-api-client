@@ -24,4 +24,5 @@ export interface AdminLinks {
   independentAccounts: LinkEntity;
   videoTypes: LinkEntity;
   contentCategories: LinkEntity;
+  ingestVideos: LinkEntity;
 }

@@ -1,7 +1,7 @@
 import { PageRequest } from '../../common/model/PageRequest';
 import Pageable from '../../common/model/Pageable';
-import { IngestVideos } from '../model/IngestVideos';
+import { IngestVideo } from '../model/IngestVideo';
 
 export interface IngestVideosClient {
-  getAll(page: PageRequest): Promise<Pageable<IngestVideos>>;
+  getAll(page: PageRequest): Promise<Pageable<IngestVideo>>;
 }

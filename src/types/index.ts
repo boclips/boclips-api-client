@@ -33,3 +33,8 @@ export { Account } from '../sub-clients/accounts/model/Account';
 export {
   UpdateAccountRequest,
 } from '../sub-clients/accounts/model/UpdateAccountRequest';
+export {
+  ContentPartner as IngestContentPartner,
+} from '../sub-clients/ingestVideos/model/ContentPartner';
+export { IngestJob } from '../sub-clients/ingestVideos/model/IngestJob';
+export { IngestVideo } from '../sub-clients/ingestVideos/model/IngestVideo';

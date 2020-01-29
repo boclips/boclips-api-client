@@ -1,7 +1,7 @@
 import { ContentPartner } from './ContentPartner';
 import { IngestJob } from './IngestJob';
 
-export interface IngestVideos {
+export interface IngestVideo {
   id: string;
   title: string;
   status: string;

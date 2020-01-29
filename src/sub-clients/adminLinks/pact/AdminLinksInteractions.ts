@@ -36,6 +36,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/jobs?size={size}&page={page}{&manuallyCreated}`,
           templated: true,
         }),
+        ingestVideos: like({
+          href: `${provider.mockService.baseUrl}/v1/ingest-videos?size={size}&page={page}`,
+          templated: true,
+        }),
         jobDetails: like({
           href: `${provider.mockService.baseUrl}/v1/jobs/{id}`,
           templated: true,

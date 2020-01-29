@@ -1,3 +1,4 @@
+import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
 import { AccountsClient } from './sub-clients/accounts/client/AccountsClient';
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
@@ -20,4 +21,5 @@ export interface BoclipsClient {
   jobsClient: JobsClient;
   accountsClient: AccountsClient;
   videoTypesClient: VideoTypesClient;
+  ingestVidoesClient: IngestVideosClient;
 }

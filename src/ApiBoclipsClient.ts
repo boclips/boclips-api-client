@@ -1,3 +1,5 @@
+import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiIngestVideosClient';
+import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
 import { AxiosInstance } from 'axios';
@@ -30,6 +32,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public jobsClient: ApiJobsClient;
   public accountsClient: ApiAccountsClient;
   public videoTypesClient: VideoTypesClient;
+  public ingestVidoesClient: IngestVideosClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     this.axios = axios;
@@ -76,6 +79,10 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.jobsClient = new ApiJobsClient(this.adminLinks, this.axios);
     this.accountsClient = new ApiAccountsClient(this.adminLinks, this.axios);
     this.videoTypesClient = new ApiVideoTypesClient(
+      this.adminLinks,
+      this.axios,
+    );
+    this.ingestVidoesClient = new ApiIngestVideosClient(
       this.adminLinks,
       this.axios,
     );
