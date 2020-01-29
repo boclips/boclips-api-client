@@ -20,12 +20,17 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
       throw Error('Not authorized to view jobs');
     }
 
+    const manuallyCreated =
+      filter && filter.manuallyCreated
+        ? filter.manuallyCreated.toString()
+        : undefined;
+
     return this.axios
       .get(
         expandUrlTemplate(jobsLink.href, {
           page: pageRequest.page,
           size: pageRequest.size,
-          status: filter == null ? undefined : filter.statuses,
+          manuallyCreated: manuallyCreated,
         }),
       )
       .then(

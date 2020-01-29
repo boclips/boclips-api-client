@@ -33,7 +33,7 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: true,
         }),
         jobs: like({
-          href: `${provider.mockService.baseUrl}/v1/jobs?size={size}&page={page}{&status}`,
+          href: `${provider.mockService.baseUrl}/v1/jobs?size={size}&page={page}{&manuallyCreated}`,
           templated: true,
         }),
         jobDetails: like({

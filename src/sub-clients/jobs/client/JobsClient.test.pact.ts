@@ -79,24 +79,29 @@ describe('JobsClient', () => {
         );
       });
 
-      it('can fetch all jobs filtering by status', async () => {
+      it('can fetch all jobs filtering by manuallyCreated', async () => {
         await provider.addInteraction(
-          getFilteredJobsInteraction({ statuses: [JobStatus.ERROR] }),
+          getFilteredJobsInteraction({ manuallyCreated: true }),
         );
 
         if (isATestClient(client)) {
           client.jobsClient.insertJobFixture(
-            JobsFactory.sample({ status: JobStatus.ERROR }),
+            JobsFactory.sample({ id: 'manual-job' }),
+            true,
+          );
+          client.jobsClient.insertJobFixture(
+            JobsFactory.sample({ id: 'auto-job' }),
+            false,
           );
         }
 
         const jobs = await client.jobsClient.getAll(
           { page: 1, size: 2 },
-          { statuses: [JobStatus.ERROR] },
+          { manuallyCreated: true },
         );
 
-        const firstJob = jobs.page[0];
-        expect(firstJob.status).toEqual('ERROR');
+        expect(jobs.page.find(it => it.id === 'manual-job')).not.toBeNull();
+        expect(jobs.page.find(it => it.id === 'auto-job')).toBeUndefined();
       });
 
       it('can fetch a job', async () => {

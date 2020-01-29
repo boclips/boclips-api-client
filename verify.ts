@@ -8,9 +8,7 @@ it('Contracts verification', async () => {
     uri: 'https://api.staging-boclips.com/v1/token',
     form: `grant_type=password&username=${process.env.CONTRACT_TEST_USERNAME}&password=${process.env.CONTRACT_TEST_PASSWORD}&client_id=teachers`,
   });
-
   const token = JSON.parse(tokenResponse).access_token;
-
   const opts = {
     provider: 'Gateway',
     logLevel: 'debug',
@@ -21,6 +19,5 @@ it('Contracts verification', async () => {
       resolve(process.cwd(), './pacts/boclips-api-client-gateway.json'),
     ],
   };
-
   await pact.verifyPacts(opts);
 }, 20000);

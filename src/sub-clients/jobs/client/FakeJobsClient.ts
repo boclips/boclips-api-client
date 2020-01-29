@@ -8,10 +8,18 @@ import { JobsClient } from './JobsClient';
 
 export class FakeJobsClient implements JobsClient, Clearable {
   private jobs: Job[] = [];
+  private manualJobs: Job[] = [];
+  private automaticJobs: Job[] = [];
 
-  public insertJobFixture(job: Job) {
+  public insertJobFixture(job: Job, manual: boolean = null) {
     this.jobs.push(job);
+    if (manual === true) {
+      this.manualJobs.push(job);
+    } else {
+      this.automaticJobs.push(job);
+    }
   }
+
   public getAll(
     page: PageRequest,
     filter?: JobsFilterRequest,
@@ -33,12 +41,15 @@ export class FakeJobsClient implements JobsClient, Clearable {
       },
     });
   }
+
   private filterJobs(filter: JobsFilterRequest): Job[] {
-    return filter && filter.statuses.length > 0
-      ? this.jobs.filter(job => {
-          return filter.statuses.indexOf(job.status) >= 0;
-        })
-      : this.jobs;
+    if (!filter) return this.jobs;
+    if (!filter.manuallyCreated) return this.jobs;
+    if (filter.manuallyCreated == true) {
+      return this.manualJobs;
+    } else if (filter.manuallyCreated == false) {
+      return this.automaticJobs;
+    }
   }
 
   public clear() {

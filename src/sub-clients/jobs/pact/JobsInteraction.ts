@@ -47,16 +47,18 @@ export const getJobsInteraction = (): InteractionObject => ({
 });
 
 export const getFilteredJobsInteraction = (
-  fitlerRequest: JobsFilterRequest,
+  filterRequest: JobsFilterRequest,
 ): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET filtered jobs',
   withRequest: {
     method: 'GET',
     path: '/v1/jobs',
-    query: `size=2&page=1${fitlerRequest.statuses.map(
-      status => `&status=${status}`,
-    )}`,
+    query: `size=2&page=1${
+      filterRequest.manuallyCreated
+        ? '&manuallyCreated=' + filterRequest.manuallyCreated
+        : ''
+    }`,
   },
   willRespondWith: {
     status: 200,
