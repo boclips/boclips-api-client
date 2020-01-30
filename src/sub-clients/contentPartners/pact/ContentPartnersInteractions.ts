@@ -95,6 +95,7 @@ export const getContentPartnerInteraction = (
     method: 'GET',
     path: `/v1/content-partners/${id}`,
   },
+  /**/
   willRespondWith: {
     status: 200,
     headers: {
