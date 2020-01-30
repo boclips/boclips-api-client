@@ -13,7 +13,7 @@ export class IngestVideosFactory {
       },
       ingestStartedAt: video.ingestStartedAt || new Date(),
       title: video.title || 'If a woodchuck could chuck wood',
-      status: 'SUCCESSFUL',
+      status: video.status || 'SUCCESSFUL',
     };
   }
 }
