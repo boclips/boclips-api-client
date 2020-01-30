@@ -9,4 +9,5 @@ export interface ContentPartnerRequest {
   ageRange?: AgeRangeRequest;
   distributionMethods?: DistributionMethod[];
   currency?: string;
+  description?: string;
 }

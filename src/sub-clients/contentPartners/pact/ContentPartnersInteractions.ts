@@ -114,6 +114,7 @@ export const getContentPartnerInteraction = (
           text: 'a legal restriction',
           id: '2',
         },
+        description: 'this is a description',
       },
     }),
   },
@@ -137,6 +138,7 @@ export const createContentPartner = (
       ageRange: request.ageRange,
       distributionMethods: request.distributionMethods,
       currency: request.currency,
+      description: request.description,
     },
   },
   willRespondWith: {

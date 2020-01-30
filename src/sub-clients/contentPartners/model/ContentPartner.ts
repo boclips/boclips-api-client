@@ -12,4 +12,5 @@ export interface ContentPartner {
   legalRestriction?: LegalRestriction;
   links: { self: Link };
   distributionMethods: DistributionMethod[];
+  description?: string;
 }

@@ -31,6 +31,7 @@ export class FakeContentPartnersClient
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods,
+      description: request.description,
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
 

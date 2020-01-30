@@ -25,6 +25,7 @@ export class ContentPartnersConverter {
       legalRestriction,
       _links,
       distributionMethods,
+      description,
     } = resource;
 
     return {
@@ -38,6 +39,7 @@ export class ContentPartnersConverter {
         self: new Link(_links.self),
       },
       distributionMethods,
+      description,
     };
   }
 }
