@@ -1,5 +1,4 @@
 import { ContentPartner, Link } from '../types';
-import { ContentPartnerRequest } from '../sub-clients/contentPartners/model/ContentPartnerRequest';
 
 export class ContentPartnerFactory {
   public static sample(
@@ -22,25 +21,14 @@ export class ContentPartnerFactory {
         }),
       },
       distributionMethods: contentPartner.distributionMethods || ['STREAM'],
-    };
-  }
-
-  public static createRequest(
-    request: Partial<ContentPartnerRequest> = {},
-  ): ContentPartnerRequest {
-    return {
-      name: request.name || 'Partner McPartnerFace',
-      accreditedToYtChannelId: request.accreditedToYtChannelId || 'YT-2345678',
-      legalRestrictions: request.legalRestrictions || {
-        id: 'legal-123',
-        text: 'Legal McLegalFace',
-      },
-      ageRange: request.ageRange || {
-        min: 10,
-        max: 11,
-      },
-      distributionMethods: [],
-      currency: 'GBP',
+      description: contentPartner.description || 'this is a description',
+      language: contentPartner.language || { code: 'spa', name: 'Spanish' },
+      contentCategories: contentPartner.contentCategories || [
+        { key: 'ANY_KEY', label: 'Any label' },
+      ],
+      awards: contentPartner.awards || 'Big famous award',
+      notes: contentPartner.notes || 'Something noteworthy',
+      hubspotId: contentPartner.hubspotId || '666',
     };
   }
 }

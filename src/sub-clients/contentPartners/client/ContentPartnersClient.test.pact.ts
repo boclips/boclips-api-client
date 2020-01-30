@@ -8,10 +8,10 @@ import {
 } from '../../../test-support';
 import {
   existingContentPartnerFromStaging,
+  getContentCategories,
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
-  getContentCategories,
 } from '../pact/ContentPartnersInteractions';
 
 describe('ContentPartnersClient', () => {
@@ -66,6 +66,14 @@ describe('ContentPartnersClient', () => {
           'a legal restriction',
         );
         expect(contentPartner.distributionMethods).toEqual(['STREAM']);
+        expect(contentPartner.description).toEqual('this is a description');
+        expect(contentPartner.awards).toEqual('Big famous award');
+        expect(contentPartner.notes).toEqual('Something noteworthy');
+        expect(contentPartner.hubspotId).toEqual('666');
+        expect(contentPartner.contentCategories[0].key).toEqual('ANY_KEY');
+        expect(contentPartner.contentCategories[0].label).toEqual('Any label');
+        expect(contentPartner.language.code).toEqual('spa');
+        expect(contentPartner.language.name).toEqual('Spanish');
       });
 
       it('can update a content partner', async () => {

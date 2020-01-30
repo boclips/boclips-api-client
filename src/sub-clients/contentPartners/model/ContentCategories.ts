@@ -1,8 +1,8 @@
 export interface ContentCategories {
-  categories: ContentCategoriesItem[];
+  categories: ContentCategory[];
 }
 
-export interface ContentCategoriesItem {
+export interface ContentCategory {
   key: string;
   label: string;
 }

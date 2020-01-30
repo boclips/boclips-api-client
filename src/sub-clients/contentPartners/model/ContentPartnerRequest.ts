@@ -1,6 +1,9 @@
 import { AgeRangeRequest } from '../../collections/model/CollectionRequest';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
+import { Link } from '../../common/model/LinkEntity';
 import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
+import { ContentCategory } from './ContentCategories';
+import { Language } from './Language';
 
 export interface ContentPartnerRequest {
   name: string;
@@ -10,4 +13,10 @@ export interface ContentPartnerRequest {
   distributionMethods?: DistributionMethod[];
   currency?: string;
   description?: string;
+  awards?: string;
+  notes?: string;
+  hubspotId?: string;
+  language?: Language;
+  contentCategories?: ContentCategory[];
+  links: { self: Link };
 }

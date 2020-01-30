@@ -26,6 +26,11 @@ export class ContentPartnersConverter {
       _links,
       distributionMethods,
       description,
+      awards,
+      hubspotId,
+      notes,
+      contentCategories,
+      language,
     } = resource;
 
     return {
@@ -40,6 +45,11 @@ export class ContentPartnersConverter {
       },
       distributionMethods,
       description,
+      awards,
+      hubspotId,
+      notes,
+      contentCategories,
+      language,
     };
   }
 }

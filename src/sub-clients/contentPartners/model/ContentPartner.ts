@@ -2,6 +2,8 @@ import { AgeRange } from '../../common/model/AgeRange';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { Link } from '../../common/model/LinkEntity';
 import { LegalRestriction } from '../../legalRestrictions/model/LegalRestriction';
+import { ContentCategory } from './ContentCategories';
+import { Language } from './Language';
 
 export interface ContentPartner {
   id: string;
@@ -10,7 +12,12 @@ export interface ContentPartner {
   ageRange?: AgeRange;
   currency?: string;
   legalRestriction?: LegalRestriction;
-  links: { self: Link };
   distributionMethods: DistributionMethod[];
   description?: string;
+  awards?: string;
+  notes?: string;
+  hubspotId?: string;
+  language?: Language;
+  contentCategories?: ContentCategory[];
+  links: { self: Link };
 }
