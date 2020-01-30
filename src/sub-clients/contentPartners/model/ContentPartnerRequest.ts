@@ -1,6 +1,5 @@
 import { AgeRangeRequest } from '../../collections/model/CollectionRequest';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
-import { Link } from '../../common/model/LinkEntity';
 import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
