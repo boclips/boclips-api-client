@@ -7,10 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.4.12] - 2020-01-30
+## [2.4.14] - 2020-01-30
 
 ### Fixed
 
+- ApiJobsClient was not using manuallyCreated=false in request
 - IngestVideosFactory was not correctly setting the status
 
 ## [2.4.13] - 2020-01-29
