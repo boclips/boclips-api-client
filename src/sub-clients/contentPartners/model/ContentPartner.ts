@@ -19,6 +19,6 @@ export interface ContentPartner {
   hubspotId?: string;
   language?: Language;
   contentCategories?: ContentCategory[];
-  contentTypes: string[];
+  contentTypes?: string[];
   links: { self: Link };
 }
