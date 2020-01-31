@@ -74,6 +74,9 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.contentCategories[0].label).toEqual('Any label');
         expect(contentPartner.language.code).toEqual('spa');
         expect(contentPartner.language.name).toEqual('Spanish');
+        expect(contentPartner.contentTypes).toHaveLength(2);
+        expect(contentPartner.contentTypes).toContain('NEWS');
+        expect(contentPartner.contentTypes).toContain('STOCK');
       });
 
       it('can update a content partner', async () => {

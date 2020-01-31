@@ -29,6 +29,7 @@ export class ContentPartnerFactory {
       awards: contentPartner.awards || 'Big famous award',
       notes: contentPartner.notes || 'Something noteworthy',
       hubspotId: contentPartner.hubspotId || '666',
+      contentTypes: contentPartner.contentTypes || ['NEWS', 'STOCK'],
     };
   }
 }

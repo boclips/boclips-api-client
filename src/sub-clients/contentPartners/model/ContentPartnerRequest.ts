@@ -17,4 +17,5 @@ export interface ContentPartnerRequest {
   hubspotId?: string;
   language?: Language;
   contentCategories?: ContentCategory[];
+  contentTypes?: string[];
 }

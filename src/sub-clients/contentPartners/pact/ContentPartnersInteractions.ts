@@ -121,6 +121,7 @@ export const getContentPartnerInteraction = (
         awards: 'Big famous award',
         notes: 'Something noteworthy',
         hubspotId: '666',
+        contentTypes: ['NEWS', 'STOCK'],
       },
     }),
   },

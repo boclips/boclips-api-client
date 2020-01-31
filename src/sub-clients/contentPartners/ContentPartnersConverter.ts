@@ -31,6 +31,7 @@ export class ContentPartnersConverter {
       notes,
       contentCategories,
       language,
+      contentTypes,
     } = resource;
 
     return {
@@ -50,6 +51,7 @@ export class ContentPartnersConverter {
       notes,
       contentCategories,
       language,
+      contentTypes,
     };
   }
 }

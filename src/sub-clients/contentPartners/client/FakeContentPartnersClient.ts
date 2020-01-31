@@ -37,6 +37,7 @@ export class FakeContentPartnersClient
       notes: request.notes,
       hubspotId: request.hubspotId,
       language: request.language,
+      contentTypes: request.contentTypes,
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
 
