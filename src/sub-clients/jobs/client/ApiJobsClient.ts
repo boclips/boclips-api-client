@@ -21,7 +21,7 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
     }
 
     const manuallyCreated =
-      filter && filter.manuallyCreated
+      filter && filter.manuallyCreated !== undefined
         ? filter.manuallyCreated.toString()
         : undefined;
 

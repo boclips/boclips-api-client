@@ -30,7 +30,6 @@ export class FakeJobsClient implements JobsClient, Clearable {
         number: page.page,
         size: page.size,
         totalElements: this.jobs.length,
-
         totalPages: Math.floor(this.jobs.length / page.size),
         nextPage: new Link({
           href: `/v1/jobs?size=${page.size}&page=${page.page + 1}`,
