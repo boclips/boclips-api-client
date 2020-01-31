@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.15] - 2020-01-29
+
+### Added
+
+- Add contentTypes to content partner
+
 ## [2.4.14] - 2020-01-30
 
 ### Fixed
