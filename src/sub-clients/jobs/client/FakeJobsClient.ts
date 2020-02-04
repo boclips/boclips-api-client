@@ -43,7 +43,7 @@ export class FakeJobsClient implements JobsClient, Clearable {
 
   private filterJobs(filter: JobsFilterRequest): Job[] {
     if (!filter) return this.jobs;
-    if (!filter.manuallyCreated) return this.jobs;
+    if (filter.manuallyCreated === undefined) return this.jobs;
     if (filter.manuallyCreated == true) {
       return this.manualJobs;
     } else if (filter.manuallyCreated == false) {
