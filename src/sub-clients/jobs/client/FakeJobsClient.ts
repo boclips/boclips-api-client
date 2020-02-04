@@ -53,6 +53,8 @@ export class FakeJobsClient implements JobsClient, Clearable {
 
   public clear() {
     this.jobs = [];
+    this.manualJobs = [];
+    this.automaticJobs = [];
   }
 
   public get(id: string): Promise<Job> {

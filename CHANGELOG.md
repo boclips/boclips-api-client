@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.17] - 2020-02-04
+
+### Fixed
+
+- FakeJobsClient now clearing all memory when cleared is called
+
 ## [2.4.17] - 2020-02-03
 
 ### Fixed
