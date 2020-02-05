@@ -47,7 +47,7 @@ export class ApiContentPartnersClient extends ApiSubClient
   ): Promise<void> {
     const contentPartnerLink = this.getLinkOrThrow('contentPartner');
 
-    await this.axios.put(
+    await this.axios.patch(
       expandUrlTemplate(contentPartnerLink.href, { id }),
       contentPartner,
       {

@@ -43,9 +43,9 @@ export const getContentPartnersInteraction = (): InteractionObject => ({
 
 export const updateContentPartner = (id: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'PUT content partner',
+  uponReceiving: 'PATCH content partner',
   withRequest: {
-    method: 'PUT',
+    method: 'PATCH',
     path: `/v1/content-partners/${id}`,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
