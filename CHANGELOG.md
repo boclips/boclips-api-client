@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.20] - 2020-02-05
+
+### Changed
+
+- Version bump (Concourse needs it for a release after previous release failure)
+
 ## [2.4.19] - 2020-02-05
 
 ### Changed
