@@ -49,9 +49,9 @@ export class ContentPartnersConverter {
       awards,
       hubspotId,
       notes,
-      contentCategories,
-      language,
-      contentTypes,
+      contentCategories: contentCategories || [],
+      language: language || [],
+      contentTypes: contentTypes || [],
     };
   }
 }
