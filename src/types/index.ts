@@ -38,3 +38,4 @@ export {
 } from '../sub-clients/ingestVideos/model/ContentPartner';
 export { IngestJob } from '../sub-clients/ingestVideos/model/IngestJob';
 export { IngestVideo } from '../sub-clients/ingestVideos/model/IngestVideo';
+export { BoclipsApiError, isBoclipsApiError } from './BoclipsApiError';

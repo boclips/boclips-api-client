@@ -1,3 +1,4 @@
+import { BoclipsApiError } from './../../../types/BoclipsApiError';
 import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartnerFactory } from '../../../test-support';
 import { Link } from '../../../types';
@@ -57,7 +58,20 @@ export class FakeContentPartnersClient
   }
 
   public get(id: string): Promise<ContentPartner> {
-    return Promise.resolve(this.contentPartners.find(i => i.id === id));
+    const retrievedContentPartner = this.contentPartners.find(i => i.id === id);
+
+    if (retrievedContentPartner != undefined) {
+      return Promise.resolve(retrievedContentPartner);
+    } else {
+      const error: BoclipsApiError = {
+        error: 'Content partner not found',
+        message: `No content partner found for this id: ${123}`,
+        path: `/v1/content-partner/${id}`,
+        timestamp: new Date(),
+        status: 404,
+      };
+      return Promise.reject(error);
+    }
   }
 
   public update(id: string, contentPartner: UpdateContentPartnerRequest) {

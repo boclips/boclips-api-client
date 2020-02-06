@@ -2,7 +2,7 @@ import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiInge
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosError } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
 import { ApiAccountsClient } from './sub-clients/accounts/client/ApiAccountsClient';
 import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverter';
@@ -15,6 +15,11 @@ import { ApiJobsClient } from './sub-clients/jobs/client/ApiJobsClient';
 import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/client/ApiLegalRestrictionsClient';
 import { ApiOrdersClient } from './sub-clients/orders/client/ApiOrdersClient';
 import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClient';
+import { BoclipsApiError } from './types/BoclipsApiError';
+
+const isAxiosError = (error: any): error is AxiosError => {
+  return error.response != undefined && error.response.data != undefined;
+};
 
 export class ApiBoclipsClient implements BoclipsClient {
   private static instance: ApiBoclipsClient;
@@ -35,6 +40,28 @@ export class ApiBoclipsClient implements BoclipsClient {
   public ingestVidoesClient: IngestVideosClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
+    axios.interceptors.response.use(
+      response => {
+        return response;
+      },
+      error => {
+        if (isAxiosError(error)) {
+          const boError: BoclipsApiError = {
+            error: error.response.data.error,
+            message: error.response.data.message,
+            path: error.response.data.path,
+            status: error.response.data.status,
+            timestamp: error.response.data.timestamp,
+          };
+
+          return Promise.reject(boError);
+        } else {
+          // not sure if we will ever get here
+          return Promise.reject(error);
+        }
+      },
+    );
+
     this.axios = axios;
     this.baseUrl = baseUrl;
   }

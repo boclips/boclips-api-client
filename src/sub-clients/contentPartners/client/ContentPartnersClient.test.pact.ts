@@ -1,3 +1,4 @@
+import { BoclipsApiError } from './../../../types/BoclipsApiError';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
@@ -12,6 +13,7 @@ import {
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
+  get404ContentPartner,
 } from '../pact/ContentPartnersInteractions';
 
 describe('ContentPartnersClient', () => {
@@ -99,6 +101,23 @@ describe('ContentPartnersClient', () => {
 
         expect(contentCategories.categories[0].key).toContain('key 1');
         expect(contentCategories.categories[0].label).toContain('label 1');
+      });
+
+      it('gives a useful error message on a 404', async () => {
+        await provider.addInteraction(get404ContentPartner('404'));
+
+        let error: BoclipsApiError;
+        try {
+          await client.contentPartnersClient.get('404');
+        } catch (err) {
+          error = err;
+        }
+
+        expect(error.status).toEqual(404);
+        expect(error.message).toBeDefined();
+        expect(error.path).toBeDefined();
+        expect(error.timestamp).toBeDefined();
+        expect(error.error).toBeDefined();
       });
     },
   );

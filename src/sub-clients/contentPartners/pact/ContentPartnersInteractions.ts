@@ -127,6 +127,28 @@ export const getContentPartnerInteraction = (
   },
 });
 
+export const get404ContentPartner = (id: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET missing content partner',
+  withRequest: {
+    method: 'GET',
+    path: `/v1/content-partners/${id}`,
+  },
+  willRespondWith: {
+    status: 404,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+    body: like({
+      error: 'lol',
+      message: "you're awesome",
+      path: `/v1/content-partners/${id}`,
+      status: 404,
+      timestamp: new Date(Date.parse('01/01/2000')).toUTCString(),
+    }),
+  },
+});
+
 export const createContentPartner = (
   request: ContentPartnerRequest,
 ): InteractionObject => ({
