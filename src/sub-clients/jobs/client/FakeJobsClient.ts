@@ -1,3 +1,4 @@
+import { BoclipsApiError } from './../../../types/BoclipsApiError';
 import { Link } from '../../../types';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
@@ -58,6 +59,20 @@ export class FakeJobsClient implements JobsClient, Clearable {
   }
 
   public get(id: string): Promise<Job> {
-    return Promise.resolve(this.jobs.find(job => job.id === id));
+    const retrievedJob = this.jobs.find(job => job.id === id);
+
+    if (retrievedJob != undefined) {
+      return Promise.resolve(retrievedJob);
+    } else {
+      const boError: BoclipsApiError = {
+        message: `No job with id: ${id}`,
+        status: 404,
+        error: 'Cannot find job',
+        path: `/v1/jobs/${id}`,
+        timestamp: new Date(),
+      };
+
+      return Promise.reject(boError);
+    }
   }
 }

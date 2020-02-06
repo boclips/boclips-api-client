@@ -1,7 +1,7 @@
 import { provider } from '../../../pact-support/pactSetup';
 import { FakeBoclipsClient } from '../../../test-support';
 import { JobsFactory } from '../../../test-support/JobsFactory';
-import { Link } from '../../../types';
+import { Link, BoclipsApiError } from '../../../types';
 import { JobStatus } from '../model/JobStatus';
 import { ApiBoclipsClient } from './../../../ApiBoclipsClient';
 import { withClients } from './../../../pact-support/pactTestWrapper';
@@ -11,6 +11,7 @@ import {
   getFilteredJobsInteraction,
   getJobInteraction,
   getJobsInteraction,
+  get404JobInteraction,
 } from './../pact/JobsInteraction';
 
 describe('JobsClient', () => {
@@ -129,6 +130,23 @@ describe('JobsClient', () => {
         expect(job.links.self.getOriginalLink()).toEqual(
           `v1/jobs/${existingJobIdFromStaging}`,
         );
+      });
+
+      it('gets useful error messages on missing job', async () => {
+        await provider.addInteraction(get404JobInteraction('404'));
+
+        let error: BoclipsApiError;
+        try {
+          await client.jobsClient.get('404');
+        } catch (err) {
+          error = err;
+        }
+
+        expect(error.status).toEqual(404);
+        expect(error.message).toBeDefined();
+        expect(error.path).toBeDefined();
+        expect(error.timestamp).toBeDefined();
+        expect(error.error).toBeDefined();
       });
     },
   );

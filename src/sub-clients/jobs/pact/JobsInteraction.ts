@@ -126,3 +126,15 @@ export const getJobInteraction = (id: string): InteractionObject => ({
     }),
   },
 });
+
+export const get404JobInteraction = (id: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET missing job',
+  withRequest: {
+    method: 'GET',
+    path: `/v1/jobs/${id}`,
+  },
+  willRespondWith: {
+    status: 404,
+  },
+});
