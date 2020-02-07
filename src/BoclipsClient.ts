@@ -1,3 +1,4 @@
+import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
 import { AccountsClient } from './sub-clients/accounts/client/AccountsClient';
@@ -22,4 +23,5 @@ export interface BoclipsClient {
   accountsClient: AccountsClient;
   videoTypesClient: VideoTypesClient;
   ingestVidoesClient: IngestVideosClient;
+  bestForTagsClient: BestForTagsClient;
 }

@@ -1,3 +1,4 @@
+import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiIngestVideosClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
@@ -16,6 +17,7 @@ import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/clie
 import { ApiOrdersClient } from './sub-clients/orders/client/ApiOrdersClient';
 import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClient';
 import { BoclipsApiError } from './types/BoclipsApiError';
+import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestForClients';
 
 const isAxiosError = (error: any): error is AxiosError => {
   return error.response != undefined && error.response.data != undefined;
@@ -38,6 +40,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public accountsClient: ApiAccountsClient;
   public videoTypesClient: VideoTypesClient;
   public ingestVidoesClient: IngestVideosClient;
+  public bestForTagsClient: BestForTagsClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     axios.interceptors.response.use(
@@ -112,6 +115,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axios,
     );
     this.ingestVidoesClient = new ApiIngestVideosClient(
+      this.adminLinks,
+      this.axios,
+    );
+    this.bestForTagsClient = new ApiBestForTagsClient(
       this.adminLinks,
       this.axios,
     );

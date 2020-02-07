@@ -25,4 +25,5 @@ export interface AdminLinks {
   videoTypes: LinkEntity;
   contentCategories: LinkEntity;
   ingestVideos: LinkEntity;
+  tags: LinkEntity;
 }
