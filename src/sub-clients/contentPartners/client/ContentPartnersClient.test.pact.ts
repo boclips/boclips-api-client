@@ -1,4 +1,3 @@
-import { BoclipsApiError } from './../../../types/BoclipsApiError';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
@@ -9,12 +8,13 @@ import {
 } from '../../../test-support';
 import {
   existingContentPartnerFromStaging,
+  get404ContentPartner,
   getContentCategories,
   getContentPartnerInteraction,
   getContentPartnersInteraction,
   updateContentPartner,
-  get404ContentPartner,
 } from '../pact/ContentPartnersInteractions';
+import { BoclipsApiError } from './../../../types/BoclipsApiError';
 
 describe('ContentPartnersClient', () => {
   withClients(
@@ -79,6 +79,12 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.contentTypes).toHaveLength(2);
         expect(contentPartner.contentTypes).toContain('NEWS');
         expect(contentPartner.contentTypes).toContain('STOCK');
+        expect(contentPartner.oneLineDescription).toEqual(
+          '30-year-old mulberry field',
+        );
+        expect(contentPartner.marketingInformation.status).toEqual(
+          'IN_PROGRESS',
+        );
       });
 
       it('can update a content partner', async () => {
@@ -90,6 +96,8 @@ describe('ContentPartnersClient', () => {
           {
             name: 'TED',
             ageRange: { min: 3, max: 12 },
+            oneLineDescription: 'One line description',
+            marketingInformation: { status: 'SOME_STATUS' },
           },
         );
       });

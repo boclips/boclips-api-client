@@ -3,6 +3,7 @@ import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
+import { MarketingInformationRequest } from './MarketingInformationRequest';
 
 export interface UpdateContentPartnerRequest {
   name?: string;
@@ -18,4 +19,6 @@ export interface UpdateContentPartnerRequest {
   language?: Language;
   contentCategories?: ContentCategory[];
   contentTypes?: string[];
+  oneLineDescription?: string;
+  marketingInformation?: MarketingInformationRequest;
 }

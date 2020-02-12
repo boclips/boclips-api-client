@@ -4,6 +4,7 @@ import { Link } from '../../common/model/LinkEntity';
 import { LegalRestriction } from '../../legalRestrictions/model/LegalRestriction';
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
+import { MarketingInformation } from './MarketingInformation';
 
 export interface ContentPartner {
   id: string;
@@ -21,4 +22,6 @@ export interface ContentPartner {
   contentCategories?: ContentCategory[];
   contentTypes?: string[];
   links: { self: Link };
+  oneLineDescription?: string;
+  marketingInformation?: MarketingInformation;
 }

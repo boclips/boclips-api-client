@@ -30,6 +30,11 @@ export class ContentPartnerFactory {
       notes: contentPartner.notes || 'Something noteworthy',
       hubspotId: contentPartner.hubspotId || '666',
       contentTypes: contentPartner.contentTypes || ['NEWS', 'STOCK'],
+      oneLineDescription:
+        contentPartner.oneLineDescription || '30-year-old mulberry field',
+      marketingInformation: contentPartner.marketingInformation || {
+        status: 'IN_PROGRESS',
+      },
     };
   }
 }

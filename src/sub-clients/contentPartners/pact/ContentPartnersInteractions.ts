@@ -56,6 +56,8 @@ export const updateContentPartner = (id: string): InteractionObject => ({
         min: 3,
         max: 12,
       },
+      oneLineDescription: 'One line description',
+      marketingInformation: like({ status: 'WaitingForIngest' }),
     },
   },
   willRespondWith: {
@@ -122,6 +124,8 @@ export const getContentPartnerInteraction = (
         notes: 'Something noteworthy',
         hubspotId: '666',
         contentTypes: ['NEWS', 'STOCK'],
+        oneLineDescription: '30-year-old mulberry field',
+        marketingInformation: like({ status: 'IN_PROGRESS' }),
       },
     }),
   },

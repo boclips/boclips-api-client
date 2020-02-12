@@ -1,11 +1,11 @@
-import { BoclipsApiError } from './../../../types/BoclipsApiError';
-import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartnerFactory } from '../../../test-support';
 import { Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
+import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
+import { BoclipsApiError } from './../../../types/BoclipsApiError';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class FakeContentPartnersClient
@@ -40,6 +40,8 @@ export class FakeContentPartnersClient
       language: request.language,
       contentTypes: request.contentTypes,
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
+      oneLineDescription: request.oneLineDescription,
+      marketingInformation: request.marketingInformation,
     });
 
     return Promise.resolve();

@@ -32,6 +32,8 @@ export class ContentPartnersConverter {
       contentCategories,
       language,
       contentTypes,
+      oneLineDescription,
+      marketingInformation,
     } = resource;
 
     return {
@@ -52,6 +54,8 @@ export class ContentPartnersConverter {
       contentCategories: contentCategories || [],
       language: language || [],
       contentTypes: contentTypes || [],
+      oneLineDescription: oneLineDescription,
+      marketingInformation: marketingInformation,
     };
   }
 }
