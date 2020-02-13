@@ -39,3 +39,6 @@ export {
 export { IngestJob } from '../sub-clients/ingestVideos/model/IngestJob';
 export { IngestVideo } from '../sub-clients/ingestVideos/model/IngestVideo';
 export { BoclipsApiError, isBoclipsApiError } from './BoclipsApiError';
+export {
+  EduAgeRange,
+} from '../sub-clients/educationalAgeRanges/model/EduAgeRange';

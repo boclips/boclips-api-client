@@ -27,4 +27,5 @@ export interface AdminLinks {
   ingestVideos: LinkEntity;
   tags: LinkEntity;
   marketingStatuses: LinkEntity;
+  ageRanges: LinkEntity;
 }
