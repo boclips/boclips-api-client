@@ -108,6 +108,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/marketing-statuses`,
           templated: false,
         }),
+        ageRanges: like({
+          href: `${provider.mockService.baseUrl}/v1/age-ranges`,
+          templated: false,
+        }),
       },
     },
   },

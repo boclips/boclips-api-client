@@ -7,6 +7,8 @@ import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestFo
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
 import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
+import { ApiEduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/ApiEduAgeRangesClient';
+import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { ApiEventsClient } from './sub-clients/events/client/ApiEventsClient';
 import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsClient';
 import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiIngestVideosClient';
@@ -44,6 +46,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public ingestVidoesClient: IngestVideosClient;
   public bestForTagsClient: BestForTagsClient;
   public marketingStatusesClient: MarketingStatusesClient;
+  public eduAgeRangesClient: EduAgeRangesClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     axios.interceptors.response.use(
@@ -126,6 +129,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axios,
     );
     this.marketingStatusesClient = new ApiMarketingStatusesClient(
+      this.adminLinks,
+      this.axios,
+    );
+    this.eduAgeRangesClient = new ApiEduAgeRangesClient(
       this.adminLinks,
       this.axios,
     );
