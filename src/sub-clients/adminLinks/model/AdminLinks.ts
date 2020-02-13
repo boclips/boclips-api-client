@@ -26,4 +26,5 @@ export interface AdminLinks {
   contentCategories: LinkEntity;
   ingestVideos: LinkEntity;
   tags: LinkEntity;
+  marketingStatuses: LinkEntity;
 }

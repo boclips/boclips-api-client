@@ -104,6 +104,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/tags`,
           templated: false,
         }),
+        marketingStatuses: like({
+          href: `${provider.mockService.baseUrl}/v1/marketing-statuses`,
+          templated: false,
+        }),
       },
     },
   },
