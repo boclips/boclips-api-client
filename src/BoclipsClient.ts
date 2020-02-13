@@ -1,3 +1,4 @@
+import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
@@ -24,4 +25,5 @@ export interface BoclipsClient {
   videoTypesClient: VideoTypesClient;
   ingestVidoesClient: IngestVideosClient;
   bestForTagsClient: BestForTagsClient;
+  eduAgeRangesClient: EduAgeRangesClient;
 }

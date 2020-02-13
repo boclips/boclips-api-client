@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.4] - 2020-02-13
+
+### Changed
+
+- Expose educational age range client on BoclipsClient
+
 ## [3.0.3] - 2020-02-13
 
 ### Changed
