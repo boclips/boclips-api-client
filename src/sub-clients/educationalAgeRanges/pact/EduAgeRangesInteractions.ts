@@ -19,7 +19,6 @@ export const getEduAgeRangesInteraction = (): InteractionObject => ({
           id: 'early-years',
           label: '3 - 5 Early Years',
           min: 3,
-          max: 5,
         }),
       },
     },
