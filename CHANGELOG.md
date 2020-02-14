@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.6] - 2020-02-14
+
+### Changed
+
+- Expose marketing statuses client on BoclipsClient.
+
 ## [3.0.5] - 2020-02-14
 
 ### Changed

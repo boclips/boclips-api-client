@@ -45,5 +45,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.ingestVidoesClient.clear();
     this.bestForTagsClient.clear();
     this.eduAgeRangesClient.clear();
+    this.marketingStatusesClient.clear();
   }
 }

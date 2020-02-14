@@ -1,6 +1,8 @@
+import { Clearable } from '../../common/utils/Clearable';
 import { MarketingStatusesClient } from './MarketingStatusesClient';
 
-export class FakeMarketingStatusesClient implements MarketingStatusesClient {
+export class FakeMarketingStatusesClient
+  implements MarketingStatusesClient, Clearable {
   private marketingStatuses = [];
 
   public setMarketingStatuses = (newStatuses: string[]) =>
@@ -8,4 +10,8 @@ export class FakeMarketingStatusesClient implements MarketingStatusesClient {
 
   public getAll = (): Promise<string[]> =>
     Promise.resolve(this.marketingStatuses);
+
+  public clear() {
+    this.marketingStatuses = [];
+  }
 }
