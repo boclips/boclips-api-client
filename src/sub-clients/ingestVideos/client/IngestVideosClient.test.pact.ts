@@ -1,6 +1,9 @@
-import { IngestVideosFactory } from './../../../test-support/IngestVideosFactory';
-import { getIngestVideosInteraction } from './../pact/IngestVideosInteraction';
-import { withClients } from './../../../pact-support/pactTestWrapper';
+import { IngestVideosFactory } from '../../../test-support';
+import {
+  getFilteredIngestVideosInteraction,
+  getIngestVideosInteraction,
+} from '../pact/IngestVideosInteraction';
+import { withClients } from '../../../pact-support/pactTestWrapper';
 import { isATestClient, FakeBoclipsClient } from '../../../test-support';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
@@ -50,6 +53,40 @@ describe('IngestVideosClient', () => {
           ingestVideoFixture.ingestStartedAt,
         );
         expect(firstVideo.status).toEqual(ingestVideoFixture.status);
+      });
+
+      it('can filter videos by content partner name', async () => {
+        if (isATestClient(client)) {
+          const fakeClient = client as FakeBoclipsClient;
+          fakeClient.ingestVidoesClient.insertIngestVideoFixture(
+            IngestVideosFactory.sample({
+              contentPartner: { id: '1', name: 'AP' },
+            }),
+          );
+          fakeClient.ingestVidoesClient.insertIngestVideoFixture(
+            IngestVideosFactory.sample({
+              contentPartner: { id: '2', name: 'AP' },
+            }),
+          );
+        }
+
+        const filter = { contentPartnerName: 'AP' };
+
+        await provider.addInteraction(
+          getFilteredIngestVideosInteraction(filter),
+        );
+
+        const filteredIngestVideos = await client.ingestVidoesClient.getAll(
+          {
+            page: 1,
+            size: 2,
+          },
+          filter,
+        );
+
+        filteredIngestVideos.page.forEach(it =>
+          expect(it.contentPartner.name).toBe('AP'),
+        );
       });
     },
   );

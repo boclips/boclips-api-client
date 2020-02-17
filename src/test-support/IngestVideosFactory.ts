@@ -1,4 +1,4 @@
-import { IngestVideo } from './../sub-clients/ingestVideos/model/IngestVideo';
+import { IngestVideo } from '../sub-clients/ingestVideos/model/IngestVideo';
 
 export class IngestVideosFactory {
   public static sample(video: Partial<IngestVideo> = {}): IngestVideo {

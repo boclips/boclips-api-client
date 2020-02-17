@@ -1,16 +1,21 @@
-import { PageableConverter } from './../../common/model/PageableConverter';
-import { PageRequest } from './../../common/model/PageRequest';
-import { IngestVideosClient } from './IngestVideosClient';
+import { PageableConverter } from '../../common/model/PageableConverter';
+import { PageRequest } from '../../common/model/PageRequest';
+import {
+  IngestVideosClient,
+  IngestVideosFilterRequest,
+} from './IngestVideosClient';
 import Pageable from '../../common/model/Pageable';
 import { IngestVideo } from '../model/IngestVideo';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { AxiosResponse } from 'axios';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
+import { isNotEmpty } from './isNotEmpty';
 
 export class ApiIngestVideosClient extends ApiSubClient
   implements IngestVideosClient {
   public async getAll(
     pageRequest: PageRequest,
+    filterRequest?: IngestVideosFilterRequest,
   ): Promise<Pageable<IngestVideo>> {
     const ingestVideosLink = await this.getLinkOrThrow('ingestVideos');
 
@@ -18,13 +23,17 @@ export class ApiIngestVideosClient extends ApiSubClient
       throw Error('Not authorized to view ingest videos');
     }
 
+    const interpolationParams = {
+      page: pageRequest.page,
+      size: pageRequest.size,
+    };
+
+    if (filterRequest && isNotEmpty(filterRequest.contentPartnerName)) {
+      interpolationParams['content_partner'] = filterRequest.contentPartnerName;
+    }
+
     return this.axios
-      .get(
-        expandUrlTemplate(ingestVideosLink.href, {
-          page: pageRequest.page,
-          size: pageRequest.size,
-        }),
-      )
+      .get(expandUrlTemplate(ingestVideosLink.href, interpolationParams))
       .then(
         (response: AxiosResponse): Pageable<IngestVideo> => {
           return PageableConverter.convert(

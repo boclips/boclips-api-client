@@ -1,9 +1,13 @@
-import { IngestVideosClient } from './IngestVideosClient';
+import {
+  IngestVideosClient,
+  IngestVideosFilterRequest,
+} from './IngestVideosClient';
 import { Clearable } from '../../common/utils/Clearable';
 import { PageRequest } from '../../common/model/PageRequest';
 import { IngestVideo } from '../model/IngestVideo';
 import Pageable from '../../common/model/Pageable';
 import { Link } from '../../../types';
+import { isNotEmpty } from './isNotEmpty';
 
 export class FakeIngestVideosClient implements IngestVideosClient, Clearable {
   private videos: IngestVideo[] = [];
@@ -12,14 +16,32 @@ export class FakeIngestVideosClient implements IngestVideosClient, Clearable {
     this.videos.push(video);
   }
 
-  getAll(page: PageRequest): Promise<Pageable<IngestVideo>> {
+  private static applyFilters(
+    video: IngestVideo,
+    filterRequest?: IngestVideosFilterRequest,
+  ): boolean {
+    if (filterRequest && isNotEmpty(filterRequest.contentPartnerName)) {
+      return video.contentPartner.name === filterRequest.contentPartnerName;
+    } else {
+      return true;
+    }
+  }
+
+  getAll(
+    page: PageRequest,
+    filterRequest?: IngestVideosFilterRequest,
+  ): Promise<Pageable<IngestVideo>> {
+    const videosToReturn = this.videos.filter(it =>
+      FakeIngestVideosClient.applyFilters(it, filterRequest),
+    );
+
     return Promise.resolve({
-      page: this.videos,
+      page: videosToReturn,
       pageSpec: {
         number: page.page,
         size: page.size,
-        totalElements: this.videos.length,
-        totalPages: Math.floor(this.videos.length / page.size),
+        totalElements: videosToReturn.length,
+        totalPages: Math.floor(videosToReturn.length / page.size),
         nextPage: new Link({
           href: `/v1/ingest-videos?size=${page.size}&page=${page.page + 1}`,
         }),
