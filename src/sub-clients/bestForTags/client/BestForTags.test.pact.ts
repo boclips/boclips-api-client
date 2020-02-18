@@ -16,7 +16,6 @@ describe('BestForTagsClient', () => {
           client.bestForTagsClient.insertBestForTag({
             id: '1',
             label: 'label',
-            userId: null,
           });
         }
       });
@@ -28,7 +27,13 @@ describe('BestForTagsClient', () => {
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual('1');
         expect(response[0].label).toEqual('label');
-        expect(response[0].userId).toEqual(null);
+      });
+
+      it('does not return the userId property', async () => {
+        await provider.addInteraction(getBestForTags);
+        const response = await client.bestForTagsClient.getAll();
+
+        expect(response[0]).not.toHaveProperty('userId');
       });
     },
   );
