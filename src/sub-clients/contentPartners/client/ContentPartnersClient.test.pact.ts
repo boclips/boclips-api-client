@@ -63,6 +63,7 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.ageRange.min).toEqual(10);
         expect(contentPartner.ageRange.max).toEqual(20);
         expect(contentPartner.ageRange.label).toEqual('10-20');
+        expect(contentPartner.ageRange.ids).toEqual(['123', '456', '678']);
         expect(contentPartner.legalRestriction.id).toEqual('2');
         expect(contentPartner.legalRestriction.text).toEqual(
           'a legal restriction',
@@ -109,7 +110,7 @@ describe('ContentPartnersClient', () => {
           existingContentPartnerFromStaging,
           {
             name: 'TED',
-            ageRange: { min: 3, max: 12 },
+            ageRange: ['123'],
             oneLineDescription: 'One line description',
             marketingInformation: { status: 'SOME_STATUS' },
           },

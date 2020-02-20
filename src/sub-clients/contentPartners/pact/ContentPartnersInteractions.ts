@@ -52,10 +52,7 @@ export const updateContentPartner = (id: string): InteractionObject => ({
     },
     body: {
       name: 'TED',
-      ageRange: {
-        min: 3,
-        max: 12,
-      },
+      ageRange: ['123'],
       oneLineDescription: 'One line description',
       marketingInformation: like({ status: 'WaitingForIngest' }),
     },
@@ -112,6 +109,7 @@ export const getContentPartnerInteraction = (
           min: 10,
           max: 20,
           label: '10-20',
+          ids: ['123', '456', '678'],
         },
         legalRestriction: {
           text: 'a legal restriction',

@@ -91,12 +91,7 @@ export class FakeContentPartnersClient
     const updatedFields: Partial<ContentPartner> = {};
 
     if (contentPartner.ageRange) {
-      const { min, max } = contentPartner.ageRange;
-      updatedFields.ageRange = {
-        min,
-        max,
-        label: min ? (max ? `${min}-${max}` : `${min}+`) : '',
-      };
+      updatedFields.ageRange = { ids: contentPartner.ageRange };
     }
 
     Object.keys(contentPartner).forEach(key => {

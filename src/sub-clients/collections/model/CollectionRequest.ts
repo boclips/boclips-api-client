@@ -25,3 +25,9 @@ export interface AgeRangeRequest {
   min?: number;
   max?: number;
 }
+
+export interface ContentPartnerAgeRangeRequest {
+  min?: number;
+  max?: number;
+  ids?: string[];
+}

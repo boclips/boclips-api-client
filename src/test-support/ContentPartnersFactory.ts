@@ -9,7 +9,12 @@ export class ContentPartnerFactory {
       id,
       name: contentPartner.name || 'Test name',
       official: contentPartner.official || true,
-      ageRange: contentPartner.ageRange || { min: 10, max: 20, label: '10-20' },
+      ageRange: contentPartner.ageRange || {
+        min: 10,
+        max: 20,
+        label: '10-20',
+        ids: ['123', '456', '678'],
+      },
       currency: contentPartner.currency || 'USD',
       legalRestriction: contentPartner.legalRestriction || {
         id: '2',
