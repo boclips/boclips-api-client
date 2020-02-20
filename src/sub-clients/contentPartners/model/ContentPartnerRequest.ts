@@ -21,4 +21,9 @@ export interface ContentPartnerRequest {
   contentTypes?: string[];
   oneLineDescription?: string;
   marketingInformation?: MarketingInformationRequest;
+  curriculumAligned: string;
+  educationalResources: string;
+  isTranscriptProvided: boolean;
+  subjects: string[];
+  bestForTags: string[];
 }

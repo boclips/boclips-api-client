@@ -34,6 +34,11 @@ export class ContentPartnersConverter {
       contentTypes,
       oneLineDescription,
       marketingInformation,
+      curriculumAligned,
+      educationalResources,
+      isTranscriptProvided,
+      subjects,
+      bestForTags,
     } = resource;
 
     return {
@@ -42,20 +47,25 @@ export class ContentPartnersConverter {
       official,
       ageRange,
       currency,
-      legalRestriction: legalRestriction,
-      links: {
-        self: new Link(_links.self),
-      },
+      legalRestriction,
       distributionMethods,
       description,
       awards,
       hubspotId,
       notes,
-      contentCategories: contentCategories || [],
-      language: language || [],
-      contentTypes: contentTypes || [],
-      oneLineDescription: oneLineDescription,
-      marketingInformation: marketingInformation,
+      contentCategories,
+      language,
+      contentTypes,
+      oneLineDescription,
+      marketingInformation,
+      curriculumAligned,
+      educationalResources,
+      isTranscriptProvided,
+      subjects,
+      bestForTags,
+      links: {
+        self: new Link(_links.self),
+      },
     };
   }
 }

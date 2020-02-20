@@ -24,4 +24,9 @@ export interface ContentPartner {
   links: { self: Link };
   oneLineDescription?: string;
   marketingInformation?: MarketingInformation;
+  curriculumAligned: string;
+  educationalResources: string;
+  isTranscriptProvided: boolean;
+  subjects: string[];
+  bestForTags: string[];
 }

@@ -1,4 +1,4 @@
-import { getVideoTypes } from './../pact/VideoTypesInteractions';
+import { getVideoTypes } from '../pact/VideoTypesInteractions';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';

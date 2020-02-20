@@ -79,6 +79,20 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.contentTypes).toHaveLength(2);
         expect(contentPartner.contentTypes).toContain('NEWS');
         expect(contentPartner.contentTypes).toContain('STOCK');
+        expect(contentPartner.curriculumAligned).toContain('123');
+        expect(contentPartner.educationalResources).toContain('456');
+        expect(contentPartner.isTranscriptProvided).toEqual(true);
+        expect(contentPartner.subjects).toEqual([
+          '5cb499c9fd5beb428189454b',
+          '5cb499c9fd5beb428189454d',
+          '5cb499c9fd5beb428189454e',
+        ]);
+        expect(contentPartner.bestForTags).toEqual([
+          '5d3ac0175b3f3b7ba335e104',
+          '5d3ac0185b3f3b7ba335e106',
+          '5d3ac0185b3f3b7ba335e105',
+        ]);
+
         expect(contentPartner.oneLineDescription).toEqual(
           '30-year-old mulberry field',
         );

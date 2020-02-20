@@ -5,7 +5,7 @@ import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
-import { BoclipsApiError } from './../../../types/BoclipsApiError';
+import { BoclipsApiError } from '../../../types';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class FakeContentPartnersClient
@@ -42,6 +42,11 @@ export class FakeContentPartnersClient
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
       oneLineDescription: request.oneLineDescription,
       marketingInformation: request.marketingInformation,
+      curriculumAligned: request.curriculumAligned,
+      educationalResources: request.educationalResources,
+      isTranscriptProvided: request.isTranscriptProvided,
+      subjects: request.subjects,
+      bestForTags: request.bestForTags,
     });
 
     return Promise.resolve();
