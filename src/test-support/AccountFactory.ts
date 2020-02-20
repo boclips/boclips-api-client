@@ -5,7 +5,7 @@ export class AccountEntityFactory {
   public static sample(args: Partial<AccountEntity> = {}): AccountEntity {
     return {
       id: '5db06aec7c6c020001339eb2',
-      contractIds: ['contract-123'],
+      accessRuleIds: ['contract-123'],
       accessExpiresOn: null,
       organisation: {
         name: 'Towle Institute',
@@ -35,7 +35,7 @@ export class AccountFactory {
     return {
       organisation: OrganisationFactory.sample(),
       accessExpiresOn: new Date(Date.parse('2019-12-10')),
-      contractIds: [],
+      accessRuleIds: [],
       id: 'org-account-id',
       links: {},
       ...args,

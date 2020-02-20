@@ -2,7 +2,7 @@ import { Link } from '../../common/model/LinkEntity';
 
 export interface Account {
   id: string;
-  contractIds: string[];
+  accessRuleIds: string[];
   accessExpiresOn: Date | null;
   organisation: Organisation;
   links: {

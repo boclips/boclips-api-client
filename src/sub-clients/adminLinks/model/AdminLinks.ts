@@ -19,7 +19,7 @@ export interface AdminLinks {
   distributionMethods: LinkEntity;
   trackPageRendered: LinkEntity;
   subjects: LinkEntity;
-  searchContracts: LinkEntity;
+  searchAccessRules: LinkEntity;
   reportAccessExpired: LinkEntity;
   independentAccounts: LinkEntity;
   videoTypes: LinkEntity;

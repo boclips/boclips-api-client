@@ -25,7 +25,7 @@ describe('AccountConverter', () => {
     const convertedAccount: Account = AccountsConverter.convert(schoolEntity);
 
     expect(convertedAccount.id).toEqual('5db06aec7c6c020001339eb2');
-    expect(convertedAccount.contractIds).toContainEqual('contract-123');
+    expect(convertedAccount.accessRuleIds).toContainEqual('contract-123');
     expect(convertedAccount.accessExpiresOn).toBeNull();
     expect(convertedAccount.organisation.name).toEqual('Towle Institute');
     expect(convertedAccount.organisation.type).toEqual('SCHOOL');

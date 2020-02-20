@@ -14,7 +14,7 @@ export class AccountsConverter {
   public static convert(entity: AccountEntity): Account {
     return {
       id: entity.id,
-      contractIds: entity.contractIds,
+      accessRuleIds: entity.accessRuleIds,
       accessExpiresOn: entity.accessExpiresOn
         ? new Date(entity.accessExpiresOn)
         : null,

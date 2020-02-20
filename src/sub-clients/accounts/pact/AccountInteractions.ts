@@ -39,7 +39,7 @@ export const getAccountsByCountryCode = (
            *
            * @see https://github.com/DiUS/pact-jvm/issues/319
            */
-          contractIds: like([]),
+          accessRuleIds: like([]),
           organisation: like({
             name: like('1st Football High School'),
             type: like('SCHOOL'),
@@ -82,7 +82,7 @@ export const updateAccount = (
     body: {
       id: like(id),
       accessExpiresOn: like(updateAccountRequest.accessExpiresOn.toISOString()),
-      contractIds: like([]),
+      accessRuleIds: like([]),
       organisation: like({
         name: like('1st Football High School'),
         type: like('SCHOOL'),
