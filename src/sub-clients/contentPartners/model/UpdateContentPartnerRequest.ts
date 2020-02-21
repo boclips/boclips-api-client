@@ -3,6 +3,7 @@ import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRest
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
 import { MarketingInformationRequest } from './MarketingInformationRequest';
+import { PedagogyInformationRequest } from './PedagogyInformationRequest';
 
 export interface UpdateContentPartnerRequest {
   name?: string;
@@ -20,4 +21,5 @@ export interface UpdateContentPartnerRequest {
   contentTypes?: string[];
   oneLineDescription?: string;
   marketingInformation?: MarketingInformationRequest;
+  pedagogyInformation?: PedagogyInformationRequest;
 }

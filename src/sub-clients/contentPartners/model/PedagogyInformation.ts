@@ -6,5 +6,5 @@ export interface PedagogyInformation {
   isTranscriptProvided: boolean;
   subjects: string[];
   bestForTags: string[];
-  ageRanges: AgeRange | string[];
+  ageRanges: AgeRange;
 }

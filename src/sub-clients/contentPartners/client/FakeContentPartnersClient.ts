@@ -21,6 +21,14 @@ export class FakeContentPartnersClient
 
   public create(request: ContentPartnerRequest): Promise<void> {
     const id = request.name + Date.now();
+
+    const fakeAgeRangeRequest = {
+      min: 3,
+      max: 7,
+      label: '3-7',
+      ids: ['early-years'],
+    };
+
     this.contentPartners.push({
       id,
       name: request.name,
@@ -47,7 +55,7 @@ export class FakeContentPartnersClient
         isTranscriptProvided: request.pedagogyInformation.isTranscriptProvided,
         subjects: request.pedagogyInformation.subjects,
         bestForTags: request.pedagogyInformation.bestForTags,
-        ageRanges: request.pedagogyInformation.ageRanges,
+        ageRanges: fakeAgeRangeRequest,
       },
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
