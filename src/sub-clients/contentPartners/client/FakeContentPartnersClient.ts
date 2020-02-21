@@ -39,14 +39,17 @@ export class FakeContentPartnersClient
       hubspotId: request.hubspotId,
       language: request.language,
       contentTypes: request.contentTypes,
-      links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
       oneLineDescription: request.oneLineDescription,
       marketingInformation: request.marketingInformation,
-      curriculumAligned: request.curriculumAligned,
-      educationalResources: request.educationalResources,
-      isTranscriptProvided: request.isTranscriptProvided,
-      subjects: request.subjects,
-      bestForTags: request.bestForTags,
+      pedagogyInformation: {
+        curriculumAligned: request.curriculumAligned,
+        educationalResources: request.educationalResources,
+        isTranscriptProvided: request.isTranscriptProvided,
+        subjects: request.subjects,
+        bestForTags: request.bestForTags,
+        ageRanges: request.ageRange,
+      },
+      links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
 
     return Promise.resolve();

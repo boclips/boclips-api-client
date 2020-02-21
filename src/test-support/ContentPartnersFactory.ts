@@ -40,19 +40,27 @@ export class ContentPartnerFactory {
       marketingInformation: contentPartner.marketingInformation || {
         status: 'IN_PROGRESS',
       },
-      curriculumAligned: contentPartner.curriculumAligned || '123',
-      educationalResources: contentPartner.educationalResources || '456',
-      isTranscriptProvided: contentPartner.isTranscriptProvided || true,
-      subjects: contentPartner.subjects || [
-        '5cb499c9fd5beb428189454b',
-        '5cb499c9fd5beb428189454d',
-        '5cb499c9fd5beb428189454e',
-      ],
-      bestForTags: contentPartner.bestForTags || [
-        '5d3ac0175b3f3b7ba335e104',
-        '5d3ac0185b3f3b7ba335e106',
-        '5d3ac0185b3f3b7ba335e105',
-      ],
+      pedagogyInformation: contentPartner.pedagogyInformation || {
+        curriculumAligned: '123',
+        educationalResources: '456',
+        isTranscriptProvided: true,
+        subjects: [
+          '5cb499c9fd5beb428189454b',
+          '5cb499c9fd5beb428189454d',
+          '5cb499c9fd5beb428189454e',
+        ],
+        bestForTags: [
+          '5d3ac0175b3f3b7ba335e104',
+          '5d3ac0185b3f3b7ba335e106',
+          '5d3ac0185b3f3b7ba335e105',
+        ],
+        ageRanges: {
+          min: 10,
+          max: 20,
+          label: '10-20',
+          ids: ['123', '456', '678'],
+        },
+      },
     };
   }
 }

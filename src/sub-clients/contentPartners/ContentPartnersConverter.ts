@@ -43,6 +43,7 @@ export class ContentPartnersConverter {
       isTranscriptProvided,
       subjects,
       bestForTags,
+      ageRanges,
     } = pedagogyInformation || {};
 
     return {
@@ -62,11 +63,14 @@ export class ContentPartnersConverter {
       contentTypes,
       oneLineDescription,
       marketingInformation,
-      curriculumAligned,
-      educationalResources,
-      isTranscriptProvided,
-      subjects,
-      bestForTags,
+      pedagogyInformation: {
+        curriculumAligned,
+        educationalResources,
+        isTranscriptProvided,
+        subjects,
+        bestForTags,
+        ageRanges,
+      },
       links: {
         self: new Link(_links.self),
       },

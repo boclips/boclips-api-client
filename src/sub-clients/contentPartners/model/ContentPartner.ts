@@ -5,6 +5,7 @@ import { LegalRestriction } from '../../legalRestrictions/model/LegalRestriction
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
 import { MarketingInformation } from './MarketingInformation';
+import { PedagogyInformation } from './PedagogyInformation';
 
 export interface ContentPartner {
   id: string;
@@ -21,12 +22,8 @@ export interface ContentPartner {
   language?: Language;
   contentCategories?: ContentCategory[];
   contentTypes?: string[];
-  links: { self: Link };
   oneLineDescription?: string;
   marketingInformation?: MarketingInformation;
-  curriculumAligned: string;
-  educationalResources: string;
-  isTranscriptProvided: boolean;
-  subjects: string[];
-  bestForTags: string[];
+  pedagogyInformation?: PedagogyInformation;
+  links: { self: Link };
 }
