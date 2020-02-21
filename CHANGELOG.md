@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.10] - 2020-02-21
+
+### Fixed
+
+- Can retrieve pedagogy information for a content partner
+
 ## [3.0.9] - 2020-02-18
 
 ### Changed

@@ -34,12 +34,16 @@ export class ContentPartnersConverter {
       contentTypes,
       oneLineDescription,
       marketingInformation,
+      pedagogyInformation,
+    } = resource;
+
+    const {
       curriculumAligned,
       educationalResources,
       isTranscriptProvided,
       subjects,
       bestForTags,
-    } = resource;
+    } = pedagogyInformation || {};
 
     return {
       id,
