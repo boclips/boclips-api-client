@@ -4,6 +4,7 @@ import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRest
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
 import { MarketingInformationRequest } from './MarketingInformationRequest';
+import { PedagogyInformationRequest } from './PedagogyInformationRequest';
 
 export interface ContentPartnerRequest {
   name: string;
@@ -21,9 +22,5 @@ export interface ContentPartnerRequest {
   contentTypes?: string[];
   oneLineDescription?: string;
   marketingInformation?: MarketingInformationRequest;
-  curriculumAligned?: string;
-  educationalResources?: string;
-  isTranscriptProvided?: boolean;
-  subjects?: string[];
-  bestForTags?: string[];
+  pedagogyInformation?: PedagogyInformationRequest;
 }

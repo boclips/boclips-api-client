@@ -42,12 +42,12 @@ export class FakeContentPartnersClient
       oneLineDescription: request.oneLineDescription,
       marketingInformation: request.marketingInformation,
       pedagogyInformation: {
-        curriculumAligned: request.curriculumAligned,
-        educationalResources: request.educationalResources,
-        isTranscriptProvided: request.isTranscriptProvided,
-        subjects: request.subjects,
-        bestForTags: request.bestForTags,
-        ageRanges: request.ageRange,
+        curriculumAligned: request.pedagogyInformation.curriculumAligned,
+        educationalResources: request.pedagogyInformation.educationalResources,
+        isTranscriptProvided: request.pedagogyInformation.isTranscriptProvided,
+        subjects: request.pedagogyInformation.subjects,
+        bestForTags: request.pedagogyInformation.bestForTags,
+        ageRanges: request.pedagogyInformation.ageRanges,
       },
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
