@@ -37,15 +37,6 @@ export class ContentPartnersConverter {
       pedagogyInformation,
     } = resource;
 
-    const {
-      curriculumAligned,
-      educationalResources,
-      isTranscriptProvided,
-      subjects,
-      bestForTags,
-      ageRanges,
-    } = pedagogyInformation || {};
-
     return {
       id,
       name,
@@ -63,14 +54,7 @@ export class ContentPartnersConverter {
       contentTypes,
       oneLineDescription,
       marketingInformation,
-      pedagogyInformation: {
-        curriculumAligned,
-        educationalResources,
-        isTranscriptProvided,
-        subjects,
-        bestForTags,
-        ageRanges,
-      },
+      pedagogyInformation,
       links: {
         self: new Link(_links.self),
       },
