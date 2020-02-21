@@ -1,3 +1,4 @@
+import { FakeIngestVideoStatusesClient } from '../sub-clients/ingestVideoStatuses/client/FakeIngestVideoStatusesClient';
 import { BoclipsClient } from '../BoclipsClient';
 import { FakeAccountsClient } from '../sub-clients/accounts/client/FakeAccountClient';
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
@@ -30,6 +31,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public bestForTagsClient: FakeBestForTagsClient = new FakeBestForTagsClient();
   public marketingStatusesClient: FakeMarketingStatusesClient = new FakeMarketingStatusesClient();
   public eduAgeRangesClient: FakeEduAgeRangesClient = new FakeEduAgeRangesClient();
+  public ingestVideoStatusesClient: FakeIngestVideoStatusesClient = new FakeIngestVideoStatusesClient();
 
   public clear() {
     this.legalRestrictionsClient.clear();

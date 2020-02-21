@@ -1,3 +1,4 @@
+import { ApiIngestVideoStatusesClient } from './sub-clients/ingestVideoStatuses/client/ApiIngestVideoStatusesClient';
 import { AxiosError, AxiosInstance } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
 import { ApiAccountsClient } from './sub-clients/accounts/client/ApiAccountsClient';
@@ -47,6 +48,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public bestForTagsClient: BestForTagsClient;
   public marketingStatusesClient: MarketingStatusesClient;
   public eduAgeRangesClient: EduAgeRangesClient;
+  public ingestVideoStatusesClient: ApiIngestVideoStatusesClient;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     axios.interceptors.response.use(
@@ -133,6 +135,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axios,
     );
     this.eduAgeRangesClient = new ApiEduAgeRangesClient(
+      this.adminLinks,
+      this.axios,
+    );
+    this.ingestVideoStatusesClient = new ApiIngestVideoStatusesClient(
       this.adminLinks,
       this.axios,
     );
