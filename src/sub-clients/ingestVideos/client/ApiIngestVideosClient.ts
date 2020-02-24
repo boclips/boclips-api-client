@@ -33,7 +33,7 @@ export class ApiIngestVideosClient extends ApiSubClient
     }
 
     if (filterRequest && filterRequest.statuses) {
-      interpolationParams['statuses'] = filterRequest.statuses;
+      interpolationParams['status'] = filterRequest.statuses;
     }
 
     return this.axios
