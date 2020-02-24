@@ -32,6 +32,10 @@ export class ApiIngestVideosClient extends ApiSubClient
       interpolationParams['content_partner'] = filterRequest.contentPartnerName;
     }
 
+    if (filterRequest && filterRequest.statuses) {
+      interpolationParams['statuses'] = filterRequest.statuses;
+    }
+
     return this.axios
       .get(expandUrlTemplate(ingestVideosLink.href, interpolationParams))
       .then(
