@@ -13,7 +13,7 @@ export class ContentPartnerFactory {
         min: 10,
         max: 20,
         label: '10-20',
-        ids: ['123', '456', '678'],
+        ids: ['123'],
       },
       currency: contentPartner.currency || 'USD',
       legalRestriction: contentPartner.legalRestriction || {
@@ -58,7 +58,7 @@ export class ContentPartnerFactory {
           min: 10,
           max: 20,
           label: '10-20',
-          ids: ['123', '456', '678'],
+          ids: ['123'],
         },
       },
     };

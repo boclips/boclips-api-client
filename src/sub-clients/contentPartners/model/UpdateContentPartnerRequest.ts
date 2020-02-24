@@ -3,13 +3,12 @@ import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRest
 import { ContentCategory } from './ContentCategories';
 import { Language } from './Language';
 import { MarketingInformationRequest } from './MarketingInformationRequest';
-import { PedagogyInformationRequest } from './PedagogyInformationRequest';
 
 export interface UpdateContentPartnerRequest {
   name?: string;
   accreditedToYtChannelId?: string;
   legalRestrictions?: LegalRestrictionRequest;
-  ageRange?: string[];
+  ageRanges?: string[];
   distributionMethods?: DistributionMethod[];
   currency?: string;
   description?: string;
@@ -21,5 +20,9 @@ export interface UpdateContentPartnerRequest {
   contentTypes?: string[];
   oneLineDescription?: string;
   marketingInformation?: MarketingInformationRequest;
-  pedagogyInformation?: PedagogyInformationRequest;
+  curriculumAligned?: string;
+  educationalResources?: string;
+  isTranscriptProvided?: boolean;
+  subjects?: string[];
+  bestForTags?: string[];
 }

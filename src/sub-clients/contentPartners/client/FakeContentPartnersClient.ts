@@ -50,11 +50,11 @@ export class FakeContentPartnersClient
       oneLineDescription: request.oneLineDescription,
       marketingInformation: request.marketingInformation,
       pedagogyInformation: {
-        curriculumAligned: request.pedagogyInformation.curriculumAligned,
-        educationalResources: request.pedagogyInformation.educationalResources,
-        isTranscriptProvided: request.pedagogyInformation.isTranscriptProvided,
-        subjects: request.pedagogyInformation.subjects,
-        bestForTags: request.pedagogyInformation.bestForTags,
+        curriculumAligned: request.curriculumAligned,
+        educationalResources: request.educationalResources,
+        isTranscriptProvided: request.isTranscriptProvided,
+        subjects: request.subjects,
+        bestForTags: request.bestForTags,
         ageRanges: fakeAgeRangeRequest,
       },
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
@@ -101,8 +101,8 @@ export class FakeContentPartnersClient
 
     const updatedFields: Partial<ContentPartner> = {};
 
-    if (contentPartner.ageRange) {
-      updatedFields.ageRange = { ids: contentPartner.ageRange };
+    if (contentPartner.ageRanges) {
+      updatedFields.ageRange = { ids: contentPartner.ageRanges };
     }
 
     Object.keys(contentPartner).forEach(key => {
