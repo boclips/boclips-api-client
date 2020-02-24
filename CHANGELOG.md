@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.12] - 2020-02-21
+
+### Fix
+
+- Fix typings for pedagogy tab
+
 ## [3.0.11] - 2020-02-21
 
 ### Added
