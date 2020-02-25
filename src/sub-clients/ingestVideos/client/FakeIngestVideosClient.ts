@@ -22,6 +22,8 @@ export class FakeIngestVideosClient implements IngestVideosClient, Clearable {
   ): boolean {
     if (filterRequest && isNotEmpty(filterRequest.contentPartnerName)) {
       return video.contentPartner.name === filterRequest.contentPartnerName;
+    } else if (filterRequest && filterRequest.statuses) {
+      return filterRequest.statuses.includes(video.status);
     } else {
       return true;
     }
