@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.14] - 2020-02-26
+
+### Added
+
+- Content partner signed link retrieval
+
 ## [3.0.13] - 2020-02-25
 
 ### Added
