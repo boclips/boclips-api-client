@@ -1,7 +1,7 @@
-import { ContentCategories } from './../model/ContentCategories';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnersConverter } from '../ContentPartnersConverter';
+import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
@@ -17,6 +17,7 @@ export class ApiContentPartnersClient extends ApiSubClient
       request,
     );
   }
+
   public async getAll(): Promise<ContentPartner[]> {
     const contentPartnersLink = this.getLinkOrThrow('contentPartners');
 
@@ -56,5 +57,16 @@ export class ApiContentPartnersClient extends ApiSubClient
         },
       },
     );
+  }
+
+  public async getSignedLink(filename: string): Promise<string> {
+    const link = this.getLinkOrThrow('contentPartnersSignedUploadLink').href;
+    return this.axios
+      .post(link, {
+        filename,
+      })
+      .then(it => {
+        return it.headers.location;
+      });
   }
 }

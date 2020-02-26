@@ -12,6 +12,7 @@ import {
   getContentCategories,
   getContentPartnerInteraction,
   getContentPartnersInteraction,
+  getSignedLink,
   updateContentPartner,
 } from '../pact/ContentPartnersInteractions';
 import { BoclipsApiError } from './../../../types/BoclipsApiError';
@@ -46,6 +47,17 @@ describe('ContentPartnersClient', () => {
         expect(response[0].links.self.getOriginalLink()).toContain(
           `/v1/content-partners/${existingContentPartnerFromStaging}`,
         );
+      });
+
+      it('can fetch signed link', async () => {
+        const filename = 'file.png';
+        await provider.addInteraction(getSignedLink(filename));
+
+        const signedLink = await client.contentPartnersClient.getSignedLink(
+          filename,
+        );
+
+        expect(typeof signedLink).toEqual('string');
       });
 
       it('can fetch a content partner', async () => {

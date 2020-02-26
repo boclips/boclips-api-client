@@ -13,6 +13,7 @@ export interface AdminLinks {
   httpFeeds: LinkEntity;
   contentPartners: LinkEntity;
   contentPartner: LinkEntity;
+  contentPartnersSignedUploadLink: LinkEntity;
   legalRestrictions: LinkEntity;
   youtubeFeeds: LinkEntity;
   createHttpFeed: LinkEntity;

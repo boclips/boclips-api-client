@@ -1,4 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
+import { term } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 
@@ -193,5 +194,29 @@ export const createContentPartner = (
   },
   willRespondWith: {
     status: 201,
+  },
+});
+
+export const getSignedLink = (filename: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST content partners signed upload link',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/content-partners/signed-upload-link`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      filename,
+    },
+  },
+  willRespondWith: {
+    status: 204,
+    headers: {
+      location: term({
+        generate: `http://fakeurl.com/${filename.replace('.', '_')}_signed_url`,
+        matcher: `http.*`,
+      }),
+    },
   },
 });

@@ -1,4 +1,3 @@
-import { ApiIngestVideoStatusesClient } from './sub-clients/ingestVideoStatuses/client/ApiIngestVideoStatusesClient';
 import { AxiosError, AxiosInstance } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
 import { ApiAccountsClient } from './sub-clients/accounts/client/ApiAccountsClient';
@@ -14,6 +13,7 @@ import { ApiEventsClient } from './sub-clients/events/client/ApiEventsClient';
 import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsClient';
 import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiIngestVideosClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
+import { ApiIngestVideoStatusesClient } from './sub-clients/ingestVideoStatuses/client/ApiIngestVideoStatusesClient';
 import { ApiJobsClient } from './sub-clients/jobs/client/ApiJobsClient';
 import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/client/ApiLegalRestrictionsClient';
 import { ApiMarketingStatusesClient } from './sub-clients/marketingStatuses/client/ApiMarketingStatusesClient';
@@ -22,7 +22,7 @@ import { ApiOrdersClient } from './sub-clients/orders/client/ApiOrdersClient';
 import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClient';
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
-import { BoclipsApiError } from './types/BoclipsApiError';
+import { BoclipsApiError } from './types';
 
 const isAxiosError = (error: any): error is AxiosError => {
   return error.response != undefined && error.response.data != undefined;
@@ -30,10 +30,6 @@ const isAxiosError = (error: any): error is AxiosError => {
 
 export class ApiBoclipsClient implements BoclipsClient {
   private static instance: ApiBoclipsClient;
-  private axios: AxiosInstance;
-  private baseUrl: string;
-  private adminLinks: AdminLinks;
-
   public legalRestrictionsClient: ApiLegalRestrictionsClient;
   public contentPartnersClient: ApiContentPartnersClient;
   public subjectsClient: ApiSubjectsClient;
@@ -49,6 +45,9 @@ export class ApiBoclipsClient implements BoclipsClient {
   public marketingStatusesClient: MarketingStatusesClient;
   public eduAgeRangesClient: EduAgeRangesClient;
   public ingestVideoStatusesClient: ApiIngestVideoStatusesClient;
+  private axios: AxiosInstance;
+  private baseUrl: string;
+  private adminLinks: AdminLinks;
 
   private constructor(axios: AxiosInstance, baseUrl: string) {
     axios.interceptors.response.use(

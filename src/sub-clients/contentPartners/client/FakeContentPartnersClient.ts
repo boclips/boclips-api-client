@@ -1,11 +1,10 @@
 import { ContentPartnerFactory } from '../../../test-support';
-import { Link } from '../../../types';
+import { BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
-import { BoclipsApiError } from '../../../types';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class FakeContentPartnersClient
@@ -121,5 +120,11 @@ export class FakeContentPartnersClient
 
   public clear() {
     this.contentPartners = [];
+  }
+
+  public async getSignedLink(filename: string): Promise<string> {
+    const newFilename = filename.replace('.', '_') + '_signed_link';
+    const signedLinkUrl = `http://www.server.com/${newFilename}`;
+    return new Promise(resolve => resolve(signedLinkUrl));
   }
 }
