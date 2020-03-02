@@ -1,3 +1,3 @@
 export interface MarketingInformation {
-  status: string;
+  status?: string;
 }
