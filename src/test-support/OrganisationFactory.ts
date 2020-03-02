@@ -1,13 +1,18 @@
-import { Account, Organisation } from '../sub-clients/accounts/model/Account';
-import { AccountEntity } from '../sub-clients/accounts/model/AccountEntity';
+import {
+  Organisation,
+  OrganisationDetails,
+} from '../sub-clients/organisations/model/Organisation';
+import { OrganisationEntity } from '../sub-clients/organisations/model/OrganisationEntity';
 
-export class AccountEntityFactory {
-  public static sample(args: Partial<AccountEntity> = {}): AccountEntity {
+export class OrganisationEntityFactory {
+  public static sample(
+    args: Partial<OrganisationEntity> = {},
+  ): OrganisationEntity {
     return {
       id: '5db06aec7c6c020001339eb2',
       accessRuleIds: ['contract-123'],
       accessExpiresOn: null,
-      organisation: {
+      organisationDetails: {
         name: 'Towle Institute',
         type: 'SCHOOL',
         state: {
@@ -22,7 +27,8 @@ export class AccountEntityFactory {
       },
       _links: {
         edit: {
-          href: 'https://api.boclips.com/v1/accounts/5db06aec7c6c020001339eb2',
+          href:
+            'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2',
         },
       },
       ...args,
@@ -30,10 +36,10 @@ export class AccountEntityFactory {
   }
 }
 
-export class AccountFactory {
-  public static sample(args: Partial<Account> = {}): Account {
+export class OrganisationFactory {
+  public static sample(args: Partial<Organisation> = {}): Organisation {
     return {
-      organisation: OrganisationFactory.sample(),
+      organisationDetails: OrganisationDetailsFactory.sample(),
       accessExpiresOn: new Date(Date.parse('2019-12-10')),
       accessRuleIds: [],
       id: 'org-account-id',
@@ -43,8 +49,10 @@ export class AccountFactory {
   }
 }
 
-export class OrganisationFactory {
-  public static sample(args: Partial<Organisation> = {}): Organisation {
+export class OrganisationDetailsFactory {
+  public static sample(
+    args: Partial<OrganisationDetails> = {},
+  ): OrganisationDetails {
     return {
       country: {
         id: 'USA',

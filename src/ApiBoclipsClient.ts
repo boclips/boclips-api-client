@@ -1,6 +1,6 @@
 import { AxiosError, AxiosInstance } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
-import { ApiAccountsClient } from './sub-clients/accounts/client/ApiAccountsClient';
+import { ApiOrganisationsClient } from './sub-clients/organisations/client/ApiOrganisationsClient';
 import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverter';
 import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
 import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestForClients';
@@ -38,7 +38,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public ordersClient: ApiOrdersClient;
   public eventsClient: ApiEventsClient;
   public jobsClient: ApiJobsClient;
-  public accountsClient: ApiAccountsClient;
+  public organisationsClient: ApiOrganisationsClient;
   public videoTypesClient: VideoTypesClient;
   public ingestVidoesClient: IngestVideosClient;
   public bestForTagsClient: BestForTagsClient;
@@ -116,7 +116,10 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.ordersClient = new ApiOrdersClient(this.adminLinks, this.axios);
     this.eventsClient = new ApiEventsClient(this.adminLinks, this.axios);
     this.jobsClient = new ApiJobsClient(this.adminLinks, this.axios);
-    this.accountsClient = new ApiAccountsClient(this.adminLinks, this.axios);
+    this.organisationsClient = new ApiOrganisationsClient(
+      this.adminLinks,
+      this.axios,
+    );
     this.videoTypesClient = new ApiVideoTypesClient(
       this.adminLinks,
       this.axios,

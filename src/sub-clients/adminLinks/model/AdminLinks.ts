@@ -22,7 +22,7 @@ export interface AdminLinks {
   subjects: LinkEntity;
   searchAccessRules: LinkEntity;
   reportAccessExpired: LinkEntity;
-  independentAccounts: LinkEntity;
+  organisations: LinkEntity;
   videoTypes: LinkEntity;
   contentCategories: LinkEntity;
   ingestVideos: LinkEntity;

@@ -1,5 +1,5 @@
+import { OrganisationsClient } from './sub-clients/organisations/client/OrganisationsClient';
 import { IngestVideoStatusesClient } from './sub-clients/ingestVideoStatuses/client/IngestVideoStatusesClient';
-import { AccountsClient } from './sub-clients/accounts/client/AccountsClient';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
 import { ContentPartnersClient } from './sub-clients/contentPartners/client/ContentPartnersClient';
@@ -23,7 +23,7 @@ export interface BoclipsClient {
   ordersClient: OrdersClient;
   eventsClient: EventsClient;
   jobsClient: JobsClient;
-  accountsClient: AccountsClient;
+  organisationsClient: OrganisationsClient;
   videoTypesClient: VideoTypesClient;
   ingestVidoesClient: IngestVideosClient;
   bestForTagsClient: BestForTagsClient;

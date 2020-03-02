@@ -2,38 +2,47 @@ import { Link } from '../../common/model/LinkEntity';
 import Pageable from '../../common/model/Pageable';
 import { PageableConverter } from '../../common/model/PageableConverter';
 import { PageableEntity } from '../../common/model/PageableEntity';
-import { Account, Country, Organisation, State } from './Account';
 import {
-  AccountEntity,
-  CountryEntity,
+  OrganisationDetails,
+  Country,
+  Organisation,
+  State,
+} from './Organisation';
+import {
   OrganisationEntity,
+  CountryEntity,
+  OrganisationDetailsEntity,
   StateEntity,
-} from './AccountEntity';
+} from './OrganisationEntity';
 
-export class AccountsConverter {
-  public static convert(entity: AccountEntity): Account {
+export class OrganisationsConverter {
+  public static convert(entity: OrganisationEntity): Organisation {
     return {
       id: entity.id,
       accessRuleIds: entity.accessRuleIds,
       accessExpiresOn: entity.accessExpiresOn
         ? new Date(entity.accessExpiresOn)
         : null,
-      organisation: AccountsConverter.convertOrganisation(entity.organisation),
-      links: AccountsConverter.convertLinks(entity._links),
+      organisationDetails: OrganisationsConverter.convertDetails(
+        entity.organisationDetails,
+      ),
+      links: OrganisationsConverter.convertLinks(entity._links),
     };
   }
 
   public static convertPage(
-    entity: PageableEntity<AccountEntity>,
-  ): Pageable<Account> {
+    entity: PageableEntity<OrganisationEntity>,
+  ): Pageable<Organisation> {
     return PageableConverter.convert(
       entity,
-      'account',
-      AccountsConverter.convert,
+      'organisations',
+      OrganisationsConverter.convert,
     );
   }
 
-  private static convertOrganisation(entity: OrganisationEntity): Organisation {
+  private static convertDetails(
+    entity: OrganisationDetailsEntity,
+  ): OrganisationDetails {
     if (entity.type !== 'SCHOOL' && entity.type !== 'DISTRICT') {
       throw new Error(`Unsupported type of organisation ${entity.type}`);
     }
@@ -41,15 +50,15 @@ export class AccountsConverter {
     return {
       type: entity.type,
       name: entity.name,
-      country: AccountsConverter.convertCountry(entity.country),
-      state: AccountsConverter.convertState(entity.state),
+      country: OrganisationsConverter.convertCountry(entity.country),
+      state: OrganisationsConverter.convertState(entity.state),
     };
   }
 
   private static convertLinks(
-    linkEntities: AccountEntity['_links'],
-  ): Account['links'] {
-    const links: Account['links'] = {};
+    linkEntities: OrganisationEntity['_links'],
+  ): Organisation['links'] {
+    const links: Organisation['links'] = {};
 
     if (linkEntities.edit) {
       links.edit = new Link(linkEntities.edit);

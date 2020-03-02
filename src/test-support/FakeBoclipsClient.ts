@@ -1,6 +1,6 @@
 import { FakeIngestVideoStatusesClient } from '../sub-clients/ingestVideoStatuses/client/FakeIngestVideoStatusesClient';
 import { BoclipsClient } from '../BoclipsClient';
-import { FakeAccountsClient } from '../sub-clients/accounts/client/FakeAccountClient';
+import { FakeOrganisationsClient } from '../sub-clients/organisations/client/FakeOrganisationClient';
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
 import { Clearable } from '../sub-clients/common/utils/Clearable';
 import { FakeContentPartnersClient } from '../sub-clients/contentPartners/client/FakeContentPartnersClient';
@@ -25,7 +25,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public ordersClient: FakeOrdersClient = new FakeOrdersClient();
   public eventsClient: FakeEventsClient = new FakeEventsClient();
   public jobsClient: FakeJobsClient = new FakeJobsClient();
-  public accountsClient: FakeAccountsClient = new FakeAccountsClient();
+  public organisationsClient: FakeOrganisationsClient = new FakeOrganisationsClient();
   public videoTypesClient: FakeVideoTypesClient = new FakeVideoTypesClient();
   public ingestVidoesClient: FakeIngestVideosClient = new FakeIngestVideosClient();
   public bestForTagsClient: FakeBestForTagsClient = new FakeBestForTagsClient();
@@ -42,7 +42,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.ordersClient.clear();
     this.jobsClient.clear();
     this.eventsClient.clear();
-    this.accountsClient.clear();
+    this.organisationsClient.clear();
     this.videoTypesClient.clear();
     this.ingestVidoesClient.clear();
     this.bestForTagsClient.clear();

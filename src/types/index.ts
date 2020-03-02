@@ -29,10 +29,10 @@ export {
   CollectionInteractedWithRequest,
   CollectionInteractionType,
 } from '../sub-clients/events/model/CollectionInteractedWithRequest';
-export { Account } from '../sub-clients/accounts/model/Account';
+export { Organisation } from '../sub-clients/organisations/model/Organisation';
 export {
-  UpdateAccountRequest,
-} from '../sub-clients/accounts/model/UpdateAccountRequest';
+  UpdateOrganisationRequest,
+} from '../sub-clients/organisations/model/UpdateOrganisationRequest';
 export {
   ContentPartner as IngestContentPartner,
 } from '../sub-clients/ingestVideos/model/ContentPartner';

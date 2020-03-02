@@ -7,7 +7,7 @@ export * from './ContentPartnersFactory';
 export * from './OrdersFactory';
 export * from './SubjectsFactory';
 export * from './JobsFactory';
-export * from './AccountFactory';
+export * from './OrganisationFactory';
 export * from './IngestVideosFactory';
 
 export const isATestClient = (

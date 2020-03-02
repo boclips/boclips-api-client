@@ -92,8 +92,8 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/events/page-render`,
           templated: false,
         }),
-        independentAccounts: like({
-          href: `${provider.mockService.baseUrl}/v1/accounts{?countryCode,page,size}`,
+        organisations: like({
+          href: `${provider.mockService.baseUrl}/v1/organisations{?countryCode,page,size}`,
           templated: true,
         }),
         videoTypes: like({

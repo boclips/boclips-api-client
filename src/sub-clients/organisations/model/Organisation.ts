@@ -1,16 +1,16 @@
 import { Link } from '../../common/model/LinkEntity';
 
-export interface Account {
+export interface Organisation {
   id: string;
   accessRuleIds: string[];
   accessExpiresOn: Date | null;
-  organisation: Organisation;
+  organisationDetails: OrganisationDetails;
   links: {
     edit?: Link;
   };
 }
 
-export interface Organisation {
+export interface OrganisationDetails {
   type: 'SCHOOL' | 'DISTRICT';
   name: string;
   country: Country;

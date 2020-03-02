@@ -1,17 +1,17 @@
 import { InteractionObject } from '@pact-foundation/pact';
 import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
-import { UpdateAccountRequest } from '../model/UpdateAccountRequest';
+import { UpdateOrganisationRequest } from '../model/UpdateOrganisationRequest';
 
-export const getAccountsByCountryCode = (
+export const getOrganisationsByCountryCode = (
   id: string,
   countryCode: string,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET Accounts by country code',
+  uponReceiving: 'GET Organisations by country code',
   withRequest: {
     method: 'GET',
-    path: `/v1/accounts`,
+    path: `/v1/organisations`,
     query: {
       countryCode: `${countryCode}`,
       page: '0',
@@ -31,7 +31,7 @@ export const getAccountsByCountryCode = (
         totalPages: like(1),
       },
       _embedded: {
-        account: eachLike({
+        organisations: eachLike({
           id: like(id),
           /**
            * The accessExpiresOn field should be described here, but since it's optional in
@@ -40,7 +40,7 @@ export const getAccountsByCountryCode = (
            * @see https://github.com/DiUS/pact-jvm/issues/319
            */
           accessRuleIds: like([]),
-          organisation: like({
+          organisationDetails: like({
             name: like('1st Football High School'),
             type: like('SCHOOL'),
             country: like({
@@ -51,7 +51,7 @@ export const getAccountsByCountryCode = (
           }),
           _links: like({
             edit: {
-              href: `${provider.mockService.baseUrl}/v1/accounts/${id}`,
+              href: `${provider.mockService.baseUrl}/v1/organisations/${id}`,
             },
           }),
         }),
@@ -60,19 +60,19 @@ export const getAccountsByCountryCode = (
   },
 });
 
-export const updateAccount = (
+export const updateOrganisation = (
   id: string,
-  updateAccountRequest: UpdateAccountRequest,
+  updateOrganisationRequest: UpdateOrganisationRequest,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'PATCH Account to change accessExpiresOn',
+  uponReceiving: 'PATCH Organisation to change accessExpiresOn',
   withRequest: {
     method: 'PATCH',
-    path: `/v1/accounts/${id}`,
+    path: `/v1/organisations/${id}`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: updateAccountRequest,
+    body: updateOrganisationRequest,
   },
   willRespondWith: {
     status: 200,
@@ -81,9 +81,11 @@ export const updateAccount = (
     },
     body: {
       id: like(id),
-      accessExpiresOn: like(updateAccountRequest.accessExpiresOn.toISOString()),
+      accessExpiresOn: like(
+        updateOrganisationRequest.accessExpiresOn.toISOString(),
+      ),
       accessRuleIds: like([]),
-      organisation: like({
+      organisationDetails: like({
         name: like('1st Football High School'),
         type: like('SCHOOL'),
         country: like({
@@ -94,7 +96,7 @@ export const updateAccount = (
       }),
       _links: {
         edit: like({
-          href: `${provider.mockService.baseUrl}/v1/accounts/${id}`,
+          href: `${provider.mockService.baseUrl}/v1/organisations/${id}`,
         }),
       },
     },
