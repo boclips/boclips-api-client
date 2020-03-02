@@ -122,7 +122,12 @@ export const getContentPartnerInteraction = (
         hubspotId: '666',
         contentTypes: ['NEWS', 'STOCK'],
         oneLineDescription: '30-year-old mulberry field',
-        marketingInformation: like({ status: 'IN_PROGRESS' }),
+        marketingInformation: like({
+          status: 'IN_PROGRESS',
+          logos: ['logo1.png', 'logo2.png'],
+          showreel: 'showreel.mkv',
+          sampleVideos: ['sample1.avi', 'sample2.avi'],
+        }),
         pedagogyInformation: like({
           curriculumAligned: '123',
           educationalResources: '456',

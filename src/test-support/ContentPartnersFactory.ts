@@ -39,6 +39,9 @@ export class ContentPartnerFactory {
         contentPartner.oneLineDescription || '30-year-old mulberry field',
       marketingInformation: contentPartner.marketingInformation || {
         status: 'IN_PROGRESS',
+        logos: ['logo1.png', 'logo2.png'],
+        showreel: 'showreel.mkv',
+        sampleVideos: ['sample1.avi', 'sample2.avi'],
       },
       pedagogyInformation: contentPartner.pedagogyInformation || {
         curriculumAligned: '123',

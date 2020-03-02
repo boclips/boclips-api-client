@@ -15,7 +15,7 @@ import {
   getSignedLink,
   updateContentPartner,
 } from '../pact/ContentPartnersInteractions';
-import { BoclipsApiError } from './../../../types/BoclipsApiError';
+import { BoclipsApiError } from '../../../types';
 
 describe('ContentPartnersClient', () => {
   withClients(
@@ -126,6 +126,17 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.marketingInformation.status).toEqual(
           'IN_PROGRESS',
         );
+        expect(contentPartner.marketingInformation.logos).toEqual([
+          'logo1.png',
+          'logo2.png',
+        ]);
+        expect(contentPartner.marketingInformation.showreel).toEqual(
+          'showreel.mkv',
+        );
+        expect(contentPartner.marketingInformation.sampleVideos).toEqual([
+          'sample1.avi',
+          'sample2.avi',
+        ]);
       });
 
       it('can update a content partner', async () => {
