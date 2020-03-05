@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.3] - 2020-03-05
+
+### Changed
+
+- Added `VISIT_LESSON_GUIDE` subtype to `CollectionInteractionType`
+
 ## [4.0.2] - 2020-03-02
 
 ### Changed
