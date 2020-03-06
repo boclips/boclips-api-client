@@ -11,6 +11,9 @@ const createContentPartnerWithMandatoryFields = (id: string) => ({
   id: like(id),
   name: 'a name',
   official: true,
+  ingest: {
+    type: 'MANUAL',
+  },
   _links: like({
     self: {
       href: `${provider.mockService.baseUrl}/v1/content-partners/${id}`,
@@ -128,6 +131,9 @@ export const getContentPartnerInteraction = (
           showreel: 'showreel.mkv',
           sampleVideos: ['sample1.avi', 'sample2.avi'],
         }),
+        ingest: {
+          type: 'MANUAL',
+        },
         pedagogyInformation: like({
           curriculumAligned: '123',
           educationalResources: '456',

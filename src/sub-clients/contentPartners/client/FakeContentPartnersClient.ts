@@ -6,6 +6,7 @@ import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
+import moment from 'moment';
 
 export class FakeContentPartnersClient
   implements ContentPartnersClient, Clearable {
@@ -56,6 +57,8 @@ export class FakeContentPartnersClient
         bestForTags: request.bestForTags,
         ageRanges: fakeAgeRangeRequest,
       },
+      ingest: { type: 'MANUAL' },
+      deliveryFrequency: moment.duration(6, 'months'),
       links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
     });
 

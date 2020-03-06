@@ -20,6 +20,8 @@ export class ContentPartnerFactory {
         id: '2',
         text: 'a legal restriction',
       },
+      ingest: contentPartner.ingest || { type: 'MANUAL' },
+      deliveryFrequency: contentPartner.deliveryFrequency,
       links: contentPartner.links || {
         self: new Link({
           href: `/v1/content-partners/${id}`,

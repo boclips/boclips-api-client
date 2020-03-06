@@ -31,7 +31,7 @@ export class ApiContentPartnersClient extends ApiSubClient
 
     return this.axios
       .get(expandUrlTemplate(contentPartnerLink.href, { id }))
-      .then(ContentPartnersConverter.convertResource);
+      .then(ContentPartnersConverter.convertResponse);
   }
 
   public async getContentCategories(): Promise<ContentCategories> {

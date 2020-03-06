@@ -31,6 +31,9 @@ describe('ContentPartnersClient', () => {
               id: existingContentPartnerFromStaging,
               name: 'a name',
               official: true,
+              ingest: {
+                type: 'MANUAL',
+              },
             }),
           );
         }
@@ -137,6 +140,8 @@ describe('ContentPartnersClient', () => {
           'sample1.avi',
           'sample2.avi',
         ]);
+        expect(contentPartner.ingest.type).toEqual('MANUAL');
+        expect(contentPartner.ingest.url).toBeUndefined();
       });
 
       it('can update a content partner', async () => {
