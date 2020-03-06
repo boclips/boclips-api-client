@@ -10,7 +10,7 @@ export class OrganisationEntityFactory {
   ): OrganisationEntity {
     return {
       id: '5db06aec7c6c020001339eb2',
-      accessRuleIds: ['contract-123'],
+      contentPackageId: 'a-content-package-id',
       accessExpiresOn: null,
       organisationDetails: {
         name: 'Towle Institute',
@@ -41,7 +41,7 @@ export class OrganisationFactory {
     return {
       organisationDetails: OrganisationDetailsFactory.sample(),
       accessExpiresOn: new Date(Date.parse('2019-12-10')),
-      accessRuleIds: [],
+      contentPackageId: 'a-content-package-id',
       id: 'org-account-id',
       links: {},
       ...args,

@@ -34,12 +34,12 @@ export const getOrganisationsByCountryCode = (
         organisations: eachLike({
           id: like(id),
           /**
-           * The accessExpiresOn field should be described here, but since it's optional in
+           * The accessExpiresOn and contentPackageId field should be described here, but since it's optional in
            * the schema we cannot describe here.
            *
            * @see https://github.com/DiUS/pact-jvm/issues/319
            */
-          accessRuleIds: like([]),
+
           organisationDetails: like({
             name: like('1st Football High School'),
             type: like('SCHOOL'),
@@ -84,7 +84,7 @@ export const updateOrganisation = (
       accessExpiresOn: like(
         updateOrganisationRequest.accessExpiresOn.toISOString(),
       ),
-      accessRuleIds: like([]),
+      contentPackageId: like('a-content-package-id'),
       organisationDetails: like({
         name: like('1st Football High School'),
         type: like('SCHOOL'),

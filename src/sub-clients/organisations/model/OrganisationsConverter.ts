@@ -19,7 +19,7 @@ export class OrganisationsConverter {
   public static convert(entity: OrganisationEntity): Organisation {
     return {
       id: entity.id,
-      accessRuleIds: entity.accessRuleIds,
+      contentPackageId: entity.contentPackageId,
       accessExpiresOn: entity.accessExpiresOn
         ? new Date(entity.accessExpiresOn)
         : null,

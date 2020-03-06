@@ -7,6 +7,7 @@ describe('OrganisationConverter', () => {
   it('converts a school to an Organisation', () => {
     const schoolEntity = OrganisationEntityFactory.sample({
       id: '5db06aec7c6c020001339eb2',
+      contentPackageId: 'a-content-package-id',
       organisationDetails: {
         name: 'Towle Institute',
         type: 'SCHOOL',
@@ -27,7 +28,9 @@ describe('OrganisationConverter', () => {
     );
 
     expect(convertedOrganisation.id).toEqual('5db06aec7c6c020001339eb2');
-    expect(convertedOrganisation.accessRuleIds).toContainEqual('contract-123');
+    expect(convertedOrganisation.contentPackageId).toEqual(
+      'a-content-package-id',
+    );
     expect(convertedOrganisation.accessExpiresOn).toBeNull();
     expect(convertedOrganisation.organisationDetails.name).toEqual(
       'Towle Institute',
