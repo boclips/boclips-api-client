@@ -16,6 +16,7 @@ import {
   updateContentPartner,
 } from '../pact/ContentPartnersInteractions';
 import { BoclipsApiError } from '../../../types';
+import moment from 'moment';
 
 describe('ContentPartnersClient', () => {
   withClients(
@@ -153,6 +154,11 @@ describe('ContentPartnersClient', () => {
           {
             name: 'TED',
             ageRanges: ['early-years'],
+            ingest: {
+              type: 'MRSS',
+              url: 'https://mrss.feed',
+            },
+            deliveryFrequency: moment.duration(3, 'month'),
           },
         );
       });

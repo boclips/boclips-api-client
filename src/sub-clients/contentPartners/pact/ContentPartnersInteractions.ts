@@ -57,6 +57,11 @@ export const updateContentPartner = (id: string): InteractionObject => ({
     body: {
       name: 'TED',
       ageRanges: ['early-years'],
+      deliveryFrequency: 'P3M',
+      ingest: {
+        type: 'MRSS',
+        url: 'https://mrss.feed',
+      },
     },
   },
   willRespondWith: {

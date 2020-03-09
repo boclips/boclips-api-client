@@ -1,8 +1,10 @@
 import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
 import { ContentCategory } from './ContentCategories';
+import { IngestDetails } from './IngestDetails';
 import { Language } from './Language';
 import { MarketingInformationRequest } from './MarketingInformationRequest';
+import moment from 'moment';
 
 export interface UpdateContentPartnerRequest {
   name?: string;
@@ -25,4 +27,6 @@ export interface UpdateContentPartnerRequest {
   isTranscriptProvided?: boolean;
   subjects?: string[];
   bestForTags?: string[];
+  deliveryFrequency?: moment.Duration;
+  ingest?: IngestDetails;
 }
