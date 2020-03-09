@@ -51,5 +51,8 @@
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.6.3",
     "urijs": "^1.19.1"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
   }
 }
