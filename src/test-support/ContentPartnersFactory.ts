@@ -1,6 +1,20 @@
+import { ContentPartnerResource } from '../sub-clients/contentPartners/resources/ContentPartnerResource';
 import { ContentPartner, Link } from '../types';
 
 export class ContentPartnerFactory {
+  public static createContentPartnerResource(
+    resource: Partial<ContentPartnerResource> = {},
+  ): ContentPartnerResource {
+    return {
+      id: '123',
+      name: 'content partner name',
+      official: true,
+      distributionMethods: [],
+      _links: {},
+      ...resource,
+    };
+  }
+
   public static sample(
     contentPartner: Partial<ContentPartner> = {},
   ): ContentPartner {

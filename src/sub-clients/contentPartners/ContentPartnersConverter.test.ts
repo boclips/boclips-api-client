@@ -1,4 +1,17 @@
+import { ContentPartnerFactory } from '../../test-support';
 import { ContentPartnersConverter } from './ContentPartnersConverter';
+
+describe('converting a content partner', () => {
+  it('can handle missing ingest details', () => {
+    const resource = ContentPartnerFactory.createContentPartnerResource({
+      ingest: undefined,
+    });
+
+    const contentPartner = ContentPartnersConverter.convertResource(resource);
+
+    expect(contentPartner.ingest).toBeUndefined();
+  });
+});
 
 describe('converting delivery frequency', () => {
   it('can handle month-based duration', () => {

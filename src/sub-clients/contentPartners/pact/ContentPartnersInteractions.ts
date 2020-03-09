@@ -11,9 +11,6 @@ const createContentPartnerWithMandatoryFields = (id: string) => ({
   id: like(id),
   name: 'a name',
   official: true,
-  ingest: {
-    type: 'MANUAL',
-  },
   _links: like({
     self: {
       href: `${provider.mockService.baseUrl}/v1/content-partners/${id}`,

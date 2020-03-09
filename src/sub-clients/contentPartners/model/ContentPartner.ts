@@ -28,6 +28,6 @@ export interface ContentPartner {
   marketingInformation?: MarketingInformation;
   pedagogyInformation?: PedagogyInformation;
   deliveryFrequency?: moment.Duration;
-  ingest: IngestDetails;
+  ingest?: IngestDetails;
   links: { self: Link };
 }

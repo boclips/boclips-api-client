@@ -64,7 +64,7 @@ export class ContentPartnersConverter {
       oneLineDescription,
       marketingInformation,
       pedagogyInformation,
-      ingest: this.convertIngestDetailsResource(ingest),
+      ingest: ingest ? this.convertIngestDetailsResource(ingest) : undefined,
       links: {
         self: new Link(_links.self),
       },

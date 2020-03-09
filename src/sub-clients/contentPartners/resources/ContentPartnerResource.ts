@@ -20,6 +20,6 @@ export interface ContentPartnerResource {
   marketingInformation?: any;
   pedagogyInformation?: any;
   deliveryFrequency?: string;
-  ingest: IngestDetailsResource;
+  ingest?: IngestDetailsResource;
   _links: any;
 }
