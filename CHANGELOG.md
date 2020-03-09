@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.0] - 2020-03-09
+
 ### Changed
 
-- Add delivery frequency and ingest details to content partners
-- Add dependency on moment.js
+- Added delivery frequency and ingest details to content partners
+- Added dependency on moment.js
 
 ## [5.0.0] - 2020-03-06
 
