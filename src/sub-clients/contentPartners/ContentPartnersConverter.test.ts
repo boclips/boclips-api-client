@@ -1,7 +1,19 @@
 import { ContentPartnerFactory } from '../../test-support';
 import { ContentPartnersConverter } from './ContentPartnersConverter';
+import moment from 'moment';
 
 describe('converting a content partner', () => {
+  it('converts ingest details', () => {
+    const resource = ContentPartnerFactory.createContentPartnerResource({
+      ingest: { type: 'MANUAL' },
+    });
+
+    const contentPartner = ContentPartnersConverter.convertResource(resource);
+
+    expect(contentPartner.ingest).toBeDefined();
+    expect(contentPartner.ingest.type).toEqual('MANUAL');
+  });
+
   it('can handle missing ingest details', () => {
     const resource = ContentPartnerFactory.createContentPartnerResource({
       ingest: undefined,
@@ -10,6 +22,28 @@ describe('converting a content partner', () => {
     const contentPartner = ContentPartnersConverter.convertResource(resource);
 
     expect(contentPartner.ingest).toBeUndefined();
+  });
+
+  it('converts delivery frequency', () => {
+    const resource = ContentPartnerFactory.createContentPartnerResource({
+      deliveryFrequency: 'P1M',
+    });
+
+    const contentPartner = ContentPartnersConverter.convertResource(resource);
+
+    expect(contentPartner.deliveryFrequency).toEqual(
+      moment.duration(1, 'month'),
+    );
+  });
+
+  it('can handle missing delivery frequency', () => {
+    const resource = ContentPartnerFactory.createContentPartnerResource({
+      deliveryFrequency: undefined,
+    });
+
+    const contentPartner = ContentPartnersConverter.convertResource(resource);
+
+    expect(contentPartner.deliveryFrequency).toBeUndefined();
   });
 });
 

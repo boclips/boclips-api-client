@@ -43,6 +43,7 @@ export class ContentPartnersConverter {
       oneLineDescription,
       marketingInformation,
       pedagogyInformation,
+      deliveryFrequency,
       ingest,
     } = resource;
 
@@ -64,6 +65,9 @@ export class ContentPartnersConverter {
       oneLineDescription,
       marketingInformation,
       pedagogyInformation,
+      deliveryFrequency: deliveryFrequency
+        ? this.convertDeliveryFrequency(deliveryFrequency)
+        : undefined,
       ingest: ingest ? this.convertIngestDetailsResource(ingest) : undefined,
       links: {
         self: new Link(_links.self),
