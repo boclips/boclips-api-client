@@ -83,13 +83,13 @@ describe('CollectionsClient', () => {
             }),
           );
         }
-        const response: Pageable<
-          Collection
-        > = await client.collectionsClient.getAllFiltered({
-          page,
-          size,
-          projection,
-        });
+        const response: Pageable<Collection> = await client.collectionsClient.getAllFiltered(
+          {
+            page,
+            size,
+            projection,
+          },
+        );
 
         expect(response.pageSpec.number).toEqual(page);
         expect(response.pageSpec.size).toEqual(size);

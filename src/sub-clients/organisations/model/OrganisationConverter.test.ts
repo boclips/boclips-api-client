@@ -126,9 +126,9 @@ describe('OrganisationConverter', () => {
       _links: {},
     };
 
-    const convertedPage: Pageable<
-      Organisation
-    > = OrganisationsConverter.convertPage(pageResponse);
+    const convertedPage: Pageable<Organisation> = OrganisationsConverter.convertPage(
+      pageResponse,
+    );
 
     expect(convertedPage.pageSpec.size).toEqual(30);
     expect(convertedPage.pageSpec.totalElements).toEqual(1);
