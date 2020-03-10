@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.1] - 2020-03-10
+
+### Changed
+
+- Axios upgraded from 0.19.0 to 0.19.2
+- Typescript upgraded from 3.6.3 to 3.8.3
+
 ## [5.1.0] - 2020-03-09
 
 ### Changed
