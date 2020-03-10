@@ -1,11 +1,11 @@
 export interface ManualIngest {
   type: 'MANUAL';
-  url?: undefined;
+  url?: never;
 }
 
 export interface CustomIngest {
   type: 'CUSTOM';
-  url?: undefined;
+  url?: never;
 }
 
 export interface MrssFeedIngest {

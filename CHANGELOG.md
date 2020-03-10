@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.2] - 2020-03-10
+
+### Changed
+
+- Manual and custom ingest url type changed to never
+
 ## [5.1.1] - 2020-03-10
 
 ### Changed
