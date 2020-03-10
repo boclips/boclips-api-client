@@ -156,7 +156,7 @@ export const updateOrderItem = (
     method: 'PATCH',
     path: `/v1/orders/${orderId}/items/${orderItemId}`,
     headers: {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json;charset=utf-8',
     },
     body: request,
   },

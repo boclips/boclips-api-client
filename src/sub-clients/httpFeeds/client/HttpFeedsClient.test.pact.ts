@@ -26,7 +26,7 @@ describe('HttpFeedsClient', () => {
        * currently this would fail when testing against staging, because the feed is duplicate
        */
       xit('can create new feed', async () => {
-        await provider.addInteraction(createHttpFeed); // TODO(AO): Is it possible to skip verification of this interaction?
+        await provider.addInteraction(createHttpFeed);
 
         await client.feedsClient.create({
           name: 'Feed Test',

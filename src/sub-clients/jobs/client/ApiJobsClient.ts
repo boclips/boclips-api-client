@@ -51,11 +51,20 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
       throw Error('Not authorized to view an individual job');
     }
 
-    return this.axios
-      .get(expandUrlTemplate(jobDetailsLinks.href, { id }))
-      .then((response: AxiosResponse) => {
-        return this.convertJobResponse(response.data);
-      });
+    const expandedLink = expandUrlTemplate(jobDetailsLinks.href, { id });
+
+    try {
+      const response: AxiosResponse = await this.axios.get(expandedLink);
+      return this.convertJobResponse(response.data);
+    } catch (e) {
+      throw {
+        error: e.error,
+        message: e.message,
+        path: expandedLink,
+        status: e.status,
+        timestamp: new Date(),
+      };
+    }
   }
 
   private convertJobResponse(response: any): Job {

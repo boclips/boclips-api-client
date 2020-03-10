@@ -92,7 +92,6 @@ export class ApiBoclipsClient implements BoclipsClient {
   };
 
   private async setUpAdminLinks() {
-    // TODO(AO/EV): Consider moving this to clients/adminLinks
     const response = await this.axios.get(`${this.baseUrl}/v1/admin`);
 
     this.adminLinks = AdminLinksConverter.convert(response.data);

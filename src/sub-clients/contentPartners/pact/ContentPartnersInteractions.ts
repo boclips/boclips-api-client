@@ -49,7 +49,7 @@ export const updateContentPartner = (id: string): InteractionObject => ({
     method: 'PATCH',
     path: `/v1/content-partners/${id}`,
     headers: {
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json;charset=utf-8',
     },
     body: {
       name: 'TED',
@@ -226,6 +226,7 @@ export const getSignedLink = (filename: string): InteractionObject => ({
   willRespondWith: {
     status: 204,
     headers: {
+      'Access-Control-Expose-Headers': 'location',
       location: term({
         generate: `http://fakeurl.com/${filename.replace('.', '_')}_signed_url`,
         matcher: `http.*`,
