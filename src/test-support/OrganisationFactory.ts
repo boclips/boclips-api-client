@@ -14,6 +14,7 @@ export class OrganisationEntityFactory {
       accessExpiresOn: null,
       organisationDetails: {
         name: 'Towle Institute',
+        domain: null,
         type: 'SCHOOL',
         state: {
           id: 'DE',
@@ -59,6 +60,7 @@ export class OrganisationDetailsFactory {
         name: 'United States',
       },
       name: 'My organisation',
+      domain: null,
       state: {
         name: 'California',
         id: 'CA',

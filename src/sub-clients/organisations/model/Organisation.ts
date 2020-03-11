@@ -11,8 +11,9 @@ export interface Organisation {
 }
 
 export interface OrganisationDetails {
-  type: 'SCHOOL' | 'DISTRICT';
+  type: 'SCHOOL' | 'DISTRICT' | 'API';
   name: string;
+  domain: string;
   country: Country;
   state: State | null;
 }

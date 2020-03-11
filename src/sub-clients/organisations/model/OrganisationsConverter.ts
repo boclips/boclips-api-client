@@ -43,13 +43,18 @@ export class OrganisationsConverter {
   private static convertDetails(
     entity: OrganisationDetailsEntity,
   ): OrganisationDetails {
-    if (entity.type !== 'SCHOOL' && entity.type !== 'DISTRICT') {
+    if (
+      entity.type !== 'SCHOOL' &&
+      entity.type !== 'DISTRICT' &&
+      entity.type !== 'API'
+    ) {
       throw new Error(`Unsupported type of organisation ${entity.type}`);
     }
 
     return {
       type: entity.type,
       name: entity.name,
+      domain: entity.domain,
       country: OrganisationsConverter.convertCountry(entity.country),
       state: OrganisationsConverter.convertState(entity.state),
     };

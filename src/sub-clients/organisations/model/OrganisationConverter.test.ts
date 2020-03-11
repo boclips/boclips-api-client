@@ -10,6 +10,7 @@ describe('OrganisationConverter', () => {
       contentPackageId: 'a-content-package-id',
       organisationDetails: {
         name: 'Towle Institute',
+        domain: 'domain.com',
         type: 'SCHOOL',
         state: {
           id: 'DE',
@@ -69,6 +70,7 @@ describe('OrganisationConverter', () => {
     const organisationEntity = OrganisationEntityFactory.sample({
       organisationDetails: {
         name: 'Towle Institute',
+        domain: null,
         type: 'SCHOOL',
         state: null,
         country: {
@@ -90,6 +92,7 @@ describe('OrganisationConverter', () => {
     const districtEntity = OrganisationEntityFactory.sample({
       organisationDetails: {
         name: 'parentOrg',
+        domain: null,
         country: {
           id: 'USA',
           name: 'United states',
@@ -108,6 +111,31 @@ describe('OrganisationConverter', () => {
     );
 
     expect(convertedOrganisation.organisationDetails.type).toEqual('DISTRICT');
+  });
+
+  it('converts an api integration', () => {
+    const apiEntity = OrganisationEntityFactory.sample({
+      organisationDetails: {
+        name: 'parentOrg',
+        domain: null,
+        country: {
+          id: 'USA',
+          name: 'United states',
+          states: null,
+        },
+        type: 'API',
+        state: {
+          id: 'KY',
+          name: 'Kentucky',
+        },
+      },
+    });
+
+    const convertedOrganisation: Organisation = OrganisationsConverter.convert(
+      apiEntity,
+    );
+
+    expect(convertedOrganisation.organisationDetails.type).toEqual('API');
   });
 
   it('can convert a page of Organisations, and page metadata', () => {

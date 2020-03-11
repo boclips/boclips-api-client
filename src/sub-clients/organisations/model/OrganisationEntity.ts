@@ -12,6 +12,7 @@ export interface OrganisationEntity {
 
 export interface OrganisationDetailsEntity {
   name: string;
+  domain: string;
   type: 'SCHOOL' | 'DISTRICT' | 'API';
   state: StateEntity | null;
   country: CountryEntity;
