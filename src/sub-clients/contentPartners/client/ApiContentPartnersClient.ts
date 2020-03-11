@@ -4,7 +4,6 @@ import { ContentPartnersConverter } from '../ContentPartnersConverter';
 import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
-import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 
 export class ApiContentPartnersClient extends ApiSubClient
@@ -44,7 +43,7 @@ export class ApiContentPartnersClient extends ApiSubClient
 
   public async update(
     id: string,
-    contentPartner: UpdateContentPartnerRequest,
+    contentPartner: ContentPartnerRequest,
   ): Promise<void> {
     const contentPartnerLink = this.getLinkOrThrow('contentPartner');
 

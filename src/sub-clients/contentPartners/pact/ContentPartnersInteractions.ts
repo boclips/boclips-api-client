@@ -1,7 +1,6 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { term } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
-import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 
 const { eachLike, like } = Matchers;
 
@@ -181,32 +180,6 @@ export const get404ContentPartner = (id: string): InteractionObject => ({
       status: 404,
       timestamp: new Date(Date.parse('01/01/2000')).toUTCString(),
     }),
-  },
-});
-
-export const createContentPartner = (
-  request: ContentPartnerRequest,
-): InteractionObject => ({
-  state: undefined,
-  uponReceiving: 'POST content-partners',
-  withRequest: {
-    method: 'POST',
-    path: `/v1/content-partners`,
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: {
-      name: request.name,
-      accreditedToYtChannelId: request.accreditedToYtChannelId,
-      legalRestrictions: request.legalRestrictions,
-      ageRange: request.ageRange,
-      distributionMethods: request.distributionMethods,
-      currency: request.currency,
-      description: request.description,
-    },
-  },
-  willRespondWith: {
-    status: 201,
   },
 });
 

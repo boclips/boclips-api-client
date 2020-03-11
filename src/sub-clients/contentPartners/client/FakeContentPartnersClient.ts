@@ -1,10 +1,9 @@
 import { ContentPartnerFactory } from '../../../test-support';
-import { BoclipsApiError, Link } from '../../../types';
+import { AgeRange, BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
-import { UpdateContentPartnerRequest } from '../model/UpdateContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
 import moment from 'moment';
 
@@ -33,10 +32,7 @@ export class FakeContentPartnersClient
       id,
       name: request.name,
       official: request.accreditedToYtChannelId == null,
-      ageRange: request.ageRange && {
-        ...request.ageRange,
-        label: `${request.ageRange.min}-${request.ageRange.max}`,
-      },
+      ageRange: request.ageRanges && this.ageRange(request.ageRanges),
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods,
@@ -63,6 +59,17 @@ export class FakeContentPartnersClient
     });
 
     return Promise.resolve();
+  }
+
+  private ageRange(ageRangeIds: string[]): AgeRange {
+    const min = Math.min(...ageRangeIds.map(id => parseInt(id) || 5));
+    const max = Math.min(...ageRangeIds.map(id => parseInt(id) || 19));
+    return {
+      min,
+      max,
+      ids: ageRangeIds,
+      label: `${min}-${max}`,
+    };
   }
 
   public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
@@ -94,7 +101,7 @@ export class FakeContentPartnersClient
     }
   }
 
-  public update(id: string, contentPartner: UpdateContentPartnerRequest) {
+  public update(id: string, contentPartner: ContentPartnerRequest) {
     const index = this.contentPartners.findIndex(i => i.id === id);
 
     if (index < 0) {
