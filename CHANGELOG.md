@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.4] - 2020-03-10
+
+### Changed
+
+- Add delivery freq and ingest details to CP create request.
+
 ## [5.1.3] - 2020-03-10
 
 ### Changed
