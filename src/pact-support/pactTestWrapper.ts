@@ -3,12 +3,10 @@ import { ApiBoclipsClient } from '../ApiBoclipsClient';
 import { getAdminLinks } from '../sub-clients/adminLinks/pact/AdminLinksInteractions';
 import { FakeBoclipsClient } from '../test-support/FakeBoclipsClient';
 import { provider } from './pactSetup';
-import rimraf from 'rimraf';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; // This is to give the pact mock server time to start
 
 beforeAll(() => {
-  rimraf.sync(provider.opts.dir);
   return provider.setup(); // Create mock provider
 });
 afterAll(() => provider.finalize()); // Tear down the mock and write the pact

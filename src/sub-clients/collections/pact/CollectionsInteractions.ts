@@ -142,7 +142,7 @@ export const createCollection = (
   willRespondWith: {
     status: 201,
     headers: {
-      'Access-Control-Expose-Headers': 'location',
+      'Access-Control-Expose-Headers': like('location'),
       location: term({
         generate: `${provider.mockService.baseUrl}/v1/collections/${expectedId}`,
         matcher: `.*/v1/collections/.+`,

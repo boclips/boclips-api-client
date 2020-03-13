@@ -199,7 +199,7 @@ export const getSignedLink = (filename: string): InteractionObject => ({
   willRespondWith: {
     status: 204,
     headers: {
-      'Access-Control-Expose-Headers': 'location',
+      'Access-Control-Expose-Headers': like('location'),
       location: term({
         generate: `http://fakeurl.com/${filename.replace('.', '_')}_signed_url`,
         matcher: `http.*`,

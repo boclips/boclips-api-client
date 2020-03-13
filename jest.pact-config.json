@@ -1,6 +1,7 @@
 {
   "testRegex": "/*(.test.pact.ts)",
   "setupFiles": ["./src/pact-support/pactSetup.ts"],
+  "globalSetup" : "./src/pact-support/globalPactSetup.ts",
   "setupFilesAfterEnv": ["./src/pact-support/pactTestWrapper.ts"],
   "transform": {
     "^.+\\.ts$": "ts-jest"
