@@ -1,5 +1,5 @@
 import { ContentPartnerFactory } from '../../../test-support';
-import { AgeRange, BoclipsApiError, Link } from '../../../types';
+import { AgeRanges, BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentCategories } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
@@ -61,7 +61,7 @@ export class FakeContentPartnersClient
     return Promise.resolve();
   }
 
-  private ageRange(ageRangeIds: string[]): AgeRange {
+  private ageRange(ageRangeIds: string[]): AgeRanges {
     const min = Math.min(...ageRangeIds.map(id => parseInt(id) || 5));
     const max = Math.min(...ageRangeIds.map(id => parseInt(id) || 19));
     return {

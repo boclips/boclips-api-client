@@ -1,4 +1,4 @@
-export interface EduAgeRange {
+export interface AgeRange {
   id: string;
   label: string;
   min: number;

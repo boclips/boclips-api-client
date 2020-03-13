@@ -1,7 +1,7 @@
 import { InteractionObject } from '@pact-foundation/pact';
 import { eachLike } from '@pact-foundation/pact/dsl/matchers';
 
-export const getEduAgeRangesInteraction = (): InteractionObject => ({
+export const getAgeRangesInteraction = (): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET age ranges',
   withRequest: {

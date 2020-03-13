@@ -1,4 +1,4 @@
-import { AgeRange } from '../../common/model/AgeRange';
+import { AgeRanges } from '../../common/model/AgeRanges';
 
 export interface PedagogyInformation {
   curriculumAligned: string;
@@ -6,5 +6,5 @@ export interface PedagogyInformation {
   isTranscriptProvided: boolean;
   subjects: string[];
   bestForTags: string[];
-  ageRanges: AgeRange;
+  ageRanges: AgeRanges;
 }

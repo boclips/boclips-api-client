@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2020-03-13
+
+### Changed
+
+- Rename EduAgeRange -> AgeRange and AgeRange -> AgeRanges
+- Update age ranges to maintain consistency with Teachers
+
 ## [6.0.0] - 2020-03-11
 
 ### Changed
