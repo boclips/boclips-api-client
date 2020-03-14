@@ -7,6 +7,7 @@ export interface Organisation {
   organisationDetails: OrganisationDetails;
   links: {
     edit?: Link;
+    associateUsers?: Link;
   };
 }
 
@@ -22,6 +23,7 @@ export interface Country {
   id: string;
   name: string;
 }
+
 export interface State {
   id: string;
   name: string;

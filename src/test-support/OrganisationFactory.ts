@@ -31,6 +31,10 @@ export class OrganisationEntityFactory {
           href:
             'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2',
         },
+        associateUsers: {
+          href:
+            'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2/associate',
+        },
       },
       ...args,
     };

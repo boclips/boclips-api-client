@@ -3,15 +3,15 @@ import Pageable from '../../common/model/Pageable';
 import { PageableConverter } from '../../common/model/PageableConverter';
 import { PageableEntity } from '../../common/model/PageableEntity';
 import {
-  OrganisationDetails,
   Country,
   Organisation,
+  OrganisationDetails,
   State,
 } from './Organisation';
 import {
-  OrganisationEntity,
   CountryEntity,
   OrganisationDetailsEntity,
+  OrganisationEntity,
   StateEntity,
 } from './OrganisationEntity';
 
@@ -67,6 +67,10 @@ export class OrganisationsConverter {
 
     if (linkEntities.edit) {
       links.edit = new Link(linkEntities.edit);
+    }
+
+    if (linkEntities.associateUsers) {
+      links.associateUsers = new Link(linkEntities.associateUsers);
     }
 
     return links;

@@ -49,6 +49,11 @@ describe('OrganisationConverter', () => {
     expect(convertedOrganisation.links.edit.getOriginalLink()).toEqual(
       'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2',
     );
+    expect(
+      convertedOrganisation.links.associateUsers.getOriginalLink(),
+    ).toEqual(
+      'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2/associate',
+    );
   });
 
   it('converts an organisation with an accessExpiresOn', () => {

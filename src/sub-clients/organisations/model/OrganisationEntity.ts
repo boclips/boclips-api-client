@@ -7,6 +7,7 @@ export interface OrganisationEntity {
   organisationDetails: OrganisationDetailsEntity;
   _links: {
     edit?: LinkEntity;
+    associateUsers?: LinkEntity;
   };
 }
 
