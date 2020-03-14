@@ -1,4 +1,4 @@
-import { AgeRanges } from '../../common/model/AgeRanges';
+import { AgeRange } from '../../common/model/AgeRange';
 import { ModelWithLinks } from '../../common/model/common';
 import { Link } from '../../common/model/LinkEntity';
 import { Video } from '../../common/model/Video';
@@ -14,7 +14,7 @@ export interface Collection extends ModelWithLinks {
   mine: boolean;
   createdBy: string;
   subjects: Subject[];
-  ageRange?: AgeRanges;
+  ageRange?: AgeRange;
   description?: string;
   attachments?: Attachment[];
   links: {

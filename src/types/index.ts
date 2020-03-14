@@ -1,5 +1,5 @@
 export { Video } from '../sub-clients/common/model/Video';
-export { AgeRanges } from '../sub-clients/common/model/AgeRanges';
+export { AgeRange } from '../sub-clients/common/model/AgeRange';
 export { DistributionMethod } from '../sub-clients/common/model/DistributionMethod';
 export { Link } from '../sub-clients/common/model/LinkEntity';
 export { AdminLinks } from '../sub-clients/adminLinks/model/AdminLinks';
@@ -23,4 +23,4 @@ export { ContentPartner as IngestContentPartner } from '../sub-clients/ingestVid
 export { IngestJob } from '../sub-clients/ingestVideos/model/IngestJob';
 export { IngestVideo } from '../sub-clients/ingestVideos/model/IngestVideo';
 export { BoclipsApiError, isBoclipsApiError } from './BoclipsApiError';
-export { AgeRange } from '../sub-clients/ageRange/model/AgeRange';
+export { EduAgeRange } from '../sub-clients/educationalAgeRanges/model/EduAgeRange';

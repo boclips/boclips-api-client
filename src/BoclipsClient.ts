@@ -3,7 +3,7 @@ import { IngestVideoStatusesClient } from './sub-clients/ingestVideoStatuses/cli
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
 import { ContentPartnersClient } from './sub-clients/contentPartners/client/ContentPartnersClient';
-import { AgeRangeClient } from './sub-clients/ageRange/client/AgeRangeClient';
+import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { EventsClient } from './sub-clients/events/client/EventsClient';
 import { HttpFeedsClient } from './sub-clients/httpFeeds/client/HttpFeedsClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
@@ -27,7 +27,7 @@ export interface BoclipsClient {
   videoTypesClient: VideoTypesClient;
   ingestVidoesClient: IngestVideosClient;
   bestForTagsClient: BestForTagsClient;
-  ageRangeClient: AgeRangeClient;
+  eduAgeRangesClient: EduAgeRangesClient;
   marketingStatusesClient: MarketingStatusesClient;
   ingestVideoStatusesClient: IngestVideoStatusesClient;
 }

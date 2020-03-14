@@ -2,7 +2,7 @@ import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
-import { getAgeRangesInteraction } from '../pact/AgeRangesInteractions';
+import { getEduAgeRangesInteraction } from '../pact/EduAgeRangesInteractions';
 
 describe('EduAgeRangeClient', () => {
   withClients(
@@ -13,18 +13,20 @@ describe('EduAgeRangeClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          (client as FakeBoclipsClient).ageRangeClient.insertAgeRange({
-            id: 'early-years',
-            min: 3,
-            max: undefined,
-            label: '3 - 5 Early Years',
-          });
+          (client as FakeBoclipsClient).eduAgeRangesClient.insertEduAgeRangeFixture(
+            {
+              id: 'early-years',
+              min: 3,
+              max: undefined,
+              label: '3 - 5 Early Years',
+            },
+          );
         }
       });
 
       it('can fetch all age ranges', async () => {
-        await provider.addInteraction(getAgeRangesInteraction());
-        const response = await client.ageRangeClient.getAll();
+        await provider.addInteraction(getEduAgeRangesInteraction());
+        const response = await client.eduAgeRangesClient.getAll();
 
         expect(response[0].id).toEqual('early-years');
         expect(response[0].min).toEqual(3);

@@ -1,4 +1,4 @@
-import { AgeRanges } from '../../common/model/AgeRanges';
+import { AgeRange } from '../../common/model/AgeRange';
 import { EntityWithLinks } from '../../common/model/common';
 import { LinkEntity } from '../../common/model/LinkEntity';
 
@@ -12,7 +12,7 @@ export interface CollectionEntity extends EntityWithLinks {
   mine: boolean;
   createdBy: string;
   subjects: any[];
-  ageRange: AgeRanges | null;
+  ageRange: AgeRange | null;
   description: string | null;
   attachments: AttachmentEntity[];
   _links: {

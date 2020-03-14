@@ -4,7 +4,7 @@ import { FakeOrganisationsClient } from '../sub-clients/organisations/client/Fak
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
 import { Clearable } from '../sub-clients/common/utils/Clearable';
 import { FakeContentPartnersClient } from '../sub-clients/contentPartners/client/FakeContentPartnersClient';
-import { FakeAgeRangeClient } from '../sub-clients/ageRange/client/FakeAgeRangeClient';
+import { FakeEduAgeRangesClient } from '../sub-clients/educationalAgeRanges/client/FakeEduAgeRangesClient';
 import { FakeEventsClient } from '../sub-clients/events/client/FakeEventsClient';
 import { FakeHttpFeedsClient } from '../sub-clients/httpFeeds/client/FakeHttpFeedsClient';
 import { FakeJobsClient } from '../sub-clients/jobs/client/FakeJobsClient';
@@ -30,7 +30,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public ingestVidoesClient: FakeIngestVideosClient = new FakeIngestVideosClient();
   public bestForTagsClient: FakeBestForTagsClient = new FakeBestForTagsClient();
   public marketingStatusesClient: FakeMarketingStatusesClient = new FakeMarketingStatusesClient();
-  public ageRangeClient: FakeAgeRangeClient = new FakeAgeRangeClient();
+  public eduAgeRangesClient: FakeEduAgeRangesClient = new FakeEduAgeRangesClient();
   public ingestVideoStatusesClient: FakeIngestVideoStatusesClient = new FakeIngestVideoStatusesClient();
 
   public clear() {
@@ -46,7 +46,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.videoTypesClient.clear();
     this.ingestVidoesClient.clear();
     this.bestForTagsClient.clear();
-    this.ageRangeClient.clear();
+    this.eduAgeRangesClient.clear();
     this.marketingStatusesClient.clear();
   }
 }

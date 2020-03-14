@@ -7,8 +7,8 @@ import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestFo
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
 import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
-import { ApiAgeRangeClient } from './sub-clients/ageRange/client/ApiAgeRangeClient';
-import { AgeRangeClient } from './sub-clients/ageRange/client/AgeRangeClient';
+import { ApiEduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/ApiEduAgeRangesClient';
+import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { ApiEventsClient } from './sub-clients/events/client/ApiEventsClient';
 import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsClient';
 import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiIngestVideosClient';
@@ -43,7 +43,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public ingestVidoesClient: IngestVideosClient;
   public bestForTagsClient: BestForTagsClient;
   public marketingStatusesClient: MarketingStatusesClient;
-  public ageRangeClient: AgeRangeClient;
+  public eduAgeRangesClient: EduAgeRangesClient;
   public ingestVideoStatusesClient: ApiIngestVideoStatusesClient;
   private axios: AxiosInstance;
   private baseUrl: string;
@@ -135,7 +135,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.adminLinks,
       this.axios,
     );
-    this.ageRangeClient = new ApiAgeRangeClient(this.adminLinks, this.axios);
+    this.eduAgeRangesClient = new ApiEduAgeRangesClient(
+      this.adminLinks,
+      this.axios,
+    );
     this.ingestVideoStatusesClient = new ApiIngestVideoStatusesClient(
       this.adminLinks,
       this.axios,
