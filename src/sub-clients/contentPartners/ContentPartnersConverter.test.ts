@@ -93,20 +93,20 @@ describe('converting ingest details', () => {
   it('can handle mrss feed ingest', () => {
     const ingest = ContentPartnersConverter.convertIngestDetailsResource({
       type: 'MRSS',
-      url: 'http://the.feed',
+      urls: ['http://the.feed'],
     });
 
     expect(ingest.type).toEqual('MRSS');
-    expect(ingest.url).toEqual('http://the.feed');
+    expect(ingest.urls).toEqual(['http://the.feed']);
   });
 
   it('can handle youtube scrape ingest', () => {
     const ingest = ContentPartnersConverter.convertIngestDetailsResource({
       type: 'YOUTUBE',
-      url: 'http://you.tube',
+      urls: ['http://you.tube'],
     });
 
     expect(ingest.type).toEqual('YOUTUBE');
-    expect(ingest.url).toEqual('http://you.tube');
+    expect(ingest.urls).toEqual(['http://you.tube']);
   });
 });

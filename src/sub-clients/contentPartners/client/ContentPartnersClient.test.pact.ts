@@ -142,7 +142,7 @@ describe('ContentPartnersClient', () => {
           'sample2.avi',
         ]);
         expect(contentPartner.ingest.type).toEqual('MANUAL');
-        expect(contentPartner.ingest.url).toBeUndefined();
+        expect(contentPartner.ingest.urls).toBeUndefined();
       });
 
       it('can update a content partner', async () => {
@@ -156,7 +156,7 @@ describe('ContentPartnersClient', () => {
             ageRanges: ['early-years'],
             ingest: {
               type: 'MRSS',
-              url: 'https://mrss.feed',
+              urls: ['https://mrss.feed'],
             },
             deliveryFrequency: moment.duration(3, 'month'),
           },

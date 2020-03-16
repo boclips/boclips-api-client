@@ -56,7 +56,7 @@ export const updateContentPartner = (id: string): InteractionObject => ({
       deliveryFrequency: 'P3M',
       ingest: {
         type: 'MRSS',
-        url: 'https://mrss.feed',
+        urls: ['https://mrss.feed'],
       },
     },
   },

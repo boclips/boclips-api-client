@@ -1,21 +1,21 @@
 export interface ManualIngest {
   type: 'MANUAL';
-  url?: never;
+  urls?: never;
 }
 
 export interface CustomIngest {
   type: 'CUSTOM';
-  url?: never;
+  urls?: never;
 }
 
 export interface MrssFeedIngest {
   type: 'MRSS';
-  url: string;
+  urls: string[];
 }
 
 export interface YoutubeScrapeIngest {
   type: 'YOUTUBE';
-  url: string;
+  urls: string[];
 }
 
 export type IngestDetails =
