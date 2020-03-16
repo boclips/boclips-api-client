@@ -3,6 +3,7 @@ import { Organisation } from '../model/Organisation';
 import { UpdateOrganisationRequest } from '../model/UpdateOrganisationRequest';
 
 export interface OrganisationFilters {
+  name?: string;
   countryCode?: string;
   page?: number;
   size?: number;

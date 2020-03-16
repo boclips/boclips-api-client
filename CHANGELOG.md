@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.4] - 2020-03-16
+
+### Changed
+
+- Make organisations searchable by name
+
 ## [6.0.3] - 2020-03-14
 
 ### Changed

@@ -15,6 +15,7 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
     filter: OrganisationFilters = {
       size: 30,
       page: 0,
+      name: undefined,
       countryCode: undefined,
     },
   ): Promise<Pageable<Organisation> | null> {

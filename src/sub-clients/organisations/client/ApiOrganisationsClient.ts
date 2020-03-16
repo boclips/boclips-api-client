@@ -20,6 +20,7 @@ export class ApiOrganisationsClient extends ApiSubClient
 
     const response = await this.axios.get<PageableEntity<OrganisationEntity>>(
       expandUrlTemplate(link.href, {
+        name: filter && filter.name,
         countryCode: filter && filter.countryCode,
         page: filter && filter.page,
         size: filter && filter.size,
