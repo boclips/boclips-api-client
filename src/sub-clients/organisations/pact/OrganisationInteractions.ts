@@ -67,7 +67,7 @@ export const updateOrganisation = (
   state: undefined,
   uponReceiving: 'PATCH Organisation to change accessExpiresOn',
   withRequest: {
-    method: 'PATCH',
+    method: 'POST',
     path: `/v1/organisations/${id}`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

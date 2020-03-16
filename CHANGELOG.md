@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.5] - 2020-03-16
+
+### Changed
+
+- Use POST instead of PATCH for updating organisations
+- Enable client to set domain of organisations
+
 ## [6.0.4] - 2020-03-16
 
 ### Changed

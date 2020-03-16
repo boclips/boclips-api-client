@@ -1,3 +1,4 @@
 export class UpdateOrganisationRequest {
-  accessExpiresOn: Date;
+  accessExpiresOn?: Date;
+  domain?: string;
 }

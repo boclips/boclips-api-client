@@ -36,7 +36,7 @@ export class ApiOrganisationsClient extends ApiSubClient
   ): Promise<Organisation> {
     const link = organisation.links.edit.getOriginalLink();
 
-    const response = await this.axios.patch<OrganisationEntity>(
+    const response = await this.axios.post<OrganisationEntity>(
       link,
       updateOrganisationRequest,
     );
