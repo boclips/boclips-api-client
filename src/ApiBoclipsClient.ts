@@ -10,7 +10,6 @@ import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/A
 import { ApiEduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/ApiEduAgeRangesClient';
 import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { ApiEventsClient } from './sub-clients/events/client/ApiEventsClient';
-import { ApiHttpFeedsClient } from './sub-clients/httpFeeds/client/ApiHttpFeedsClient';
 import { ApiIngestVideosClient } from './sub-clients/ingestVideos/client/ApiIngestVideosClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
 import { ApiIngestVideoStatusesClient } from './sub-clients/ingestVideoStatuses/client/ApiIngestVideoStatusesClient';
@@ -33,7 +32,6 @@ export class ApiBoclipsClient implements BoclipsClient {
   public legalRestrictionsClient: ApiLegalRestrictionsClient;
   public contentPartnersClient: ApiContentPartnersClient;
   public subjectsClient: ApiSubjectsClient;
-  public feedsClient: ApiHttpFeedsClient;
   public collectionsClient: ApiCollectionsClient;
   public ordersClient: ApiOrdersClient;
   public eventsClient: ApiEventsClient;
@@ -107,7 +105,6 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axios,
     );
     this.subjectsClient = new ApiSubjectsClient(this.adminLinks, this.axios);
-    this.feedsClient = new ApiHttpFeedsClient(this.adminLinks, this.axios);
     this.collectionsClient = new ApiCollectionsClient(
       this.adminLinks,
       this.axios,

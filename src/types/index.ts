@@ -6,7 +6,6 @@ export { AdminLinks } from '../sub-clients/adminLinks/model/AdminLinks';
 export { Collection } from '../sub-clients/collections/model/Collection';
 export { ContentPartner } from '../sub-clients/contentPartners/model/ContentPartner';
 export { ContentPartnerRequest } from '../sub-clients/contentPartners/model/ContentPartnerRequest';
-export { HttpFeed } from '../sub-clients/httpFeeds/model/HttpFeed';
 export { LegalRestriction } from '../sub-clients/legalRestrictions/model/LegalRestriction';
 export { Subject } from '../sub-clients/subjects/model/Subject';
 export { Order } from '../sub-clients/orders/model/Order';

@@ -54,10 +54,6 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/orders/{id}`,
           templated: false,
         }),
-        httpFeeds: like({
-          href: `${provider.mockService.baseUrl}/v1/http-feeds{?provider}`,
-          templated: true,
-        }),
         contentPartners: like({
           href: `${provider.mockService.baseUrl}/v1/content-partners{?name,official,accreditedToYtChannelId}`,
           templated: true,
@@ -72,14 +68,6 @@ export const getAdminLinks = (): InteractionObject => ({
         }),
         legalRestrictions: like({
           href: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
-          templated: false,
-        }),
-        youtubeFeeds: like({
-          href: `${provider.mockService.baseUrl}/v1/http-feeds?provider=youtube`,
-          templated: false,
-        }),
-        createHttpFeed: like({
-          href: `${provider.mockService.baseUrl}/v1/http-feeds`,
           templated: false,
         }),
         distributionMethods: like(sampleLink),
