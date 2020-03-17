@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.0] - 2020-03-17
+
+### Changed
+
+- Change urls to playlistIds in YT IngestDetails
+
 ## [6.1.0] - 2020-03-16
 
 ### Changed

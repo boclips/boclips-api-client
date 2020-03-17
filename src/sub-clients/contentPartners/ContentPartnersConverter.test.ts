@@ -103,10 +103,10 @@ describe('converting ingest details', () => {
   it('can handle youtube scrape ingest', () => {
     const ingest = ContentPartnersConverter.convertIngestDetailsResource({
       type: 'YOUTUBE',
-      urls: ['http://you.tube'],
+      playlistIds: ['playlist-1'],
     });
 
     expect(ingest.type).toEqual('YOUTUBE');
-    expect(ingest.urls).toEqual(['http://you.tube']);
+    expect(ingest.playlistIds).toEqual(['playlist-1']);
   });
 });

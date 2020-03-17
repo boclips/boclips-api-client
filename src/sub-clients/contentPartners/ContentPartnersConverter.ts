@@ -83,8 +83,9 @@ export class ContentPartnersConverter {
       case 'CUSTOM':
         return { type: resource.type };
       case 'MRSS':
-      case 'YOUTUBE':
         return { type: resource.type, urls: resource.urls };
+      case 'YOUTUBE':
+        return { type: resource.type, playlistIds: resource.playlistIds };
     }
   }
 
