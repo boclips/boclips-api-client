@@ -53,6 +53,9 @@ export const getOrganisationsByCountryCode = (
             edit: {
               href: `${provider.mockService.baseUrl}/v1/organisations/${id}`,
             },
+            associateUsers: {
+              href: `${provider.mockService.baseUrl}/v1/organisations/${id}/associate`,
+            },
           }),
         }),
       },
@@ -98,6 +101,27 @@ export const updateOrganisation = (
         edit: like({
           href: `${provider.mockService.baseUrl}/v1/organisations/${id}`,
         }),
+      },
+    },
+  },
+});
+
+export const associateUsers = (organisationId: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST to assign users in organisation by email domain',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/organisations/${organisationId}/associate`,
+    body: undefined,
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: {
+      _embedded: {
+        users: [],
       },
     },
   },

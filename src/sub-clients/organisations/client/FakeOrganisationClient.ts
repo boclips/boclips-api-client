@@ -56,6 +56,10 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
     }
   }
 
+  public associateUsers() {
+    return Promise.resolve([]);
+  }
+
   public insertOrganisationFixture(organisation: Organisation) {
     this.organisations.push(organisation);
   }

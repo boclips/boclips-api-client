@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.2] - 2020-03-18
+
+### Changed
+
+- Add functionality to Organisation client to assign users with organisations by domain
+- Add User objects (only used in organisation context for now)
+
 ## [6.2.1] - 2020-03-17
 
 ### Changed

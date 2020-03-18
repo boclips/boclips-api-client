@@ -5,6 +5,7 @@ import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { OrganisationFactory } from '../../../test-support/OrganisationFactory';
 import { UpdateOrganisationRequest } from '../model/UpdateOrganisationRequest';
 import {
+  associateUsers,
   getOrganisationsByCountryCode,
   updateOrganisation,
 } from '../pact/OrganisationInteractions';
@@ -104,6 +105,31 @@ describe('Organisation', () => {
         expect(updatedOrganisation.accessExpiresOn).toEqual(
           new Date(updatedTime),
         );
+      });
+
+      it(`can associate users to organisations`, async () => {
+        await provider.addInteraction(
+          getOrganisationsByCountryCode(
+            USA_ORGANISATION_ID_FROM_STAGING,
+            'USA',
+          ),
+        );
+        const organisationPage = await client.organisationsClient.getOrganisations(
+          {
+            countryCode: 'USA',
+            page: 0,
+            size: 30,
+          },
+        );
+
+        await provider.addInteraction(
+          associateUsers(USA_ORGANISATION_ID_FROM_STAGING),
+        );
+        const associatedUsers = await client.organisationsClient.associateUsers(
+          organisationPage.page[0],
+        );
+
+        expect(associatedUsers.length).toEqual(0);
       });
     },
   );

@@ -7,9 +7,11 @@ import { OrganisationEntity } from '../model/OrganisationEntity';
 import { OrganisationsConverter } from '../model/OrganisationsConverter';
 import { UpdateOrganisationRequest } from '../model/UpdateOrganisationRequest';
 import {
-  OrganisationsClient,
   OrganisationFilters,
+  OrganisationsClient,
 } from './OrganisationsClient';
+import { User } from '../model/User';
+import { UserConverter } from '../model/UserConverter';
 
 export class ApiOrganisationsClient extends ApiSubClient
   implements OrganisationsClient {
@@ -42,5 +44,11 @@ export class ApiOrganisationsClient extends ApiSubClient
     );
 
     return OrganisationsConverter.convert(response.data);
+  }
+
+  public async associateUsers(organisation: Organisation): Promise<User[]> {
+    const link = organisation.links.associateUsers.getOriginalLink();
+    const response = await this.axios.post(link);
+    return UserConverter.convert(response.data);
   }
 }
