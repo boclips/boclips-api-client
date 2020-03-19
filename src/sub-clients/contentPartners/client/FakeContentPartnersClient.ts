@@ -34,7 +34,7 @@ export class FakeContentPartnersClient
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods,
-      contentCategories: request.contentCategories.map(key => ({
+      contentCategories: request.contentCategories?.map(key => ({
         key,
         label: `Label: ${key}`,
       })),
