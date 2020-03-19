@@ -1,7 +1,6 @@
 import moment from 'moment';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
-import { ContentCategory } from './ContentCategories';
 import { IngestDetails } from './IngestDetails';
 import { Language } from './Language';
 import { MarketingInformationRequest } from './MarketingInformationRequest';
@@ -18,7 +17,7 @@ export interface ContentPartnerRequest {
   notes?: string;
   hubspotId?: string;
   language?: Language;
-  contentCategories?: ContentCategory[];
+  contentCategories?: string[];
   contentTypes?: string[];
   oneLineDescription?: string;
   marketingInformation?: MarketingInformationRequest;

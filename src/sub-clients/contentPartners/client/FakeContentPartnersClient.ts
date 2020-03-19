@@ -1,22 +1,20 @@
+import moment from 'moment';
 import { ContentPartnerFactory } from '../../../test-support';
 import { AgeRange, BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
-import { ContentCategories } from '../model/ContentCategories';
+import { ContentCategories, ContentCategory } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 import { ContentPartnersClient } from './ContentPartnersClient';
-import moment from 'moment';
 
 export class FakeContentPartnersClient
   implements ContentPartnersClient, Clearable {
   private contentPartners: ContentPartner[] = [];
 
-  private contentCategories = {
-    categories: [
-      { key: 'key 1', label: 'label 1' },
-      { key: 'key 2', label: 'label 2' },
-    ],
-  };
+  private contentCategories: ContentCategory[] = [
+    { key: 'key 1', label: 'label 1' },
+    { key: 'key 2', label: 'label 2' },
+  ];
 
   public create(request: ContentPartnerRequest): Promise<void> {
     const id = request.name + Date.now();
@@ -36,7 +34,10 @@ export class FakeContentPartnersClient
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods,
-      contentCategories: request.contentCategories,
+      contentCategories: request.contentCategories.map(key => ({
+        key,
+        label: `Label: ${key}`,
+      })),
       description: request.description,
       awards: request.awards,
       notes: request.notes,
@@ -61,23 +62,12 @@ export class FakeContentPartnersClient
     return Promise.resolve();
   }
 
-  private ageRange(ageRangeIds: string[]): AgeRange {
-    const min = Math.min(...ageRangeIds.map(id => parseInt(id) || 5));
-    const max = Math.min(...ageRangeIds.map(id => parseInt(id) || 19));
-    return {
-      min,
-      max,
-      ids: ageRangeIds,
-      label: `${min}-${max}`,
-    };
-  }
-
   public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
     this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));
   }
 
   public getContentCategories(): Promise<ContentCategories> {
-    return Promise.resolve(this.contentCategories);
+    return Promise.resolve({ categories: this.contentCategories });
   }
 
   public getAll(): Promise<ContentPartner[]> {
@@ -136,5 +126,16 @@ export class FakeContentPartnersClient
     const newFilename = filename.replace('.', '_') + '_signed_link';
     const signedLinkUrl = `http://www.server.com/${newFilename}`;
     return new Promise(resolve => resolve(signedLinkUrl));
+  }
+
+  private ageRange(ageRangeIds: string[]): AgeRange {
+    const min = Math.min(...ageRangeIds.map(id => parseInt(id) || 5));
+    const max = Math.min(...ageRangeIds.map(id => parseInt(id) || 19));
+    return {
+      min,
+      max,
+      ids: ageRangeIds,
+      label: `${min}-${max}`,
+    };
   }
 }
