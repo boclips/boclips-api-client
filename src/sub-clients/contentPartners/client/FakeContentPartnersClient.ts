@@ -42,7 +42,7 @@ export class FakeContentPartnersClient
       awards: request.awards,
       notes: request.notes,
       hubspotId: request.hubspotId,
-      language: request.language,
+      language: { code: request.language, name: request.language },
       contentTypes: request.contentTypes,
       oneLineDescription: request.oneLineDescription,
       marketingInformation: request.marketingInformation,
