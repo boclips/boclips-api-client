@@ -12,6 +12,7 @@ export class VideoFactory {
     description: 'video description',
     contentPartner: 'some content partner',
     disabledDistributionMethods: [],
+    playback: { type: 'STREAM' },
     links: {
       update: null,
     },
