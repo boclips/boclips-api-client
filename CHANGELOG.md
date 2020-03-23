@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.2.6] - 2020-03-23
+
+### Added
+- Corrected language type in content partner request.
+
 ## [6.2.5] - 2020-03-23
 
 ### Added
