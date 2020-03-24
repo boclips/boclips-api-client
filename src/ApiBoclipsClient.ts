@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
 import { ApiOrganisationsClient } from './sub-clients/organisations/client/ApiOrganisationsClient';
 import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverter';
@@ -43,12 +43,27 @@ export class ApiBoclipsClient implements BoclipsClient {
   public marketingStatusesClient: MarketingStatusesClient;
   public eduAgeRangesClient: EduAgeRangesClient;
   public ingestVideoStatusesClient: ApiIngestVideoStatusesClient;
-  private axios: AxiosInstance;
-  private baseUrl: string;
+  private readonly axiosInstance: AxiosInstance;
   private adminLinks: AdminLinks;
 
-  private constructor(axios: AxiosInstance, baseUrl: string) {
-    axios.interceptors.response.use(
+  private constructor(initialAxios: AxiosInstance, private baseUrl: string) {
+    this.axiosInstance = axios.create();
+
+    (initialAxios.interceptors.request as any).forEach(interceptor => {
+      this.axiosInstance.interceptors.request.use(
+        interceptor.fulfilled,
+        interceptor.rejected,
+      );
+    });
+
+    (initialAxios.interceptors.response as any).forEach(interceptor => {
+      this.axiosInstance.interceptors.response.use(
+        interceptor.fulfilled,
+        interceptor.rejected,
+      );
+    });
+
+    this.axiosInstance.interceptors.response.use(
       response => {
         return response;
       },
@@ -71,9 +86,6 @@ export class ApiBoclipsClient implements BoclipsClient {
         }
       },
     );
-
-    this.axios = axios;
-    this.baseUrl = baseUrl;
   }
 
   public static initialize = async (axios: AxiosInstance, baseUrl: string) => {
@@ -89,8 +101,12 @@ export class ApiBoclipsClient implements BoclipsClient {
     return ApiBoclipsClient.instance;
   };
 
+  public static reset = () => {
+    ApiBoclipsClient.instance = null;
+  };
+
   private async setUpAdminLinks() {
-    const response = await this.axios.get(`${this.baseUrl}/v1/admin`);
+    const response = await this.axiosInstance.get(`${this.baseUrl}/v1/admin`);
 
     this.adminLinks = AdminLinksConverter.convert(response.data);
   }
@@ -98,47 +114,56 @@ export class ApiBoclipsClient implements BoclipsClient {
   private setUpSubClients() {
     this.legalRestrictionsClient = new ApiLegalRestrictionsClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.contentPartnersClient = new ApiContentPartnersClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
-    this.subjectsClient = new ApiSubjectsClient(this.adminLinks, this.axios);
+    this.subjectsClient = new ApiSubjectsClient(
+      this.adminLinks,
+      this.axiosInstance,
+    );
     this.collectionsClient = new ApiCollectionsClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
-    this.ordersClient = new ApiOrdersClient(this.adminLinks, this.axios);
-    this.eventsClient = new ApiEventsClient(this.adminLinks, this.axios);
-    this.jobsClient = new ApiJobsClient(this.adminLinks, this.axios);
+    this.ordersClient = new ApiOrdersClient(
+      this.adminLinks,
+      this.axiosInstance,
+    );
+    this.eventsClient = new ApiEventsClient(
+      this.adminLinks,
+      this.axiosInstance,
+    );
+    this.jobsClient = new ApiJobsClient(this.adminLinks, this.axiosInstance);
     this.organisationsClient = new ApiOrganisationsClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.videoTypesClient = new ApiVideoTypesClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.ingestVidoesClient = new ApiIngestVideosClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.bestForTagsClient = new ApiBestForTagsClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.marketingStatusesClient = new ApiMarketingStatusesClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.eduAgeRangesClient = new ApiEduAgeRangesClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
     this.ingestVideoStatusesClient = new ApiIngestVideoStatusesClient(
       this.adminLinks,
-      this.axios,
+      this.axiosInstance,
     );
   }
 }
