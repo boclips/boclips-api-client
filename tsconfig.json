@@ -12,7 +12,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "typeRoots": ["./src/types/", "./node_modules/@types"]
   },
   "exclude": ["src/**/*.test.*"],
   "include": ["src/**/*"]

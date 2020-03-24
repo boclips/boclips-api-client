@@ -49,14 +49,14 @@ export class ApiBoclipsClient implements BoclipsClient {
   private constructor(initialAxios: AxiosInstance, private baseUrl: string) {
     this.axiosInstance = axios.create();
 
-    (initialAxios.interceptors.request as any).forEach(interceptor => {
+    initialAxios.interceptors.request.forEach(interceptor => {
       this.axiosInstance.interceptors.request.use(
         interceptor.fulfilled,
         interceptor.rejected,
       );
     });
 
-    (initialAxios.interceptors.response as any).forEach(interceptor => {
+    initialAxios.interceptors.response.forEach(interceptor => {
       this.axiosInstance.interceptors.response.use(
         interceptor.fulfilled,
         interceptor.rejected,

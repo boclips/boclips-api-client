@@ -10,7 +10,6 @@ async function initialiseClient(axiosInstance: AxiosInstance) {
       );
     })();
   } catch (err) {
-    console.warn(err);
     // we expect this error.
   }
 }
@@ -25,22 +24,22 @@ describe('ApiBoclipsClient', () => {
 
     let initialCount = 0;
 
-    (axiosInstance.interceptors.response as any).forEach(() => {
+    axiosInstance.interceptors.response.forEach(() => {
       initialCount++;
     });
 
-    (axiosInstance.interceptors.request as any).forEach(() => {
+    axiosInstance.interceptors.request.forEach(() => {
       initialCount++;
     });
 
     await initialiseClient(axiosInstance);
 
     let count = 0;
-    (axiosInstance.interceptors.response as any).forEach(() => {
+    axiosInstance.interceptors.response.forEach(() => {
       count++;
     });
 
-    (axiosInstance.interceptors.request as any).forEach(() => {
+    axiosInstance.interceptors.request.forEach(() => {
       count++;
     });
 
