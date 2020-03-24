@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2020-03-24
+
+### Changed
+- In prior versions the global axios instance was polluted with internal error handling concerns.
+This release removes the pollution by creating a self-contained instance.
+
 ## [6.2.6] - 2020-03-23
 
 ### Added
