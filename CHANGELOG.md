@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.1] - 2020-03-26
+
+## Added
+- `Collection` exposes `promoted` field
+
 ## [8.0.0] - 2020-03-26
 
 ## [7.0.0] - 2020-03-24

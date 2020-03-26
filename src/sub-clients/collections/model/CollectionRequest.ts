@@ -8,6 +8,7 @@ export interface CreateCollectionRequest {
 export interface UpdateCollectionRequest {
   title?: string;
   public?: boolean;
+  promoted?: boolean;
   subjects?: string[];
   description?: string;
   videos?: string[];

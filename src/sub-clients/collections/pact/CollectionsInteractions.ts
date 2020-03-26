@@ -82,7 +82,7 @@ export const getFilteredCollections = (
               matcher: CustomMatchers.ISO8601_DATETIME_RELAXED,
             }),
             public: false,
-
+            promoted: false,
             mine: false,
             createdBy: 'Teacher',
             _links: like({

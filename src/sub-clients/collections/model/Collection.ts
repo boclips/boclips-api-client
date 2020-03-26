@@ -11,6 +11,7 @@ export interface Collection extends ModelWithLinks {
   videos: Video[];
   updatedAt: Date;
   public: boolean;
+  promoted?: boolean;
   mine: boolean;
   createdBy: string;
   subjects: Subject[];
