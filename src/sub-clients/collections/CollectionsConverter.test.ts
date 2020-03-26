@@ -74,6 +74,7 @@ describe('Collections converter', () => {
     expect(converted.videos.length).toEqual(entity.videos.length);
     expect(converted.updatedAt).toEqual(new Date(entity.updatedAt));
     expect(converted.public).toEqual(entity.public);
+    expect(converted.promoted).toEqual(entity.promoted);
     expect(converted.mine).toEqual(entity.mine);
     expect(converted.createdBy).toEqual(entity.createdBy);
     expect(converted.subjects.length).toEqual(entity.subjects.length);

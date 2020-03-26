@@ -21,6 +21,7 @@ export class CollectionsConverter {
       videos: entity.videos,
       updatedAt: new Date(entity.updatedAt),
       public: entity.public,
+      promoted: entity.promoted,
       mine: entity.mine,
       createdBy: entity.createdBy,
       subjects: entity.subjects,

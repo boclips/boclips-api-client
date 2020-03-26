@@ -22,6 +22,7 @@ export class CollectionEntityFactory {
       videos: [],
       updatedAt: '2019-10-21T09:11:19.074Z',
       public: false,
+      promoted: false,
       mine: false,
       createdBy: 'Teacher',
       subjects: [],

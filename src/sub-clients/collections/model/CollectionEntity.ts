@@ -8,6 +8,7 @@ export interface CollectionEntity extends EntityWithLinks {
   title: string;
   videos: any[];
   updatedAt: string;
+  promoted: boolean;
   public: boolean;
   mine: boolean;
   createdBy: string;
