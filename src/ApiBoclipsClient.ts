@@ -1,11 +1,11 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { BoclipsClient } from './BoclipsClient';
-import { ApiOrganisationsClient } from './sub-clients/organisations/client/ApiOrganisationsClient';
 import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverter';
 import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
 import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestForClients';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
+import { ApiContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ApiContentPartnerContractsClient';
 import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
 import { ApiEduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/ApiEduAgeRangesClient';
 import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
@@ -18,6 +18,7 @@ import { ApiLegalRestrictionsClient } from './sub-clients/legalRestrictions/clie
 import { ApiMarketingStatusesClient } from './sub-clients/marketingStatuses/client/ApiMarketingStatusesClient';
 import { MarketingStatusesClient } from './sub-clients/marketingStatuses/client/MarketingStatusesClient';
 import { ApiOrdersClient } from './sub-clients/orders/client/ApiOrdersClient';
+import { ApiOrganisationsClient } from './sub-clients/organisations/client/ApiOrganisationsClient';
 import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClient';
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
@@ -31,6 +32,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   private static instance: ApiBoclipsClient;
   public legalRestrictionsClient: ApiLegalRestrictionsClient;
   public contentPartnersClient: ApiContentPartnersClient;
+  public contentPartnerContractsClient: ApiContentPartnerContractsClient;
   public subjectsClient: ApiSubjectsClient;
   public collectionsClient: ApiCollectionsClient;
   public ordersClient: ApiOrdersClient;
@@ -121,6 +123,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axiosInstance,
     );
     this.subjectsClient = new ApiSubjectsClient(
+      this.adminLinks,
+      this.axiosInstance,
+    );
+    this.contentPartnerContractsClient = new ApiContentPartnerContractsClient(
       this.adminLinks,
       this.axiosInstance,
     );
