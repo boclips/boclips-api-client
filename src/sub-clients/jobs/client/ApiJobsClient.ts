@@ -87,7 +87,8 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
       videos,
       links: {
         self: new Link(_links.self),
-        errorsMetadata: _links.errorsMetadata && new Link(_links.self),
+        errorsMetadata:
+          _links.errorsMetadata && new Link(_links.errorsMetadata),
       },
     };
   }
