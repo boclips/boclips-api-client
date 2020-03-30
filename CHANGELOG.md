@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.2.0] - 2020-03-30
+- Change the CP contract client create API
+
 ## [8.1.0] - 2020-03-30
 - Job details capable of downloading CSV
 

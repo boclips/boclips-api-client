@@ -6,7 +6,7 @@ import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
 
 export class ApiContentPartnerContractsClient extends ApiSubClient
   implements ContentPartnerContractsClient {
-  create(contract: ContentPartnerContract): Promise<void> {
+  create(contract: Omit<ContentPartnerContract, 'id'>): Promise<void> {
     const contentPartnerContractsLink = this.getLinkOrThrow(
       'contentPartnerContracts',
     );

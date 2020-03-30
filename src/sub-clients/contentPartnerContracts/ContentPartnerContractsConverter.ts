@@ -5,7 +5,7 @@ import { ContentPartnerContractResource } from './resources/ContentPartnerContra
 
 export class ContentPartnerContractsConverter {
   public static toRequest(
-    contract: ContentPartnerContract,
+    contract: Omit<ContentPartnerContract, 'id'>,
   ): ContentPartnerContractRequest {
     const { contractDates, ...rest } = contract;
     const datesRequest = {
