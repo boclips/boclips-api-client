@@ -18,6 +18,19 @@ export class ContentPartnerContractFactory {
       },
       minimumPriceDescription: 'a minimum price description',
       remittanceCurrency: 'GBP',
+      restrictions: {
+        clientFacing: [
+          'client facing restriction 1',
+          'client facing restriction 2',
+        ],
+        territory: 'territory restriction',
+        licensing: 'licensing restriction',
+        editing: 'editing restriction',
+        marketing: 'marketing restriction',
+        companies: 'companies restriction',
+        payout: 'payout restriction',
+        other: 'other restriction',
+      },
       ...contract,
     };
   }
@@ -41,6 +54,19 @@ export class ContentPartnerContractResourceFactory {
       },
       minimumPriceDescription: 'a minimum price description',
       remittanceCurrency: 'GBP',
+      restrictions: {
+        clientFacing: [
+          'client facing restriction 1',
+          'client facing restriction 2',
+        ],
+        territory: 'territory restriction',
+        licensing: 'licensing restriction',
+        editing: 'editing restriction',
+        marketing: 'marketing restriction',
+        companies: 'companies restriction',
+        payout: 'payout restriction',
+        other: 'other restriction',
+      },
       _links: {},
       ...resource,
     };

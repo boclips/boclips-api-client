@@ -66,6 +66,30 @@ describe('ContentPartnerContracts', () => {
         expect(contract.remittanceCurrency).toEqual(
           sampleContract.remittanceCurrency,
         );
+        expect(contract.restrictions.clientFacing).toEqual(
+          sampleContract.restrictions.clientFacing,
+        );
+        expect(contract.restrictions.companies).toEqual(
+          sampleContract.restrictions.companies,
+        );
+        expect(contract.restrictions.editing).toEqual(
+          sampleContract.restrictions.editing,
+        );
+        expect(contract.restrictions.licensing).toEqual(
+          sampleContract.restrictions.licensing,
+        );
+        expect(contract.restrictions.marketing).toEqual(
+          sampleContract.restrictions.marketing,
+        );
+        expect(contract.restrictions.other).toEqual(
+          sampleContract.restrictions.other,
+        );
+        expect(contract.restrictions.payout).toEqual(
+          sampleContract.restrictions.payout,
+        );
+        expect(contract.restrictions.territory).toEqual(
+          sampleContract.restrictions.territory,
+        );
       });
     },
   );

@@ -23,5 +23,23 @@ describe('converting a content partner contract', () => {
       resource.minimumPriceDescription,
     );
     expect(request.remittanceCurrency).toEqual(resource.remittanceCurrency);
+    expect(request.restrictions.clientFacing).toEqual(
+      resource.restrictions.clientFacing,
+    );
+    expect(request.restrictions.companies).toEqual(
+      resource.restrictions.companies,
+    );
+    expect(request.restrictions.editing).toEqual(resource.restrictions.editing);
+    expect(request.restrictions.licensing).toEqual(
+      resource.restrictions.licensing,
+    );
+    expect(request.restrictions.marketing).toEqual(
+      resource.restrictions.marketing,
+    );
+    expect(request.restrictions.other).toEqual(resource.restrictions.other);
+    expect(request.restrictions.payout).toEqual(resource.restrictions.payout);
+    expect(request.restrictions.territory).toEqual(
+      resource.restrictions.territory,
+    );
   });
 });

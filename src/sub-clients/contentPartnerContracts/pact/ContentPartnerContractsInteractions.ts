@@ -1,4 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
+import { somethingLike } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 
 const { like } = Matchers;
@@ -48,6 +49,19 @@ export const getContentPartnerContractInteraction = (
         }),
         minimumPriceDescription: 'a minimum price description',
         remittanceCurrency: 'GBP',
+        restrictions: {
+          clientFacing: somethingLike([
+            'client facing restriction 1',
+            'client facing restriction 2',
+          ]),
+          territory: 'territory restriction',
+          licensing: 'licensing restriction',
+          editing: 'editing restriction',
+          marketing: 'marketing restriction',
+          companies: 'companies restriction',
+          payout: 'payout restriction',
+          other: 'other restriction',
+        },
       },
     }),
   },

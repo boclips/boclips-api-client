@@ -1,4 +1,5 @@
 import { ContentPartnerContractDatesResource } from '../resources/ContentPartnerContractDatesResource';
+import { ContentPartnerContractRestrictionsResource } from '../resources/ContentPartnerContractRestrictionsResource';
 import { ContentPartnerContractRoyaltySplitResource } from '../resources/ContentPartnerContractRoyaltySplitResource';
 
 export interface ContentPartnerContractRequest {
@@ -11,4 +12,5 @@ export interface ContentPartnerContractRequest {
   royaltySplit?: ContentPartnerContractRoyaltySplitResource;
   minimumPriceDescription?: string;
   remittanceCurrency?: string;
+  restrictions?: ContentPartnerContractRestrictionsResource;
 }
