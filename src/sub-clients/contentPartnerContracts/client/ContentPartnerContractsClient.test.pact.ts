@@ -90,6 +90,19 @@ describe('ContentPartnerContracts', () => {
         expect(contract.restrictions.territory).toEqual(
           sampleContract.restrictions.territory,
         );
+        expect(contract.costs.minimumGuarantee).toEqual(
+          sampleContract.costs.minimumGuarantee,
+        );
+        expect(contract.costs.upfrontLicense).toEqual(
+          sampleContract.costs.upfrontLicense,
+        );
+        expect(contract.costs.technicalFee).toEqual(
+          sampleContract.costs.technicalFee,
+        );
+        expect(contract.costs.recoupable).toEqual(
+          sampleContract.costs.recoupable,
+        );
+
       });
     },
   );

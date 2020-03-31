@@ -31,6 +31,12 @@ export class ContentPartnerContractFactory {
         payout: 'payout restriction',
         other: 'other restriction',
       },
+      costs: {
+        minimumGuarantee: [1.1, 2.3],
+        upfrontLicense: 4.4,
+        technicalFee: 5.5,
+        recoupable: true,
+      },
       ...contract,
     };
   }
@@ -66,6 +72,12 @@ export class ContentPartnerContractResourceFactory {
         companies: 'companies restriction',
         payout: 'payout restriction',
         other: 'other restriction',
+      },
+      costs: {
+        minimumGuarantee: [1.1, 2.3],
+        upfrontLicense: 4.4,
+        technicalFee: 5.5,
+        recoupable: true,
       },
       _links: {},
       ...resource,

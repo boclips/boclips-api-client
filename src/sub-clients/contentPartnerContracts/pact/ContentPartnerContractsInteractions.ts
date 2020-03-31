@@ -62,6 +62,12 @@ export const getContentPartnerContractInteraction = (
           payout: 'payout restriction',
           other: 'other restriction',
         },
+        costs: {
+          minimumGuarantee: somethingLike([1.1, 2.3]),
+          upfrontLicense: 4.4,
+          technicalFee: 5.5,
+          recoupable: true,
+        },
       },
     }),
   },

@@ -41,5 +41,11 @@ describe('converting a content partner contract', () => {
     expect(request.restrictions.territory).toEqual(
       resource.restrictions.territory,
     );
+    expect(request.costs.minimumGuarantee).toEqual(
+      resource.costs.minimumGuarantee,
+    );
+    expect(request.costs.upfrontLicense).toEqual(resource.costs.upfrontLicense);
+    expect(request.costs.technicalFee).toEqual(resource.costs.technicalFee);
+    expect(request.costs.recoupable).toEqual(resource.costs.recoupable);
   });
 });
