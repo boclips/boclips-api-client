@@ -7,26 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.5.0] - 2020-04-01
+
+- Can fetch all CP contracts
+
 ## [8.4.0] - 2020-04-01
+
 - CP contract has new field, contractIsRolling
 
 ## [8.3.0] - 2020-03-30
+
 - CP contract client supports costs
 
 ## [8.2.0] - 2020-03-30
+
 - Change the CP contract client create API
 
 ## [8.1.0] - 2020-03-30
+
 - Job details capable of downloading CSV
 
 ## [8.0.2] - 2020-03-27
 
 ## Added
+
 - Content partner contract client now available
 
 ## [8.0.1] - 2020-03-26
 
 ## Added
+
 - `Collection` exposes `promoted` field
 
 ## [8.0.0] - 2020-03-26
@@ -34,17 +44,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [7.0.0] - 2020-03-24
 
 ### Changed
+
 - In prior versions the global axios instance was polluted with internal error handling concerns.
-This release removes the pollution by creating a self-contained instance.
+  This release removes the pollution by creating a self-contained instance.
 
 ## [6.2.6] - 2020-03-23
 
 ### Added
+
 - Corrected language type in content partner request.
 
 ## [6.2.5] - 2020-03-23
 
 ### Added
+
 - `Video` contains `Playback` type information
 
 ## [6.2.4] - 2020-03-19
