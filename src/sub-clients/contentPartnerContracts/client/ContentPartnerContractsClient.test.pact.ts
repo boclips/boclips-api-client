@@ -50,6 +50,9 @@ describe('ContentPartnerContracts', () => {
         expect(contract.contractDates.end).toEqual(
           sampleContract.contractDates.end,
         );
+        expect(contract.contractIsRolling).toEqual(
+          sampleContract.contractIsRolling,
+        );
         expect(contract.daysBeforeTerminationWarning).toEqual(
           sampleContract.daysBeforeTerminationWarning,
         );
@@ -102,7 +105,6 @@ describe('ContentPartnerContracts', () => {
         expect(contract.costs.recoupable).toEqual(
           sampleContract.costs.recoupable,
         );
-
       });
     },
   );

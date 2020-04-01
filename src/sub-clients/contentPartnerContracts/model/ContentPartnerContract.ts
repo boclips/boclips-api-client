@@ -1,13 +1,14 @@
+import { ContentPartnerContractCostsResource } from '../resources/ContentPartnerContractCostsResource';
 import { ContentPartnerContractRestrictionsResource } from '../resources/ContentPartnerContractRestrictionsResource';
 import { ContentPartnerContractDates } from './ContentPartnerContractDates';
 import { ContentPartnerContractRoyaltySplit } from './ContentPartnerContractRoyaltySplit';
-import { ContentPartnerContractCostsResource } from '../resources/ContentPartnerContractCostsResource';
 
 export interface ContentPartnerContract {
   id: string;
   contentPartnerName: string;
   contractDocument?: string;
   contractDates?: ContentPartnerContractDates;
+  contractIsRolling?: boolean;
   daysBeforeTerminationWarning?: number;
   yearsForMaximumLicense?: number;
   daysForSellOffPeriod?: number;

@@ -7,6 +7,7 @@ export interface ContentPartnerContractRequest {
   contentPartnerName: string;
   contractDocument?: string;
   contractDates?: ContentPartnerContractDatesResource;
+  contractIsRolling?: boolean;
   daysBeforeTerminationWarning?: number;
   yearsForMaximumLicense?: number;
   daysForSellOffPeriod?: number;

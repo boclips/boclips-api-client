@@ -40,6 +40,7 @@ export const getContentPartnerContractInteraction = (
           start: '2012-01-31',
           end: '2012-02-01',
         }),
+        contractIsRolling: true,
         daysBeforeTerminationWarning: 100,
         yearsForMaximumLicense: 10,
         daysForSellOffPeriod: 20,
