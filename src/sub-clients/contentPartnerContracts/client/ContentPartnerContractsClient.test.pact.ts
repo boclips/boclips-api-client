@@ -6,6 +6,7 @@ import { ContentPartnerContractFactory } from '../../../test-support/ContentPart
 import {
   existingContentPartnerContractFromStaging,
   getContentPartnerContractInteraction,
+  getContentPartnerContractsInteraction,
 } from '../pact/ContentPartnerContractsInteractions';
 
 const sampleContract = ContentPartnerContractFactory.sample({
@@ -105,6 +106,24 @@ describe('ContentPartnerContracts', () => {
         expect(contract.costs.recoupable).toEqual(
           sampleContract.costs.recoupable,
         );
+      });
+
+      it('can fetc all contracts', async () => {
+        const pageRequest = {
+          page: 0,
+          size: 1,
+        };
+        await provider.addInteraction(
+          getContentPartnerContractsInteraction(pageRequest),
+        );
+
+        const contracts = await client.contentPartnerContractsClient.getAll(
+          pageRequest,
+        );
+
+        expect(contracts.page).toHaveLength(1);
+        expect(contracts.pageSpec.size).toEqual(1);
+        expect(contracts.pageSpec.number).toEqual(0);
       });
     },
   );

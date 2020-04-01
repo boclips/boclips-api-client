@@ -1,5 +1,6 @@
+import { PageRequest } from './../../common/model/PageRequest';
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { somethingLike } from '@pact-foundation/pact/dsl/matchers';
+import { somethingLike, eachLike } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 
 const { like } = Matchers;
@@ -21,7 +22,7 @@ export const getContentPartnerContractInteraction = (
   id: string,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET content partner contracts',
+  uponReceiving: 'GET a content partner contract',
   withRequest: {
     method: 'GET',
     path: `/v1/content-partner-contracts/${id}`,
@@ -70,6 +71,40 @@ export const getContentPartnerContractInteraction = (
           recoupable: true,
         },
       },
+    }),
+  },
+});
+
+export const getContentPartnerContractsInteraction = (
+  pageRequest: PageRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET all content partner contracts',
+  withRequest: {
+    method: 'GET',
+    path: `/v1/content-partner-contracts`,
+    query: {
+      page: pageRequest.page + '',
+      size: pageRequest.size + '',
+    },
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: like({
+      _embedded: like({
+        contracts: eachLike({
+          ...createContentPartnerContractWithMandatoryFields('123'),
+        }),
+      }),
+      page: like({
+        number: pageRequest.page,
+        size: pageRequest.size,
+        totalElements: 1,
+        totalPages: 1,
+      }),
     }),
   },
 });

@@ -67,6 +67,10 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: false,
         }),
         contentPartnerContracts: like({
+          href: `${provider.mockService.baseUrl}/v1/content-partner-contracts{?size,page}`,
+          templated: true,
+        }),
+        createContentPartnerContracts: like({
           href: `${provider.mockService.baseUrl}/v1/content-partner-contracts`,
           templated: false,
         }),

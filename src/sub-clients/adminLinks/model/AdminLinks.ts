@@ -15,6 +15,7 @@ export interface AdminLinks {
   contentPartner: LinkEntity;
   contentPartnersSignedUploadLink: LinkEntity;
   contentPartnerContract: LinkEntity;
+  createContentPartnerContracts: LinkEntity;
   contentPartnerContracts: LinkEntity;
   legalRestrictions: LinkEntity;
   youtubeFeeds: LinkEntity;
