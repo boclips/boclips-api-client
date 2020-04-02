@@ -20,6 +20,15 @@ export const getVideo = (id: string): InteractionObject => ({
       releasedOn: like(new Date('2020-02-03T23:11:19.074Z').toUTCString()),
       playback: like({
         type: 'YOUTUBE',
+        id: '1_pxz2v8gx',
+        duration: 'PT5M4S',
+        _links: {
+          createPlayerInteractedWithEvent: {
+            href: 'https://api.boclips.com/v1/events',
+            templated: false,
+          },
+          thumbnail: { href: 'https://thumbnail', templated: false },
+        },
       }),
       subjects: like([{ id: '5cb499c9fd5beb428189454d', name: 'History' }]),
       badges: like(['youtube']),

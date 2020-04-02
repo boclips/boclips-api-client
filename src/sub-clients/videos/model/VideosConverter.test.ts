@@ -1,6 +1,8 @@
 import { Video } from './Video';
 import { VideosConverter } from './VideosConverter';
 import { hasBoclipsProjection } from '../utils/hasBoclipsProjection';
+import { Link } from '../../common/model/LinkEntity';
+import moment = require('moment');
 
 describe('VideosConverter', () => {
   const baseVideoEntity = {
@@ -10,20 +12,31 @@ describe('VideosConverter', () => {
       "Subscribe: http://bit.ly/subscribetotheBFI.\nThe first West Indies Test cricket team flees England and loses all three matches.\n\nThe first West Indies Test TEAM visits England in this Topical Budget newsreel item. Cricketers from the West Indies had toured England before and expectations of the tourists were high in the light of their impressive showing in 1923. Unfortunately, weak fielding led to the West Indies losing the third and final Test match at The Oval by an innings and seventy-nine runs.\n\nIn 1927 the West Indies were admitted to full membership of the Imperial Cricket Conference, joining England, Australia and South Africa. The 1928 Test tour was their first visit to England, and although the tourists lost each match by an innings, it marked the arrival of African Caribbean cricketers into the global game. Six black players appeared in the side including the celebrated all-rounder Learie Constantine and the emerging star George Headley. Learie Constantine went on to practice as a lawyer in Britain and was High Commissioner for Trinidad and Tobago in the United Kingdom, becoming Britain's first black peer in 1969 as Lord Constantine of Maraval and Nelson. (S.I. Martin)\n\nWatch more on the BFI Player: http://player.bfi.org.uk/\nFollow us on Twitter: https://twitter.com/BFI\nLike us on Facebook: https://www.facebook.com/BritishFilmInstitute\nFollow us on Google+: https://plus.google.com/+britishfilminstitute/\n\n\nThis is another paragraph\n\nthis is my website www.doc.com",
     releasedOn: '2019-03-20',
     playback: {
-      type: 'YOUTUBE',
+      type: 'STREAM',
       id: 'Fj5hU6SoCDA',
       duration: 'PT1M3S',
       _links: {
         createPlaybackEvent: {
-          href: 'https://api.staging-boclips.com/v1/events/playback',
+          href: 'https://api.boclips.com/v1/events/playback',
           templated: false,
         },
         createPlayerInteractedWithEvent: {
-          href: 'https://api.staging-boclips.com/v1/events/player-interaction',
+          href: 'https://api.boclips.com/v1/events/player-interaction',
           templated: false,
         },
         thumbnail: {
-          href: 'https://i.ytimg.com/vi/Fj5hU6SoCDA/hqdefault.jpg',
+          href:
+            'https://cdnapisec.kaltura.com/p/1776261/thumbnail/…0/width/{thumbnailWidth}/vid_slices/3/vid_slice/1',
+          templated: true,
+        },
+        videoPreview: {
+          href:
+            'https://cdnapisec.kaltura.com/p/1776261/thumbnail/…idth/{thumbnailWidth}/vid_slices/{thumbnailCount}',
+          templated: true,
+        },
+        hlsStream: {
+          href:
+            'https://cdnapisec.kaltura.com/p/1776261/sp/1776261…87091%2C487111%2C1049881/protocol/https/video.mp4',
           templated: false,
         },
       },
@@ -66,7 +79,36 @@ describe('VideosConverter', () => {
     expect(video.releasedOn.toUTCString()).toEqual(
       'Wed, 20 Mar 2019 00:00:00 GMT',
     );
-    expect(video.playback).toEqual({ type: 'YOUTUBE' });
+    expect(video.playback).toEqual({
+      id: 'Fj5hU6SoCDA',
+      type: 'STREAM',
+      duration: moment.duration('PT1M3S'),
+      links: {
+        createPlaybackEvent: new Link({
+          href: 'https://api.boclips.com/v1/events/playback',
+          templated: false,
+        }),
+        createPlayerInteractedWithEvent: new Link({
+          href: 'https://api.boclips.com/v1/events/player-interaction',
+          templated: false,
+        }),
+        thumbnail: new Link({
+          href:
+            'https://cdnapisec.kaltura.com/p/1776261/thumbnail/…0/width/{thumbnailWidth}/vid_slices/3/vid_slice/1',
+          templated: true,
+        }),
+        videoPreview: new Link({
+          href:
+            'https://cdnapisec.kaltura.com/p/1776261/thumbnail/…idth/{thumbnailWidth}/vid_slices/{thumbnailCount}',
+          templated: true,
+        }),
+        hlsStream: new Link({
+          href:
+            'https://cdnapisec.kaltura.com/p/1776261/sp/1776261…87091%2C487111%2C1049881/protocol/https/video.mp4',
+          templated: false,
+        }),
+      },
+    });
     expect(video.subjects).toEqual([
       { id: '5cb499c9fd5beb428189454d', name: 'History' },
     ]);

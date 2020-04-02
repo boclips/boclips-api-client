@@ -1,5 +1,6 @@
 import { VideoWithBoclipsProjection, Video } from './Video';
 import { convertLinks } from '../../common/utils/convertLinks';
+import { PlaybackConverter } from '../../common/model/PlaybackConverter';
 
 export class VideosConverter {
   public static convert(entity: any): Video | VideoWithBoclipsProjection {
@@ -10,7 +11,7 @@ export class VideosConverter {
       title: entity.title,
       description: entity.description,
       releasedOn: new Date(entity.releasedOn),
-      playback: { type: entity.playback.type },
+      playback: PlaybackConverter.convert(entity.playback),
       subjects: entity.subjects,
       badges: entity.badges,
       legalRestrictions: entity.legalRestrictions,
