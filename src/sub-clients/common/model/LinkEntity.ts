@@ -17,6 +17,10 @@ export class Link {
     return this.link.href;
   }
 
+  public get isTemplated(): boolean {
+    return this.link.templated === true;
+  }
+
   public getTemplatedLink(paramKeysValues: {
     [paramName: string]: any;
   }): string {
