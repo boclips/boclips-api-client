@@ -2,6 +2,8 @@ import {
   VideoWithBoclipsProjection,
   Video,
 } from '../sub-clients/videos/model/Video';
+import moment from 'moment';
+import { Link } from '../sub-clients/common/model/LinkEntity';
 
 export class VideoFactory {
   public static sample = (video: Partial<Video>): Video => ({
@@ -14,7 +16,15 @@ export class VideoFactory {
     title: 'video title',
     description: 'video description',
     releasedOn: new Date(),
-    playback: { type: 'STREAM' },
+    playback: {
+      type: 'STREAM',
+      id: 'playback-id',
+      duration: moment.duration(),
+      links: {
+        createPlayerInteractedWithEvent: new Link({ href: 'events' }),
+        thumbnail: new Link({ href: 'thumbnail' }),
+      },
+    },
     subjects: [],
     badges: [],
     legalRestrictions: '',
