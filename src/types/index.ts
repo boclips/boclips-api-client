@@ -1,4 +1,4 @@
-export { Video } from '../sub-clients/common/model/Video';
+export { Video } from '../sub-clients/videos/model/Video';
 export { AgeRange } from '../sub-clients/common/model/AgeRange';
 export { DistributionMethod } from '../sub-clients/common/model/DistributionMethod';
 export { Link } from '../sub-clients/common/model/LinkEntity';

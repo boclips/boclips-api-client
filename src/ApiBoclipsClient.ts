@@ -23,6 +23,7 @@ import { ApiSubjectsClient } from './sub-clients/subjects/client/ApiSubjectsClie
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
 import { BoclipsApiError } from './types';
+import { ApiVideosClient } from './sub-clients/videos/client/ApiVideosClient';
 
 const isAxiosError = (error: any): error is AxiosError => {
   return error.response != undefined && error.response.data != undefined;
@@ -35,6 +36,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public contentPartnerContractsClient: ApiContentPartnerContractsClient;
   public subjectsClient: ApiSubjectsClient;
   public collectionsClient: ApiCollectionsClient;
+  public videosClient: ApiVideosClient;
   public ordersClient: ApiOrdersClient;
   public eventsClient: ApiEventsClient;
   public jobsClient: ApiJobsClient;
@@ -131,6 +133,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axiosInstance,
     );
     this.collectionsClient = new ApiCollectionsClient(
+      this.adminLinks,
+      this.axiosInstance,
+    );
+    this.videosClient = new ApiVideosClient(
       this.adminLinks,
       this.axiosInstance,
     );

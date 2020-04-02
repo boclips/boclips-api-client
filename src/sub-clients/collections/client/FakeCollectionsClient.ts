@@ -1,6 +1,6 @@
 import { CollectionFactory } from '../../../test-support';
 import { SubjectFactory } from '../../../test-support/SubjectsFactory';
-import { VideoFactory } from '../../../test-support/VideosFactory';
+import { VideoWithBoclipsProjectionFactory } from '../../../test-support/VideosFactory';
 import Pageable from '../../common/model/Pageable';
 import { Clearable } from '../../common/utils/Clearable';
 import { Collection, getAttachmentType } from '../model/Collection';
@@ -50,7 +50,9 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
       id: this.nextId,
       title,
       description,
-      videos: videos.map(id => VideoFactory.sample({ id })),
+      videos: videos.map(id =>
+        VideoWithBoclipsProjectionFactory.sample({ id }),
+      ),
       public: isPublic,
     });
     this.addToFake(collection);
@@ -95,7 +97,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
 
     if (request.hasOwnProperty('videos')) {
       partialCollection.videos = request.videos.map(id =>
-        VideoFactory.sample({ id }),
+        VideoWithBoclipsProjectionFactory.sample({ id }),
       );
     }
 

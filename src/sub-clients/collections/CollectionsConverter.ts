@@ -1,16 +1,15 @@
-import { EntityWithLinks } from '../common/model/common';
-import { Link } from '../common/model/LinkEntity';
 import Pageable from '../common/model/Pageable';
 import { PageableConverter } from '../common/model/PageableConverter';
 import { PageableEntity } from '../common/model/PageableEntity';
 import { Attachment, Collection, getAttachmentType } from './model/Collection';
 import { AttachmentEntity, CollectionEntity } from './model/CollectionEntity';
+import { convertLinks } from '../common/utils/convertLinks';
 
 export class CollectionsConverter {
   // can throw if attachment type is not valid
   // e.g. (not a member of enum AttachmentType)
   public static convert(entity: CollectionEntity): Collection {
-    const links = CollectionsConverter.convertLinks(entity);
+    const links = convertLinks(entity);
     const attachments = entity.attachments
       ? entity.attachments.map(CollectionsConverter.convertAttachment)
       : [];
@@ -52,20 +51,5 @@ export class CollectionsConverter {
       'collections',
       CollectionsConverter.convert,
     );
-  }
-
-  private static convertLinks<
-    E extends EntityWithLinks,
-    R extends { [rel in keyof E['_links']]: Link }
-  >(entity: E): R {
-    // Use the links we received from the API
-    const rels = Object.keys(entity._links);
-
-    // Reduce the rels into a single object
-    return rels.reduce((acc, rel) => {
-      acc[rel] = new Link(entity._links[rel]);
-
-      return acc;
-    }, {}) as R;
   }
 }

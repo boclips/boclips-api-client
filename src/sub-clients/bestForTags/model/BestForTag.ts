@@ -1,4 +1,4 @@
 export interface BestForTag {
-  id: string;
+  id?: string;
   label: string;
 }

@@ -1,7 +1,7 @@
 import { AgeRange } from '../../common/model/AgeRange';
 import { ModelWithLinks } from '../../common/model/common';
 import { Link } from '../../common/model/LinkEntity';
-import { Video } from '../../common/model/Video';
+import { Video } from '../../videos/model/Video';
 import { Subject } from '../../subjects/model/Subject';
 
 export interface Collection extends ModelWithLinks {

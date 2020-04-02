@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Add Video sub client and `GET videos/{id}`
+
 ## [8.5.0] - 2020-04-01
 
 - Can fetch all CP contracts
