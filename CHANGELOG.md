@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Add Video sub client and `GET videos/{id}`
+## [8.6.0] - 2020-04-03
+
+## Added
+- Add `videosClient`
+  - implement `GET videos/{id}`
+  
+## Changed
+- `Video` contains all available fields
 
 ## [8.5.0] - 2020-04-01
 

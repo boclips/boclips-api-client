@@ -1,6 +1,5 @@
 import { Video } from './Video';
 import { VideosConverter } from './VideosConverter';
-import { hasBoclipsProjection } from '../utils/hasBoclipsProjection';
 import { Link } from '../../common/model/LinkEntity';
 import moment = require('moment');
 
@@ -128,6 +127,7 @@ describe('VideosConverter', () => {
       'https://api.staging-boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/events?logVideoInteraction=true&type={type}',
     );
   });
+
   it('converts a Video with Boclips projection', () => {
     const entityWithBoclipsProjection = {
       ...baseVideoEntity,
@@ -142,10 +142,10 @@ describe('VideosConverter', () => {
 
     const video = VideosConverter.convert(entityWithBoclipsProjection);
 
-    if (hasBoclipsProjection(video)) {
-      expect(video.contentPartner).toEqual('TED-Ed');
-    } else {
-      fail('Video type should be VideoWithBoclipsProjection');
-    }
+    expect(video.contentPartner).toEqual('TED-Ed');
+    expect(video.contentPartnerId).toEqual('5cf141cbc1475c47f717870d');
+    expect(video.contentPartnerVideoId).toEqual('1805_08_A');
+    expect(video.type.id).toEqual(3);
+    expect(video.type.name).toEqual('Instructional Clips');
   });
 });

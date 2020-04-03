@@ -1,12 +1,10 @@
-import { VideoWithBoclipsProjection, Video } from './Video';
+import { Video } from './Video';
 import { convertLinks } from '../../common/utils/convertLinks';
 import { PlaybackConverter } from '../../common/model/PlaybackConverter';
 
 export class VideosConverter {
-  public static convert(entity: any): Video | VideoWithBoclipsProjection {
-    const hasBoclipsProjection: boolean = entity.contentPartnerId !== undefined;
-
-    const videoWithPublicFields: Video = {
+  public static convert(entity: any): Video {
+    return {
       id: entity.id,
       title: entity.title,
       description: entity.description,
@@ -23,18 +21,10 @@ export class VideosConverter {
       promoted: entity.promoted,
       language: entity.language,
       links: convertLinks(entity),
+      contentPartner: entity.contentPartner,
+      contentPartnerId: entity.contentPartnerId,
+      contentPartnerVideoId: entity.contentPartnerVideoId,
+      type: entity.type,
     };
-
-    if (hasBoclipsProjection) {
-      return {
-        ...videoWithPublicFields,
-        contentPartner: entity.contentPartner,
-        contentPartnerId: entity.contentPartnerId,
-        contentPartnerVideoId: entity.contentPartnerVideoId,
-        type: entity.type,
-      } as VideoWithBoclipsProjection;
-    } else {
-      return videoWithPublicFields;
-    }
   }
 }

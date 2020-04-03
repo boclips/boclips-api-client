@@ -1,7 +1,4 @@
-import {
-  VideoWithBoclipsProjection,
-  Video,
-} from '../sub-clients/videos/model/Video';
+import { Video } from '../sub-clients/videos/model/Video';
 import { PlaybackFactory } from './PlaybackFactory';
 
 export class VideoFactory {
@@ -35,14 +32,12 @@ export class VideoFactory {
 }
 
 export class VideoWithBoclipsProjectionFactory extends VideoFactory {
-  public static sample = (
-    video: Partial<VideoWithBoclipsProjection>,
-  ): VideoWithBoclipsProjection => ({
+  public static sample = (video: Partial<Video>): Video => ({
     ...VideoWithBoclipsProjectionFactory.defaultFields(),
     ...video,
   });
 
-  protected static defaultFields = (): VideoWithBoclipsProjection => ({
+  protected static defaultFields = (): Video => ({
     ...VideoFactory.defaultFields(),
     contentPartner: 'some content partner',
     contentPartnerId: 'partner-1',

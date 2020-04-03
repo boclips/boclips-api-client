@@ -7,9 +7,7 @@ import { VideoType } from '../../videoTypes/model/VideoType';
 import { Link } from '../../common/model/LinkEntity';
 import { ModelWithLinks } from '../../common/model/common';
 
-export interface BaseVideo extends ModelWithLinks {}
-
-export interface Video extends BaseVideo {
+export interface Video extends ModelWithLinks {
   id: string;
   title: string;
   description: string;
@@ -33,11 +31,8 @@ export interface Video extends BaseVideo {
     tag?: Link;
     transcript?: Link;
   };
-}
-
-export interface VideoWithBoclipsProjection extends Video {
-  contentPartner: string;
-  contentPartnerId: string;
-  contentPartnerVideoId: string;
-  type: VideoType;
+  contentPartner?: string;
+  contentPartnerId?: string;
+  contentPartnerVideoId?: string;
+  type?: VideoType;
 }

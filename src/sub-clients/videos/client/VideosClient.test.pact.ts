@@ -5,7 +5,6 @@ import { provider } from '../../../pact-support/pactSetup';
 import { Video } from '../model/Video';
 import { getVideo } from '../pact/VideoInteractions';
 import { Link } from '../../common/model/LinkEntity';
-import { hasBoclipsProjection } from '../utils/hasBoclipsProjection';
 import moment = require('moment');
 
 export const existingVideoIdFromStaging = '5c92b2f4d0f34e48bbfb40d9';
@@ -64,7 +63,6 @@ describe('VideosClient', () => {
           existingVideoIdFromStaging,
         );
 
-        expect(hasBoclipsProjection(video)).toBeFalsy();
         expect(video.id).toEqual(existingVideoIdFromStaging);
         expect(video.title).toEqual('Test Video');
         expect(video.description).toEqual('Test description');
