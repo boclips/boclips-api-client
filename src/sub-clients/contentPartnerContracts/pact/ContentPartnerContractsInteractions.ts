@@ -1,6 +1,10 @@
 import { PageRequest } from './../../common/model/PageRequest';
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { somethingLike, eachLike } from '@pact-foundation/pact/dsl/matchers';
+import {
+  somethingLike,
+  eachLike,
+  term,
+} from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 
 const { like } = Matchers;
@@ -106,5 +110,30 @@ export const getContentPartnerContractsInteraction = (
         totalPages: 1,
       }),
     }),
+  },
+});
+
+export const getSignedLink = (filename: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST content partner contracts signed upload link',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/content-partner-contracts/signed-upload-link`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      filename,
+    },
+  },
+  willRespondWith: {
+    status: 204,
+    headers: {
+      'Access-Control-Expose-Headers': like('location'),
+      location: term({
+        generate: `http://fakeurl.com/${filename.replace('.', '_')}_signed_url`,
+        matcher: `http.*`,
+      }),
+    },
   },
 });

@@ -78,6 +78,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/content-partner-contracts/{id}`,
           templated: true,
         }),
+        createContentPartnerContractsSignedUploadLink: like({
+          href: `${provider.mockService.baseUrl}/v1/content-partner-contracts/signed-upload-link`,
+          templated: false,
+        }),
         legalRestrictions: like({
           href: `${provider.mockService.baseUrl}/v1/legal-restrictions`,
           templated: false,

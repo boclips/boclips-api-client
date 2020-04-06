@@ -7,6 +7,7 @@ import {
   existingContentPartnerContractFromStaging,
   getContentPartnerContractInteraction,
   getContentPartnerContractsInteraction,
+  getSignedLink,
 } from '../pact/ContentPartnerContractsInteractions';
 
 const sampleContract = ContentPartnerContractFactory.sample({
@@ -108,7 +109,7 @@ describe('ContentPartnerContracts', () => {
         );
       });
 
-      it('can fetc all contracts', async () => {
+      it('can fetch all contracts', async () => {
         const pageRequest = {
           page: 0,
           size: 1,
@@ -124,6 +125,17 @@ describe('ContentPartnerContracts', () => {
         expect(contracts.page).toHaveLength(1);
         expect(contracts.pageSpec.size).toEqual(1);
         expect(contracts.pageSpec.number).toEqual(0);
+      });
+
+      it('can fetch signed link', async () => {
+        const filename = 'file.png';
+        await provider.addInteraction(getSignedLink(filename));
+
+        const signedLink = await client.contentPartnerContractsClient.getSignedLink(
+          filename,
+        );
+
+        expect(typeof signedLink).toEqual('string');
       });
     },
   );

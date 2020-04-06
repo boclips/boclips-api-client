@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.1] - 2020-04-06
+
 ### Added
 
+- `contentPartnerContractsClient` can now request signed upload links
 - `videosClient` can update videos' title, description and promoted flag
 
 ## [8.6.0] - 2020-04-03

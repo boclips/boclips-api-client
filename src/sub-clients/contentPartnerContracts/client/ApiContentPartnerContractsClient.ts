@@ -53,4 +53,28 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
         ContentPartnerContractsConverter.fromResource(response.data),
       );
   }
+
+  getSignedLink(filename: string): Promise<string> {
+    this.axios.interceptors.request.use(request => {
+      console.log('Starting Request', request);
+      return request;
+    });
+
+    this.axios.interceptors.response.use(response => {
+      console.log('Response:', response);
+      return response;
+    });
+
+    const link = this.getLinkOrThrow(
+      'createContentPartnerContractsSignedUploadLink',
+    ).href;
+    console.log(link);
+    return this.axios
+      .post(link, {
+        filename,
+      })
+      .then(it => {
+        return it.headers.location;
+      });
+  }
 }

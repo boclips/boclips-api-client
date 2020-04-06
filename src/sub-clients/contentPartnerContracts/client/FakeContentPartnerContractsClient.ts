@@ -41,4 +41,10 @@ export class FakeContentPartnerContractsClient
   insertContentPartnerContractFixture(contract: ContentPartnerContract) {
     this.contracts = [contract];
   }
+
+  getSignedLink(filename: string): Promise<string> {
+    const newFilename = filename.replace('.', '_') + '_signed_link';
+    const signedLinkUrl = `http://www.server.com/${newFilename}`;
+    return new Promise(resolve => resolve(signedLinkUrl));
+  }
 }
