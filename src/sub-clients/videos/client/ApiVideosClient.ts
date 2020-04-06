@@ -3,6 +3,7 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { VideosConverter } from '../model/VideosConverter';
 import { Video } from '../model/Video';
+import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 
 export class ApiVideosClient extends ApiSubClient implements VideosClient {
   public async get(id: string): Promise<Video> {
@@ -12,5 +13,19 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     );
 
     return VideosConverter.convert(response.data);
+  }
+
+  public async update(
+    originalVideo: Video,
+    updateVideoRequest: UpdateVideoRequest,
+  ): Promise<Video> {
+    const validUpdateLink = originalVideo && originalVideo.links.update;
+    if (!validUpdateLink) {
+      throw new Error('Update link not available');
+    }
+
+    return this.axios
+      .patch(validUpdateLink.getOriginalLink(), updateVideoRequest)
+      .then(response => VideosConverter.convert(response.data));
   }
 }

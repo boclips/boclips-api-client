@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `videosClient` can update videos' title, description and promoted flag
+
 ## [8.6.0] - 2020-04-03
 
 ## Added
