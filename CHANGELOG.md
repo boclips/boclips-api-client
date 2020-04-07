@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.4] - 2020-04-07
+
+### Added
+
+- `videosClient` can update ageRange and subjects
+
 ## [8.6.3] - 2020-04-07
 
 ### Changed

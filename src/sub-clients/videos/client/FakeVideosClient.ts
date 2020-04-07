@@ -19,14 +19,30 @@ export class FakeVideosClient implements VideosClient, Clearable {
       video => video.id === originalVideo.id,
     );
     if (videoIndex >= 0) {
-      const { title, description, promoted } = updateVideoRequest;
+      const {
+        title,
+        description,
+        promoted,
+        subjectIds,
+        ageRangeMin,
+        ageRangeMax,
+      } = updateVideoRequest;
 
-      this.videos[videoIndex] = {
+      const updatedVideo = {
         ...originalVideo,
         title: title ? title : originalVideo.title,
         description: description ? description : originalVideo.description,
         promoted: promoted ? promoted : originalVideo.promoted,
+        ageRange:
+          ageRangeMin || ageRangeMax
+            ? { min: ageRangeMin, max: ageRangeMax }
+            : originalVideo.ageRange,
+        subjects: subjectIds
+          ? subjectIds.map(id => ({ id, name: `subject${id}` }))
+          : originalVideo.subjects,
       };
+
+      this.videos[videoIndex] = updatedVideo;
 
       return Promise.resolve(this.videos[videoIndex]);
     } else {

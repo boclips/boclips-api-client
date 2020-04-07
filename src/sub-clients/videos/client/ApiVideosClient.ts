@@ -25,7 +25,7 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     }
 
     return this.axios
-      .patch(validUpdateLink.getOriginalLink(), updateVideoRequest)
+      .patch(validUpdateLink.getTemplatedLink(updateVideoRequest))
       .then(response => VideosConverter.convert(response.data));
   }
 }

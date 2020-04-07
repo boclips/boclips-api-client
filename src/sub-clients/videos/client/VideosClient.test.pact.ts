@@ -62,43 +62,48 @@ describe('VideosClient', () => {
         expect(video.links.logInteraction).toBeTruthy();
       });
 
-      describe(`updating a video`, () => {
-        it(`can change title, description and promoted`, async () => {
-          const updateVideoRequest: UpdateVideoRequest = {
-            title:
-              'England Beats West Indies in the Final Test (2029) Time Machine',
-            description:
-              "Subscribe: http://bit.ly/subscribetotheBFI.\nThe first West Indies Test cricket team flees England and loses all three matches.\n\nThe first West Indies Test TEAM visits England in this Topical Budget newsreel item. Cricketers from the West Indies had toured England before and expectations of the tourists were high in the light of their impressive showing in 1923. Unfortunately, weak fielding led to the West Indies losing the third and final Test match at The Oval by an innings and seventy-nine runs.\n\nIn 1927 the West Indies were admitted to full membership of the Imperial Cricket Conference, joining England, Australia and South Africa. The 1928 Test tour was their first visit to England, and although the tourists lost each match by an innings, it marked the arrival of African Caribbean cricketers into the global game. Six black players appeared in the side including the celebrated all-rounder Learie Constantine and the emerging star George Headley. Learie Constantine went on to practice as a lawyer in Britain and was High Commissioner for Trinidad and Tobago in the United Kingdom, becoming Britain's first black peer in 1969 as Lord Constantine of Maraval and Nelson. (S.I. Martin)\n\nWatch more on the BFI Player: http://player.bfi.org.uk/\nFollow us on Twitter: https://twitter.com/BFI\nLike us on Facebook: https://www.facebook.com/BritishFilmInstitute\nFollow us on Google+: https://plus.google.com/+britishfilminstitute/\n\n\nThis is another paragraph\n\nthis is my website www.doc.com",
-            promoted: true,
-          };
-
-          const videoToUpdate: Video = {
-            ...testVideo,
-            links: {
-              ...testVideo.links,
-              update: new Link({
-                href: `${provider.mockService.baseUrl}/v1/videos/${existingVideoIdFromStaging}`,
-              }),
-            },
-          };
-
-          await provider.addInteraction(
-            updateVideo(existingVideoIdFromStaging, updateVideoRequest),
-          );
-
-          const updatedVideo = await client.videosClient.update(
-            videoToUpdate,
-            updateVideoRequest,
-          );
-
-          expect(updatedVideo.title).toEqual(
+      it(`can update a video`, async () => {
+        const updateVideoRequest: UpdateVideoRequest = {
+          title:
             'England Beats West Indies in the Final Test (2029) Time Machine',
-          );
-          expect(updatedVideo.description).toEqual(
-            updateVideoRequest.description,
-          );
-          expect(updatedVideo.promoted).toEqual(true);
-        });
+          description:
+            'Subscribe: http://bit.ly/subscribetotheBFI.\nThe first West Indies Test cricket team flees England and loses all three matches.',
+          promoted: true,
+          subjectIds: ['5cb499c9fd5beb428189454d'],
+          ageRangeMin: 3,
+          ageRangeMax: 12,
+        };
+
+        const videoToUpdate: Video = {
+          ...testVideo,
+          links: {
+            ...testVideo.links,
+            update: new Link({
+              href: `${provider.mockService.baseUrl}/v1/videos/${existingVideoIdFromStaging}{?title,description,promoted,subjectIds,ageRangeMin,ageRangeMax}`,
+              templated: true,
+            }),
+          },
+        };
+
+        await provider.addInteraction(
+          updateVideo(videoToUpdate, updateVideoRequest),
+        );
+
+        const updatedVideo = await client.videosClient.update(
+          videoToUpdate,
+          updateVideoRequest,
+        );
+
+        expect(updatedVideo.title).toEqual(
+          'England Beats West Indies in the Final Test (2029) Time Machine',
+        );
+        expect(updatedVideo.description).toEqual(
+          updateVideoRequest.description,
+        );
+        expect(updatedVideo.promoted).toEqual(true);
+        expect(updatedVideo.subjects.length).toEqual(1);
+        expect(updatedVideo.ageRange.min).toEqual(3);
+        expect(updatedVideo.ageRange.max).toEqual(12);
       });
     },
   );

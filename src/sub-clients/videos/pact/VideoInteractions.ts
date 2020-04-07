@@ -1,6 +1,8 @@
 import { InteractionObject } from '@pact-foundation/pact';
-import { like } from '@pact-foundation/pact/dsl/matchers';
+import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
+import { Video } from '../model/Video';
+import { Link } from '../../common/model/LinkEntity';
 
 export const getVideo = (id: string): InteractionObject => ({
   state: undefined,
@@ -53,15 +55,23 @@ export const getVideo = (id: string): InteractionObject => ({
 });
 
 export const updateVideo = (
-  id: string,
+  video: Video,
   updateVideoRequest: UpdateVideoRequest,
 ): InteractionObject => {
+  const updateLink = new Link({
+    href: `/v1/videos/${video.id}{?title,description,promoted,subjectIds,ageRangeMin,ageRangeMax}`,
+    templated: true,
+  }).getTemplatedLink(updateVideoRequest);
+
+  const [path, query] = updateLink.split('?');
+
   const interactionObject: InteractionObject = {
     state: undefined,
     uponReceiving: 'PATCH video',
     withRequest: {
       method: 'PATCH',
-      path: `/v1/videos/${id}`,
+      path,
+      query,
     },
     willRespondWith: {
       status: 200,
@@ -69,7 +79,7 @@ export const updateVideo = (
         'Content-Type': 'application/hal+json;charset=UTF-8',
       },
       body: {
-        id: like(id),
+        id: like(video.id),
         title: like(
           updateVideoRequest.title ? updateVideoRequest.title : 'Test Video',
         ),
@@ -91,7 +101,14 @@ export const updateVideo = (
             thumbnail: { href: 'https://thumbnail', templated: false },
           },
         }),
-        subjects: like([{ id: '5cb499c9fd5beb428189454d', name: 'History' }]),
+        ageRange: like({
+          min: updateVideoRequest.ageRangeMin,
+          max: updateVideoRequest.ageRangeMax,
+        }),
+        subjects: eachLike({
+          id: updateVideoRequest.subjectIds[0],
+          name: `subject`,
+        }),
         badges: like(['youtube']),
         legalRestrictions: like(''),
         bestFor: [{ label: 'Context builder' }],
