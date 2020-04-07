@@ -3,6 +3,7 @@ import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCol
 import { Clearable } from '../sub-clients/common/utils/Clearable';
 import { FakeContentPartnerContractsClient } from '../sub-clients/contentPartnerContracts/client/FakeContentPartnerContractsClient';
 import { FakeContentPartnersClient } from '../sub-clients/contentPartners/client/FakeContentPartnersClient';
+import { FakeContractLegalRestrictionsClient } from '../sub-clients/contractLegalRestrictions/client/FakeContractLegalRestrictionsClient';
 import { FakeEduAgeRangesClient } from '../sub-clients/educationalAgeRanges/client/FakeEduAgeRangesClient';
 import { FakeEventsClient } from '../sub-clients/events/client/FakeEventsClient';
 import { FakeIngestVideoStatusesClient } from '../sub-clients/ingestVideoStatuses/client/FakeIngestVideoStatusesClient';
@@ -34,6 +35,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public marketingStatusesClient: FakeMarketingStatusesClient = new FakeMarketingStatusesClient();
   public eduAgeRangesClient: FakeEduAgeRangesClient = new FakeEduAgeRangesClient();
   public ingestVideoStatusesClient: FakeIngestVideoStatusesClient = new FakeIngestVideoStatusesClient();
+  public contractLegalRestrictions: FakeContractLegalRestrictionsClient = new FakeContractLegalRestrictionsClient();
 
   public clear() {
     this.legalRestrictionsClient.clear();
@@ -51,5 +53,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.bestForTagsClient.clear();
     this.eduAgeRangesClient.clear();
     this.marketingStatusesClient.clear();
+    this.contractLegalRestrictions.clear();
   }
 }

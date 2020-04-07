@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.3] - 2020-04-07
+
+### Changed
+
+- Add contract legal restrictions to api client
+
 ## [8.6.2] - 2020-04-07
 
 ### Changed

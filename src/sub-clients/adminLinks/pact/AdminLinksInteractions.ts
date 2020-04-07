@@ -128,6 +128,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/ingest-video-statuses`,
           templated: false,
         }),
+        contractLegalRestrictions: like({
+          href: `${provider.mockService.baseUrl}/v1/contract-legal-restrictions`,
+          templated: false,
+        }),
       },
     },
   },

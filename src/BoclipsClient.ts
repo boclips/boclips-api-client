@@ -2,6 +2,7 @@ import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsC
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
 import { ContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ContentPartnerContractsClient';
 import { ContentPartnersClient } from './sub-clients/contentPartners/client/ContentPartnersClient';
+import { ContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ContractLegalRestrictionsClient';
 import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { EventsClient } from './sub-clients/events/client/EventsClient';
 import { IngestVideosClient } from './sub-clients/ingestVideos/client/IngestVideosClient';
@@ -32,4 +33,5 @@ export interface BoclipsClient {
   eduAgeRangesClient: EduAgeRangesClient;
   marketingStatusesClient: MarketingStatusesClient;
   ingestVideoStatusesClient: IngestVideoStatusesClient;
+  contractLegalRestrictions: ContractLegalRestrictionsClient;
 }

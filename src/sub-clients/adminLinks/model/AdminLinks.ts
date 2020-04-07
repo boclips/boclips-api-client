@@ -35,4 +35,5 @@ export interface AdminLinks {
   marketingStatuses: LinkEntity;
   ageRanges: LinkEntity;
   ingestVideoStatuses: LinkEntity;
+  contractLegalRestrictions: LinkEntity;
 }

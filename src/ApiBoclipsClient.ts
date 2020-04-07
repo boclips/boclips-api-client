@@ -7,6 +7,7 @@ import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsC
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
 import { ApiContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ApiContentPartnerContractsClient';
 import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
+import { ApiContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ApiContractLegalRestrictionsClient';
 import { ApiEduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/ApiEduAgeRangesClient';
 import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
 import { ApiEventsClient } from './sub-clients/events/client/ApiEventsClient';
@@ -47,6 +48,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public marketingStatusesClient: MarketingStatusesClient;
   public eduAgeRangesClient: EduAgeRangesClient;
   public ingestVideoStatusesClient: ApiIngestVideoStatusesClient;
+  public contractLegalRestrictions: ApiContractLegalRestrictionsClient;
   private readonly axiosInstance: AxiosInstance;
   private adminLinks: AdminLinks;
 
@@ -174,6 +176,10 @@ export class ApiBoclipsClient implements BoclipsClient {
       this.axiosInstance,
     );
     this.ingestVideoStatusesClient = new ApiIngestVideoStatusesClient(
+      this.adminLinks,
+      this.axiosInstance,
+    );
+    this.contractLegalRestrictions = new ApiContractLegalRestrictionsClient(
       this.adminLinks,
       this.axiosInstance,
     );
