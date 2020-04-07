@@ -1,3 +1,4 @@
+import { Link } from '../sub-clients/common/model/LinkEntity';
 import { Video } from '../sub-clients/videos/model/Video';
 import { PlaybackFactory } from './PlaybackFactory';
 
@@ -24,8 +25,8 @@ export class VideoFactory {
     promoted: false,
     language: undefined,
     links: {
-      self: null,
-      logInteraction: null,
+      self: new Link({ href: 'http://link-to-video' }),
+      logInteraction: new Link({ href: 'http://link-to-log-interaction' }),
       update: null,
     },
   });
