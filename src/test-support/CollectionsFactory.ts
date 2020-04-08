@@ -1,14 +1,12 @@
-import {
-  AttachmentType,
-  Collection,
-} from '../sub-clients/collections/model/Collection';
-import {
-  AttachmentEntity,
-  CollectionEntity,
-} from '../sub-clients/collections/model/CollectionEntity';
+import { Collection } from '../sub-clients/collections/model/Collection';
+import { CollectionEntity } from '../sub-clients/collections/model/CollectionEntity';
 import CollectionFilter from '../sub-clients/collections/model/CollectionFilter';
 import { Link } from '../sub-clients/common/model/LinkEntity';
 import { PageableEntity } from '../sub-clients/common/model/PageableEntity';
+import {
+  AttachmentEntity,
+  AttachmentType,
+} from '../sub-clients/common/model/Attachment';
 
 export class CollectionEntityFactory {
   public static sample(

@@ -4,8 +4,9 @@ import {
   PageableCollectionsEntityFactory,
 } from '../../test-support/CollectionsFactory';
 import { CollectionsConverter } from './CollectionsConverter';
-import { AttachmentType, Collection } from './model/Collection';
+import { Collection } from './model/Collection';
 import { CollectionEntity } from './model/CollectionEntity';
+import { AttachmentType } from '../common/model/Attachment';
 
 describe('Collections converter', () => {
   it('can convert from collection', () => {

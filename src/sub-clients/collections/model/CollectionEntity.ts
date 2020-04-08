@@ -1,6 +1,7 @@
 import { AgeRange } from '../../common/model/AgeRange';
 import { EntityWithLinks } from '../../common/model/common';
 import { LinkEntity } from '../../common/model/LinkEntity';
+import { AttachmentEntity } from '../../common/model/Attachment';
 
 export interface CollectionEntity extends EntityWithLinks {
   id: string;
@@ -25,14 +26,5 @@ export interface CollectionEntity extends EntityWithLinks {
     bookmark?: LinkEntity;
     unbookmark?: LinkEntity;
     myLatestRel?: LinkEntity;
-  };
-}
-
-export interface AttachmentEntity {
-  id: string;
-  type: string;
-  description?: string;
-  _links: {
-    download: LinkEntity;
   };
 }

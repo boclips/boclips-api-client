@@ -5,8 +5,8 @@ import { provider } from '../../../pact-support/pactSetup';
 import { Video } from '../model/Video';
 import { getVideo, updateVideo } from '../pact/VideoInteractions';
 import { Link } from '../../common/model/LinkEntity';
-import moment = require('moment');
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
+import moment = require('moment');
 
 export const existingVideoIdFromStaging = '5c92b2f4d0f34e48bbfb40d9';
 
@@ -58,6 +58,7 @@ describe('VideosClient', () => {
         expect(video.legalRestrictions).toEqual('');
         expect(video.bestFor).toEqual([{ label: 'Context builder' }]);
         expect(video.createdBy).toEqual('BFI');
+        expect(video.attachments.length).toEqual(0);
         expect(video.links.self).toBeTruthy();
         expect(video.links.logInteraction).toBeTruthy();
       });
@@ -139,6 +140,7 @@ const testVideo: Video = {
   createdBy: 'BFI',
   promoted: undefined,
   language: null,
+  attachments: [],
   links: {
     self: new Link({ href: '/self' }),
     logInteraction: new Link({ href: '/logInteraction' }),

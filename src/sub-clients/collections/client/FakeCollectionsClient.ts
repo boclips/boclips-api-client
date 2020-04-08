@@ -3,13 +3,14 @@ import { SubjectFactory } from '../../../test-support/SubjectsFactory';
 import { VideoWithBoclipsProjectionFactory } from '../../../test-support/VideosFactory';
 import Pageable from '../../common/model/Pageable';
 import { Clearable } from '../../common/utils/Clearable';
-import { Collection, getAttachmentType } from '../model/Collection';
+import { Collection } from '../model/Collection';
 import CollectionFilter from '../model/CollectionFilter';
 import {
   CreateCollectionRequest,
   UpdateCollectionRequest,
 } from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
+import { getAttachmentType } from '../../common/model/Attachment';
 
 export class FakeCollectionsClient implements CollectionsClient, Clearable {
   private collections: Collection[] = [];

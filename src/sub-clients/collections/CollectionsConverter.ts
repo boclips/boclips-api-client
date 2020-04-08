@@ -1,9 +1,10 @@
 import Pageable from '../common/model/Pageable';
 import { PageableConverter } from '../common/model/PageableConverter';
 import { PageableEntity } from '../common/model/PageableEntity';
-import { Attachment, Collection, getAttachmentType } from './model/Collection';
-import { AttachmentEntity, CollectionEntity } from './model/CollectionEntity';
+import { Collection } from './model/Collection';
+import { CollectionEntity } from './model/CollectionEntity';
 import { convertLinks } from '../common/utils/convertLinks';
+import { convertAttachment } from '../common/utils/convertAttachment';
 
 export class CollectionsConverter {
   // can throw if attachment type is not valid
@@ -11,7 +12,7 @@ export class CollectionsConverter {
   public static convert(entity: CollectionEntity): Collection {
     const links = convertLinks(entity);
     const attachments = entity.attachments
-      ? entity.attachments.map(CollectionsConverter.convertAttachment)
+      ? entity.attachments.map(convertAttachment)
       : [];
     return {
       id: entity.id,
@@ -30,18 +31,6 @@ export class CollectionsConverter {
       links: { ...links, self: links.self },
     };
   }
-
-  public static convertAttachment = (entity: AttachmentEntity): Attachment => {
-    const type = getAttachmentType(entity.type);
-    if (!type) {
-      throw Error(`${type} is not a valid attachment type`);
-    }
-    return {
-      type,
-      linkToResource: entity._links.download.href,
-      description: entity.description,
-    };
-  };
 
   public static convertPage(
     entity: PageableEntity<CollectionEntity>,

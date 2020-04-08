@@ -51,6 +51,19 @@ describe('VideosConverter', () => {
     createdBy: 'BFI',
     promoted: true,
     language: null,
+    attachments: [
+      {
+        id: 'attachment-id-123',
+        type: 'ACTIVITY',
+        description: 'Attachment description',
+        _links: {
+          download: {
+            href: 'www.boclips.com',
+            templated: false,
+          },
+        },
+      },
+    ],
     _links: {
       self: {
         href:
@@ -61,6 +74,11 @@ describe('VideosConverter', () => {
         href:
           'https://api.staging-boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/events?logVideoInteraction=true&type={type}',
         templated: true,
+      },
+      addAttachment: {
+        href:
+          'https://api.boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/attachments',
+        templated: false,
       },
     },
   };
@@ -120,11 +138,21 @@ describe('VideosConverter', () => {
     expect(video.createdBy).toEqual('BFI');
     expect(video.promoted).toEqual(true);
     expect(video.language).toEqual(null);
+    expect(video.attachments).toEqual([
+      {
+        type: 'ACTIVITY',
+        description: 'Attachment description',
+        linkToResource: 'www.boclips.com',
+      },
+    ]);
     expect(video.links.self.getOriginalLink()).toEqual(
       'https://api.staging-boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9',
     );
     expect(video.links.logInteraction.getOriginalLink()).toEqual(
       'https://api.staging-boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/events?logVideoInteraction=true&type={type}',
+    );
+    expect(video.links.addAttachment.getOriginalLink()).toEqual(
+      'https://api.boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/attachments',
     );
   });
 

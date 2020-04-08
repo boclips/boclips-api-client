@@ -6,6 +6,7 @@ import { Language } from './Language';
 import { VideoType } from '../../videoTypes/model/VideoType';
 import { Link } from '../../common/model/LinkEntity';
 import { ModelWithLinks } from '../../common/model/common';
+import { Attachment } from '../../common/model/Attachment';
 
 export interface Video extends ModelWithLinks {
   id: string;
@@ -23,6 +24,7 @@ export interface Video extends ModelWithLinks {
   createdBy: string;
   promoted: boolean;
   language: Language;
+  attachments?: Attachment[];
   links: {
     self: Link;
     logInteraction: Link;
@@ -30,6 +32,7 @@ export interface Video extends ModelWithLinks {
     rate?: Link;
     tag?: Link;
     transcript?: Link;
+    addAttachment?: Link;
   };
   contentPartner?: string;
   contentPartnerId?: string;

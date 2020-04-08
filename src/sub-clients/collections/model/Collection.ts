@@ -3,6 +3,7 @@ import { ModelWithLinks } from '../../common/model/common';
 import { Link } from '../../common/model/LinkEntity';
 import { Video } from '../../videos/model/Video';
 import { Subject } from '../../subjects/model/Subject';
+import { Attachment } from '../../common/model/Attachment';
 
 export interface Collection extends ModelWithLinks {
   id: string;
@@ -29,20 +30,3 @@ export interface Collection extends ModelWithLinks {
     interactedWith?: Link;
   };
 }
-
-export interface Attachment {
-  type: AttachmentType;
-  description?: string;
-  linkToResource: string;
-}
-
-export enum AttachmentType {
-  LESSON_PLAN = 'LESSON_PLAN',
-}
-
-export const getAttachmentType = (
-  value: string,
-): AttachmentType | undefined => {
-  const matchedKey = Object.keys(AttachmentType).find(type => type === value);
-  return matchedKey && AttachmentType[matchedKey];
-};
