@@ -16,10 +16,10 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
   }
 
   public async update(
-    originalVideo: Video,
+    videoWithLinks: Pick<Video, 'links'>,
     updateVideoRequest: UpdateVideoRequest,
   ): Promise<Video> {
-    const validUpdateLink = originalVideo && originalVideo.links.update;
+    const validUpdateLink = videoWithLinks.links.update;
     if (!validUpdateLink) {
       throw new Error('Update link not available');
     }

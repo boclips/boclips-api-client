@@ -4,7 +4,7 @@ import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 export interface VideosClient {
   get(id: string): Promise<Video>;
   update(
-    originalVideo: Video,
+    videoWithLinks: Pick<Video, 'links'>,
     updateVideoRequest: UpdateVideoRequest,
   ): Promise<Video>;
 }

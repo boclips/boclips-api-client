@@ -12,42 +12,47 @@ export class FakeVideosClient implements VideosClient, Clearable {
   }
 
   public update(
-    originalVideo: Video,
+    videoWithLinks: Pick<Video, 'links'>,
     updateVideoRequest: UpdateVideoRequest,
   ): Promise<Video> {
-    const videoIndex = this.videos.findIndex(
-      video => video.id === originalVideo.id,
-    );
-    if (videoIndex >= 0) {
-      const {
-        title,
-        description,
-        promoted,
-        subjectIds,
-        ageRangeMin,
-        ageRangeMax,
-      } = updateVideoRequest;
+    const updateLink = videoWithLinks.links.update?.getOriginalLink();
 
-      const updatedVideo = {
-        ...originalVideo,
-        title: title ? title : originalVideo.title,
-        description: description ? description : originalVideo.description,
-        promoted: promoted ? promoted : originalVideo.promoted,
-        ageRange:
-          ageRangeMin || ageRangeMax
-            ? { min: ageRangeMin, max: ageRangeMax }
-            : originalVideo.ageRange,
-        subjects: subjectIds
-          ? subjectIds.map(id => ({ id, name: `subject${id}` }))
-          : originalVideo.subjects,
-      };
+    if (!updateLink) Promise.reject('Video does not have update link');
 
-      this.videos[videoIndex] = updatedVideo;
+    const videoId = updateLink.match(/.+\/v1\/videos\/(.+)\?.+/)[1];
+    if (!videoId)
+      Promise.reject(`Update link does not contain video id: ${updateLink}`);
 
-      return Promise.resolve(this.videos[videoIndex]);
-    } else {
-      return Promise.reject();
-    }
+    const videoIndex = this.videos.findIndex(video => video.id === videoId);
+    if (videoIndex < 0) Promise.reject(`No video found with id: ${videoId}`);
+
+    const {
+      title,
+      description,
+      promoted,
+      subjectIds,
+      ageRangeMin,
+      ageRangeMax,
+    } = updateVideoRequest;
+    const originalVideo = this.videos[videoIndex];
+
+    const updatedVideo = {
+      ...originalVideo,
+      title: title ? title : originalVideo.title,
+      description: description ? description : originalVideo.description,
+      promoted: promoted ? promoted : originalVideo.promoted,
+      ageRange:
+        ageRangeMin || ageRangeMax
+          ? { min: ageRangeMin, max: ageRangeMax }
+          : originalVideo.ageRange,
+      subjects: subjectIds
+        ? subjectIds.map(id => ({ id, name: `subject${id}` }))
+        : originalVideo.subjects,
+    };
+
+    this.videos[videoIndex] = updatedVideo;
+
+    return Promise.resolve(this.videos[videoIndex]);
   }
 
   public insertVideo(video: Video): void {
