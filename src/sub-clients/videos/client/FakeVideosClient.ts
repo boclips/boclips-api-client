@@ -40,7 +40,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       ...originalVideo,
       title: title ? title : originalVideo.title,
       description: description ? description : originalVideo.description,
-      promoted: promoted ? promoted : originalVideo.promoted,
+      promoted: promoted !== undefined ? promoted : originalVideo.promoted,
       ageRange:
         ageRangeMin || ageRangeMax
           ? { min: ageRangeMin, max: ageRangeMax }

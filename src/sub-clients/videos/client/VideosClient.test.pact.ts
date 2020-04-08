@@ -68,7 +68,7 @@ describe('VideosClient', () => {
             'England Beats West Indies in the Final Test (2029) Time Machine',
           description:
             'Subscribe: http://bit.ly/subscribetotheBFI.\nThe first West Indies Test cricket team flees England and loses all three matches.',
-          promoted: true,
+          promoted: false,
           subjectIds: ['5cb499c9fd5beb428189454d', '5e73821c9bbfd47e6e7533a4'],
           ageRangeMin: 3,
           ageRangeMax: 12,
@@ -100,7 +100,7 @@ describe('VideosClient', () => {
         expect(updatedVideo.description).toEqual(
           updateVideoRequest.description,
         );
-        expect(updatedVideo.promoted).toEqual(true);
+        expect(updatedVideo.promoted).toEqual(false);
         expect(updatedVideo.subjects.length).toEqual(2);
         expect(updatedVideo.ageRange.min).toEqual(3);
         expect(updatedVideo.ageRange.max).toEqual(12);
