@@ -56,12 +56,10 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
 
   getSignedLink(filename: string): Promise<string> {
     this.axios.interceptors.request.use(request => {
-      console.log('Starting Request', request);
       return request;
     });
 
     this.axios.interceptors.response.use(response => {
-      console.log('Response:', response);
       return response;
     });
 
