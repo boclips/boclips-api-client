@@ -1,3 +1,5 @@
+import { AttachmentRequest } from '../../common/model/Attachment';
+
 export interface CreateCollectionRequest {
   title?: string;
   description?: string;
@@ -14,12 +16,6 @@ export interface UpdateCollectionRequest {
   videos?: string[];
   attachment?: AttachmentRequest;
   ageRange?: AgeRangeRequest;
-}
-
-export interface AttachmentRequest {
-  linkToResource: string;
-  description?: string;
-  type: string;
 }
 
 export interface AgeRangeRequest {

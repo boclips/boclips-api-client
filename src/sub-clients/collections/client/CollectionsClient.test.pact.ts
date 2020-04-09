@@ -8,10 +8,7 @@ import {
 } from '../../../test-support';
 import Pageable from '../../common/model/Pageable';
 import { Collection } from '../model/Collection';
-import {
-  AttachmentRequest,
-  UpdateCollectionRequest,
-} from '../model/CollectionRequest';
+import { UpdateCollectionRequest } from '../model/CollectionRequest';
 import {
   createCollection,
   existingCollectionFromStaging,
@@ -19,6 +16,7 @@ import {
   getFilteredCollections,
   updateCollection,
 } from '../pact/CollectionsInteractions';
+import { AttachmentRequest } from '../../common/model/Attachment';
 
 describe('CollectionsClient', () => {
   withClients(

@@ -59,7 +59,7 @@ export const updateVideo = (
   updateVideoRequest: UpdateVideoRequest,
 ): InteractionObject => {
   const updateLink = new Link({
-    href: `/v1/videos/${video.id}{?title,description,promoted,subjectIds,ageRangeMin,ageRangeMax}`,
+    href: `/v1/videos/${video.id}`,
     templated: true,
   }).getTemplatedLink(updateVideoRequest);
 
@@ -71,7 +71,11 @@ export const updateVideo = (
     withRequest: {
       method: 'PATCH',
       path,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
       query,
+      body: updateVideoRequest,
     },
     willRespondWith: {
       status: 200,

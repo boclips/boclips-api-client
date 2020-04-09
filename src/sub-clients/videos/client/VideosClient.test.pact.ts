@@ -73,6 +73,13 @@ describe('VideosClient', () => {
           subjectIds: ['5cb499c9fd5beb428189454d', '5e73821c9bbfd47e6e7533a4'],
           ageRangeMin: 3,
           ageRangeMax: 12,
+          attachments: [
+            {
+              description: 'New attachment description',
+              linkToResource: 'www.boclips.com',
+              type: 'ACTIVITY',
+            },
+          ],
         };
 
         const videoToUpdate: Video = {

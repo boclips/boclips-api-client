@@ -1,3 +1,5 @@
+import { AttachmentRequest } from '../../common/model/Attachment';
+
 export interface UpdateVideoRequest {
   title?: string;
   description?: string;
@@ -5,4 +7,5 @@ export interface UpdateVideoRequest {
   subjectIds?: string[];
   ageRangeMin?: number;
   ageRangeMax?: number;
+  attachments?: AttachmentRequest[];
 }

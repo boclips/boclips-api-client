@@ -20,6 +20,12 @@ export enum AttachmentType {
   ACTIVITY = 'ACTIVITY',
 }
 
+export interface AttachmentRequest {
+  type: string;
+  linkToResource: string;
+  description?: string;
+}
+
 export const getAttachmentType = (
   value: string,
 ): AttachmentType | undefined => {
