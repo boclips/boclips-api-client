@@ -24,6 +24,7 @@ export interface AdminLinks {
   createHttpFeed: LinkEntity;
   distributionMethods: LinkEntity;
   trackPageRendered: LinkEntity;
+  trackPlatformInteractedWith: LinkEntity;
   subjects: LinkEntity;
   searchAccessRules: LinkEntity;
   reportAccessExpired: LinkEntity;

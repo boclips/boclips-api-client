@@ -9,4 +9,5 @@ export interface EventsClient {
     request: CollectionInteractedWithRequest,
   ): Promise<void>;
   trackUserExpired(): Promise<void>;
+  trackPlatformInteraction(subtype: string): Promise<void>;
 }

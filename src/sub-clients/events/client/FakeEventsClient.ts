@@ -26,9 +26,15 @@ export class FakeEventsClient implements EventsClient, Clearable {
     return Promise.resolve();
   }
 
+  public trackPlatformInteraction(subtype: string): Promise<void> {
+    this.events.push({ type: 'PLATFORM_INTERACTED_WITH', subtype });
+    return Promise.resolve();
+  }
+
   public clear() {
     this.events = [];
   }
+
   public getEvents() {
     return this.events;
   }

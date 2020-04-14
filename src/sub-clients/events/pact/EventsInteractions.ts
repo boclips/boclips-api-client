@@ -57,3 +57,18 @@ export const trackCollectionInteraction = (
     status: 200,
   },
 });
+
+export const trackPlatformInteraction = (
+  subtype: string,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST PlatformInteractedWith event',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/events/platform-interaction`,
+    query: `subtype=${subtype}`,
+  },
+  willRespondWith: {
+    status: 201,
+  },
+});

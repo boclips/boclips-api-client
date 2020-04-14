@@ -16,6 +16,7 @@ import {
   collectionID,
   trackCollectionInteraction,
   trackPageRendered,
+  trackPlatformInteraction,
 } from '../pact/EventsInteractions';
 
 describe('EventsClient', () => {
@@ -87,6 +88,25 @@ describe('EventsClient', () => {
         if (isATestClient(client)) {
           const events = client.eventsClient.getEvents();
           expect(events.length).toEqual(1);
+        }
+      });
+
+      it(`can track platform interaction events`, async () => {
+        await provider.addInteraction(
+          trackPlatformInteraction('CONTRACT_TEST_CLICK'),
+        );
+
+        await client.eventsClient.trackPlatformInteraction(
+          'CONTRACT_TEST_CLICK',
+        );
+
+        if (isATestClient(client)) {
+          const events = client.eventsClient.getEvents();
+          expect(events.length).toEqual(1);
+          expect(events[0]).toEqual({
+            type: 'PLATFORM_INTERACTED_WITH',
+            subtype: 'CONTRACT_TEST_CLICK',
+          });
         }
       });
     },
