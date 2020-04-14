@@ -1,11 +1,9 @@
-import { AgeRange } from '../../common/model/AgeRange';
 import { IngestDetailsResource } from './IngestDetailsResource';
 
 export interface ContentPartnerResource {
   id: string;
   name: string;
   official: boolean;
-  ageRange?: AgeRange;
   currency?: string;
   legalRestriction?: any;
   distributionMethods: any[];

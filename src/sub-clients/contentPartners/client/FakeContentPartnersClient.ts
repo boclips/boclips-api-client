@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { ContentPartnerFactory } from '../../../test-support';
-import { AgeRange, BoclipsApiError, Link } from '../../../types';
+import { BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentCategories, ContentCategory } from '../model/ContentCategories';
 import { ContentPartner } from '../model/ContentPartner';
@@ -30,7 +30,6 @@ export class FakeContentPartnersClient
       id,
       name: request.name,
       official: request.accreditedToYtChannelId == null,
-      ageRange: request.ageRanges && this.ageRange(request.ageRanges),
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods,
@@ -100,14 +99,8 @@ export class FakeContentPartnersClient
 
     const updatedFields: Partial<ContentPartner> = {};
 
-    if (contentPartner.ageRanges) {
-      updatedFields.ageRange = { ids: contentPartner.ageRanges };
-    }
-
     Object.keys(contentPartner).forEach(key => {
-      if (key !== 'ageRange') {
-        updatedFields[key] = contentPartner[key];
-      }
+      updatedFields[key] = contentPartner[key];
     });
 
     this.contentPartners[index] = {
@@ -128,14 +121,14 @@ export class FakeContentPartnersClient
     return new Promise(resolve => resolve(signedLinkUrl));
   }
 
-  private ageRange(ageRangeIds: string[]): AgeRange {
-    const min = Math.min(...ageRangeIds.map(id => parseInt(id) || 5));
-    const max = Math.min(...ageRangeIds.map(id => parseInt(id) || 19));
-    return {
-      min,
-      max,
-      ids: ageRangeIds,
-      label: `${min}-${max}`,
-    };
-  }
+  // private ageRange(ageRangeIds: string[]): AgeRange {
+  //   const min = Math.min(...ageRangeIds.map(id => parseInt(id) || 5));
+  //   const max = Math.min(...ageRangeIds.map(id => parseInt(id) || 19));
+  //   return {
+  //     min,
+  //     max,
+  //     ids: ageRangeIds,
+  //     label: `${min}-${max}`,
+  //   };
+  // }
 }

@@ -76,10 +76,6 @@ describe('ContentPartnersClient', () => {
         expect(contentPartner.name).toEqual('a name');
         expect(contentPartner.official).toEqual(true);
         expect(contentPartner.currency).toEqual('USD');
-        expect(contentPartner.ageRange.min).toEqual(10);
-        expect(contentPartner.ageRange.max).toEqual(20);
-        expect(contentPartner.ageRange.label).toEqual('10-20');
-        expect(contentPartner.ageRange.ids).toEqual(['123']);
         expect(contentPartner.legalRestriction.id).toEqual('2');
         expect(contentPartner.legalRestriction.text).toEqual(
           'a legal restriction',

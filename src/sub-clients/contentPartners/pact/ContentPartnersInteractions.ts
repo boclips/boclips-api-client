@@ -108,12 +108,6 @@ export const getContentPartnerInteraction = (
       ...{
         currency: 'USD',
         distributionMethods: eachLike('STREAM', { min: 1 }),
-        ageRange: {
-          min: 10,
-          max: 20,
-          label: '10-20',
-          ids: ['123'],
-        },
         legalRestriction: {
           text: 'a legal restriction',
           id: '2',

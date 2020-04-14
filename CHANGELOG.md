@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.8.1] - 2020-04-14
+
+- Remove old ageRange from content partner
+
 ## [8.8.0] - 2020-04-09
 
 - Use body for video updates instead of query params (align with new behavior of video update endpoint)
