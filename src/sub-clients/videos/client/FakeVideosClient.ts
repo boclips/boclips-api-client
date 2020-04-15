@@ -12,19 +12,11 @@ export class FakeVideosClient implements VideosClient, Clearable {
   }
 
   public update(
-    videoWithLinks: Pick<Video, 'links'>,
+    id: string,
     updateVideoRequest: UpdateVideoRequest,
   ): Promise<Video> {
-    const updateLink = videoWithLinks.links.update?.getOriginalLink();
-
-    if (!updateLink) Promise.reject('Video does not have update link');
-
-    const videoId = updateLink.match(/.+\/v1\/videos\/(.+)\?.+/)[1];
-    if (!videoId)
-      Promise.reject(`Update link does not contain video id: ${updateLink}`);
-
-    const videoIndex = this.videos.findIndex(video => video.id === videoId);
-    if (videoIndex < 0) Promise.reject(`No video found with id: ${videoId}`);
+    const videoIndex = this.videos.findIndex(video => video.id === id);
+    if (videoIndex < 0) Promise.reject(`No video found with id: ${id}`);
 
     const {
       title,

@@ -16,16 +16,15 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
   }
 
   public async update(
-    videoWithLinks: Pick<Video, 'links'>,
+    id: string,
     updateVideoRequest: UpdateVideoRequest,
   ): Promise<Video> {
-    const validUpdateLink = videoWithLinks.links.update;
-    if (!validUpdateLink) {
-      throw new Error('Update link not available');
-    }
+    const videoLink = this.getLinkOrThrow('video');
+    const response = await this.axios.patch(
+      expandUrlTemplate(videoLink.href, { id }),
+      updateVideoRequest,
+    );
 
-    return this.axios
-      .patch(validUpdateLink.getTemplatedLink({}), updateVideoRequest)
-      .then(response => VideosConverter.convert(response.data));
+    return VideosConverter.convert(response.data);
   }
 }

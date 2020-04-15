@@ -85,23 +85,12 @@ describe('VideosClient', () => {
           ],
         };
 
-        const videoToUpdate: Video = {
-          ...testVideo,
-          links: {
-            ...testVideo.links,
-            update: new Link({
-              href: `${provider.mockService.baseUrl}/v1/videos/${existingVideoIdFromStaging}{?title,description,promoted,subjectIds,ageRangeMin,ageRangeMax}`,
-              templated: true,
-            }),
-          },
-        };
-
         await provider.addInteraction(
-          updateVideo(videoToUpdate, updateVideoRequest),
+          updateVideo(existingVideoIdFromStaging, updateVideoRequest),
         );
 
         const updatedVideo = await client.videosClient.update(
-          videoToUpdate,
+          existingVideoIdFromStaging,
           updateVideoRequest,
         );
 

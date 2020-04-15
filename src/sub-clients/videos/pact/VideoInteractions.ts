@@ -1,7 +1,6 @@
 import { InteractionObject } from '@pact-foundation/pact';
 import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
-import { Video } from '../model/Video';
 import { Link } from '../../common/model/LinkEntity';
 
 export const getVideo = (id: string): InteractionObject => ({
@@ -65,11 +64,11 @@ export const getVideo = (id: string): InteractionObject => ({
 });
 
 export const updateVideo = (
-  video: Video,
+  id: string,
   updateVideoRequest: UpdateVideoRequest,
 ): InteractionObject => {
   const updateLink = new Link({
-    href: `/v1/videos/${video.id}`,
+    href: `/v1/videos/${id}`,
     templated: true,
   }).getTemplatedLink(updateVideoRequest);
 
@@ -93,7 +92,7 @@ export const updateVideo = (
         'Content-Type': 'application/hal+json;charset=UTF-8',
       },
       body: {
-        id: like(video.id),
+        id: like(id),
         title: like(
           updateVideoRequest.title ? updateVideoRequest.title : 'Test Video',
         ),
