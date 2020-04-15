@@ -1,4 +1,4 @@
-import { LinkEntity } from './LinkEntity';
+import { Link, LinkEntity } from './LinkEntity';
 
 export interface AttachmentEntity {
   id: string;
@@ -10,9 +10,13 @@ export interface AttachmentEntity {
 }
 
 export interface Attachment {
+  id: string;
   type: AttachmentType;
   description?: string;
   linkToResource: string;
+  links: {
+    download: Link;
+  };
 }
 
 export enum AttachmentType {
@@ -30,5 +34,10 @@ export const getAttachmentType = (
   value: string,
 ): AttachmentType | undefined => {
   const matchedKey = Object.keys(AttachmentType).find(type => type === value);
-  return matchedKey && AttachmentType[matchedKey];
+
+  if (!matchedKey) {
+    throw Error(`${value} is not a valid attachment type`);
+  }
+
+  return AttachmentType[matchedKey];
 };

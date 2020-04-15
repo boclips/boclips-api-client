@@ -138,13 +138,21 @@ describe('VideosConverter', () => {
     expect(video.createdBy).toEqual('BFI');
     expect(video.promoted).toEqual(true);
     expect(video.language).toEqual(null);
-    expect(video.attachments).toEqual([
-      {
-        type: 'ACTIVITY',
-        description: 'Attachment description',
-        linkToResource: 'www.boclips.com',
+
+    expect(video.attachments.length).toEqual(1);
+    expect(video.attachments[0].id).toEqual('attachment-id-123');
+    expect(video.attachments[0].type).toEqual('ACTIVITY');
+    expect(video.attachments[0].description).toEqual('Attachment description');
+    expect(video.attachments[0].linkToResource).toEqual('www.boclips.com');
+    expect(video.attachments[0].links).toEqual({
+      download: {
+        link: {
+          href: 'www.boclips.com',
+          templated: false,
+        },
       },
-    ]);
+    });
+
     expect(video.links.self.getOriginalLink()).toEqual(
       'https://api.staging-boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9',
     );

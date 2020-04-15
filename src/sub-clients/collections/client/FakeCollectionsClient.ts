@@ -11,6 +11,7 @@ import {
 } from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
 import { getAttachmentType } from '../../common/model/Attachment';
+import { AttachmentFactory } from '../../../test-support/AttachmentsFactory';
 
 export class FakeCollectionsClient implements CollectionsClient, Clearable {
   private collections: Collection[] = [];
@@ -111,11 +112,11 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
       }
 
       partialCollection.attachments = [
-        {
+        AttachmentFactory.sample({
           type: attachmentType,
           description: request.attachment.description,
           linkToResource: request.attachment.linkToResource,
-        },
+        }),
       ];
     }
 

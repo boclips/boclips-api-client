@@ -1,5 +1,4 @@
 import {
-  AttachmentEntityFactory,
   CollectionEntityFactory,
   PageableCollectionsEntityFactory,
 } from '../../test-support/CollectionsFactory';
@@ -7,6 +6,7 @@ import { CollectionsConverter } from './CollectionsConverter';
 import { Collection } from './model/Collection';
 import { CollectionEntity } from './model/CollectionEntity';
 import { AttachmentType } from '../common/model/Attachment';
+import { AttachmentEntityFactory } from '../../test-support/AttachmentsFactory';
 
 describe('Collections converter', () => {
   it('can convert from collection', () => {

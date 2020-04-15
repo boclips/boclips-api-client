@@ -26,8 +26,7 @@ export class VideosConverter {
       contentPartnerId: entity.contentPartnerId,
       contentPartnerVideoId: entity.contentPartnerVideoId,
       type: entity.type,
-      attachments:
-        (entity.attachments && entity.attachments.map(convertAttachment)) || [],
+      attachments: entity.attachments.map(convertAttachment) || [],
     };
   }
 }

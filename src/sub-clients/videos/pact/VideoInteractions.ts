@@ -37,6 +37,16 @@ export const getVideo = (id: string): InteractionObject => ({
       badges: like(['youtube']),
       legalRestrictions: like(''),
       bestFor: [{ label: 'Context builder' }],
+      attachments: like([
+        like({
+          id: '5e963dc0bc854e03b4f0fa6b',
+          type: 'ACTIVITY',
+          description: 'New attachment description',
+          _links: {
+            download: { href: 'www.boclips.com', templated: false },
+          },
+        }),
+      ]),
       createdBy: 'BFI',
       _links: like({
         self: {
@@ -122,6 +132,16 @@ export const updateVideo = (
         badges: like(['youtube']),
         legalRestrictions: like(''),
         bestFor: [{ label: 'Context builder' }],
+        attachments: like([
+          like({
+            id: '5e963dc0bc854e03b4f0fa6b',
+            type: 'ACTIVITY',
+            description: 'New attachment description',
+            _links: {
+              download: { href: 'www.boclips.com', templated: false },
+            },
+          }),
+        ]),
         createdBy: 'BFI',
         _links: like({
           self: {

@@ -3,15 +3,14 @@ import {
   AttachmentEntity,
   getAttachmentType,
 } from '../model/Attachment';
+import { convertLinks } from './convertLinks';
 
 export const convertAttachment = (entity: AttachmentEntity): Attachment => {
-  const type = getAttachmentType(entity.type);
-  if (!type) {
-    throw Error(`${type} is not a valid attachment type`);
-  }
   return {
-    type,
+    id: entity.id,
+    type: getAttachmentType(entity.type),
     linkToResource: entity._links.download.href,
     description: entity.description,
+    links: convertLinks(entity),
   };
 };

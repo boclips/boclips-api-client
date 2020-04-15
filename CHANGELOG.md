@@ -19,6 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add attachment updating functionality to video update
 - Refactor attachment request to share between videos and collections
 
+## [8.7.1] - 2020-04-09
+### Changed
+
+- Retrofit tests for attachments conversion
+- Change attachments property on videos to be initialised with empty list (instead of undefined)
+
 ## [8.7.0] - 2020-04-09
 ### Added
 

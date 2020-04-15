@@ -3,10 +3,6 @@ import { CollectionEntity } from '../sub-clients/collections/model/CollectionEnt
 import CollectionFilter from '../sub-clients/collections/model/CollectionFilter';
 import { Link } from '../sub-clients/common/model/LinkEntity';
 import { PageableEntity } from '../sub-clients/common/model/PageableEntity';
-import {
-  AttachmentEntity,
-  AttachmentType,
-} from '../sub-clients/common/model/Attachment';
 
 export class CollectionEntityFactory {
   public static sample(
@@ -142,22 +138,5 @@ export class CollectionFactory {
         }),
       },
     };
-  }
-}
-
-export class AttachmentEntityFactory {
-  public static sample(entity: Partial<AttachmentEntity>): AttachmentEntity {
-    const defaults: AttachmentEntity = {
-      id: 'test-id',
-      type: AttachmentType.LESSON_PLAN,
-      description: null,
-      _links: {
-        download: {
-          href: 'externallink.com',
-          templated: false,
-        },
-      },
-    };
-    return { ...defaults, ...entity };
   }
 }

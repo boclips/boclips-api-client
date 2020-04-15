@@ -24,6 +24,7 @@ export class VideoFactory {
     createdBy: undefined,
     promoted: false,
     language: undefined,
+    attachments: [],
     links: {
       self: new Link({ href: 'http://link-to-video' }),
       logInteraction: new Link({ href: 'http://link-to-log-interaction' }),

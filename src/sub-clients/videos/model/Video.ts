@@ -24,7 +24,7 @@ export interface Video extends ModelWithLinks {
   createdBy: string;
   promoted: boolean;
   language: Language;
-  attachments?: Attachment[];
+  attachments: Attachment[];
   links: {
     self: Link;
     logInteraction: Link;
