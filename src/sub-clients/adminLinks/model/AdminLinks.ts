@@ -3,6 +3,7 @@ import { LinkEntity } from '../../common/model/LinkEntity';
 export interface AdminLinks {
   collection: LinkEntity;
   video: LinkEntity;
+  searchVideos: LinkEntity;
   createCollection: LinkEntity;
   adminCollectionSearch: LinkEntity;
   jobs: LinkEntity;

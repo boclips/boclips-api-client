@@ -5,7 +5,8 @@ import { LinkEntity } from '../../common/model/LinkEntity';
 const { like } = Matchers;
 
 export const sampleLink: LinkEntity = { href: 'href', templated: false };
-
+export const VIDEO_SEARCH_URL =
+  '/v1/videos{?query,sort_by,duration,duration_facets,duration_min,duration_max,released_date_from,released_date_to,source,age_range_min,age_range_max,age_range,age_range_facets,size,page,subject,subjects_set_manually,promoted,content_partner,type}';
 export const getAdminLinks = (): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET Admin Links',
@@ -106,6 +107,10 @@ export const getAdminLinks = (): InteractionObject => ({
         }),
         video: like({
           href: `${provider.mockService.baseUrl}/v1/videos/{id}`,
+          templated: true,
+        }),
+        searchVideos: like({
+          href: `${provider.mockService.baseUrl}${VIDEO_SEARCH_URL}`,
           templated: true,
         }),
         videoTypes: like({

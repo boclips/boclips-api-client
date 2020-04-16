@@ -3,12 +3,14 @@ import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { Video } from '../model/Video';
-import { getVideo, updateVideo } from '../pact/VideoInteractions';
+import { getVideo, searchVideo, updateVideo } from '../pact/VideoInteractions';
 import { Link } from '../../common/model/LinkEntity';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { AttachmentFactory } from '../../../test-support/AttachmentsFactory';
 import { AttachmentType } from '../../common/model/Attachment';
 import moment = require('moment');
+import { VideoSearchRequest } from '../model/VideoSearchRequest';
+import Pageable from '../../common/model/Pageable';
 
 export const existingVideoIdFromStaging = '5c92b2f4d0f34e48bbfb40d9';
 
@@ -104,6 +106,32 @@ describe('VideosClient', () => {
         expect(updatedVideo.subjects.length).toEqual(2);
         expect(updatedVideo.ageRange.min).toEqual(3);
         expect(updatedVideo.ageRange.max).toEqual(12);
+      });
+
+      it(`can get videos by a video filter`, async () => {
+        const searchRequest: VideoSearchRequest = {
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          content_partner: ['TED'],
+          page: 0,
+          size: 10,
+        };
+
+        await provider.addInteraction(searchVideo(searchRequest));
+        if (isATestClient(client)) {
+          client.videosClient.insertVideo({
+            ...testVideo,
+            id: 'video2',
+            contentPartner: 'TED',
+          });
+        }
+
+        const results: Pageable<Video> = await client.videosClient.search(
+          searchRequest,
+        );
+
+        expect(results.pageSpec.number).toEqual(0);
+        expect(results.pageSpec.size).toEqual(10);
+        expect(results.page.length > 0).toBeTruthy();
       });
     },
   );

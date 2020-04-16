@@ -2,6 +2,9 @@ import { VideosClient } from './VideosClient';
 import { Video } from '../model/Video';
 import { Clearable } from '../../common/utils/Clearable';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
+import { VideoSearchRequest } from '../model/VideoSearchRequest';
+import Pageable from '../../common/model/Pageable';
+import { PageableFactory } from '../../common/model/PageableFactory';
 
 export class FakeVideosClient implements VideosClient, Clearable {
   private videos: Video[] = [];
@@ -9,6 +12,21 @@ export class FakeVideosClient implements VideosClient, Clearable {
   public get(id: string): Promise<Video> {
     const video = this.videos.find(video => video.id === id);
     return video === undefined ? Promise.reject() : Promise.resolve(video);
+  }
+
+  public search(searchRequest: VideoSearchRequest): Promise<Pageable<Video>> {
+    const matchingVideos = this.videos.filter(video => {
+      return searchRequest.content_partner.find(
+        contentPartnerName => contentPartnerName === video.contentPartner,
+      );
+    });
+
+    const payload = PageableFactory.sample<Video>(matchingVideos, {
+      number: searchRequest.page,
+      size: searchRequest.size,
+    });
+
+    return Promise.resolve(payload);
   }
 
   public update(

@@ -2,9 +2,10 @@ import { Video } from './Video';
 import { VideosConverter } from './VideosConverter';
 import { Link } from '../../common/model/LinkEntity';
 import moment = require('moment');
+import { VideoEntity } from './VideoEntity';
 
 describe('VideosConverter', () => {
-  const baseVideoEntity = {
+  const baseVideoEntity: VideoEntity = {
     id: '5c92b2f4d0f34e48bbfb40d9',
     title: 'England Beats West Indies in the Final Test (2029) Time Machine',
     description:

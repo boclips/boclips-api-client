@@ -4,6 +4,11 @@ import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { VideosConverter } from '../model/VideosConverter';
 import { Video } from '../model/Video';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
+import { VideoSearchRequest } from '../model/VideoSearchRequest';
+import Pageable from '../../common/model/Pageable';
+import { PageableConverter } from '../../common/model/PageableConverter';
+import { VideoEntity } from '../model/VideoEntity';
+import { PageableEntity } from '../../common/model/PageableEntity';
 
 export class ApiVideosClient extends ApiSubClient implements VideosClient {
   public async get(id: string): Promise<Video> {
@@ -13,6 +18,21 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     );
 
     return VideosConverter.convert(response.data);
+  }
+
+  public async search(
+    searchRequest: VideoSearchRequest,
+  ): Promise<Pageable<Video>> {
+    const link = this.getLinkOrThrow('searchVideos');
+    const response = await this.axios.get<PageableEntity<VideoEntity>>(
+      expandUrlTemplate(link.href, { ...searchRequest }),
+    );
+
+    return PageableConverter.convert<VideoEntity, Video>(
+      response.data,
+      'videos',
+      VideosConverter.convert,
+    );
   }
 
   public async update(
