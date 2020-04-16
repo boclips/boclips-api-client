@@ -24,7 +24,7 @@ describe('ContentPartnerContracts', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.contentPartnerContractsClient.insertContentPartnerContractFixture(
+          client.contentPartnerContracts.insertContentPartnerContractFixture(
             sampleContract,
           );
         }
@@ -36,7 +36,7 @@ describe('ContentPartnerContracts', () => {
             existingContentPartnerContractFromStaging,
           ),
         );
-        const contract = await client.contentPartnerContractsClient.get(
+        const contract = await client.contentPartnerContracts.get(
           existingContentPartnerContractFromStaging,
         );
 
@@ -119,7 +119,7 @@ describe('ContentPartnerContracts', () => {
           getContentPartnerContractsInteraction(pageRequest),
         );
 
-        const contracts = await client.contentPartnerContractsClient.getAll(
+        const contracts = await client.contentPartnerContracts.getAll(
           pageRequest,
         );
 
@@ -132,7 +132,7 @@ describe('ContentPartnerContracts', () => {
         const filename = 'file.png';
         await provider.addInteraction(getSignedLink(filename));
 
-        const signedLink = await client.contentPartnerContractsClient.getSignedLink(
+        const signedLink = await client.contentPartnerContracts.getSignedLink(
           filename,
         );
 
@@ -146,7 +146,7 @@ describe('ContentPartnerContracts', () => {
           ),
         );
 
-        await client.contentPartnerContractsClient.update(
+        await client.contentPartnerContracts.update(
           existingContentPartnerContractFromStaging,
           {
             contentPartnerName: 'new name',

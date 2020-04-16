@@ -36,10 +36,10 @@ describe('EventsClient', () => {
           await provider.addInteraction(trackPageRendered(request));
         }
 
-        await client.eventsClient.trackPageRendered(request);
+        await client.events.trackPageRendered(request);
 
         if (isATestClient(client)) {
-          const events = client.eventsClient.getEvents();
+          const events = client.events.getEvents();
           expect(events.length).toEqual(1);
         }
       });
@@ -49,10 +49,10 @@ describe('EventsClient', () => {
         //   await provider.addInteraction(trackUserExpired());
         // }
 
-        await client.eventsClient.trackUserExpired();
+        await client.events.trackUserExpired();
 
         if (isATestClient(client)) {
-          const events = client.eventsClient.getEvents();
+          const events = client.events.getEvents();
           expect(events.length).toEqual(1);
         }
       });
@@ -80,13 +80,13 @@ describe('EventsClient', () => {
           );
         }
 
-        await client.eventsClient.trackCollectionInteraction(
+        await client.events.trackCollectionInteraction(
           { id: collection.id, links: collection.links },
           request,
         );
 
         if (isATestClient(client)) {
-          const events = client.eventsClient.getEvents();
+          const events = client.events.getEvents();
           expect(events.length).toEqual(1);
         }
       });
@@ -96,12 +96,10 @@ describe('EventsClient', () => {
           trackPlatformInteraction('CONTRACT_TEST_CLICK'),
         );
 
-        await client.eventsClient.trackPlatformInteraction(
-          'CONTRACT_TEST_CLICK',
-        );
+        await client.events.trackPlatformInteraction('CONTRACT_TEST_CLICK');
 
         if (isATestClient(client)) {
-          const events = client.eventsClient.getEvents();
+          const events = client.events.getEvents();
           expect(events.length).toEqual(1);
           expect(events[0]).toEqual({
             type: 'PLATFORM_INTERACTED_WITH',

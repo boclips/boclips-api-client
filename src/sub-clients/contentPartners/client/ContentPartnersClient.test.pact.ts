@@ -27,7 +27,7 @@ describe('ContentPartnersClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.contentPartnersClient.insertContentPartnerFixture(
+          client.contentPartners.insertContentPartnerFixture(
             ContentPartnerFactory.sample({
               id: existingContentPartnerFromStaging,
               name: 'a name',
@@ -42,7 +42,7 @@ describe('ContentPartnersClient', () => {
 
       it('can fetch all content partners', async () => {
         await provider.addInteraction(getContentPartnersInteraction());
-        const response = await client.contentPartnersClient.getAll();
+        const response = await client.contentPartners.getAll();
 
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual(existingContentPartnerFromStaging);
@@ -57,9 +57,7 @@ describe('ContentPartnersClient', () => {
         const filename = 'file.png';
         await provider.addInteraction(getSignedLink(filename));
 
-        const signedLink = await client.contentPartnersClient.getSignedLink(
-          filename,
-        );
+        const signedLink = await client.contentPartners.getSignedLink(filename);
 
         expect(typeof signedLink).toEqual('string');
       });
@@ -68,7 +66,7 @@ describe('ContentPartnersClient', () => {
         await provider.addInteraction(
           getContentPartnerInteraction(existingContentPartnerFromStaging),
         );
-        const contentPartner = await client.contentPartnersClient.get(
+        const contentPartner = await client.contentPartners.get(
           existingContentPartnerFromStaging,
         );
 
@@ -145,24 +143,21 @@ describe('ContentPartnersClient', () => {
         await provider.addInteraction(
           updateContentPartner(existingContentPartnerFromStaging),
         );
-        await client.contentPartnersClient.update(
-          existingContentPartnerFromStaging,
-          {
-            name: 'TED',
-            ageRanges: ['early-years'],
-            ingest: {
-              type: 'MRSS',
-              urls: ['https://mrss.feed'],
-            },
-            deliveryFrequency: moment.duration(3, 'month'),
+        await client.contentPartners.update(existingContentPartnerFromStaging, {
+          name: 'TED',
+          ageRanges: ['early-years'],
+          ingest: {
+            type: 'MRSS',
+            urls: ['https://mrss.feed'],
           },
-        );
+          deliveryFrequency: moment.duration(3, 'month'),
+        });
       });
 
       it('can get content partner categories', async () => {
         await provider.addInteraction(getContentCategories());
 
-        const contentCategories = await client.contentPartnersClient.getContentCategories();
+        const contentCategories = await client.contentPartners.getContentCategories();
 
         expect(contentCategories.categories[0].key).toContain('key 1');
         expect(contentCategories.categories[0].label).toContain('label 1');
@@ -173,7 +168,7 @@ describe('ContentPartnersClient', () => {
 
         let error: BoclipsApiError;
         try {
-          await client.contentPartnersClient.get('404');
+          await client.contentPartners.get('404');
         } catch (err) {
           error = err;
         }

@@ -23,14 +23,14 @@ describe('VideosClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.videosClient.insertVideo(testVideo);
+          client.videos.insertVideo(testVideo);
         }
       });
 
       it(`can fetch a video by id`, async () => {
         await provider.addInteraction(getVideo(existingVideoIdFromStaging));
 
-        const video: Video = await client.videosClient.get(
+        const video: Video = await client.videos.get(
           existingVideoIdFromStaging,
         );
 
@@ -91,7 +91,7 @@ describe('VideosClient', () => {
           updateVideo(existingVideoIdFromStaging, updateVideoRequest),
         );
 
-        const updatedVideo = await client.videosClient.update(
+        const updatedVideo = await client.videos.update(
           existingVideoIdFromStaging,
           updateVideoRequest,
         );
@@ -118,14 +118,14 @@ describe('VideosClient', () => {
 
         await provider.addInteraction(searchVideo(searchRequest));
         if (isATestClient(client)) {
-          client.videosClient.insertVideo({
+          client.videos.insertVideo({
             ...testVideo,
             id: 'video2',
             contentPartner: 'TED',
           });
         }
 
-        const results: Pageable<Video> = await client.videosClient.search(
+        const results: Pageable<Video> = await client.videos.search(
           searchRequest,
         );
 

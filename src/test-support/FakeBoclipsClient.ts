@@ -19,40 +19,40 @@ import { FakeIngestVideosClient } from '../sub-clients/ingestVideos/client/FakeI
 import { FakeVideosClient } from '../sub-clients/videos/client/FakeVideosClient';
 
 export class FakeBoclipsClient implements BoclipsClient, Clearable {
-  public legalRestrictionsClient: FakeLegalRestrictionsClient = new FakeLegalRestrictionsClient();
-  public contentPartnersClient: FakeContentPartnersClient = new FakeContentPartnersClient();
-  public contentPartnerContractsClient: FakeContentPartnerContractsClient = new FakeContentPartnerContractsClient();
-  public subjectsClient: FakeSubjectsClient = new FakeSubjectsClient();
-  public collectionsClient: FakeCollectionsClient = new FakeCollectionsClient();
-  public videosClient: FakeVideosClient = new FakeVideosClient();
-  public ordersClient: FakeOrdersClient = new FakeOrdersClient();
-  public eventsClient: FakeEventsClient = new FakeEventsClient();
-  public jobsClient: FakeJobsClient = new FakeJobsClient();
-  public organisationsClient: FakeOrganisationsClient = new FakeOrganisationsClient();
-  public videoTypesClient: FakeVideoTypesClient = new FakeVideoTypesClient();
-  public ingestVidoesClient: FakeIngestVideosClient = new FakeIngestVideosClient();
-  public bestForTagsClient: FakeBestForTagsClient = new FakeBestForTagsClient();
-  public marketingStatusesClient: FakeMarketingStatusesClient = new FakeMarketingStatusesClient();
-  public eduAgeRangesClient: FakeEduAgeRangesClient = new FakeEduAgeRangesClient();
-  public ingestVideoStatusesClient: FakeIngestVideoStatusesClient = new FakeIngestVideoStatusesClient();
+  public legalRestrictions: FakeLegalRestrictionsClient = new FakeLegalRestrictionsClient();
+  public contentPartners: FakeContentPartnersClient = new FakeContentPartnersClient();
+  public contentPartnerContracts: FakeContentPartnerContractsClient = new FakeContentPartnerContractsClient();
+  public subjects: FakeSubjectsClient = new FakeSubjectsClient();
+  public collections: FakeCollectionsClient = new FakeCollectionsClient();
+  public videos: FakeVideosClient = new FakeVideosClient();
+  public orders: FakeOrdersClient = new FakeOrdersClient();
+  public events: FakeEventsClient = new FakeEventsClient();
+  public jobs: FakeJobsClient = new FakeJobsClient();
+  public organisations: FakeOrganisationsClient = new FakeOrganisationsClient();
+  public videoTypes: FakeVideoTypesClient = new FakeVideoTypesClient();
+  public ingestVidoes: FakeIngestVideosClient = new FakeIngestVideosClient();
+  public bestForTags: FakeBestForTagsClient = new FakeBestForTagsClient();
+  public marketingStatuses: FakeMarketingStatusesClient = new FakeMarketingStatusesClient();
+  public eduAgeRanges: FakeEduAgeRangesClient = new FakeEduAgeRangesClient();
+  public ingestVideoStatuses: FakeIngestVideoStatusesClient = new FakeIngestVideoStatusesClient();
   public contractLegalRestrictions: FakeContractLegalRestrictionsClient = new FakeContractLegalRestrictionsClient();
 
   public clear() {
-    this.legalRestrictionsClient.clear();
-    this.contentPartnersClient.clear();
-    this.contentPartnerContractsClient.clear();
-    this.subjectsClient.clear();
-    this.collectionsClient.clear();
-    this.videosClient.clear();
-    this.ordersClient.clear();
-    this.jobsClient.clear();
-    this.eventsClient.clear();
-    this.organisationsClient.clear();
-    this.videoTypesClient.clear();
-    this.ingestVidoesClient.clear();
-    this.bestForTagsClient.clear();
-    this.eduAgeRangesClient.clear();
-    this.marketingStatusesClient.clear();
+    this.legalRestrictions.clear();
+    this.contentPartners.clear();
+    this.contentPartnerContracts.clear();
+    this.subjects.clear();
+    this.collections.clear();
+    this.videos.clear();
+    this.orders.clear();
+    this.jobs.clear();
+    this.events.clear();
+    this.organisations.clear();
+    this.videoTypes.clear();
+    this.ingestVidoes.clear();
+    this.bestForTags.clear();
+    this.eduAgeRanges.clear();
+    this.marketingStatuses.clear();
     this.contractLegalRestrictions.clear();
   }
 }

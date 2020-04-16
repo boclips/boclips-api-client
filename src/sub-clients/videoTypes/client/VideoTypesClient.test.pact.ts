@@ -13,7 +13,7 @@ describe('VideoTypesClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.videoTypesClient.insertVideoTypesFixture({
+          client.videoTypes.insertVideoTypesFixture({
             types: ['type'],
           });
         }
@@ -21,7 +21,7 @@ describe('VideoTypesClient', () => {
 
       it('can fetch all video types', async () => {
         await provider.addInteraction(getVideoTypes);
-        const response = await client.videoTypesClient.getAll();
+        const response = await client.videoTypes.getAll();
 
         expect(response.types).toHaveLength(1);
         expect(response.types[0]).toEqual('type');

@@ -129,8 +129,8 @@ export class CollectionFactory {
       mine: false,
       createdBy: 'Teacher',
       subjects: [],
-      ageRange: null,
-      description: null,
+      ageRange: undefined,
+      description: undefined,
       attachments: [],
       links: {
         self: new Link({

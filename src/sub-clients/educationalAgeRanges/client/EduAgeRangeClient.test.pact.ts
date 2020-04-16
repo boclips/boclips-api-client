@@ -13,20 +13,18 @@ describe('EduAgeRangeClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          (client as FakeBoclipsClient).eduAgeRangesClient.insertEduAgeRangeFixture(
-            {
-              id: 'early-years',
-              min: 3,
-              max: undefined,
-              label: '3 - 5 Early Years',
-            },
-          );
+          (client as FakeBoclipsClient).eduAgeRanges.insertEduAgeRangeFixture({
+            id: 'early-years',
+            min: 3,
+            max: undefined,
+            label: '3 - 5 Early Years',
+          });
         }
       });
 
       it('can fetch all age ranges', async () => {
         await provider.addInteraction(getEduAgeRangesInteraction());
-        const response = await client.eduAgeRangesClient.getAll();
+        const response = await client.eduAgeRanges.getAll();
 
         expect(response[0].id).toEqual('early-years');
         expect(response[0].min).toEqual(3);

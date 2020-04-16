@@ -20,7 +20,7 @@ export const withClients = (
     ['Real client against Mock Gateway by Pact', true],
     ['Fake client using test data', false],
   ])('contract test using %s', (_: string, shouldUseRealClient: boolean) => {
-    beforeAll(() => {
+    beforeEach(() => {
       if (shouldUseRealClient) {
         return provider.addInteraction(getAdminLinks());
       }
@@ -34,7 +34,7 @@ export const withClients = (
 
     const getClient = async () => {
       if (shouldUseRealClient) {
-        return await ApiBoclipsClient.initialize(
+        return await ApiBoclipsClient.create(
           axios.create(),
           provider.mockService.baseUrl,
         );

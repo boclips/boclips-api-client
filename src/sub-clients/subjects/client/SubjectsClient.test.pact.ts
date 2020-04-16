@@ -20,7 +20,7 @@ describe('SubjectsClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.subjectsClient.insertSubject({
+          client.subjects.insertSubject({
             id: existingSubjectIdFromStaging,
             name: 'Subject Sample',
             links: {
@@ -35,7 +35,7 @@ describe('SubjectsClient', () => {
       it(`can fetch all subjects `, async () => {
         await provider.addInteraction(getSubjects());
 
-        const response: Subject[] = await client.subjectsClient.getAll();
+        const response: Subject[] = await client.subjects.getAll();
 
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual(existingSubjectIdFromStaging);
@@ -50,7 +50,7 @@ describe('SubjectsClient', () => {
           updateSubject(existingSubjectIdFromStaging, 'Design'),
         );
 
-        await client.subjectsClient.update(
+        await client.subjects.update(
           SubjectFactory.sample({
             id: existingSubjectIdFromStaging,
             links: {
@@ -65,7 +65,7 @@ describe('SubjectsClient', () => {
 
       it('cannot update subject without an updateLink', async () => {
         const updateCall = async () =>
-          await client.subjectsClient.update(
+          await client.subjects.update(
             SubjectFactory.sample({ id: existingSubjectIdFromStaging }),
             { name: 'Design' },
           );

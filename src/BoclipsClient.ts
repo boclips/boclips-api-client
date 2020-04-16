@@ -17,21 +17,21 @@ import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClie
 import { VideosClient } from './sub-clients/videos/client/VideosClient';
 
 export interface BoclipsClient {
-  legalRestrictionsClient: LegalRestrictionsClient;
-  contentPartnersClient: ContentPartnersClient;
-  contentPartnerContractsClient: ContentPartnerContractsClient;
-  subjectsClient: SubjectsClient;
-  collectionsClient: CollectionsClient;
-  ordersClient: OrdersClient;
-  eventsClient: EventsClient;
-  jobsClient: JobsClient;
-  organisationsClient: OrganisationsClient;
-  videosClient: VideosClient;
-  videoTypesClient: VideoTypesClient;
-  ingestVidoesClient: IngestVideosClient;
-  bestForTagsClient: BestForTagsClient;
-  eduAgeRangesClient: EduAgeRangesClient;
-  marketingStatusesClient: MarketingStatusesClient;
-  ingestVideoStatusesClient: IngestVideoStatusesClient;
+  legalRestrictions: LegalRestrictionsClient;
+  contentPartners: ContentPartnersClient;
+  contentPartnerContracts: ContentPartnerContractsClient;
+  subjects: SubjectsClient;
+  collections: CollectionsClient;
+  orders: OrdersClient;
+  events: EventsClient;
+  jobs: JobsClient;
+  organisations: OrganisationsClient;
+  videos: VideosClient;
+  videoTypes: VideoTypesClient;
+  ingestVidoes: IngestVideosClient;
+  bestForTags: BestForTagsClient;
+  eduAgeRanges: EduAgeRangesClient;
+  marketingStatuses: MarketingStatusesClient;
+  ingestVideoStatuses: IngestVideoStatusesClient;
   contractLegalRestrictions: ContractLegalRestrictionsClient;
 }

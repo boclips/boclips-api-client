@@ -13,13 +13,13 @@ describe('MarketingStatusesClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.ingestVideoStatusesClient.insertFixture('Fake Status 1');
+          client.ingestVideoStatuses.insertFixture('Fake Status 1');
         }
       });
 
       it('can fetch all content partners', async () => {
         await provider.addInteraction(getIngestVideoStatusesInteraction());
-        const response = await client.ingestVideoStatusesClient.getAll();
+        const response = await client.ingestVideoStatuses.getAll();
 
         expect(response).not.toEqual([]);
         response.map(it => expect(typeof it).toEqual('string'));

@@ -8,6 +8,6 @@ export interface EntityWithLinks {
 
 export interface ModelWithLinks {
   links: {
-    [rel: string]: Link;
+    [rel: string]: Link | undefined;
   };
 }

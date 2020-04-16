@@ -29,7 +29,7 @@ describe('CollectionsClient', () => {
       it('can fetch a collection', async () => {
         // given:
         if (isATestClient(client)) {
-          client.collectionsClient.addToFake(
+          client.collections.addToFake(
             CollectionFactory.sampleFromId({
               id: existingCollectionFromStaging,
             }),
@@ -41,7 +41,7 @@ describe('CollectionsClient', () => {
         }
 
         // when:
-        const response: Collection = await client.collectionsClient.get(
+        const response: Collection = await client.collections.get(
           existingCollectionFromStaging,
         );
 
@@ -67,7 +67,7 @@ describe('CollectionsClient', () => {
         const projection = 'details';
 
         if (isATestClient(client)) {
-          client.collectionsClient.addToFake(
+          client.collections.addToFake(
             CollectionFactory.sampleFromId({
               id: existingCollectionFromStaging,
             }),
@@ -81,7 +81,7 @@ describe('CollectionsClient', () => {
             }),
           );
         }
-        const response: Pageable<Collection> = await client.collectionsClient.getAllFiltered(
+        const response: Pageable<Collection> = await client.collections.getAllFiltered(
           {
             page,
             size,
@@ -104,7 +104,7 @@ describe('CollectionsClient', () => {
         const expectedId = 'abc123-id';
 
         if (isATestClient(client)) {
-          client.collectionsClient.setNextIdForFake(expectedId);
+          client.collections.setNextIdForFake(expectedId);
         }
 
         const request = {
@@ -115,13 +115,11 @@ describe('CollectionsClient', () => {
         };
 
         await provider.addInteraction(createCollection(request, expectedId));
-        const collectionId = await client.collectionsClient.create(request);
+        const collectionId = await client.collections.create(request);
         expect(collectionId).toEqual(expectedId);
 
         if (isATestClient(client)) {
-          const newCollection = await client.collectionsClient.get(
-            collectionId,
-          );
+          const newCollection = await client.collections.get(collectionId);
           expect(newCollection.title).toEqual(title);
           expect(newCollection.description).toEqual(description);
           expect(newCollection.videos).toEqual(videos);
@@ -142,7 +140,7 @@ describe('CollectionsClient', () => {
         };
 
         if (isATestClient(client)) {
-          client.collectionsClient.addToFake(
+          client.collections.addToFake(
             CollectionFactory.sample({ id: collectionId }),
           );
         }
@@ -151,12 +149,10 @@ describe('CollectionsClient', () => {
           updateCollection(collectionId, updatedFields),
         );
 
-        await client.collectionsClient.update(collectionId, updatedFields);
+        await client.collections.update(collectionId, updatedFields);
 
         if (isATestClient(client)) {
-          const updatedCollection = await client.collectionsClient.get(
-            collectionId,
-          );
+          const updatedCollection = await client.collections.get(collectionId);
           expect(updatedCollection.title).toEqual(updatedFields.title);
           expect(updatedCollection.description).toEqual(
             updatedFields.description,

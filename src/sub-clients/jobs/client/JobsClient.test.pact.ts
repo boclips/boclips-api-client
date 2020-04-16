@@ -23,7 +23,7 @@ describe('JobsClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.jobsClient.insertJobFixture(
+          client.jobs.insertJobFixture(
             JobsFactory.sample({
               id: existingJobIdFromStaging,
               createdAt: new Date('2019-11-21T17:00:00.908'),
@@ -58,7 +58,7 @@ describe('JobsClient', () => {
       it('can fetch all jobs', async () => {
         await provider.addInteraction(getJobsInteraction());
 
-        const jobs = await client.jobsClient.getAll({ page: 1, size: 2 });
+        const jobs = await client.jobs.getAll({ page: 1, size: 2 });
         const pageSpec = jobs.pageSpec;
         const firstJob = jobs.page[0];
 
@@ -86,17 +86,17 @@ describe('JobsClient', () => {
         );
 
         if (isATestClient(client)) {
-          client.jobsClient.insertJobFixture(
+          client.jobs.insertJobFixture(
             JobsFactory.sample({ id: 'manual-job' }),
             true,
           );
-          client.jobsClient.insertJobFixture(
+          client.jobs.insertJobFixture(
             JobsFactory.sample({ id: 'auto-job' }),
             false,
           );
         }
 
-        const jobs = await client.jobsClient.getAll(
+        const jobs = await client.jobs.getAll(
           { page: 1, size: 2 },
           { manuallyCreated: true },
         );
@@ -110,7 +110,7 @@ describe('JobsClient', () => {
           getJobInteraction(existingJobIdFromStaging),
         );
 
-        const job = await client.jobsClient.get(existingJobIdFromStaging);
+        const job = await client.jobs.get(existingJobIdFromStaging);
         expect(job.id).toEqual(existingJobIdFromStaging);
         expect(job.createdAt).toEqual(new Date('2019-11-21T17:00:00.908'));
         expect(job.provider).toEqual('Getty');
@@ -137,7 +137,7 @@ describe('JobsClient', () => {
 
         let error: BoclipsApiError;
         try {
-          await client.jobsClient.get('404');
+          await client.jobs.get('404');
         } catch (err) {
           error = err;
         }

@@ -3,22 +3,16 @@ import { ApiBoclipsClient } from './index';
 
 async function initialiseClient(axiosInstance: AxiosInstance) {
   try {
-    await (async () => {
-      await ApiBoclipsClient.initialize(
-        axiosInstance,
-        'https://api.staging-boclips.com',
-      );
-    })();
+    await ApiBoclipsClient.create(
+      axiosInstance,
+      'https://api.staging-boclips.com',
+    );
   } catch (err) {
     // we expect this error.
   }
 }
 
 describe('ApiBoclipsClient', () => {
-  beforeEach(() => {
-    ApiBoclipsClient.reset();
-  });
-
   it('Does not clobber the input axios client', async () => {
     const axiosInstance = axios.create();
 

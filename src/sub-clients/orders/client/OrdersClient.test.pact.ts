@@ -26,7 +26,7 @@ describe('OrdersClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          const fake = client.ordersClient;
+          const fake = client.orders;
           fake.insertOrderFixture({
             id: existingOrderIdFromStaging,
             createdAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)),
@@ -113,7 +113,7 @@ describe('OrdersClient', () => {
 
       it('can fetch all orders', async () => {
         await provider.addInteraction(getOrdersInteraction());
-        const orders = await client.ordersClient.getAll();
+        const orders = await client.orders.getAll();
 
         expect(orders).toHaveLength(1);
         const order = orders[0];
@@ -125,7 +125,7 @@ describe('OrdersClient', () => {
           getOrderInteraction(existingOrderIdFromStaging),
         );
 
-        const order = await client.ordersClient.get(existingOrderIdFromStaging);
+        const order = await client.orders.get(existingOrderIdFromStaging);
         assertOnMandatoryOrderFields(order);
 
         expect(order.totalPrice.currency).toEqual('USD');
@@ -141,7 +141,7 @@ describe('OrdersClient', () => {
           updateOrderCurrency(existingOrderIdFromStaging, 'GBP'),
         );
 
-        const updatedOrder = await client.ordersClient.updateCurrency(
+        const updatedOrder = await client.orders.updateCurrency(
           existingOrderIdFromStaging,
           'GBP',
         );
@@ -175,7 +175,7 @@ describe('OrdersClient', () => {
           ),
         );
 
-        const updatedOrder = await client.ordersClient.updateItem(
+        const updatedOrder = await client.orders.updateItem(
           orderItemToUpdate,
           updateRequest,
         );

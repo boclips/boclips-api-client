@@ -13,7 +13,7 @@ describe('LegalRestrictionsClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.legalRestrictionsClient.insertLegalRestrictionsFixture({
+          client.legalRestrictions.insertLegalRestrictionsFixture({
             id: '2',
             text: 'No restrictions',
           });
@@ -22,7 +22,7 @@ describe('LegalRestrictionsClient', () => {
 
       it('can fetch all legal restrictions', async () => {
         await provider.addInteraction(getLegalRestrictions);
-        const response = await client.legalRestrictionsClient.getAll();
+        const response = await client.legalRestrictions.getAll();
 
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual('2');

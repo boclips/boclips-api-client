@@ -19,15 +19,13 @@ describe('IngestVideosClient', () => {
 
         if (isATestClient(client)) {
           const fakeClient = client as FakeBoclipsClient;
-          fakeClient.ingestVidoesClient.insertIngestVideoFixture(
-            ingestVideoFixture,
-          );
+          fakeClient.ingestVidoes.insertIngestVideoFixture(ingestVideoFixture);
         }
       });
 
       it('can fetch all jobs', async () => {
         await provider.addInteraction(getIngestVideosInteraction());
-        const ingestVideos = await client.ingestVidoesClient.getAll({
+        const ingestVideos = await client.ingestVidoes.getAll({
           page: 1,
           size: 2,
         });
@@ -58,12 +56,12 @@ describe('IngestVideosClient', () => {
       it('can filter videos by content partner name', async () => {
         if (isATestClient(client)) {
           const fakeClient = client as FakeBoclipsClient;
-          fakeClient.ingestVidoesClient.insertIngestVideoFixture(
+          fakeClient.ingestVidoes.insertIngestVideoFixture(
             IngestVideosFactory.sample({
               contentPartner: { id: '1', name: 'AP' },
             }),
           );
-          fakeClient.ingestVidoesClient.insertIngestVideoFixture(
+          fakeClient.ingestVidoes.insertIngestVideoFixture(
             IngestVideosFactory.sample({
               contentPartner: { id: '2', name: 'AP' },
             }),
@@ -76,7 +74,7 @@ describe('IngestVideosClient', () => {
           getFilteredIngestVideosInteraction(filter),
         );
 
-        const filteredIngestVideos = await client.ingestVidoesClient.getAll(
+        const filteredIngestVideos = await client.ingestVidoes.getAll(
           {
             page: 1,
             size: 2,

@@ -21,7 +21,7 @@ describe('Organisation', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.organisationsClient.insertOrganisationFixture(
+          client.organisations.insertOrganisationFixture(
             OrganisationFactory.sample({
               id: USA_ORGANISATION_ID_FROM_STAGING,
             }),
@@ -36,13 +36,11 @@ describe('Organisation', () => {
             'USA',
           ),
         );
-        const organisationsPage = await client.organisationsClient.getOrganisations(
-          {
-            countryCode: 'USA',
-            page: 0,
-            size: 30,
-          },
-        );
+        const organisationsPage = await client.organisations.getOrganisations({
+          countryCode: 'USA',
+          page: 0,
+          size: 30,
+        });
 
         expect(organisationsPage.page.length).toBeGreaterThanOrEqual(1);
         expect(
@@ -59,13 +57,11 @@ describe('Organisation', () => {
             'USA',
           ),
         );
-        const organisationsPage = await client.organisationsClient.getOrganisations(
-          {
-            countryCode: 'USA',
-            page: 0,
-            size: 30,
-          },
-        );
+        const organisationsPage = await client.organisations.getOrganisations({
+          countryCode: 'USA',
+          page: 0,
+          size: 30,
+        });
 
         expect(organisationsPage.page.length).toBeGreaterThanOrEqual(1);
         expect(
@@ -89,15 +85,13 @@ describe('Organisation', () => {
         await provider.addInteraction(
           updateOrganisation(USA_ORGANISATION_ID_FROM_STAGING, updateRequest),
         );
-        const organisationPage = await client.organisationsClient.getOrganisations(
-          {
-            countryCode: 'USA',
-            page: 0,
-            size: 30,
-          },
-        );
+        const organisationPage = await client.organisations.getOrganisations({
+          countryCode: 'USA',
+          page: 0,
+          size: 30,
+        });
 
-        const updatedOrganisation = await client.organisationsClient.updateOrganisation(
+        const updatedOrganisation = await client.organisations.updateOrganisation(
           organisationPage.page[0],
           updateRequest,
         );
@@ -114,18 +108,16 @@ describe('Organisation', () => {
             'USA',
           ),
         );
-        const organisationPage = await client.organisationsClient.getOrganisations(
-          {
-            countryCode: 'USA',
-            page: 0,
-            size: 30,
-          },
-        );
+        const organisationPage = await client.organisations.getOrganisations({
+          countryCode: 'USA',
+          page: 0,
+          size: 30,
+        });
 
         await provider.addInteraction(
           associateUsers(USA_ORGANISATION_ID_FROM_STAGING),
         );
-        const associatedUsers = await client.organisationsClient.associateUsers(
+        const associatedUsers = await client.organisations.associateUsers(
           organisationPage.page[0],
         );
 

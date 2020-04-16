@@ -13,7 +13,7 @@ describe('MarketingStatusesClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.marketingStatusesClient.setMarketingStatuses([
+          client.marketingStatuses.setMarketingStatuses([
             'Fake Status 1',
             'Fake Status 2',
           ]);
@@ -22,7 +22,7 @@ describe('MarketingStatusesClient', () => {
 
       it('can fetch all content partners', async () => {
         await provider.addInteraction(getMarketingStatusesInteraction());
-        const response = await client.marketingStatusesClient.getAll();
+        const response = await client.marketingStatuses.getAll();
 
         expect(response).not.toEqual([]);
         response.map(it => expect(typeof it).toEqual('string'));
