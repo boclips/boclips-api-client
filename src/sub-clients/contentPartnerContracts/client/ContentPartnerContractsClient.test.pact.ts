@@ -8,6 +8,7 @@ import {
   getContentPartnerContractInteraction,
   getContentPartnerContractsInteraction,
   getSignedLink,
+  updateContentPartnerContract,
 } from '../pact/ContentPartnerContractsInteractions';
 
 const sampleContract = ContentPartnerContractFactory.sample({
@@ -136,6 +137,21 @@ describe('ContentPartnerContracts', () => {
         );
 
         expect(typeof signedLink).toEqual('string');
+      });
+
+      it('can update contract', async () => {
+        await provider.addInteraction(
+          updateContentPartnerContract(
+            existingContentPartnerContractFromStaging,
+          ),
+        );
+
+        await client.contentPartnerContractsClient.update(
+          existingContentPartnerContractFromStaging,
+          {
+            contentPartnerName: 'new name',
+          },
+        );
       });
     },
   );

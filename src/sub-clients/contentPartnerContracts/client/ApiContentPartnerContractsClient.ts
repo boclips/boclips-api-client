@@ -2,6 +2,7 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnerContractsConverter } from '../ContentPartnerContractsConverter';
 import { ContentPartnerContract } from '../model/ContentPartnerContract';
+import { ContentPartnerContractRequest } from '../requests/ContentPartnerContractRequest';
 import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
@@ -39,6 +40,23 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
     return this.axios.post(
       expandUrlTemplate(contentPartnerContractsLink.href, {}),
       ContentPartnerContractsConverter.toRequest(contract),
+    );
+  }
+
+  public async update(
+    id: string,
+    updatedContract: ContentPartnerContractRequest,
+  ): Promise<void> {
+    const contractLink = this.getLinkOrThrow('contentPartnerContract');
+
+    await this.axios.patch(
+      expandUrlTemplate(contractLink.href, { id }),
+      updatedContract,
+      {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      },
     );
   }
 

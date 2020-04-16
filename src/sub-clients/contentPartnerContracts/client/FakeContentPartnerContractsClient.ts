@@ -1,5 +1,7 @@
 import { Clearable } from '../../common/utils/Clearable';
+import { ContentPartner } from '../../contentPartners/model/ContentPartner';
 import { ContentPartnerContract } from '../model/ContentPartnerContract';
+import { ContentPartnerContractRequest } from '../requests/ContentPartnerContractRequest';
 import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
@@ -25,6 +27,27 @@ export class FakeContentPartnerContractsClient
   }
 
   create(): Promise<void> {
+    return Promise.resolve();
+  }
+
+  public update(id: string, contractUpdate: ContentPartnerContractRequest) {
+    const index = this.contracts.findIndex(i => i.id === id);
+
+    if (index < 0) {
+      return Promise.reject();
+    }
+
+    const updatedFields: Partial<ContentPartner> = {};
+
+    Object.keys(contractUpdate).forEach(key => {
+      updatedFields[key] = contractUpdate[key];
+    });
+
+    this.contracts[index] = {
+      ...this.contracts[index],
+      ...updatedFields,
+    };
+
     return Promise.resolve();
   }
 

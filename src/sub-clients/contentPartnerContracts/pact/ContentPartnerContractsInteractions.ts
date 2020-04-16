@@ -79,6 +79,26 @@ export const getContentPartnerContractInteraction = (
   },
 });
 
+export const updateContentPartnerContract = (
+  id: string,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'PATCH contract content partner',
+  withRequest: {
+    method: 'PATCH',
+    path: `/v1/content-partner-contracts/${id}`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      contentPartnerName: 'new name',
+    },
+  },
+  willRespondWith: {
+    status: 204,
+  },
+});
+
 export const getContentPartnerContractsInteraction = (
   pageRequest: PageRequest,
 ): InteractionObject => ({
