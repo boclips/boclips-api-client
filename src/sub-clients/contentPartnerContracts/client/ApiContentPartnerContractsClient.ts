@@ -2,7 +2,6 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnerContractsConverter } from '../ContentPartnerContractsConverter';
 import { ContentPartnerContract } from '../model/ContentPartnerContract';
-import { ContentPartnerContractRequest } from '../requests/ContentPartnerContractRequest';
 import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
@@ -45,7 +44,7 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
 
   public async update(
     id: string,
-    updatedContract: ContentPartnerContractRequest,
+    updatedContract: Omit<ContentPartnerContract, 'id'>,
   ): Promise<void> {
     const contractLink = this.getLinkOrThrow('contentPartnerContract');
 
