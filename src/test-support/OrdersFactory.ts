@@ -47,7 +47,7 @@ export class OrderItemFactory {
           name: 'contentPartner-name',
         },
         price: OrderPriceFactory.sample(),
-        trim: null,
+        trim: undefined,
         license: { duration: 'A long time', territory: 'Wrexham' },
         transcriptRequested: false,
         links: {

@@ -75,7 +75,7 @@ describe('PageableConverter', () => {
     expect(convertedPageable.pageSpec.size).toEqual(1);
     expect(convertedPageable.pageSpec.totalElements).toEqual(2);
     expect(convertedPageable.pageSpec.totalPages).toEqual(2);
-    expect(convertedPageable.pageSpec.nextPage.getOriginalLink()).toEqual(
+    expect(convertedPageable.pageSpec.nextPage?.getOriginalLink()).toEqual(
       'www.next.com',
     );
     expect(convertedPageable.pageSpec.previousPage).toBeUndefined();
@@ -112,7 +112,7 @@ describe('PageableConverter', () => {
     expect(convertedPageable.pageSpec.totalElements).toEqual(2);
     expect(convertedPageable.pageSpec.totalPages).toEqual(2);
     expect(convertedPageable.pageSpec.nextPage).toBeUndefined();
-    expect(convertedPageable.pageSpec.previousPage.getOriginalLink()).toEqual(
+    expect(convertedPageable.pageSpec.previousPage?.getOriginalLink()).toEqual(
       'www.prev.com',
     );
 

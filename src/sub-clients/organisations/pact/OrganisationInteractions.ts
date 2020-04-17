@@ -85,7 +85,7 @@ export const updateOrganisation = (
     body: {
       id: like(id),
       accessExpiresOn: like(
-        updateOrganisationRequest.accessExpiresOn.toISOString(),
+        updateOrganisationRequest.accessExpiresOn?.toISOString(),
       ),
       contentPackageId: like('a-content-package-id'),
       organisationDetails: like({

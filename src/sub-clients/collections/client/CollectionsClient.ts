@@ -9,7 +9,7 @@ import {
 export interface CollectionsClient {
   getAllFiltered(filter: CollectionFilter): Promise<Pageable<Collection>>;
 
-  get(id: string): Promise<Collection>;
+  get(id: string): Promise<Collection | null>;
 
   create(request: CreateCollectionRequest): Promise<string>;
 

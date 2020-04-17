@@ -40,7 +40,7 @@ describe('SubjectsClient', () => {
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual(existingSubjectIdFromStaging);
         expect(response[0].name).toEqual('Subject Sample');
-        expect(response[0].links.update.getOriginalLink()).toMatch(
+        expect(response[0].links?.update?.getOriginalLink()).toMatch(
           new RegExp(`.*/v1/subjects/${existingSubjectIdFromStaging}$`),
         );
       });

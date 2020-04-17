@@ -29,10 +29,14 @@ export class ApiIngestVideosClient extends ApiSubClient
     };
 
     if (filterRequest && isNotEmpty(filterRequest.contentPartnerName)) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       interpolationParams['content_partner'] = filterRequest.contentPartnerName;
     }
 
     if (filterRequest && filterRequest.statuses) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       interpolationParams['status'] = filterRequest.statuses;
     }
 

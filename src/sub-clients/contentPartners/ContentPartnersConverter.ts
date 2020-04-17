@@ -1,16 +1,16 @@
 import { AxiosResponse } from 'axios';
+import moment from 'moment';
 import { Link } from '../common/model/LinkEntity';
 import { ContentPartner } from './model/ContentPartner';
 import { IngestDetails } from './model/IngestDetails';
 import { ContentPartnerResource } from './resources/ContentPartnerResource';
 import { IngestDetailsResource } from './resources/IngestDetailsResource';
-import moment from 'moment';
 
 export class ContentPartnersConverter {
   public static convertEmbeddedResources(
     response: AxiosResponse,
   ): ContentPartner[] {
-    return response.data._embedded.contentPartners.map(resource =>
+    return response.data._embedded.contentPartners.map((resource: any) =>
       ContentPartnersConverter.convertResource(
         resource as ContentPartnerResource,
       ),
@@ -81,9 +81,11 @@ export class ContentPartnersConverter {
       case 'CUSTOM':
         return { type: resource.type };
       case 'MRSS':
-        return { type: resource.type, urls: resource.urls };
+        return { type: resource.type, urls: resource.urls! };
       case 'YOUTUBE':
-        return { type: resource.type, playlistIds: resource.playlistIds };
+        return { type: resource.type, playlistIds: resource.playlistIds! };
+      default:
+        throw new Error(resource.type);
     }
   }
 

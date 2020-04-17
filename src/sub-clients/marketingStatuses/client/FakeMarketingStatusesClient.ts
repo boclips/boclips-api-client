@@ -3,7 +3,7 @@ import { MarketingStatusesClient } from './MarketingStatusesClient';
 
 export class FakeMarketingStatusesClient
   implements MarketingStatusesClient, Clearable {
-  private marketingStatuses = [];
+  private marketingStatuses: string[] = [];
 
   public setMarketingStatuses = (newStatuses: string[]) =>
     (this.marketingStatuses = newStatuses);

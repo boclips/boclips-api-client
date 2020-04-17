@@ -51,7 +51,7 @@ export const getFilteredIngestVideosInteraction = (
     method: 'GET',
     path: '/v1/ingest-videos',
     query: `page=1&size=2&content_partner=${encodeURI(
-      ingestVideosFilterRequest.contentPartnerName,
+      ingestVideosFilterRequest.contentPartnerName!,
     )}`,
   },
   willRespondWith: {
@@ -77,17 +77,17 @@ export const getFilteredIngestVideosInteraction = (
       _links: like({
         self: {
           href: `https://api.staging-boclips.com/v1/ingest-videos?page=1&size=2${encodeURI(
-            ingestVideosFilterRequest.contentPartnerName,
+            ingestVideosFilterRequest.contentPartnerName!,
           )}`,
         },
         next: {
           href: `https://api.staging-boclips.com/v1/ingest-videos?page=2&size=2${encodeURI(
-            ingestVideosFilterRequest.contentPartnerName,
+            ingestVideosFilterRequest.contentPartnerName!,
           )}`,
         },
         prev: {
           href: `https://api.staging-boclips.com/v1/ingest-videos?page=0&size=2${encodeURI(
-            ingestVideosFilterRequest.contentPartnerName,
+            ingestVideosFilterRequest.contentPartnerName!,
           )}`,
         },
       }),

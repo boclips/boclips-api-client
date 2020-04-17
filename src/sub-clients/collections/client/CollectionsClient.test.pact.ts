@@ -41,22 +41,22 @@ describe('CollectionsClient', () => {
         }
 
         // when:
-        const response: Collection = await client.collections.get(
+        const response: Collection | null = await client.collections.get(
           existingCollectionFromStaging,
         );
 
         // then:
-        expect(response.id).toEqual(existingCollectionFromStaging);
-        expect(response.title).toEqual('My Videos edited');
-        expect(response.owner).toEqual('owner-id');
-        expect(response.updatedAt).toEqual(
+        expect(response?.id).toEqual(existingCollectionFromStaging);
+        expect(response?.title).toEqual('My Videos edited');
+        expect(response?.owner).toEqual('owner-id');
+        expect(response?.updatedAt).toEqual(
           new Date('2019-10-21T09:11:19.074Z'),
         );
-        expect(response.public).toEqual(false);
-        expect(response.mine).toEqual(false);
-        expect(response.createdBy).toEqual('Teacher');
-        expect(response.links).toBeTruthy();
-        expect(response.links.self.getOriginalLink()).toContain(
+        expect(response?.public).toEqual(false);
+        expect(response?.mine).toEqual(false);
+        expect(response?.createdBy).toEqual('Teacher');
+        expect(response?.links).toBeTruthy();
+        expect(response?.links.self.getOriginalLink()).toContain(
           `/v1/collections/${existingCollectionFromStaging}`,
         );
       });
@@ -99,7 +99,7 @@ describe('CollectionsClient', () => {
       it('can create a collection', async () => {
         const title = 'A title';
         const description = 'Description of collection';
-        const videos = [];
+        const videos: string[] = [];
         const isPublic = true;
         const expectedId = 'abc123-id';
 
@@ -120,10 +120,10 @@ describe('CollectionsClient', () => {
 
         if (isATestClient(client)) {
           const newCollection = await client.collections.get(collectionId);
-          expect(newCollection.title).toEqual(title);
-          expect(newCollection.description).toEqual(description);
-          expect(newCollection.videos).toEqual(videos);
-          expect(newCollection.public).toEqual(isPublic);
+          expect(newCollection?.title).toEqual(title);
+          expect(newCollection?.description).toEqual(description);
+          expect(newCollection?.videos).toEqual(videos);
+          expect(newCollection?.public).toEqual(isPublic);
         }
       });
 
@@ -153,20 +153,20 @@ describe('CollectionsClient', () => {
 
         if (isATestClient(client)) {
           const updatedCollection = await client.collections.get(collectionId);
-          expect(updatedCollection.title).toEqual(updatedFields.title);
-          expect(updatedCollection.description).toEqual(
+          expect(updatedCollection?.title).toEqual(updatedFields.title);
+          expect(updatedCollection?.description).toEqual(
             updatedFields.description,
           );
-          expect(updatedCollection.attachments).toHaveLength(1);
-          const newAttachment: AttachmentRequest =
-            updatedCollection.attachments[0];
-          expect(newAttachment.description).toEqual(
-            updatedFields.attachment.description,
+          expect(updatedCollection?.attachments).toHaveLength(1);
+          const newAttachment: AttachmentRequest | undefined =
+            updatedCollection?.attachments?.[0];
+          expect(newAttachment?.description).toEqual(
+            updatedFields.attachment?.description,
           );
-          expect(newAttachment.linkToResource).toEqual(
-            updatedFields.attachment.linkToResource,
+          expect(newAttachment?.linkToResource).toEqual(
+            updatedFields.attachment?.linkToResource,
           );
-          expect(newAttachment.type).toEqual(updatedFields.attachment.type);
+          expect(newAttachment?.type).toEqual(updatedFields.attachment?.type);
         }
       });
     },

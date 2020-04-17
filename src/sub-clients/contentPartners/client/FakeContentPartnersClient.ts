@@ -17,7 +17,7 @@ export class FakeContentPartnersClient
   ];
 
   public create(request: ContentPartnerRequest): Promise<void> {
-    const id = request.name + Date.now();
+    const id = request.name! + Date.now();
 
     const fakeAgeRangeRequest = {
       min: 3,
@@ -28,11 +28,11 @@ export class FakeContentPartnersClient
 
     this.contentPartners.push({
       id,
-      name: request.name,
+      name: request.name!,
       official: request.accreditedToYtChannelId == null,
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
-      distributionMethods: request.distributionMethods,
+      distributionMethods: request.distributionMethods!,
       contentCategories: request.contentCategories?.map(key => ({
         key,
         label: `Label: ${key}`,
@@ -41,16 +41,16 @@ export class FakeContentPartnersClient
       awards: request.awards,
       notes: request.notes,
       hubspotId: request.hubspotId,
-      language: { code: request.language, name: request.language },
+      language: { code: request.language!, name: request.language! },
       contentTypes: request.contentTypes,
       oneLineDescription: request.oneLineDescription,
       marketingInformation: request.marketingInformation,
       pedagogyInformation: {
-        curriculumAligned: request.curriculumAligned,
-        educationalResources: request.educationalResources,
-        isTranscriptProvided: request.isTranscriptProvided,
-        subjects: request.subjects,
-        bestForTags: request.bestForTags,
+        curriculumAligned: request.curriculumAligned!,
+        educationalResources: request.educationalResources!,
+        isTranscriptProvided: request.isTranscriptProvided!,
+        subjects: request.subjects!,
+        bestForTags: request.bestForTags!,
         ageRanges: fakeAgeRangeRequest,
       },
       ingest: { type: 'MANUAL' },
@@ -100,6 +100,8 @@ export class FakeContentPartnersClient
     const updatedFields: Partial<ContentPartner> = {};
 
     Object.keys(contentPartner).forEach(key => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       updatedFields[key] = contentPartner[key];
     });
 

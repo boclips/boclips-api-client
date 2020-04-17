@@ -3,7 +3,7 @@ import { IngestVideoStatusesClient } from './IngestVideoStatusesClient';
 
 export class FakeIngestVideoStatusesClient
   implements IngestVideoStatusesClient, Clearable {
-  private statuses = [];
+  private statuses: string[] = [];
 
   insertFixture(status: string) {
     this.statuses.push(status);

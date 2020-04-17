@@ -126,13 +126,13 @@ describe('OrdersClient', () => {
         );
 
         const order = await client.orders.get(existingOrderIdFromStaging);
-        assertOnMandatoryOrderFields(order);
+        assertOnMandatoryOrderFields(order!);
 
-        expect(order.totalPrice.currency).toEqual('USD');
+        expect(order!.totalPrice.currency).toEqual('USD');
 
-        const item = order.items[0];
-        expect(item.license.duration).toEqual('5 Years');
-        expect(item.license.territory).toEqual('World Wide');
+        const item = order!.items[0];
+        expect(item.license?.duration).toEqual('5 Years');
+        expect(item.license?.territory).toEqual('World Wide');
         expect(item.transcriptRequested).toBeFalsy();
       });
 
@@ -183,7 +183,7 @@ describe('OrdersClient', () => {
         expect(updatedOrder.id).toEqual(existingOrderIdFromStaging);
         const updatedItem = updatedOrder.items[0];
 
-        expect(updatedItem.price.value).toEqual(updateRequest.price);
+        expect(updatedItem.price?.value).toEqual(updateRequest.price);
         expect(updatedItem.license).toEqual(updateRequest.license);
       });
     },

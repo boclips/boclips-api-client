@@ -39,5 +39,5 @@ export const getAttachmentType = (
     throw Error(`${value} is not a valid attachment type`);
   }
 
-  return AttachmentType[matchedKey];
+  return AttachmentType[matchedKey as AttachmentType];
 };

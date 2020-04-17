@@ -25,10 +25,10 @@ export class CollectionsConverter {
       mine: entity.mine,
       createdBy: entity.createdBy,
       subjects: entity.subjects,
-      ageRange: entity.ageRange,
-      description: entity.description,
+      ageRange: entity.ageRange || null,
+      description: entity.description || null,
       attachments,
-      links: { ...links, self: links.self },
+      links: { ...links, self: links.self! },
     };
   }
 

@@ -49,7 +49,7 @@ export class OrderConverter {
     };
   }
   private static orderItemsConverter(items: any): OrderItem[] {
-    return items.map(item => {
+    return items.map((item: any) => {
       const {
         id,
         contentPartner,

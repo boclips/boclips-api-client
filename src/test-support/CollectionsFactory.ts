@@ -129,7 +129,7 @@ export class CollectionFactory {
       mine: false,
       createdBy: 'Teacher',
       subjects: [],
-      ageRange: undefined,
+      ageRange: null,
       description: undefined,
       attachments: [],
       links: {

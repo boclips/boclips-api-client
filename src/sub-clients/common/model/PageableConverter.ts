@@ -6,7 +6,7 @@ export class PageableConverter {
   public static convert<E, T>(
     pageableEntity: PageableEntity<E>,
     key: string,
-    embeddedConverter,
+    embeddedConverter: any,
   ): Pageable<T> {
     return {
       pageSpec: {

@@ -1,4 +1,4 @@
 export interface ContentPartnerContractDatesResource {
-  start: string;
-  end: string;
+  start?: string;
+  end?: string;
 }

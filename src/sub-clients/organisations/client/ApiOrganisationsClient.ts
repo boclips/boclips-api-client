@@ -22,10 +22,10 @@ export class ApiOrganisationsClient extends ApiSubClient
 
     const response = await this.axios.get<PageableEntity<OrganisationEntity>>(
       expandUrlTemplate(link.href, {
-        name: filter && filter.name,
-        countryCode: filter && filter.countryCode,
-        page: filter && filter.page,
-        size: filter && filter.size,
+        name: filter?.name!,
+        countryCode: filter?.countryCode!,
+        page: filter?.page!,
+        size: filter?.size!,
       }),
     );
 
@@ -36,7 +36,7 @@ export class ApiOrganisationsClient extends ApiSubClient
     organisation: Organisation,
     updateOrganisationRequest: UpdateOrganisationRequest,
   ): Promise<Organisation> {
-    const link = organisation.links.edit.getOriginalLink();
+    const link = organisation.links.edit!.getOriginalLink();
 
     const response = await this.axios.post<OrganisationEntity>(
       link,
@@ -47,7 +47,7 @@ export class ApiOrganisationsClient extends ApiSubClient
   }
 
   public async associateUsers(organisation: Organisation): Promise<User[]> {
-    const link = organisation.links.associateUsers.getOriginalLink();
+    const link = organisation.links.associateUsers!.getOriginalLink();
     const response = await this.axios.post(link);
     return UserConverter.convert(response.data);
   }

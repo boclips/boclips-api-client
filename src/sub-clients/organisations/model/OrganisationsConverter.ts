@@ -55,8 +55,10 @@ export class OrganisationsConverter {
       type: entity.type,
       name: entity.name,
       domain: entity.domain,
-      country: OrganisationsConverter.convertCountry(entity.country),
-      state: OrganisationsConverter.convertState(entity.state),
+      country: OrganisationsConverter.convertCountry(entity.country)!,
+      state: entity.state
+        ? OrganisationsConverter.convertState(entity.state!)
+        : null,
     };
   }
 
@@ -76,8 +78,8 @@ export class OrganisationsConverter {
     return links;
   }
 
-  private static convertState(entity: StateEntity): State {
-    if (entity == null) {
+  private static convertState(entity: StateEntity | null): State | null {
+    if (!entity) {
       return null;
     }
 
@@ -87,8 +89,8 @@ export class OrganisationsConverter {
     };
   }
 
-  private static convertCountry(entity: CountryEntity): Country {
-    if (entity == null) {
+  private static convertCountry(entity: CountryEntity | null): Country | null {
+    if (entity === null) {
       return null;
     }
 

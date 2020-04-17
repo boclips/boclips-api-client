@@ -16,7 +16,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
   public search(searchRequest: VideoSearchRequest): Promise<Pageable<Video>> {
     const matchingVideos = this.videos.filter(video => {
-      return searchRequest.content_partner.find(
+      return searchRequest.content_partner?.find(
         contentPartnerName => contentPartnerName === video.contentPartner,
       );
     });

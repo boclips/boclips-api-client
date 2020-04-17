@@ -17,7 +17,7 @@ export class JobsFactory {
         totalSuccessfulVideos: 1,
       },
       videos: [],
-      errors: null,
+      errors: undefined,
       links: {
         self: new Link({ href: 'v1/jobs/the-id', templated: false }),
       },

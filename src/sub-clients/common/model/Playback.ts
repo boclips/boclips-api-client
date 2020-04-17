@@ -8,7 +8,7 @@ export interface Playback extends ModelWithLinks {
   duration: Duration;
   links: {
     createPlaybackEvent?: Link;
-    createPlayerInteractedWithEvent;
+    createPlayerInteractedWithEvent: any;
     download?: Link;
     thumbnail: Link;
     videoPreview?: Link;

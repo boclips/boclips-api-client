@@ -26,8 +26,8 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
     this.nextId = id;
   }
 
-  public get(id: string): Promise<Collection> {
-    return Promise.resolve(this.collections.find(c => c.id === id));
+  public get(id: string): Promise<Collection | null> {
+    return Promise.resolve(this.collections.find(c => c.id === id) || null);
   }
 
   public getAllFiltered(
@@ -88,7 +88,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
     }
 
     if (request.hasOwnProperty('subjects')) {
-      partialCollection.subjects = request.subjects.map(id =>
+      partialCollection.subjects = request.subjects?.map(id =>
         SubjectFactory.sample({ id }),
       );
     }
@@ -98,30 +98,33 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
     }
 
     if (request.hasOwnProperty('videos')) {
-      partialCollection.videos = request.videos.map(id =>
+      partialCollection.videos = request.videos?.map(id =>
         VideoWithBoclipsProjectionFactory.sample({ id }),
       );
     }
 
     if (request.hasOwnProperty('attachment')) {
-      const attachmentType = getAttachmentType(request.attachment.type);
+      const attachmentType = request.attachment?.type
+        ? getAttachmentType(request.attachment?.type!)
+        : undefined;
       if (attachmentType === undefined) {
         throw new Error(
-          `${request.attachment.type} is not a valid attachment type`,
+          `${request.attachment?.type} is not a valid attachment type`,
         );
       }
 
       partialCollection.attachments = [
         AttachmentFactory.sample({
           type: attachmentType,
-          description: request.attachment.description,
-          linkToResource: request.attachment.linkToResource,
+          description: request.attachment?.description,
+          linkToResource: request.attachment?.linkToResource,
         }),
       ];
     }
 
     if (request.hasOwnProperty('ageRange')) {
-      const { min, max } = request.ageRange;
+      const min = request.ageRange?.min;
+      const max = request.ageRange?.max;
       partialCollection.ageRange = {
         ...request.ageRange,
         label: min ? (max ? `${min}-${max}` : `${min}+`) : '',

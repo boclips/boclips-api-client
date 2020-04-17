@@ -10,7 +10,7 @@ export class ApiBestForTagsClient extends ApiSubClient
     return this.axios
       .get(bestForTagsLink.href)
       .then(response =>
-        response.data._embedded.tags.map(it => convertToBestForTag(it)),
+        response.data._embedded.tags.map((it: any) => convertToBestForTag(it)),
       );
   }
 }

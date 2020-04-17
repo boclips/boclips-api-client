@@ -12,7 +12,7 @@ export class FakeJobsClient implements JobsClient, Clearable {
   private manualJobs: Job[] = [];
   private automaticJobs: Job[] = [];
 
-  public insertJobFixture(job: Job, manual: boolean = null) {
+  public insertJobFixture(job: Job, manual: boolean | null = null) {
     this.jobs.push(job);
     if (manual === true) {
       this.manualJobs.push(job);
@@ -26,7 +26,7 @@ export class FakeJobsClient implements JobsClient, Clearable {
     filter?: JobsFilterRequest,
   ): Promise<Pageable<Job>> {
     return Promise.resolve({
-      page: this.filterJobs(filter),
+      page: this.filterJobs(filter!),
       pageSpec: {
         number: page.page,
         size: page.size,
@@ -45,10 +45,12 @@ export class FakeJobsClient implements JobsClient, Clearable {
   private filterJobs(filter: JobsFilterRequest): Job[] {
     if (!filter) return this.jobs;
     if (filter.manuallyCreated === undefined) return this.jobs;
-    if (filter.manuallyCreated == true) {
+    if (filter.manuallyCreated) {
       return this.manualJobs;
-    } else if (filter.manuallyCreated == false) {
+    } else if (!filter.manuallyCreated) {
       return this.automaticJobs;
+    } else {
+      throw new Error('???');
     }
   }
 

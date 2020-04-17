@@ -11,7 +11,7 @@ describe('converting a content partner', () => {
     const contentPartner = ContentPartnersConverter.convertResource(resource);
 
     expect(contentPartner.ingest).toBeDefined();
-    expect(contentPartner.ingest.type).toEqual('MANUAL');
+    expect(contentPartner.ingest?.type).toEqual('MANUAL');
   });
 
   it('can handle missing ingest details', () => {

@@ -34,7 +34,7 @@ export class ApiCollectionsClient extends ApiSubClient
     return this.axios
       .get<PageableEntity<CollectionEntity>>(
         expandUrlTemplate(filteredCollectionsLink.href, {
-          query,
+          query: query!,
           page,
           size,
           projection,

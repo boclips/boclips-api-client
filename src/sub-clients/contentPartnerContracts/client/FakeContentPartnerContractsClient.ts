@@ -7,7 +7,7 @@ import { PageRequest } from '../../common/model/PageRequest';
 
 export class FakeContentPartnerContractsClient
   implements ContentPartnerContractsClient, Clearable {
-  private contracts = [];
+  private contracts: ContentPartnerContract[] = [];
 
   getAll(page: PageRequest): Promise<Pageable<ContentPartnerContract>> {
     return Promise.resolve({
@@ -42,6 +42,8 @@ export class FakeContentPartnerContractsClient
     const updatedFields: Partial<ContentPartner> = {};
 
     Object.keys(contractUpdate).forEach(key => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       updatedFields[key] = contractUpdate[key];
     });
 
@@ -55,7 +57,7 @@ export class FakeContentPartnerContractsClient
 
   get(): Promise<ContentPartnerContract> {
     if (this.contracts[0]) {
-      return this.contracts[0];
+      return Promise.resolve(this.contracts[0]);
     } else {
       throw new Error(
         'No content partner contracts have been set on the FakeContentPartnerContractsClient',

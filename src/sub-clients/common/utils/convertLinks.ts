@@ -3,7 +3,7 @@ import { Link } from '../model/LinkEntity';
 
 export const convertLinks = <
   E extends EntityWithLinks,
-  R extends { [rel in keyof E['_links']]: Link }
+  R extends { [rel in keyof E['_links']]: Link | undefined }
 >(
   entity: E,
 ): R => {
@@ -12,8 +12,8 @@ export const convertLinks = <
 
   // Reduce the rels into a single object
   return rels.reduce((acc, rel) => {
-    acc[rel] = new Link(entity._links[rel]);
+    acc[rel] = new Link(entity._links[rel]!);
 
     return acc;
-  }, {}) as R;
+  }, {} as { [key: string]: Link }) as R;
 };

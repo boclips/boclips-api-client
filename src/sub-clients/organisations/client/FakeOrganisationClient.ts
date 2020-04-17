@@ -27,8 +27,8 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
       : this.organisations;
 
     const pageOfOrganisations = filteredOrganisations.slice(
-      filter.size * filter.page,
-      filter.size * (filter.page + 1),
+      filter.size! * filter.page!,
+      filter.size! * (filter.page! + 1),
     );
 
     const pageable = PageableFactory.sample(pageOfOrganisations, {
@@ -48,7 +48,7 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
 
     if (index > -1) {
       this.organisations[index].accessExpiresOn =
-        updateOrganisationRequest.accessExpiresOn;
+        updateOrganisationRequest.accessExpiresOn || null;
 
       return Promise.resolve(this.organisations[index]);
     } else {

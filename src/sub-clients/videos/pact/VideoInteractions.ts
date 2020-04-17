@@ -122,11 +122,11 @@ export const updateVideo = (
         }),
         subjects: like([
           {
-            id: updateVideoRequest.subjectIds[0],
+            id: updateVideoRequest.subjectIds?.[0],
             name: `History`,
           },
           {
-            id: updateVideoRequest.subjectIds[1],
+            id: updateVideoRequest.subjectIds?.[1],
             name: `Ancient History`,
           },
         ]),

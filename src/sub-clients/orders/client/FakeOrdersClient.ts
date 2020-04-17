@@ -13,7 +13,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
   }
 
   public get(id: string): Promise<Order | null> {
-    return Promise.resolve(this.orders.find(order => order.id === id));
+    return Promise.resolve(this.orders.find(order => order.id === id) || null);
   }
   public getAll(): Promise<Order[]> {
     return Promise.resolve(this.orders);
@@ -51,9 +51,9 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
 
           if (request.price) {
             itemToUpdate.price = {
-              currency: itemToUpdate.price.currency,
+              currency: itemToUpdate.price?.currency,
               value: request.price,
-              displayValue: `${itemToUpdate.price.currency} ${request.price}`,
+              displayValue: `${itemToUpdate.price?.currency} ${request.price}`,
             };
 
             if (request.license) {
@@ -63,7 +63,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
 
           return order;
         })
-        .find(o => o != null),
+        .find(o => o != null)!,
     );
   }
 

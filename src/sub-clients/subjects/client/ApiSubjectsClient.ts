@@ -10,7 +10,7 @@ export class ApiSubjectsClient extends ApiSubClient implements SubjectsClient {
     return this.axios
       .get(subjectsLink.href)
       .then(response =>
-        response.data._embedded.subjects.map(it =>
+        response.data._embedded.subjects.map((it: any) =>
           SubjectsConverter.convert(it),
         ),
       );
@@ -20,11 +20,14 @@ export class ApiSubjectsClient extends ApiSubClient implements SubjectsClient {
     subject: Subject,
     updateRequest: UpdateSubjectRequest,
   ): Promise<void> {
-    const validUpdateLink = subject && subject.links.update;
+    const validUpdateLink = subject?.links?.update;
     if (!validUpdateLink) {
       throw new Error('Update link not available');
     }
 
-    await this.axios.put(subject.links.update.getOriginalLink(), updateRequest);
+    await this.axios.put(
+      subject.links!.update!.getOriginalLink(),
+      updateRequest,
+    );
   }
 }

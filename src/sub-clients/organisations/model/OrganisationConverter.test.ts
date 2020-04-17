@@ -46,11 +46,11 @@ describe('OrganisationConverter', () => {
       name: 'United States',
     });
     expect(convertedOrganisation.links).not.toBeNull();
-    expect(convertedOrganisation.links.edit.getOriginalLink()).toEqual(
+    expect(convertedOrganisation.links.edit?.getOriginalLink()).toEqual(
       'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2',
     );
     expect(
-      convertedOrganisation.links.associateUsers.getOriginalLink(),
+      convertedOrganisation.links.associateUsers?.getOriginalLink(),
     ).toEqual(
       'https://api.boclips.com/v1/organisations/5db06aec7c6c020001339eb2/associate',
     );
@@ -75,7 +75,7 @@ describe('OrganisationConverter', () => {
     const organisationEntity = OrganisationEntityFactory.sample({
       organisationDetails: {
         name: 'Towle Institute',
-        domain: null,
+        domain: '',
         type: 'SCHOOL',
         state: null,
         country: {
@@ -97,7 +97,7 @@ describe('OrganisationConverter', () => {
     const districtEntity = OrganisationEntityFactory.sample({
       organisationDetails: {
         name: 'parentOrg',
-        domain: null,
+        domain: '',
         country: {
           id: 'USA',
           name: 'United states',
@@ -122,7 +122,7 @@ describe('OrganisationConverter', () => {
     const apiEntity = OrganisationEntityFactory.sample({
       organisationDetails: {
         name: 'parentOrg',
-        domain: null,
+        domain: '',
         country: {
           id: 'USA',
           name: 'United states',

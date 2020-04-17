@@ -20,15 +20,15 @@ export class VideoFactory {
     ageRange: {},
     rating: 4,
     yourRating: undefined,
-    bestFor: undefined,
-    createdBy: undefined,
+    bestFor: [],
+    createdBy: '',
     promoted: false,
-    language: undefined,
+    language: { code: 'en-US', displayName: 'English (US)' },
     attachments: [],
     links: {
       self: new Link({ href: 'http://link-to-video' }),
       logInteraction: new Link({ href: 'http://link-to-log-interaction' }),
-      update: null,
+      update: undefined,
     },
   });
 }

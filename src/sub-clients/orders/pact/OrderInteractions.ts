@@ -147,7 +147,7 @@ export const updateOrderCurrency = (
 
 export const updateOrderItem = (
   orderId: string,
-  orderItemId,
+  orderItemId: any,
   request: OrderItemUpdateRequest,
 ): InteractionObject => ({
   state: undefined,
@@ -175,8 +175,8 @@ export const updateOrderItem = (
             ),
             ...{
               price: { value: request.price },
-              licenseDuration: request.license.duration,
-              licenseTerritory: request.license.territory,
+              licenseDuration: request.license?.duration,
+              licenseTerritory: request.license?.territory,
             },
           },
         ],

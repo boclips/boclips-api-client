@@ -7,7 +7,7 @@ import { getLegalRestrictions } from '../pact/LegalRestrictionsInteractions';
 describe('LegalRestrictionsClient', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
-      let client;
+      let client: FakeBoclipsClient | ApiBoclipsClient | null = null;
 
       beforeEach(async () => {
         client = await getClient();
@@ -22,7 +22,7 @@ describe('LegalRestrictionsClient', () => {
 
       it('can fetch all legal restrictions', async () => {
         await provider.addInteraction(getLegalRestrictions);
-        const response = await client.legalRestrictions.getAll();
+        const response = await client!.legalRestrictions.getAll();
 
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual('2');

@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "strict": false,
+    "strict": true,
     "typeRoots": ["./src/types/", "./node_modules/@types"]
   },
   "exclude": ["src/**/*.test.*"],

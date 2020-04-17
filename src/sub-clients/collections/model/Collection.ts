@@ -16,8 +16,8 @@ export interface Collection extends ModelWithLinks {
   mine: boolean;
   createdBy: string;
   subjects: Subject[];
-  ageRange?: AgeRange;
-  description?: string;
+  ageRange: AgeRange | null;
+  description?: string | null;
   attachments?: Attachment[];
   links: {
     self: Link;

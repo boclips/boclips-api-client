@@ -15,7 +15,12 @@ export class ApiEduAgeRangesClient extends ApiSubClient
           eduResponse.data._embedded.ageRanges,
       )
       .then(ageRanges =>
-        ageRanges.map(({ id, min, max, label }) => ({ id, min, max, label })),
+        ageRanges.map((ageRange: any) => ({
+          id: ageRange.id,
+          min: ageRange.min,
+          max: ageRange.max,
+          label: ageRange.label,
+        })),
       );
   }
 }

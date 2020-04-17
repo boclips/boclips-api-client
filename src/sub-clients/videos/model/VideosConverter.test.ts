@@ -160,7 +160,7 @@ describe('VideosConverter', () => {
     expect(video.links.logInteraction.getOriginalLink()).toEqual(
       'https://api.staging-boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/events?logVideoInteraction=true&type={type}',
     );
-    expect(video.links.addAttachment.getOriginalLink()).toEqual(
+    expect(video.links.addAttachment?.getOriginalLink()).toEqual(
       'https://api.boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/attachments',
     );
   });
@@ -182,7 +182,7 @@ describe('VideosConverter', () => {
     expect(video.contentPartner).toEqual('TED-Ed');
     expect(video.contentPartnerId).toEqual('5cf141cbc1475c47f717870d');
     expect(video.contentPartnerVideoId).toEqual('1805_08_A');
-    expect(video.type.id).toEqual(3);
-    expect(video.type.name).toEqual('Instructional Clips');
+    expect(video.type?.id).toEqual(3);
+    expect(video.type?.name).toEqual('Instructional Clips');
   });
 });

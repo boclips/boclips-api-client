@@ -47,10 +47,10 @@ describe('ContentPartnerContracts', () => {
         expect(contract.contractDocument).toEqual(
           sampleContract.contractDocument,
         );
-        expect(contract.contractDates.start).toEqual(
+        expect(contract.contractDates?.start).toEqual(
           sampleContract.contractDates.start,
         );
-        expect(contract.contractDates.end).toEqual(
+        expect(contract.contractDates?.end).toEqual(
           sampleContract.contractDates.end,
         );
         expect(contract.contractIsRolling).toEqual(
@@ -72,40 +72,40 @@ describe('ContentPartnerContracts', () => {
         expect(contract.remittanceCurrency).toEqual(
           sampleContract.remittanceCurrency,
         );
-        expect(contract.restrictions.clientFacing).toEqual(
+        expect(contract.restrictions?.clientFacing).toEqual(
           sampleContract.restrictions.clientFacing,
         );
-        expect(contract.restrictions.companies).toEqual(
+        expect(contract.restrictions?.companies).toEqual(
           sampleContract.restrictions.companies,
         );
-        expect(contract.restrictions.editing).toEqual(
+        expect(contract.restrictions?.editing).toEqual(
           sampleContract.restrictions.editing,
         );
-        expect(contract.restrictions.licensing).toEqual(
+        expect(contract.restrictions?.licensing).toEqual(
           sampleContract.restrictions.licensing,
         );
-        expect(contract.restrictions.marketing).toEqual(
+        expect(contract.restrictions?.marketing).toEqual(
           sampleContract.restrictions.marketing,
         );
-        expect(contract.restrictions.other).toEqual(
+        expect(contract.restrictions?.other).toEqual(
           sampleContract.restrictions.other,
         );
-        expect(contract.restrictions.payout).toEqual(
+        expect(contract.restrictions?.payout).toEqual(
           sampleContract.restrictions.payout,
         );
-        expect(contract.restrictions.territory).toEqual(
+        expect(contract.restrictions?.territory).toEqual(
           sampleContract.restrictions.territory,
         );
-        expect(contract.costs.minimumGuarantee).toEqual(
+        expect(contract.costs?.minimumGuarantee).toEqual(
           sampleContract.costs.minimumGuarantee,
         );
-        expect(contract.costs.upfrontLicense).toEqual(
+        expect(contract.costs?.upfrontLicense).toEqual(
           sampleContract.costs.upfrontLicense,
         );
-        expect(contract.costs.technicalFee).toEqual(
+        expect(contract.costs?.technicalFee).toEqual(
           sampleContract.costs.technicalFee,
         );
-        expect(contract.costs.recoupable).toEqual(
+        expect(contract.costs?.recoupable).toEqual(
           sampleContract.costs.recoupable,
         );
       });

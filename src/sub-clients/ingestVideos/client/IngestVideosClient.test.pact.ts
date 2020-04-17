@@ -33,8 +33,8 @@ describe('IngestVideosClient', () => {
         const firstVideo = ingestVideos.page[0];
         expect(pageSpec.size).toEqual(2);
         expect(pageSpec.number).toEqual(1);
-        expect(pageSpec.nextPage.getOriginalLink()).toBeDefined();
-        expect(pageSpec.previousPage.getOriginalLink()).toBeDefined();
+        expect(pageSpec.nextPage?.getOriginalLink()).toBeDefined();
+        expect(pageSpec.previousPage?.getOriginalLink()).toBeDefined();
 
         expect(firstVideo.id).toEqual(ingestVideoFixture.id);
         expect(firstVideo.title).toEqual(ingestVideoFixture.title);

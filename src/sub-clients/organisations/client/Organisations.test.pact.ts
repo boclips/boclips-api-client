@@ -42,9 +42,9 @@ describe('Organisation', () => {
           size: 30,
         });
 
-        expect(organisationsPage.page.length).toBeGreaterThanOrEqual(1);
+        expect(organisationsPage?.page.length).toBeGreaterThanOrEqual(1);
         expect(
-          organisationsPage.page.some(
+          organisationsPage?.page.some(
             account => account.id === USA_ORGANISATION_ID_FROM_STAGING,
           ),
         ).toBeTruthy();
@@ -63,9 +63,9 @@ describe('Organisation', () => {
           size: 30,
         });
 
-        expect(organisationsPage.page.length).toBeGreaterThanOrEqual(1);
+        expect(organisationsPage?.page.length).toBeGreaterThanOrEqual(1);
         expect(
-          organisationsPage.page.some(
+          organisationsPage?.page.some(
             account => account.id === USA_ORGANISATION_ID_FROM_STAGING,
           ),
         ).toBeTruthy();
@@ -92,7 +92,7 @@ describe('Organisation', () => {
         });
 
         const updatedOrganisation = await client.organisations.updateOrganisation(
-          organisationPage.page[0],
+          organisationPage!.page[0],
           updateRequest,
         );
 
@@ -118,7 +118,7 @@ describe('Organisation', () => {
           associateUsers(USA_ORGANISATION_ID_FROM_STAGING),
         );
         const associatedUsers = await client.organisations.associateUsers(
-          organisationPage.page[0],
+          organisationPage!.page[0],
         );
 
         expect(associatedUsers.length).toEqual(0);

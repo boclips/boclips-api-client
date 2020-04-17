@@ -7,7 +7,7 @@ import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 describe('VideoTypesClient', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
-      let client;
+      let client: FakeBoclipsClient | ApiBoclipsClient | null = null;
 
       beforeEach(async () => {
         client = await getClient();
@@ -21,7 +21,7 @@ describe('VideoTypesClient', () => {
 
       it('can fetch all video types', async () => {
         await provider.addInteraction(getVideoTypes);
-        const response = await client.videoTypes.getAll();
+        const response = await client!.videoTypes.getAll();
 
         expect(response.types).toHaveLength(1);
         expect(response.types[0]).toEqual('type');

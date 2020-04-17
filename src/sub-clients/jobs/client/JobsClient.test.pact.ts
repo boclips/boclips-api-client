@@ -64,8 +64,8 @@ describe('JobsClient', () => {
 
         expect(pageSpec.size).toEqual(2);
         expect(pageSpec.number).toEqual(1);
-        expect(pageSpec.nextPage.getOriginalLink()).toBeDefined();
-        expect(pageSpec.previousPage.getOriginalLink()).toBeDefined();
+        expect(pageSpec?.nextPage?.getOriginalLink()).toBeDefined();
+        expect(pageSpec?.previousPage?.getOriginalLink()).toBeDefined();
 
         expect(firstJob.id).toEqual(existingJobIdFromStaging);
         expect(firstJob.createdAt).toEqual(new Date('2019-11-21T17:00:00.908'));
@@ -135,18 +135,18 @@ describe('JobsClient', () => {
       it('gets useful error messages on missing job', async () => {
         await provider.addInteraction(get404JobInteraction('404'));
 
-        let error: BoclipsApiError;
+        let error: BoclipsApiError | null = null;
         try {
           await client.jobs.get('404');
         } catch (err) {
           error = err;
         }
 
-        expect(error.status).toEqual(404);
-        expect(error.message).toBeDefined();
-        expect(error.path).toBeDefined();
-        expect(error.timestamp).toBeDefined();
-        expect(error.error).toBeDefined();
+        expect(error?.status).toEqual(404);
+        expect(error?.message).toBeDefined();
+        expect(error?.path).toBeDefined();
+        expect(error?.timestamp).toBeDefined();
+        expect(error?.error).toBeDefined();
       });
     },
   );

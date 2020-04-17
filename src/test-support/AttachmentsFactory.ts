@@ -10,7 +10,7 @@ export class AttachmentEntityFactory {
     const defaults: AttachmentEntity = {
       id: 'test-id',
       type: AttachmentType.LESSON_PLAN,
-      description: null,
+      description: undefined,
       _links: {
         download: {
           href: 'externallink.com',
@@ -28,7 +28,7 @@ export class AttachmentFactory {
       id: 'test-id',
       type: AttachmentType.LESSON_PLAN,
       linkToResource: 'some-download-href',
-      description: null,
+      description: undefined,
       links: {
         download: new Link({ href: 'some-download-href', templated: false }),
       },

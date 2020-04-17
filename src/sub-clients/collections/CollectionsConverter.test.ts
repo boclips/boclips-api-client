@@ -81,16 +81,16 @@ describe('Collections converter', () => {
     expect(converted.subjects.length).toEqual(entity.subjects.length);
     expect(converted.ageRange).toEqual(entity.ageRange);
     expect(converted.description).toEqual(entity.description);
-    expect(converted.attachments.length).toEqual(entity.attachments.length);
+    expect(converted.attachments?.length).toEqual(entity.attachments.length);
 
     if (entity.attachments.length > 0) {
-      const convertedAttachment = converted.attachments[0];
+      const convertedAttachment = converted.attachments?.[0];
       const entityAttachment = entity.attachments[0];
-      expect(convertedAttachment.type).toEqual(entityAttachment.type);
-      expect(convertedAttachment.description).toEqual(
+      expect(convertedAttachment?.type).toEqual(entityAttachment.type);
+      expect(convertedAttachment?.description).toEqual(
         entityAttachment.description,
       );
-      expect(convertedAttachment.linkToResource).toEqual(
+      expect(convertedAttachment?.linkToResource).toEqual(
         entityAttachment._links.download.href,
       );
     }
@@ -98,11 +98,11 @@ describe('Collections converter', () => {
     expect(converted.links.self.getOriginalLink()).toEqual(
       entity._links.self.href,
     );
-    expect(converted.links.edit.getOriginalLink()).toEqual(
-      entity._links.edit.href,
+    expect(converted.links.edit?.getOriginalLink()).toEqual(
+      entity._links.edit?.href,
     );
-    expect(converted.links.bookmark.getOriginalLink()).toEqual(
-      entity._links.bookmark.href,
+    expect(converted.links.bookmark?.getOriginalLink()).toEqual(
+      entity._links.bookmark?.href,
     );
   };
 });

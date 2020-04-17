@@ -30,7 +30,7 @@ export class ApiJobsClient extends ApiSubClient implements JobsClient {
         expandUrlTemplate(jobsLink.href, {
           page: pageRequest.page,
           size: pageRequest.size,
-          manuallyCreated: manuallyCreated,
+          manuallyCreated: manuallyCreated!,
         }),
       )
       .then(
