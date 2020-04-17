@@ -90,9 +90,10 @@ export const updateContentPartnerContract = (
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: {
+    body: somethingLike({
       contentPartnerName: 'new name',
-    },
+      contractDates: { start: undefined, end: undefined },
+    }),
   },
   willRespondWith: {
     status: 204,

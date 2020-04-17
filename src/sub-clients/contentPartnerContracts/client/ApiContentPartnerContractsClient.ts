@@ -47,7 +47,7 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
     updatedContract: Omit<ContentPartnerContract, 'id'>,
   ): Promise<void> {
     const contractLink = this.getLinkOrThrow('contentPartnerContract');
-
+    console.log(ContentPartnerContractsConverter.toRequest(updatedContract));
     await this.axios.patch(
       expandUrlTemplate(contractLink.href, { id }),
       ContentPartnerContractsConverter.toRequest(updatedContract),
