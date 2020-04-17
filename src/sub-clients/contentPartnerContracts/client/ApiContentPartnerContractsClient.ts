@@ -50,7 +50,7 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
 
     await this.axios.patch(
       expandUrlTemplate(contractLink.href, { id }),
-      updatedContract,
+      ContentPartnerContractsConverter.toRequest(updatedContract),
       {
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
