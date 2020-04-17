@@ -10,6 +10,7 @@ import {
   getSignedLink,
   updateContentPartnerContract,
 } from '../pact/ContentPartnerContractsInteractions';
+import moment = require('moment');
 
 const sampleContract = ContentPartnerContractFactory.sample({
   id: existingContentPartnerContractFromStaging,
@@ -150,6 +151,10 @@ describe('ContentPartnerContracts', () => {
           existingContentPartnerContractFromStaging,
           {
             contentPartnerName: 'new name',
+            contractDates: {
+              start: moment('2012-01-31'),
+              end: moment('2012-02-01'),
+            },
           },
         );
       });

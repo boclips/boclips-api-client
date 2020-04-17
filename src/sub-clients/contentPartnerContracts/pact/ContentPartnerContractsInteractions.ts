@@ -1,11 +1,11 @@
-import { PageRequest } from './../../common/model/PageRequest';
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import {
-  somethingLike,
   eachLike,
+  somethingLike,
   term,
 } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
+import { PageRequest } from './../../common/model/PageRequest';
 
 const { like } = Matchers;
 
@@ -92,7 +92,10 @@ export const updateContentPartnerContract = (
     },
     body: somethingLike({
       contentPartnerName: 'new name',
-      contractDates: { start: undefined, end: undefined },
+      contractDates: somethingLike({
+        start: '2012-01-31' || null,
+        end: '2012-02-01' || null,
+      }),
     }),
   },
   willRespondWith: {
