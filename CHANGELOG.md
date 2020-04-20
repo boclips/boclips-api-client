@@ -7,37 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add contract fields to content partner
+
 ## [10.0.3] - 2020-04-16
 
 ### Added
+
 - Update version
 
 ## [10.0.2] - 2020-04-16
 
 ### Added
+
 - Update content partner contract
 
 ## [10.0.1] - 2020-04-16
 
 ### Added
+
 - Enabled TS strict mode
 
 ## [10.0.0] - 2020-04-16
 
 ### Added
-- Extracted initialisation 
+
+- Extracted initialisation
 
 ## [9.1.0] - 2020-04-16
 
 ### Added
-- `videosClient` provides a search method 
+
+- `videosClient` provides a search method
 
 ## [9.0.0] - 2020-04-15
 
 ### Changed
+
 - `videosClient` update takes only the video id and an `UpdateVideoRequest`
 
 ## [8.9.1] - 2020-04-15
+
 ### Changed
 
 - Retrofit tests for attachments conversion
@@ -58,15 +67,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor attachment request to share between videos and collections
 
 ## [8.7.0] - 2020-04-09
+
 ### Added
 
 - Video client provides video attachments
 
 ### Changed
 
-- Moved the location of attachments to share them between collections and videos 
+- Moved the location of attachments to share them between collections and videos
 
 ### Fixed
+
 - Removed unnecessary `console.log`s
 
 ## [8.6.5] - 2020-04-08
@@ -107,10 +118,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [8.6.0] - 2020-04-03
 
 ## Added
+
 - Add `videosClient`
+
   - implement `GET videos/{id}`
-  
+
 ## Changed
+
 - `Video` contains all available fields
 
 ## [8.5.0] - 2020-04-01
