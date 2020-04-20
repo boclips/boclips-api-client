@@ -27,5 +27,7 @@ export interface ContentPartner {
   pedagogyInformation?: PedagogyInformation;
   deliveryFrequency?: moment.Duration;
   ingest?: IngestDetails;
+  contractId?: string;
+  contractName?: string;
   links: { self: Link };
 }

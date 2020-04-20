@@ -44,6 +44,8 @@ export class ContentPartnersConverter {
       pedagogyInformation,
       deliveryFrequency,
       ingest,
+      contractName,
+      contractId,
     } = resource;
 
     return {
@@ -67,6 +69,8 @@ export class ContentPartnersConverter {
         ? this.convertDeliveryFrequency(deliveryFrequency)
         : undefined,
       ingest: ingest ? this.convertIngestDetailsResource(ingest) : undefined,
+      contractId,
+      contractName,
       links: {
         self: new Link(_links.self),
       },

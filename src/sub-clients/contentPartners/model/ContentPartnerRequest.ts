@@ -27,4 +27,5 @@ export interface ContentPartnerRequest {
   bestForTags?: string[];
   deliveryFrequency?: moment.Duration;
   ingest?: IngestDetails;
+  contractId?: string;
 }

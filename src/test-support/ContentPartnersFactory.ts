@@ -74,6 +74,8 @@ export class ContentPartnerFactory {
           ids: ['123'],
         },
       },
+      contractId: '123',
+      contractName: 'the contract',
     };
   }
 }

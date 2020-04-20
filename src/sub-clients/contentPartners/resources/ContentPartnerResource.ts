@@ -19,5 +19,7 @@ export interface ContentPartnerResource {
   pedagogyInformation?: any;
   deliveryFrequency?: string;
   ingest?: IngestDetailsResource;
+  contractId?: string;
+  contractName?: string;
   _links: any;
 }
