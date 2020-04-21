@@ -8,7 +8,6 @@ export interface AdminLinks {
   adminCollectionSearch: LinkEntity;
   jobs: LinkEntity;
   jobDetails: LinkEntity;
-  adminSearch: LinkEntity;
   orders: LinkEntity;
   exportOrders: LinkEntity;
   order: LinkEntity;

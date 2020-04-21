@@ -171,6 +171,7 @@ export const updateVideo = (
 
 export const searchVideo = (
   searchRequest: VideoSearchRequest,
+  state: string,
 ): InteractionObject => {
   const link = new Link({
     href: `${VIDEO_SEARCH_URL}`,
@@ -180,7 +181,7 @@ export const searchVideo = (
   const [path, query] = link.split('?');
 
   return {
-    state: undefined,
+    state: state,
     uponReceiving: 'GET search video',
     withRequest: {
       method: 'GET',

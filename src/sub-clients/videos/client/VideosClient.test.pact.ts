@@ -12,7 +12,10 @@ import moment = require('moment');
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import Pageable from '../../common/model/Pageable';
 
-export const existingVideoIdFromStaging = '5c92b2f4d0f34e48bbfb40d9';
+export const existingVideoWithAttachmentAndBestForFromStaging =
+  '5c92b2f4d0f34e48bbfb40d9';
+export const existingVideoWithoutAttachmentsAndBestFor =
+  '5d2856277e173c570e69c459';
 
 describe('VideosClient', () => {
   withClients(
@@ -28,13 +31,17 @@ describe('VideosClient', () => {
       });
 
       it(`can fetch a video by id`, async () => {
-        await provider.addInteraction(getVideo(existingVideoIdFromStaging));
-
-        const video: Video = await client.videos.get(
-          existingVideoIdFromStaging,
+        await provider.addInteraction(
+          getVideo(existingVideoWithAttachmentAndBestForFromStaging),
         );
 
-        expect(video.id).toEqual(existingVideoIdFromStaging);
+        const video: Video = await client.videos.get(
+          existingVideoWithAttachmentAndBestForFromStaging,
+        );
+
+        expect(video.id).toEqual(
+          existingVideoWithAttachmentAndBestForFromStaging,
+        );
         expect(video.title).toEqual('Test Video');
         expect(video.description).toEqual('Test description');
         expect(video.releasedOn.toUTCString()).toEqual(
@@ -88,11 +95,14 @@ describe('VideosClient', () => {
         };
 
         await provider.addInteraction(
-          updateVideo(existingVideoIdFromStaging, updateVideoRequest),
+          updateVideo(
+            existingVideoWithAttachmentAndBestForFromStaging,
+            updateVideoRequest,
+          ),
         );
 
         const updatedVideo = await client.videos.update(
-          existingVideoIdFromStaging,
+          existingVideoWithAttachmentAndBestForFromStaging,
           updateVideoRequest,
         );
 
@@ -108,7 +118,7 @@ describe('VideosClient', () => {
         expect(updatedVideo.ageRange.max).toEqual(12);
       });
 
-      it(`can get videos by a video filter`, async () => {
+      it(`can search videos by content partner`, async () => {
         const searchRequest: VideoSearchRequest = {
           // eslint-disable-next-line @typescript-eslint/camelcase
           content_partner: ['TED'],
@@ -116,7 +126,9 @@ describe('VideosClient', () => {
           size: 10,
         };
 
-        await provider.addInteraction(searchVideo(searchRequest));
+        await provider.addInteraction(
+          searchVideo(searchRequest, 'filtering by content partner'),
+        );
         if (isATestClient(client)) {
           client.videos.insertVideo({
             ...testVideo,
@@ -133,12 +145,39 @@ describe('VideosClient', () => {
         expect(results.pageSpec.size).toEqual(10);
         expect(results.page.length > 0).toBeTruthy();
       });
+
+      it(`can search videos by video ids`, async () => {
+        const searchRequest: VideoSearchRequest = {
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          id: [existingVideoWithoutAttachmentsAndBestFor],
+          page: 0,
+          size: 10,
+        };
+
+        await provider.addInteraction(
+          searchVideo(searchRequest, 'filtering by video ids'),
+        );
+        if (isATestClient(client)) {
+          client.videos.insertVideo({
+            ...testVideo,
+            id: existingVideoWithoutAttachmentsAndBestFor,
+          });
+        }
+
+        const results: Pageable<Video> = await client.videos.search(
+          searchRequest,
+        );
+
+        expect(results.pageSpec.number).toEqual(0);
+        expect(results.pageSpec.size).toEqual(10);
+        expect(results.page.length > 0).toBeTruthy();
+      });
     },
   );
 });
 
 const testVideo: Video = {
-  id: existingVideoIdFromStaging,
+  id: existingVideoWithAttachmentAndBestForFromStaging,
   title: 'Test Video',
   description: 'Test description',
   releasedOn: new Date('2020-02-03T23:11:19.074Z'),
