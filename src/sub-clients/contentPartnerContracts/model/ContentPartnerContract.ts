@@ -6,7 +6,7 @@ import { ContentPartnerContractRoyaltySplit } from './ContentPartnerContractRoya
 export interface ContentPartnerContract {
   id: string;
   contentPartnerName: string;
-  contractDocument?: string;
+  contractDocument?: string | null;
   contractDates?: ContentPartnerContractDates;
   contractIsRolling?: boolean;
   daysBeforeTerminationWarning?: number;

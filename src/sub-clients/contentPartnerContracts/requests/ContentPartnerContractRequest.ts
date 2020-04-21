@@ -5,7 +5,7 @@ import { ContentPartnerContractRoyaltySplitResource } from '../resources/Content
 
 export interface ContentPartnerContractRequest {
   contentPartnerName: string;
-  contractDocument?: string;
+  contractDocument?: string | null;
   contractDates?: ContentPartnerContractDatesResource;
   contractIsRolling?: boolean;
   daysBeforeTerminationWarning?: number;
