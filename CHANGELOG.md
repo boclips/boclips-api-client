@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [10.0.7] - 2020-04-23
 
-- `UpdateVideoRequest` can handle video tags
+- Make name optional on contract update
 
 ## [10.0.6] - 2020-04-23
 
