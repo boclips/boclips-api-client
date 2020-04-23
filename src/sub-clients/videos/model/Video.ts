@@ -20,7 +20,7 @@ export interface Video extends ModelWithLinks {
   ageRange: AgeRange;
   rating?: number;
   yourRating?: number;
-  bestFor: BestForTag[];
+  bestFor?: BestForTag[];
   createdBy: string;
   promoted: boolean;
   language: Language;
