@@ -1,3 +1,4 @@
+import { ContentPartnerContractDates } from './model/ContentPartnerContractDates';
 import moment from 'moment';
 import { ContentPartnerContract } from './model/ContentPartnerContract';
 import { ContentPartnerContractRequest } from './requests/ContentPartnerContractRequest';
@@ -8,13 +9,19 @@ export class ContentPartnerContractsConverter {
     contract: Omit<ContentPartnerContract, 'id'>,
   ): ContentPartnerContractRequest {
     const { contractDates, ...rest } = contract;
-    const datesRequest = {
-      start: contractDates?.start?.format('YYYY-MM-DD'),
-      end: contractDates?.end?.format('YYYY-MM-DD'),
-    };
+    const datesRequest = this.formatDates(contractDates);
     return {
       ...rest,
       contractDates: datesRequest,
+    };
+  }
+
+  public static formatDates(
+    contractDates?: ContentPartnerContractDates,
+  ): { start?: string; end?: string } {
+    return {
+      start: contractDates?.start?.format('YYYY-MM-DD'),
+      end: contractDates?.end?.format('YYYY-MM-DD'),
     };
   }
 

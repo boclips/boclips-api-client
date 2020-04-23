@@ -1,3 +1,4 @@
+import { UpdateContractRequest } from './../model/UpdateContractRequest';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ContentPartnerContractsConverter } from '../ContentPartnerContractsConverter';
@@ -44,13 +45,18 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
 
   public async update(
     id: string,
-    updatedContract: Omit<ContentPartnerContract, 'id'>,
+    updateRequest: UpdateContractRequest,
   ): Promise<void> {
     const contractLink = this.getLinkOrThrow('contentPartnerContract');
-    console.log(ContentPartnerContractsConverter.toRequest(updatedContract));
+    console.log(updateRequest);
     await this.axios.patch(
       expandUrlTemplate(contractLink.href, { id }),
-      ContentPartnerContractsConverter.toRequest(updatedContract),
+      {
+        ...updateRequest,
+        contractDates: ContentPartnerContractsConverter.formatDates(
+          updateRequest.contractDates,
+        ),
+      },
       {
         headers: {
           'Content-Type': 'application/json; charset=utf-8',

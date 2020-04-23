@@ -91,7 +91,6 @@ export const updateContentPartnerContract = (
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: somethingLike({
-      contentPartnerName: 'new name',
       contractDates: somethingLike({
         start: '2012-01-31' || null,
         end: '2012-02-01' || null,

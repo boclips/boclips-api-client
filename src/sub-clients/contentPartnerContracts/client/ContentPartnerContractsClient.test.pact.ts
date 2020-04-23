@@ -150,7 +150,6 @@ describe('ContentPartnerContracts', () => {
         await client.contentPartnerContracts.update(
           existingContentPartnerContractFromStaging,
           {
-            contentPartnerName: 'new name',
             contractDates: {
               start: moment('2012-01-31'),
               end: moment('2012-02-01'),
