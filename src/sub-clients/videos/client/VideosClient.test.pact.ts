@@ -85,6 +85,7 @@ describe('VideosClient', () => {
           subjectIds: ['5cb499c9fd5beb428189454d', '5e73821c9bbfd47e6e7533a4'],
           ageRangeMin: 3,
           ageRangeMax: 12,
+          tagId: '5d3ac0185b3f3b7ba335e105',
           attachments: [
             {
               description: 'New attachment description',
@@ -116,6 +117,9 @@ describe('VideosClient', () => {
         expect(updatedVideo.subjects.length).toEqual(2);
         expect(updatedVideo.ageRange.min).toEqual(3);
         expect(updatedVideo.ageRange.max).toEqual(12);
+        expect(updatedVideo.bestFor).toEqual([
+          { label: 'tag-5d3ac0185b3f3b7ba335e105' },
+        ]);
       });
 
       it(`can search videos by content partner`, async () => {

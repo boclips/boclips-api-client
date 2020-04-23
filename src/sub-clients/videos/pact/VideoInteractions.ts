@@ -37,7 +37,7 @@ export const getVideo = (id: string): InteractionObject => ({
       subjects: eachLike({ id: '5cb499c9fd5beb428189454d', name: 'History' }),
       badges: like(['youtube']),
       legalRestrictions: like(''),
-      bestFor: [{ label: 'Context builder' }],
+      bestFor: like([{ label: 'Context builder' }]),
       attachments: like([
         like({
           id: '5e963dc0bc854e03b4f0fa6b',
@@ -132,7 +132,7 @@ export const updateVideo = (
         ]),
         badges: like(['youtube']),
         legalRestrictions: like(''),
-        bestFor: [{ label: 'Context builder' }],
+        bestFor: like([{ label: `tag-${updateVideoRequest.tagId}` }]),
         attachments: like([
           like({
             id: '5e963dc0bc854e03b4f0fa6b',

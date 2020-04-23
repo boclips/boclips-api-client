@@ -47,6 +47,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       subjectIds,
       ageRangeMin,
       ageRangeMax,
+      tagId,
     } = updateVideoRequest;
     const originalVideo = this.videos[videoIndex];
 
@@ -62,6 +63,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       subjects: subjectIds
         ? subjectIds.map(id => ({ id, name: `subject${id}` }))
         : originalVideo.subjects,
+      bestFor: [{ label: `tag-${tagId}` }],
     };
 
     this.videos[videoIndex] = updatedVideo;

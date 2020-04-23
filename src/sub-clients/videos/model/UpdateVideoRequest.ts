@@ -7,5 +7,6 @@ export interface UpdateVideoRequest {
   subjectIds?: string[];
   ageRangeMin?: number;
   ageRangeMax?: number;
+  tagId?: string;
   attachments?: AttachmentRequest[];
 }
