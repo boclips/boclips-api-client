@@ -48,7 +48,7 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
     updateRequest: UpdateContractRequest,
   ): Promise<void> {
     const contractLink = this.getLinkOrThrow('contentPartnerContract');
-    console.log(updateRequest);
+
     await this.axios.patch(
       expandUrlTemplate(contractLink.href, { id }),
       {
@@ -89,7 +89,7 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
     const link = this.getLinkOrThrow(
       'createContentPartnerContractsSignedUploadLink',
     ).href;
-    console.log(link);
+
     return this.axios
       .post(link, {
         filename,
