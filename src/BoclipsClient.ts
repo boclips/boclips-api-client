@@ -15,6 +15,7 @@ import { OrganisationsClient } from './sub-clients/organisations/client/Organisa
 import { SubjectsClient } from './sub-clients/subjects/client/SubjectsClient';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
 import { VideosClient } from './sub-clients/videos/client/VideosClient';
+import { SuggestionsClient } from './sub-clients/suggestions/client/SuggestionsClient';
 
 export interface BoclipsClient {
   legalRestrictions: LegalRestrictionsClient;
@@ -34,4 +35,5 @@ export interface BoclipsClient {
   marketingStatuses: MarketingStatusesClient;
   ingestVideoStatuses: IngestVideoStatusesClient;
   contractLegalRestrictions: ContractLegalRestrictionsClient;
+  suggestions: SuggestionsClient;
 }
