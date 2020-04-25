@@ -140,6 +140,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/contract-legal-restrictions`,
           templated: false,
         }),
+        suggestions: like({
+          href: `${provider.mockService.baseUrl}/v1/suggestions?query={query}`,
+          templated: true,
+        }),
       },
     },
   },

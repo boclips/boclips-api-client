@@ -28,6 +28,8 @@ import { ApiVideosClient } from './sub-clients/videos/client/ApiVideosClient';
 import { VideosClient } from './sub-clients/videos/client/VideosClient';
 import { ApiVideoTypesClient } from './sub-clients/videoTypes/client/ApiVideoTypes';
 import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClient';
+import { SuggestionsClient } from './sub-clients/suggestions/client/SuggestionsClient';
+import { ApiSuggestionsClient } from './sub-clients/suggestions/client/ApiSuggestionsClient';
 
 export class ApiBoclipsClient implements BoclipsClient {
   public legalRestrictions: ApiLegalRestrictionsClient;
@@ -47,6 +49,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public contentPartnerContracts: ContentPartnerContractsClient;
   public contractLegalRestrictions: ContractLegalRestrictionsClient;
   public videos: VideosClient;
+  public suggestions: SuggestionsClient;
 
   constructor(axios: AxiosInstance, adminLinks: AdminLinks) {
     this.legalRestrictions = new ApiLegalRestrictionsClient(adminLinks, axios);
@@ -75,6 +78,7 @@ export class ApiBoclipsClient implements BoclipsClient {
       axios,
     );
     this.videos = new ApiVideosClient(adminLinks, axios);
+    this.suggestions = new ApiSuggestionsClient(adminLinks, axios);
   }
 
   public static create = async (
