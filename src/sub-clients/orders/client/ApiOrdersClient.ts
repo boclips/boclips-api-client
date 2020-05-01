@@ -28,7 +28,7 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
 
     return this.axios
       .patch(
-        `${expandUrlTemplate(orderLink.href, { id })}?currency=${currency}`, // TODO this should be a HATEOS link on the order
+        `${expandUrlTemplate(orderLink.href, { id })}?currency=${currency}`, // TODO this should be a HATEOAS link on the order
         null,
         {
           headers: {

@@ -9,6 +9,7 @@ import Pageable from '../../common/model/Pageable';
 import { PageableConverter } from '../../common/model/PageableConverter';
 import { VideoEntity } from '../model/VideoEntity';
 import { PageableEntity } from '../../common/model/PageableEntity';
+import { ResourceProjection } from '../../common/model/ResourceProjection';
 
 export class ApiVideosClient extends ApiSubClient implements VideosClient {
   public async get(id: string): Promise<Video> {
@@ -16,6 +17,20 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     const response = await this.axios.get(
       expandUrlTemplate(videoLink.href, { id }),
     );
+
+    return VideosConverter.convert(response.data);
+  }
+
+  async getVideoProjection(
+    video: { _links: ResourceProjection },
+    projection: keyof ResourceProjection,
+  ) {
+    const link = video._links[projection]?.getOriginalLink();
+
+    if (!link) {
+      throw Error(`Projection ${projection} not available in these links`);
+    }
+    const response = await this.axios.get(link);
 
     return VideosConverter.convert(response.data);
   }
