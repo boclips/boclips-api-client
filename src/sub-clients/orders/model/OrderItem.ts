@@ -15,17 +15,17 @@ export interface OrderItem {
   license?: OrderItemLicense;
 }
 
-interface OrderItemLicense {
+export interface OrderItemLicense {
   duration: string;
   territory: string;
 }
 
-interface OrderItemContentPartner {
+export interface OrderItemContentPartner {
   id: string;
   name: string;
 }
 
-interface OrderItemVideo {
+export interface OrderItemVideo {
   id: string;
   type: string;
   title: string;
