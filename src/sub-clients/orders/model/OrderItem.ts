@@ -30,4 +30,7 @@ interface OrderItemVideo {
   type: string;
   title: string;
   videoReference: string;
+  _links: {
+    fullProjection: Link;
+  };
 }

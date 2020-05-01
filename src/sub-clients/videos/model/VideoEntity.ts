@@ -43,6 +43,7 @@ export interface VideoEntity extends EntityWithLinks {
   createdBy: string;
   promoted: true;
   language: null;
+  captionStatus: string;
   attachments: [
     {
       id: string;

@@ -41,6 +41,11 @@ export class OrderItemFactory {
           type: 'NEWS',
           title: 'The video title',
           videoReference: 'The video reference',
+          _links: {
+            fullProjection: new Link({
+              href: '/v1/videos/123?projection=full',
+            }),
+          },
         },
         contentPartner: {
           id: 'contentPartner-123',

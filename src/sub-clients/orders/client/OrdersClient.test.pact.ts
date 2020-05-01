@@ -50,6 +50,11 @@ describe('OrdersClient', () => {
                   type: 'NEWS',
                   title: 'The video title',
                   videoReference: 'The video is a good one',
+                  _links: {
+                    fullProjection: new Link({
+                      href: '/v1/vieos/123?projection=full',
+                    }),
+                  },
                 },
                 contentPartner: {
                   id: 'content-partner id',
@@ -102,6 +107,9 @@ describe('OrdersClient', () => {
           type: 'NEWS',
           title: 'The video title',
           videoReference: 'The video is a good one',
+          _links: {
+            fullProjection: new Link({ href: '/v1/vieos/123?projection=full' }),
+          },
         });
         expect(firstOrderItem.links.updatePrice.getOriginalLink()).toEqual(
           '/v1/orders/123/items/456?price={price}',

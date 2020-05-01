@@ -1,6 +1,7 @@
 import { Link } from '../sub-clients/common/model/LinkEntity';
 import { Video } from '../sub-clients/videos/model/Video';
 import { PlaybackFactory } from './PlaybackFactory';
+import { CaptionStatus } from '../sub-clients/videos/model/CaptionStatus';
 
 export class VideoFactory {
   public static sample = (video: Partial<Video>): Video => ({
@@ -25,6 +26,7 @@ export class VideoFactory {
     promoted: false,
     language: { code: 'en-US', displayName: 'English (US)' },
     attachments: [],
+    captionStatus: CaptionStatus.PROCESSING,
     links: {
       self: new Link({ href: 'http://link-to-video' }),
       logInteraction: new Link({ href: 'http://link-to-log-interaction' }),

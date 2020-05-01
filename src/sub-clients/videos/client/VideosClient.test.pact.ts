@@ -11,6 +11,7 @@ import { AttachmentType } from '../../common/model/Attachment';
 import moment = require('moment');
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import Pageable from '../../common/model/Pageable';
+import { CaptionStatus } from '../model/CaptionStatus';
 
 export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
@@ -211,6 +212,7 @@ const testVideo: Video = {
   promoted: false,
   language: { code: 'en-US', displayName: 'English (US)' },
   attachments: [AttachmentFactory.sample({ type: AttachmentType.ACTIVITY })],
+  captionStatus: CaptionStatus.PROCESSING,
   links: {
     self: new Link({ href: '/self' }),
     logInteraction: new Link({ href: '/logInteraction' }),

@@ -67,7 +67,12 @@ export class OrderConverter {
         license: { duration: licenseDuration, territory: licenseTerritory },
         price,
         transcriptRequested,
-        video,
+        video: {
+          ...video,
+          _links: {
+            fullProjection: new Link(video._links.fullProjection),
+          },
+        },
         links: {
           updatePrice: new Link(_links.updatePrice),
           update: new Link(_links.update),

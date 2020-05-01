@@ -7,6 +7,7 @@ import { VideoType } from '../../videoTypes/model/VideoType';
 import { Link } from '../../common/model/LinkEntity';
 import { ModelWithLinks } from '../../common/model/common';
 import { Attachment } from '../../common/model/Attachment';
+import { CaptionStatus } from './CaptionStatus';
 
 export interface Video extends ModelWithLinks {
   id: string;
@@ -38,4 +39,5 @@ export interface Video extends ModelWithLinks {
   contentPartnerId?: string;
   contentPartnerVideoId?: string;
   type?: VideoType;
+  captionStatus?: CaptionStatus;
 }

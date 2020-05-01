@@ -3,6 +3,7 @@ import { VideosConverter } from './VideosConverter';
 import { Link } from '../../common/model/LinkEntity';
 import moment = require('moment');
 import { VideoEntity } from './VideoEntity';
+import { CaptionStatus } from './CaptionStatus';
 
 describe('VideosConverter', () => {
   const baseVideoEntity: VideoEntity = {
@@ -52,6 +53,7 @@ describe('VideosConverter', () => {
     createdBy: 'BFI',
     promoted: true,
     language: null,
+    captionStatus: 'PROCESSING',
     attachments: [
       {
         id: 'attachment-id-123',
@@ -163,6 +165,7 @@ describe('VideosConverter', () => {
     expect(video.links.addAttachment?.getOriginalLink()).toEqual(
       'https://api.boclips.com/v1/videos/5c92b2f4d0f34e48bbfb40d9/attachments',
     );
+    expect(video.captionStatus).toEqual(CaptionStatus.PROCESSING);
   });
 
   it('converts a Video with Boclips projection', () => {

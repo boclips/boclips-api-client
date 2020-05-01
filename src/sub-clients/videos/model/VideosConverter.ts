@@ -2,6 +2,7 @@ import { Video } from './Video';
 import { convertLinks } from '../../common/utils/convertLinks';
 import { PlaybackConverter } from '../../common/model/PlaybackConverter';
 import { convertAttachment } from '../../common/utils/convertAttachment';
+import { CaptionStatus } from './CaptionStatus';
 
 export class VideosConverter {
   public static convert(entity: any): Video {
@@ -27,6 +28,8 @@ export class VideosConverter {
       contentPartnerVideoId: entity.contentPartnerVideoId,
       type: entity.type,
       attachments: entity.attachments.map(convertAttachment) || [],
+      // 🤷‍♀️
+      captionStatus: (CaptionStatus as any)[entity.captionStatus] ?? undefined,
     };
   }
 }

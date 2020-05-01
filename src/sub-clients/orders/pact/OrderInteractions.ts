@@ -14,6 +14,9 @@ const createOrderItemWithMandatoryFields = (id: string) => ({
     type: 'NEWS',
     title: 'The video title',
     videoReference: 'The video is a good one',
+    _links: {
+      fullProjection: { href: '/v1/vieos/123?projection=full' },
+    },
   },
   contentPartner: like({
     name: 'content-partner name',
