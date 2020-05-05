@@ -5,9 +5,12 @@ import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import Pageable from '../../common/model/Pageable';
 import { PageableFactory } from '../../common/model/PageableFactory';
+import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
+import { CaptionContent } from '../model/CaptionContent';
 
 export class FakeVideosClient implements VideosClient, Clearable {
   private videos: Video[] = [];
+  private videoCaptions: { videoId: string; content: string }[] = [];
 
   public get(id: string): Promise<Video> {
     const video = this.videos.find(video => video.id === id);
@@ -80,5 +83,30 @@ export class FakeVideosClient implements VideosClient, Clearable {
   }
   public clear() {
     this.videos = [];
+  }
+
+  public getCaptions(id: string): Promise<CaptionContent> {
+    const captions = this.videoCaptions.find(it => it.videoId === id);
+    return captions === undefined
+      ? Promise.reject('Not found')
+      : Promise.resolve({ content: captions.content });
+  }
+
+  public updateCaptions(
+    id: string,
+    updateCaptionsRequest: UpdateCaptionRequest,
+  ): Promise<string> {
+    const captionIndex = this.videoCaptions.findIndex(it => it.videoId === id);
+
+    if (captionIndex !== -1) {
+      this.videoCaptions[captionIndex].content = updateCaptionsRequest.captions;
+      return Promise.resolve(updateCaptionsRequest.captions);
+    } else {
+      return Promise.reject('Not found');
+    }
+  }
+
+  public addCaptions(videoId: string, captionContent: string): void {
+    this.videoCaptions.push({ videoId: videoId, content: captionContent });
   }
 }

@@ -65,6 +65,24 @@ export const getVideo = (id: string): InteractionObject => ({
   },
 });
 
+export const getCaptions = (id: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET captions',
+  withRequest: {
+    method: 'GET',
+    path: `/v1/videos/${id}/captions`,
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: {
+      content: like('some caption content'),
+    },
+  },
+});
+
 export const updateVideo = (
   id: string,
   updateVideoRequest: UpdateVideoRequest,

@@ -34,6 +34,7 @@ export interface Video extends ModelWithLinks {
     tag?: Link;
     transcript?: Link;
     addAttachment?: Link;
+    captions?: Link;
   };
   contentPartner?: string;
   contentPartnerId?: string;

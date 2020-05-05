@@ -3,7 +3,12 @@ import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { Video } from '../model/Video';
-import { getVideo, searchVideo, updateVideo } from '../pact/VideoInteractions';
+import {
+  getCaptions,
+  getVideo,
+  searchVideo,
+  updateVideo,
+} from '../pact/VideoInteractions';
 import { Link } from '../../common/model/LinkEntity';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { AttachmentFactory } from '../../../test-support/AttachmentsFactory';
@@ -12,11 +17,14 @@ import moment = require('moment');
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import Pageable from '../../common/model/Pageable';
 import { CaptionStatus } from '../model/CaptionStatus';
+import { CaptionContent } from '../model/CaptionContent';
 
 export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
 export const existingVideoWithoutAttachmentsAndBestFor =
   '5d2856277e173c570e69c459';
+export const existingKalturaVideoFromStaging =
+  '5c542ab85438cdbcb56ddceb';
 
 describe('VideosClient', () => {
   withClients(
@@ -76,6 +84,24 @@ describe('VideosClient', () => {
         expect(video.links.logInteraction).toBeTruthy();
       });
 
+      it(`can fetch a video's caption content by ID`, async () => {
+        await provider.addInteraction(
+          getCaptions(existingKalturaVideoFromStaging),
+        );
+
+        if (isATestClient(client)) {
+          client.videos.addCaptions(
+              existingKalturaVideoFromStaging,
+            'some caption content',
+          );
+        }
+
+        const captionContent: CaptionContent = await client.videos.getCaptions(
+            existingKalturaVideoFromStaging,
+        );
+        expect(captionContent.content).toEqual('some caption content');
+      });
+
       it(`can update a video`, async () => {
         const updateVideoRequest: UpdateVideoRequest = {
           title:
@@ -121,6 +147,24 @@ describe('VideosClient', () => {
         expect(updatedVideo.bestFor).toEqual([
           { label: 'tag-5d3ac0185b3f3b7ba335e105' },
         ]);
+      });
+
+      it(`can retrieve a video's captions`, async () => {
+        await provider.addInteraction(
+          getCaptions(existingKalturaVideoFromStaging),
+        );
+
+        if (isATestClient(client)) {
+          client.videos.addCaptions(
+              existingKalturaVideoFromStaging,
+            'some caption content',
+          );
+        }
+        const results: CaptionContent = await client.videos.getCaptions(
+            existingKalturaVideoFromStaging,
+        );
+
+        expect(results.content).toEqual('some caption content');
       });
 
       it(`can search videos by content partner`, async () => {

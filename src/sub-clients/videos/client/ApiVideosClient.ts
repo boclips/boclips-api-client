@@ -10,6 +10,9 @@ import { PageableConverter } from '../../common/model/PageableConverter';
 import { VideoEntity } from '../model/VideoEntity';
 import { PageableEntity } from '../../common/model/PageableEntity';
 import { ResourceProjection } from '../../common/model/ResourceProjection';
+import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
+import { CaptionsConverter } from '../model/CaptionsConverter';
+import { CaptionContent } from '../model/CaptionContent';
 import { ProjectedResource } from '../../common/model/ProjectedResource';
 
 export class ApiVideosClient extends ApiSubClient implements VideosClient {
@@ -62,5 +65,31 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     );
 
     return VideosConverter.convert(response.data);
+  }
+
+  public async updateCaptions(
+    id: string,
+    updateCaptionsRequest: UpdateCaptionRequest,
+  ): Promise<string> {
+    return this.get(id).then(
+      video =>
+        (video &&
+          video.links &&
+          video.links.captions &&
+          this.axios.put(
+            video.links.captions.getOriginalLink(),
+            updateCaptionsRequest,
+          )) ||
+        Promise.reject('Missing update captions link'),
+    );
+  }
+
+  public async getCaptions(id: string): Promise<CaptionContent> {
+    const captionsLink = this.getLinkOrThrow('getCaptions');
+    const response = await this.axios.get(
+      expandUrlTemplate(captionsLink.href, { id }),
+    );
+
+    return CaptionsConverter.convert(response.data);
   }
 }
