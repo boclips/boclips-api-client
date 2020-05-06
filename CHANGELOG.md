@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [10.2.2] - 2020-05-06
 
 - Expose `editThumbnail` on playback links
+- Add retrieval and editing of video caption content
 
 ## [10.2.1] - 2020-05-06
 
