@@ -10,6 +10,7 @@ import { PageableConverter } from '../../common/model/PageableConverter';
 import { VideoEntity } from '../model/VideoEntity';
 import { PageableEntity } from '../../common/model/PageableEntity';
 import { ResourceProjection } from '../../common/model/ResourceProjection';
+import { ProjectedResource } from '../../common/model/ProjectedResource';
 
 export class ApiVideosClient extends ApiSubClient implements VideosClient {
   public async get(id: string): Promise<Video> {
@@ -22,7 +23,7 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
   }
 
   async getVideoProjection(
-    video: { _links: ResourceProjection },
+    video: ProjectedResource,
     projection: keyof ResourceProjection,
   ) {
     const link = video._links[projection]?.getOriginalLink();
