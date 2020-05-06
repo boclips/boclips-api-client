@@ -11,6 +11,7 @@ export interface Playback extends ModelWithLinks {
     createPlayerInteractedWithEvent: any;
     download?: Link;
     thumbnail: Link;
+    editThumbnail?: Link;
     videoPreview?: Link;
     hlsStream?: Link;
   };

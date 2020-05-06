@@ -22,6 +22,10 @@ describe('PlaybackConverter', () => {
           href: 'https://thumbnail',
           templated: true,
         },
+        editThumbnail: {
+          href: 'https://editThumbnail',
+          templated: false,
+        },
         videoPreview: {
           href: 'https://videoPreview',
           templated: true,
@@ -47,6 +51,7 @@ describe('PlaybackConverter', () => {
       createPlaybackEvent: link('https://playback'),
       createPlayerInteractedWithEvent: link('https://player-interaction'),
       thumbnail: link('https://thumbnail', true),
+      editThumbnail: link('https://editThumbnail', false),
       videoPreview: link('https://videoPreview', true),
       hlsStream: link('https://hlsStream'),
       download: link('https://download'),
