@@ -71,16 +71,11 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     id: string,
     updateCaptionsRequest: UpdateCaptionRequest,
   ): Promise<string> {
-    return this.get(id).then(
-      video =>
-        (video &&
-          video.links &&
-          video.links.captions &&
-          this.axios.put(
-            video.links.captions.getOriginalLink(),
-            updateCaptionsRequest,
-          )) ||
-        Promise.reject('Missing update captions link'),
+    const captionsLink = this.getLinkOrThrow('getCaptions');
+
+    return await this.axios.put(
+      expandUrlTemplate(captionsLink.href, { id }),
+      updateCaptionsRequest,
     );
   }
 

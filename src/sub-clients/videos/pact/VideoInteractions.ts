@@ -4,6 +4,7 @@ import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { Link } from '../../common/model/LinkEntity';
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import { VIDEO_SEARCH_URL } from '../../adminLinks/pact/AdminLinksInteractions';
+import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 
 export const getVideo = (id: string): InteractionObject => ({
   state: undefined,
@@ -78,8 +79,29 @@ export const getCaptions = (id: string): InteractionObject => ({
       'Content-Type': 'application/hal+json;charset=UTF-8',
     },
     body: {
-      content: like('some caption content'),
+      content: like(
+        'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
+      ),
     },
+  },
+});
+
+export const updateCaptions = (
+  id: string,
+  updateCaptionRequest: UpdateCaptionRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'PUT captions',
+  withRequest: {
+    method: 'PUT',
+    path: `/v1/videos/${id}/captions`,
+    body: updateCaptionRequest,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+  },
+  willRespondWith: {
+    status: 200,
   },
 });
 

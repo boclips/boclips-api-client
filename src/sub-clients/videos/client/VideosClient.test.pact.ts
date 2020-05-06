@@ -7,6 +7,7 @@ import {
   getCaptions,
   getVideo,
   searchVideo,
+  updateCaptions,
   updateVideo,
 } from '../pact/VideoInteractions';
 import { Link } from '../../common/model/LinkEntity';
@@ -18,13 +19,13 @@ import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import Pageable from '../../common/model/Pageable';
 import { CaptionStatus } from '../model/CaptionStatus';
 import { CaptionContent } from '../model/CaptionContent';
+import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 
 export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
 export const existingVideoWithoutAttachmentsAndBestFor =
   '5d2856277e173c570e69c459';
-export const existingKalturaVideoFromStaging =
-  '5c542ab85438cdbcb56ddceb';
+export const existingKalturaVideoFromStaging = '5c542ab85438cdbcb56ddceb';
 
 describe('VideosClient', () => {
   withClients(
@@ -91,15 +92,17 @@ describe('VideosClient', () => {
 
         if (isATestClient(client)) {
           client.videos.addCaptions(
-              existingKalturaVideoFromStaging,
-            'some caption content',
+            existingKalturaVideoFromStaging,
+            'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
           );
         }
 
         const captionContent: CaptionContent = await client.videos.getCaptions(
-            existingKalturaVideoFromStaging,
+          existingKalturaVideoFromStaging,
         );
-        expect(captionContent.content).toEqual('some caption content');
+        expect(captionContent.content).toEqual(
+          'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
+        );
       });
 
       it(`can update a video`, async () => {
@@ -156,15 +159,49 @@ describe('VideosClient', () => {
 
         if (isATestClient(client)) {
           client.videos.addCaptions(
-              existingKalturaVideoFromStaging,
-            'some caption content',
+            existingKalturaVideoFromStaging,
+            'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
           );
         }
         const results: CaptionContent = await client.videos.getCaptions(
-            existingKalturaVideoFromStaging,
+          existingKalturaVideoFromStaging,
         );
 
-        expect(results.content).toEqual('some caption content');
+        expect(results.content).toEqual(
+          'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
+        );
+      });
+
+      it(`can update a video's captions`, async () => {
+        const updateCaptionRequest: UpdateCaptionRequest = {
+          captions:
+            'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
+        };
+        await provider.addInteraction(
+          updateCaptions(existingKalturaVideoFromStaging, updateCaptionRequest),
+        );
+
+        await provider.addInteraction(
+          getCaptions(existingKalturaVideoFromStaging),
+        );
+
+        if (isATestClient(client)) {
+          client.videos.addCaptions(
+            existingKalturaVideoFromStaging,
+            'some caption content',
+          );
+        }
+        await client.videos.updateCaptions(
+          existingKalturaVideoFromStaging,
+          updateCaptionRequest,
+        );
+        const results: CaptionContent = await client.videos.getCaptions(
+          existingKalturaVideoFromStaging,
+        );
+
+        expect(results.content).toEqual(
+          'WEBVTT\n\n00:00:12.290 --> 00:00:16.090\nId like to talk today about the 2.\n00:00:16.090 --> 00:00:20.520\nBiggest social trends in the coming century and perhaps in',
+        );
       });
 
       it(`can search videos by content partner`, async () => {
