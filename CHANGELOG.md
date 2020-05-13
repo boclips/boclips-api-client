@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- expose `setThumbnail` and `deleteThumbnail` on playbacks
+## [10.4.0] - 2020-05-13
+
+- Add `setThumbnail` and `deleteThumbnail` to `VideoClient`
+- Expose `setThumbnail` and `deleteThumbnail` links on playbacks
 
 ## [10.3.0] - 2020-05-11
 

@@ -16,7 +16,8 @@ export interface VideosClient {
     updateCaptionsRequest: UpdateCaptionRequest,
   ): Promise<string>;
   getCaptions(id: string): Promise<CaptionContent>;
-
+  setThumbnail(video: Video, second: number): Promise<Video>;
+  deleteThumbnail(video: Video): Promise<Video>;
   getVideoProjection(
     video: ProjectedResource,
     projection: keyof ResourceProjection,

@@ -87,4 +87,22 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
 
     return CaptionsConverter.convert(response.data);
   }
+
+  public async deleteThumbnail(video: Video): Promise<Video> {
+    const link = video.playback.links?.deleteThumbnail;
+    if (!link) throw new Error(`Not authorized`);
+
+    const response = await this.axios.delete(link.getOriginalLink());
+    return VideosConverter.convert(response.data);
+  }
+
+  public async setThumbnail(video: Video, second: number): Promise<Video> {
+    const link = video.playback.links?.setThumbnail;
+    if (!link) throw new Error(`Not authorized`);
+
+    const response = await this.axios.patch(
+      link.getTemplatedLink({ thumbnailSecond: second }),
+    );
+    return VideosConverter.convert(response.data);
+  }
 }

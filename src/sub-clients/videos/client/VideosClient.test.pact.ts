@@ -4,9 +4,11 @@ import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { Video } from '../model/Video';
 import {
+  deleteThumbnail,
   getCaptions,
   getVideo,
   searchVideo,
+  setThumbnail,
   updateCaptions,
   updateVideo,
 } from '../pact/VideoInteractions';
@@ -257,6 +259,50 @@ describe('VideosClient', () => {
         expect(results.pageSpec.number).toEqual(0);
         expect(results.pageSpec.size).toEqual(10);
         expect(results.page.length > 0).toBeTruthy();
+      });
+
+      it(`can set up video thumbnail by second`, async () => {
+        const video: Video = {
+          ...testVideo,
+          id: existingKalturaVideoFromStaging,
+        };
+
+        video.playback.links.setThumbnail = new Link({
+          href: `${provider.mockService.baseUrl}/v1/videos/${video.id}/playback{?thumbnailSecond}`,
+          templated: true,
+        });
+
+        await provider.addInteraction(setThumbnail(video.id, 20));
+
+        if (isATestClient(client)) {
+          client.videos.insertVideo(video);
+        }
+
+        const updatedVideo = await client.videos.setThumbnail(video, 20);
+        expect(updatedVideo.playback.links.deleteThumbnail).not.toBeUndefined();
+        expect(updatedVideo.playback.links.setThumbnail).toBeUndefined();
+      });
+
+      it(`can delete video thumbnail`, async () => {
+        const video: Video = {
+          ...testVideo,
+          id: existingKalturaVideoFromStaging,
+        };
+
+        video.playback.links.deleteThumbnail = new Link({
+          href: `${provider.mockService.baseUrl}/v1/videos/${video.id}/playback/thumbnail`,
+          templated: false,
+        });
+
+        await provider.addInteraction(deleteThumbnail(video.id));
+
+        if (isATestClient(client)) {
+          client.videos.insertVideo(video);
+        }
+
+        const updatedVideo = await client.videos.deleteThumbnail(video);
+        expect(updatedVideo.playback.links.deleteThumbnail).toBeUndefined();
+        expect(updatedVideo.playback.links.setThumbnail).not.toBeUndefined();
       });
     },
   );

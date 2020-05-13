@@ -7,6 +7,7 @@ import Pageable from '../../common/model/Pageable';
 import { PageableFactory } from '../../common/model/PageableFactory';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 import { CaptionContent } from '../model/CaptionContent';
+import { Link } from '../../common/model/LinkEntity';
 
 export class FakeVideosClient implements VideosClient, Clearable {
   private videos: Video[] = [];
@@ -40,12 +41,11 @@ export class FakeVideosClient implements VideosClient, Clearable {
     return Promise.resolve(payload);
   }
 
-  public update(
+  public async update(
     id: string,
     updateVideoRequest: UpdateVideoRequest,
   ): Promise<Video> {
-    const videoIndex = this.videos.findIndex(video => video.id === id);
-    if (videoIndex < 0) Promise.reject(`No video found with id: ${id}`);
+    const videoIndex = await this.findVideoIndexById(id);
 
     const {
       title,
@@ -108,5 +108,36 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
   public addCaptions(videoId: string, captionContent: string): void {
     this.videoCaptions.push({ videoId: videoId, content: captionContent });
+  }
+
+  public async deleteThumbnail(video: Video): Promise<Video> {
+    const videoIndex = await this.findVideoIndexById(video.id);
+    this.videos[videoIndex].playback.links = {
+      ...this.videos[videoIndex].playback.links,
+      thumbnail: new Link({ href: 'thumbnailAfterDelete' }),
+      deleteThumbnail: undefined,
+      setThumbnail: new Link({ href: `setThumbnail` }),
+    };
+
+    return Promise.resolve(this.videos[videoIndex]);
+  }
+
+  public async setThumbnail(video: Video, second: number): Promise<Video> {
+    const videoIndex = await this.findVideoIndexById(video.id);
+    this.videos[videoIndex].playback.links = {
+      ...this.videos[videoIndex].playback.links,
+      thumbnail: new Link({ href: `thumbnailAt${second}` }),
+      setThumbnail: undefined,
+      deleteThumbnail: new Link({ href: `deleteThumbnail` }),
+    };
+
+    return Promise.resolve(this.videos[videoIndex]);
+  }
+
+  private findVideoIndexById(id: string): Promise<number> {
+    const videoIndex = this.videos.findIndex(video => video.id === id);
+    return videoIndex < 0
+      ? Promise.reject(`No video found with id: ${id}`)
+      : Promise.resolve(videoIndex);
   }
 }
