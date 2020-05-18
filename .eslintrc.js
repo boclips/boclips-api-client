@@ -22,7 +22,10 @@ module.exports = {
     'no-prototype-builtins': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
-      { ignoreRestSiblings: true },
+      {
+        ignoreRestSiblings: true,
+        "argsIgnorePattern": "^_"
+      },
     ],
   },
   settings: {
