@@ -15,12 +15,15 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
   public trackCollectionInteraction(
     collection: Pick<Collection, 'id' | 'links'>,
     request: CollectionInteractedWithRequest,
+    referer: string | null = null,
   ): Promise<void> {
     const validInteractionLink = collection && collection.links.interactedWith;
     if (!validInteractionLink) {
       throw new Error('Collection interaction link not available');
     }
-    return this.axios.post(validInteractionLink.getOriginalLink(), request);
+    return this.axios.post(validInteractionLink.getOriginalLink(), request, {
+      headers: { 'Boclips-Referer': referer },
+    });
   }
 
   public trackUserExpired(): Promise<void> {

@@ -74,15 +74,17 @@ describe('EventsClient', () => {
           },
         });
 
+        const overwriteReferer = 'http://www.boclips.com';
         if (!isATestClient(client)) {
           await provider.addInteraction(
-            trackCollectionInteraction(collection, request),
+            trackCollectionInteraction(collection, request, overwriteReferer),
           );
         }
 
         await client.events.trackCollectionInteraction(
           { id: collection.id, links: collection.links },
           request,
+          overwriteReferer,
         );
 
         if (isATestClient(client)) {

@@ -40,6 +40,7 @@ export const trackUserExpired = (): InteractionObject => ({
 export const trackCollectionInteraction = (
   collection: Collection,
   request: CollectionInteractedWithRequest,
+  boclipsReferer: string,
 ): InteractionObject => ({
   state: undefined,
   uponReceiving: 'POST CollectionInteractedWith event',
@@ -48,6 +49,7 @@ export const trackCollectionInteraction = (
     path: `/v1/collections/${collection.id}/events`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
+      'Boclips-Referer': boclipsReferer,
     },
     body: {
       subtype: request.subtype,
