@@ -52,7 +52,7 @@ describe('CollectionsClient', () => {
         expect(response?.updatedAt).toEqual(
           new Date('2019-10-21T09:11:19.074Z'),
         );
-        expect(response?.public).toEqual(false);
+        expect(response?.discoverable).toEqual(false);
         expect(response?.mine).toEqual(false);
         expect(response?.createdBy).toEqual('Teacher');
         expect(response?.links).toBeTruthy();
@@ -100,7 +100,7 @@ describe('CollectionsClient', () => {
         const title = 'A title';
         const description = 'Description of collection';
         const videos: string[] = [];
-        const isPublic = true;
+        const discoverable = true;
         const expectedId = 'abc123-id';
 
         if (isATestClient(client)) {
@@ -111,7 +111,7 @@ describe('CollectionsClient', () => {
           title,
           description,
           videos,
-          public: isPublic,
+          discoverable,
         };
 
         await provider.addInteraction(createCollection(request, expectedId));
@@ -123,7 +123,7 @@ describe('CollectionsClient', () => {
           expect(newCollection?.title).toEqual(title);
           expect(newCollection?.description).toEqual(description);
           expect(newCollection?.videos).toEqual(videos);
-          expect(newCollection?.public).toEqual(isPublic);
+          expect(newCollection?.discoverable).toEqual(discoverable);
         }
       });
 

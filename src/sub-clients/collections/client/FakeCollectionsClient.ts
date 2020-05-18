@@ -47,7 +47,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
   }
 
   public create(request: CreateCollectionRequest): Promise<string> {
-    const { title, description, public: isPublic, videos } = request;
+    const { title, description, discoverable, videos } = request;
     const collection = CollectionFactory.sample({
       id: this.nextId,
       title,
@@ -55,7 +55,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
       videos: videos.map(id =>
         VideoWithBoclipsProjectionFactory.sample({ id }),
       ),
-      public: isPublic,
+      discoverable: discoverable,
     });
     this.addToFake(collection);
 
@@ -83,8 +83,8 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
       partialCollection.title = request.title;
     }
 
-    if (request.hasOwnProperty('public')) {
-      partialCollection.public = request.public;
+    if (request.hasOwnProperty('discoverable')) {
+      partialCollection.discoverable = request.discoverable;
     }
 
     if (request.hasOwnProperty('subjects')) {

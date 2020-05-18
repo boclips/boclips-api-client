@@ -35,7 +35,7 @@ export const getCollectionById = (
         generate: '2019-10-21T09:11:19.074Z',
         matcher: CustomMatchers.ISO8601_DATETIME_RELAXED,
       }),
-      public: like(false),
+      discoverable: like(false),
 
       mine: like(false),
       createdBy: like('Teacher'),
@@ -81,7 +81,7 @@ export const getFilteredCollections = (
               generate: '2019-10-21T09:11:19.074Z',
               matcher: CustomMatchers.ISO8601_DATETIME_RELAXED,
             }),
-            public: false,
+            discoverable: false,
             promoted: false,
             mine: false,
             createdBy: 'Teacher',
@@ -136,7 +136,7 @@ export const createCollection = (
       title: request.title,
       description: request.description,
       videos: request.videos,
-      public: request.public,
+      discoverable: request.discoverable,
     },
   },
   willRespondWith: {

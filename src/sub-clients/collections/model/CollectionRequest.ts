@@ -4,12 +4,12 @@ export interface CreateCollectionRequest {
   title?: string;
   description?: string;
   videos: string[];
-  public?: boolean;
+  discoverable?: boolean;
 }
 
 export interface UpdateCollectionRequest {
   title?: string;
-  public?: boolean;
+  discoverable?: boolean;
   promoted?: boolean;
   subjects?: string[];
   description?: string;

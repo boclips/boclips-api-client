@@ -20,7 +20,7 @@ export class CollectionsConverter {
       title: entity.title,
       videos: entity.videos,
       updatedAt: new Date(entity.updatedAt),
-      public: entity.public,
+      discoverable: entity.discoverable,
       promoted: entity.promoted,
       mine: entity.mine,
       createdBy: entity.createdBy,
