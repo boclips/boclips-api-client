@@ -52,6 +52,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       description,
       promoted,
       subjectIds,
+      contentWarningIds,
       ageRangeMin,
       ageRangeMax,
       tagId,
@@ -70,6 +71,9 @@ export class FakeVideosClient implements VideosClient, Clearable {
       subjects: subjectIds
         ? subjectIds.map(id => ({ id, name: `subject${id}` }))
         : originalVideo.subjects,
+      contentWarnings: contentWarningIds
+        ? contentWarningIds.map(id => ({ id, label: `warning${id}` }))
+        : originalVideo.contentWarnings,
       bestFor: [{ label: `tag-${tagId}` }],
     };
 

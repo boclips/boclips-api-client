@@ -196,6 +196,10 @@ export const updateVideo = (
             },
           }),
         ]),
+        contentWarnings: eachLike({
+          id: '5ebeb463cb699d30b550e59b',
+          label: 'Discusses drug or alcohol use',
+        }),
         createdBy: 'BFI',
         _links: like({
           self: {

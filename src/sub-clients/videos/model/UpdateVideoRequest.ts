@@ -5,6 +5,7 @@ export interface UpdateVideoRequest {
   description?: string;
   promoted?: boolean;
   subjectIds?: string[];
+  contentWarningIds?: string[];
   ageRangeMin?: number;
   ageRangeMax?: number;
   tagId?: string;

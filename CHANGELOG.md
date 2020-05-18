@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Add `contentWarnings` subclient, update admin links to get all content warnings
+- Update video request can contain content warnings
 
 ## [10.4.0] - 2020-05-13
 

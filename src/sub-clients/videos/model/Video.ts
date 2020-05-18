@@ -8,6 +8,7 @@ import { Link } from '../../common/model/LinkEntity';
 import { ModelWithLinks } from '../../common/model/common';
 import { Attachment } from '../../common/model/Attachment';
 import { CaptionStatus } from './CaptionStatus';
+import { ContentWarning } from '../../contentWarnings/model/ContentWarning';
 
 export interface Video extends ModelWithLinks {
   id: string;
@@ -42,4 +43,5 @@ export interface Video extends ModelWithLinks {
   contentPartnerVideoId?: string;
   type?: VideoType;
   captionStatus?: CaptionStatus;
+  contentWarnings?: ContentWarning[];
 }

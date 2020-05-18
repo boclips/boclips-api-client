@@ -115,6 +115,7 @@ describe('VideosClient', () => {
             'Subscribe: http://bit.ly/subscribetotheBFI.\nThe first West Indies Test cricket team flees England and loses all three matches.',
           promoted: false,
           subjectIds: ['5cb499c9fd5beb428189454d', '5e73821c9bbfd47e6e7533a4'],
+          contentWarningIds: ['5ebeb463cb699d30b550e59b'],
           ageRangeMin: 3,
           ageRangeMax: 12,
           tagId: '5d3ac0185b3f3b7ba335e105',
@@ -152,6 +153,10 @@ describe('VideosClient', () => {
         expect(updatedVideo.bestFor).toEqual([
           { label: 'tag-5d3ac0185b3f3b7ba335e105' },
         ]);
+        expect(updatedVideo.contentWarnings!!.length).toEqual(1);
+        expect(updatedVideo.contentWarnings!![0].id).toEqual(
+          '5ebeb463cb699d30b550e59b',
+        );
       });
 
       it(`can retrieve a video's captions`, async () => {

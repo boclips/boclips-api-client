@@ -28,7 +28,7 @@ export class VideosConverter {
       contentPartnerVideoId: entity.contentPartnerVideoId,
       type: entity.type,
       attachments: entity.attachments.map(convertAttachment) || [],
-      // 🤷‍♀️
+      contentWarnings: entity.contentWarnings,
       captionStatus: (CaptionStatus as any)[entity.captionStatus] ?? undefined,
     };
   }
