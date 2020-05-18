@@ -39,4 +39,5 @@ export interface AdminLinks {
   ingestVideoStatuses: LinkEntity;
   contractLegalRestrictions: LinkEntity;
   getCaptions: LinkEntity;
+  contentWarnings: LinkEntity;
 }

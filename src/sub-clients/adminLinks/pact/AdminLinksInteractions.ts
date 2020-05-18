@@ -148,6 +148,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/suggestions?query={query}`,
           templated: true,
         }),
+        contentWarnings: like({
+          href: `${provider.mockService.baseUrl}/v1/content-warnings`,
+          templated: false,
+        }),
       },
     },
   },
