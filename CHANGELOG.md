@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `contentWarnings` subclient, update admin links to get all content warnings
 - Update video request can contain content warnings
 
+## [10.4.1] - 2020-05-18
+
+- Add url to collectionInteractedWith event to set boclips-referer as normal referer is unreliable 
+
 ## [10.4.0] - 2020-05-13
 
 - Add `setThumbnail` and `deleteThumbnail` to `VideoClient`
