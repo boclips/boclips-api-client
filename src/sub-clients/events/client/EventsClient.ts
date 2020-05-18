@@ -7,6 +7,7 @@ export interface EventsClient {
   trackCollectionInteraction(
     collection: Pick<Collection, 'id' | 'links'>,
     request: CollectionInteractedWithRequest,
+    referer: string | null,
   ): Promise<void>;
   trackUserExpired(): Promise<void>;
   trackPlatformInteraction(subtype: string): Promise<void>;
