@@ -4,4 +4,5 @@ export interface VideoSearchRequest {
   id?: string[];
   page?: number;
   size?: number;
+  sort_by?: string;
 }
