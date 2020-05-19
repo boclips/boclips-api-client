@@ -17,20 +17,11 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
   private collections: Collection[] = [];
   private nextId: string = '123';
 
-  // todo: group these fake-related methods in some way
-  public addToFake(collection: Collection) {
-    this.collections.push(collection);
-  }
-
-  public setNextIdForFake(id: string) {
-    this.nextId = id;
-  }
-
   public get(id: string): Promise<Collection | null> {
     return Promise.resolve(this.collections.find(c => c.id === id) || null);
   }
 
-  public getAllFiltered(
+  public getCollections(
     filter: CollectionFilter,
   ): Promise<Pageable<Collection>> {
     const fromIndex = filter.page * filter.size;
@@ -44,6 +35,10 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
       },
       page: this.collections.slice(fromIndex, untilIndex),
     });
+  }
+
+  public getMyCollections(_: CollectionFilter): Promise<Pageable<Collection>> {
+    throw Error('Not implemented');
   }
 
   public create(request: CreateCollectionRequest): Promise<string> {
@@ -132,6 +127,15 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
     }
 
     return partialCollection;
+  }
+
+  // todo: group these fake-related methods in some way
+  public addToFake(collection: Collection) {
+    this.collections.push(collection);
+  }
+
+  public setNextIdForFake(id: string) {
+    this.nextId = id;
   }
 
   public clear() {

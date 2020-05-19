@@ -81,7 +81,7 @@ describe('CollectionsClient', () => {
             }),
           );
         }
-        const response: Pageable<Collection> = await client.collections.getAllFiltered(
+        const response: Pageable<Collection> = await client.collections.getCollections(
           {
             page,
             size,

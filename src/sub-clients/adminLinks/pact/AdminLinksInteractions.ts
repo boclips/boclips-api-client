@@ -29,8 +29,12 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/collections`,
           templated: false,
         }),
-        adminCollectionSearch: like({
+        searchCollections: like({
           href: `${provider.mockService.baseUrl}/v1/collections{?query,subject,projection,page,size}`,
+          templated: true,
+        }),
+        myCollections: like({
+          href: `${provider.mockService.baseUrl}/v1/users/{userId}/collections{?query,subject,projection,page,size}`,
           templated: true,
         }),
         jobs: like({

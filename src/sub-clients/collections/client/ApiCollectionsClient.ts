@@ -22,18 +22,33 @@ export class ApiCollectionsClient extends ApiSubClient
       .get<CollectionEntity>(expandUrlTemplate(collectionLink.href, { id }))
       .then(response => CollectionsConverter.convert(response.data));
   }
-
-  public getAllFiltered(
+  public getCollections(
     filter: CollectionFilter,
   ): Promise<Pageable<Collection>> {
     const { query, page, size, projection } = filter;
-    const filteredCollectionsLink = this.getLinkOrThrow(
-      'adminCollectionSearch',
-    );
+    const filteredCollectionsLink = this.getLinkOrThrow('searchCollections');
 
     return this.axios
       .get<PageableEntity<CollectionEntity>>(
         expandUrlTemplate(filteredCollectionsLink.href, {
+          query: query!,
+          page,
+          size,
+          projection,
+        }),
+      )
+      .then(response => CollectionsConverter.convertPage(response.data));
+  }
+
+  public getMyCollections(
+    filter: CollectionFilter,
+  ): Promise<Pageable<Collection>> {
+    const { query, page, size, projection } = filter;
+    const myCollectionsLink = this.getLinkOrThrow('myCollections');
+
+    return this.axios
+      .get<PageableEntity<CollectionEntity>>(
+        expandUrlTemplate(myCollectionsLink.href, {
           query: query!,
           page,
           size,

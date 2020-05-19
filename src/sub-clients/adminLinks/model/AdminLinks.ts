@@ -2,10 +2,11 @@ import { LinkEntity } from '../../common/model/LinkEntity';
 
 export interface AdminLinks {
   collection: LinkEntity;
+  createCollection: LinkEntity;
+  myCollections: LinkEntity;
+  searchCollections: LinkEntity;
   video: LinkEntity;
   searchVideos: LinkEntity;
-  createCollection: LinkEntity;
-  adminCollectionSearch: LinkEntity;
   jobs: LinkEntity;
   jobDetails: LinkEntity;
   orders: LinkEntity;

@@ -7,7 +7,9 @@ import {
 } from '../model/CollectionRequest';
 
 export interface CollectionsClient {
-  getAllFiltered(filter: CollectionFilter): Promise<Pageable<Collection>>;
+  getCollections(filter: CollectionFilter): Promise<Pageable<Collection>>;
+
+  getMyCollections(filter: CollectionFilter): Promise<Pageable<Collection>>;
 
   get(id: string): Promise<Collection | null>;
 
