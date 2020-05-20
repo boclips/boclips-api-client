@@ -1,0 +1,8 @@
+export enum SortKey {
+  RELEASE_DATE = 'RELEASE_DATE',
+  RATING = 'RATING',
+  TITLE_DESC = 'TITLE_DESC',
+  TITLE_ASC = 'TITLE_ASC',
+  RANDOM = 'RANDOM',
+  NOT_SORTED = 'NOT_SORTED',
+}
