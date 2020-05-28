@@ -9,6 +9,7 @@ export interface VideoEntity extends EntityWithLinks {
     type: string;
     id: string;
     duration: string;
+    maxResolutionAvailable: boolean;
     _links: {
       createPlaybackEvent?: {
         href: string;

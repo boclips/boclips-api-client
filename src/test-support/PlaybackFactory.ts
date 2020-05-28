@@ -12,6 +12,7 @@ export class PlaybackFactory {
     type: 'STREAM',
     id: 'playback-id',
     duration: moment.duration(),
+    maxResolutionAvailable: true,
     links: {
       createPlayerInteractedWithEvent: new Link({ href: 'events' }),
       thumbnail: new Link({ href: 'thumbnail' }),

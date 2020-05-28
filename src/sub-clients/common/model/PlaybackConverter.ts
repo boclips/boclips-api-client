@@ -8,6 +8,7 @@ export class PlaybackConverter {
       id: entity.id,
       type: entity.type,
       duration: moment.duration(entity.duration),
+      maxResolutionAvailable: entity.maxResolutionAvailable,
       links: convertLinks(entity),
     };
   }

@@ -6,6 +6,7 @@ export interface Playback extends ModelWithLinks {
   id: string;
   type: 'STREAM' | 'YOUTUBE';
   duration: Duration;
+  maxResolutionAvailable?: boolean;
   links: {
     createPlaybackEvent?: Link;
     createPlayerInteractedWithEvent: any;

@@ -16,6 +16,7 @@ describe('VideosConverter', () => {
       type: 'STREAM',
       id: 'Fj5hU6SoCDA',
       duration: 'PT1M3S',
+      maxResolutionAvailable: true,
       _links: {
         createPlaybackEvent: {
           href: 'https://api.boclips.com/v1/events/playback',
@@ -102,6 +103,7 @@ describe('VideosConverter', () => {
     expect(video.playback).toEqual({
       id: 'Fj5hU6SoCDA',
       type: 'STREAM',
+      maxResolutionAvailable: true,
       duration: moment.duration('PT1M3S'),
       links: {
         createPlaybackEvent: new Link({
