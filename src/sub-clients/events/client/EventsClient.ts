@@ -10,5 +10,5 @@ export interface EventsClient {
     referer: string | null,
   ): Promise<void>;
   trackUserExpired(): Promise<void>;
-  trackPlatformInteraction(subtype: string): Promise<void>;
+  trackPlatformInteraction(subtype: string, anonymous?: boolean): Promise<void>;
 }

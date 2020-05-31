@@ -14,6 +14,7 @@ import {
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
 import {
   collectionID,
+  trackAnonymousPlatformInteraction,
   trackCollectionInteraction,
   trackPageRendered,
   trackPlatformInteraction,
@@ -106,6 +107,27 @@ describe('EventsClient', () => {
           expect(events[0]).toEqual({
             type: 'PLATFORM_INTERACTED_WITH',
             subtype: 'CONTRACT_TEST_CLICK',
+          });
+        }
+      });
+
+      it(`can track anonymous platform interaction events`, async () => {
+        await provider.addInteraction(
+          trackAnonymousPlatformInteraction('CONTRACT_TEST_CLICK'),
+        );
+
+        await client.events.trackPlatformInteraction(
+          'CONTRACT_TEST_CLICK',
+          true,
+        );
+
+        if (isATestClient(client)) {
+          const events = client.events.getEvents();
+          expect(events.length).toEqual(1);
+          expect(events[0]).toEqual({
+            type: 'PLATFORM_INTERACTED_WITH',
+            subtype: 'CONTRACT_TEST_CLICK',
+            anonymous: true,
           });
         }
       });

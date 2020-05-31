@@ -101,7 +101,7 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: false,
         }),
         trackPlatformInteractedWith: like({
-          href: `${provider.mockService.baseUrl}/v1/events/platform-interaction{?subtype}`,
+          href: `${provider.mockService.baseUrl}/v1/events/platform-interaction{?subtype,anonymous}`,
           templated: true,
         }),
         organisations: like({

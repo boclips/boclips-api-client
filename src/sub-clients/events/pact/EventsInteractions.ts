@@ -74,3 +74,18 @@ export const trackPlatformInteraction = (
     status: 201,
   },
 });
+
+export const trackAnonymousPlatformInteraction = (
+  subtype: string,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST AnonymousPlatformInteractedWith event',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/events/platform-interaction`,
+    query: `subtype=${subtype}&anonymous=true`,
+  },
+  willRespondWith: {
+    status: 201,
+  },
+});

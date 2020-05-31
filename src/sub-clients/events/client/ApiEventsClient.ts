@@ -36,13 +36,16 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
     return this.axios.post(trackPageRenderedLink.href);
   }
 
-  public trackPlatformInteraction(subtype: string): Promise<void> {
+  public trackPlatformInteraction(
+    subtype: string,
+    anonymous?: boolean,
+  ): Promise<void> {
     const trackLinkEntity = this.getLinkOrThrow('trackPlatformInteractedWith');
 
     const expandedLink = new Link({
       href: trackLinkEntity.href,
       templated: trackLinkEntity.templated,
-    }).getTemplatedLink({ subtype });
+    }).getTemplatedLink({ subtype, anonymous });
 
     return this.axios.post(expandedLink);
   }
