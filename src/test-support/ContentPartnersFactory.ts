@@ -1,10 +1,10 @@
-import { ContentPartnerResource } from '../sub-clients/contentPartners/resources/ContentPartnerResource';
-import { ContentPartner, Link } from '../types';
+import { ChannelResource } from '../sub-clients/channels/resources/ChannelResource';
+import { Channel, Link } from '../types';
 
-export class ContentPartnerFactory {
-  public static createContentPartnerResource(
-    resource: Partial<ContentPartnerResource> = {},
-  ): ContentPartnerResource {
+export class ChannelFactory {
+  public static createChannelResource(
+    resource: Partial<ChannelResource> = {},
+  ): ChannelResource {
     return {
       id: '123',
       name: 'content partner name',
@@ -15,45 +15,43 @@ export class ContentPartnerFactory {
     };
   }
 
-  public static sample(
-    contentPartner: Partial<ContentPartner> = {},
-  ): ContentPartner {
-    const id = contentPartner.id || '123';
+  public static sample(channel: Partial<Channel> = {}): Channel {
+    const id = channel.id || '123';
     return {
       id,
-      name: contentPartner.name || 'Test name',
-      official: contentPartner.official || true,
-      currency: contentPartner.currency || 'USD',
-      legalRestriction: contentPartner.legalRestriction || {
+      name: channel.name || 'Test name',
+      official: channel.official || true,
+      currency: channel.currency || 'USD',
+      legalRestriction: channel.legalRestriction || {
         id: '2',
         text: 'a legal restriction',
       },
-      ingest: contentPartner.ingest || { type: 'MANUAL' },
-      deliveryFrequency: contentPartner.deliveryFrequency,
-      links: contentPartner.links || {
+      ingest: channel.ingest || { type: 'MANUAL' },
+      deliveryFrequency: channel.deliveryFrequency,
+      links: channel.links || {
         self: new Link({
-          href: `/v1/content-partners/${id}`,
+          href: `/v1/channels/${id}`,
         }),
       },
-      distributionMethods: contentPartner.distributionMethods || ['STREAM'],
-      description: contentPartner.description || 'this is a description',
-      language: contentPartner.language || { code: 'spa', name: 'Spanish' },
-      contentCategories: contentPartner.contentCategories || [
+      distributionMethods: channel.distributionMethods || ['STREAM'],
+      description: channel.description || 'this is a description',
+      language: channel.language || { code: 'spa', name: 'Spanish' },
+      contentCategories: channel.contentCategories || [
         { key: 'ANY_KEY', label: 'Any label' },
       ],
-      awards: contentPartner.awards || 'Big famous award',
-      notes: contentPartner.notes || 'Something noteworthy',
-      hubspotId: contentPartner.hubspotId || '666',
-      contentTypes: contentPartner.contentTypes || ['NEWS', 'STOCK'],
+      awards: channel.awards || 'Big famous award',
+      notes: channel.notes || 'Something noteworthy',
+      hubspotId: channel.hubspotId || '666',
+      contentTypes: channel.contentTypes || ['NEWS', 'STOCK'],
       oneLineDescription:
-        contentPartner.oneLineDescription || '30-year-old mulberry field',
-      marketingInformation: contentPartner.marketingInformation || {
+        channel.oneLineDescription || '30-year-old mulberry field',
+      marketingInformation: channel.marketingInformation || {
         status: 'IN_PROGRESS',
         logos: ['logo1.png', 'logo2.png'],
         showreel: 'showreel.mkv',
         sampleVideos: ['sample1.avi', 'sample2.avi'],
       },
-      pedagogyInformation: contentPartner.pedagogyInformation || {
+      pedagogyInformation: channel.pedagogyInformation || {
         curriculumAligned: '123',
         educationalResources: '456',
         isTranscriptProvided: true,

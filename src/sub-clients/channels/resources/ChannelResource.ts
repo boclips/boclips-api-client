@@ -1,6 +1,6 @@
 import { IngestDetailsResource } from './IngestDetailsResource';
 
-export interface ContentPartnerResource {
+export interface ChannelResource {
   id: string;
   name: string;
   official: boolean;

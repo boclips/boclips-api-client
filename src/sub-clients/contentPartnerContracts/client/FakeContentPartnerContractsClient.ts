@@ -1,6 +1,6 @@
 import { UpdateContractRequest } from './../model/UpdateContractRequest';
 import { Clearable } from '../../common/utils/Clearable';
-import { ContentPartner } from '../../contentPartners/model/ContentPartner';
+import { Channel } from '../../channels/model/Channel';
 import { ContentPartnerContract } from '../model/ContentPartnerContract';
 import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
 import Pageable from '../../common/model/Pageable';
@@ -37,7 +37,7 @@ export class FakeContentPartnerContractsClient
       return Promise.reject();
     }
 
-    const updatedFields: Partial<ContentPartner> = {};
+    const updatedFields: Partial<Channel> = {};
 
     Object.keys(contractUpdate).forEach(key => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore

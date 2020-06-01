@@ -1,11 +1,11 @@
 import { ContentCategories } from '../model/ContentCategories';
-import { ContentPartner } from '../model/ContentPartner';
+import { Channel } from '../model/Channel';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
 
-export interface ContentPartnersClient {
-  get(id: string): Promise<ContentPartner>;
+export interface ChannelsClient {
+  get(id: string): Promise<Channel>;
 
-  getAll(): Promise<ContentPartner[]>;
+  getAll(): Promise<Channel[]>;
 
   update(id: string, contentPartner: ContentPartnerRequest): Promise<void>;
 

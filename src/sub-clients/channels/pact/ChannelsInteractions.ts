@@ -4,25 +4,25 @@ import { provider } from '../../../pact-support/pactSetup';
 
 const { eachLike, like } = Matchers;
 
-export const existingContentPartnerFromStaging = '5cf140c4c1475c47f7178678';
+export const existingChannelFromStaging = '5cf140c4c1475c47f7178678';
 
-const createContentPartnerWithMandatoryFields = (id: string) => ({
+const createChannelWithMandatoryFields = (id: string) => ({
   id: like(id),
   name: 'a name',
   official: true,
   _links: like({
     self: {
-      href: `${provider.mockService.baseUrl}/v1/content-partners/${id}`,
+      href: `${provider.mockService.baseUrl}/v1/channels/${id}`,
     },
   }),
 });
 
-export const getContentPartnersInteraction = (): InteractionObject => ({
+export const getChannelsInteraction = (): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET content partners',
+  uponReceiving: 'GET channels',
   withRequest: {
     method: 'GET',
-    path: '/v1/content-partners',
+    path: '/v1/channels',
   },
   willRespondWith: {
     status: 200,
@@ -31,22 +31,20 @@ export const getContentPartnersInteraction = (): InteractionObject => ({
     },
     body: {
       _embedded: {
-        contentPartners: eachLike(
-          createContentPartnerWithMandatoryFields(
-            existingContentPartnerFromStaging,
-          ),
+        channels: eachLike(
+          createChannelWithMandatoryFields(existingChannelFromStaging),
         ),
       },
     },
   },
 });
 
-export const updateContentPartner = (id: string): InteractionObject => ({
+export const updateChannel = (id: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'PATCH content partner',
+  uponReceiving: 'PATCH channel',
   withRequest: {
     method: 'PATCH',
-    path: `/v1/content-partners/${id}`,
+    path: `/v1/channels/${id}`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
@@ -88,14 +86,12 @@ export const getContentCategories = (): InteractionObject => ({
   },
 });
 
-export const getContentPartnerInteraction = (
-  id: string,
-): InteractionObject => ({
+export const getChannelInteraction = (id: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET content partner',
+  uponReceiving: 'GET channel',
   withRequest: {
     method: 'GET',
-    path: `/v1/content-partners/${id}`,
+    path: `/v1/channels/${id}`,
   },
   /**/
   willRespondWith: {
@@ -104,7 +100,7 @@ export const getContentPartnerInteraction = (
       'Content-Type': 'application/hal+json;charset=UTF-8',
     },
     body: like({
-      ...createContentPartnerWithMandatoryFields(id),
+      ...createChannelWithMandatoryFields(id),
       ...{
         currency: 'USD',
         distributionMethods: eachLike('STREAM', { min: 1 }),
@@ -155,12 +151,12 @@ export const getContentPartnerInteraction = (
   },
 });
 
-export const get404ContentPartner = (id: string): InteractionObject => ({
+export const get404Channel = (id: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET missing content partner',
+  uponReceiving: 'GET missing channel',
   withRequest: {
     method: 'GET',
-    path: `/v1/content-partners/${id}`,
+    path: `/v1/channels/${id}`,
   },
   willRespondWith: {
     status: 404,
@@ -170,7 +166,7 @@ export const get404ContentPartner = (id: string): InteractionObject => ({
     body: like({
       error: 'lol',
       message: "you're awesome",
-      path: `/v1/content-partners/${id}`,
+      path: `/v1/channels/${id}`,
       status: 404,
       timestamp: new Date(Date.parse('01/01/2000')).toUTCString(),
     }),
@@ -179,10 +175,10 @@ export const get404ContentPartner = (id: string): InteractionObject => ({
 
 export const getSignedLink = (filename: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'POST content partners signed upload link',
+  uponReceiving: 'POST channels signed upload link',
   withRequest: {
     method: 'POST',
-    path: `/v1/content-partners/signed-upload-link`,
+    path: `/v1/channels/signed-upload-link`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },

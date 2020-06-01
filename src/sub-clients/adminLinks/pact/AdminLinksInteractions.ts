@@ -58,16 +58,16 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/orders/{id}`,
           templated: false,
         }),
-        contentPartners: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partners{?name,official,accreditedToYtChannelId}`,
+        channels: like({
+          href: `${provider.mockService.baseUrl}/v1/channels{?name,official,accreditedToYtChannelId}`,
           templated: true,
         }),
-        contentPartner: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partners/{id}`,
+        channel: like({
+          href: `${provider.mockService.baseUrl}/v1/channels/{id}`,
           templated: true,
         }),
-        contentPartnersSignedUploadLink: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partners/signed-upload-link`,
+        channelsSignedUploadLink: like({
+          href: `${provider.mockService.baseUrl}/v1/channels/signed-upload-link`,
           templated: false,
         }),
         contentPartnerContracts: like({

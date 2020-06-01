@@ -1,29 +1,23 @@
 import { AxiosResponse } from 'axios';
 import moment from 'moment';
 import { Link } from '../common/model/LinkEntity';
-import { ContentPartner } from './model/ContentPartner';
+import { Channel } from './model/Channel';
 import { IngestDetails } from './model/IngestDetails';
-import { ContentPartnerResource } from './resources/ContentPartnerResource';
+import { ChannelResource } from './resources/ChannelResource';
 import { IngestDetailsResource } from './resources/IngestDetailsResource';
 
-export class ContentPartnersConverter {
-  public static convertEmbeddedResources(
-    response: AxiosResponse,
-  ): ContentPartner[] {
-    return response.data._embedded.contentPartners.map((resource: any) =>
-      ContentPartnersConverter.convertResource(
-        resource as ContentPartnerResource,
-      ),
+export class ChannelsConverter {
+  public static convertEmbeddedResources(response: AxiosResponse): Channel[] {
+    return response.data._embedded.channels.map((resource: any) =>
+      ChannelsConverter.convertResource(resource as ChannelResource),
     );
   }
 
-  public static convertResponse(response: AxiosResponse): ContentPartner {
-    return ContentPartnersConverter.convertResource(response.data);
+  public static convertResponse(response: AxiosResponse): Channel {
+    return ChannelsConverter.convertResource(response.data);
   }
 
-  public static convertResource(
-    resource: ContentPartnerResource,
-  ): ContentPartner {
+  public static convertResource(resource: ChannelResource): Channel {
     const {
       id,
       name,

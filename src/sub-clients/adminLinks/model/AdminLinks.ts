@@ -13,9 +13,9 @@ export interface AdminLinks {
   exportOrders: LinkEntity;
   order: LinkEntity;
   httpFeeds: LinkEntity;
-  contentPartners: LinkEntity;
-  contentPartner: LinkEntity;
-  contentPartnersSignedUploadLink: LinkEntity;
+  channels: LinkEntity;
+  channel: LinkEntity;
+  channelsSignedUploadLink: LinkEntity;
   contentPartnerContract: LinkEntity;
   createContentPartnerContracts: LinkEntity;
   createContentPartnerContractsSignedUploadLink: LinkEntity;

@@ -8,7 +8,7 @@ import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsC
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
 import { ApiContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ApiContentPartnerContractsClient';
 import { ContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ContentPartnerContractsClient';
-import { ApiContentPartnersClient } from './sub-clients/contentPartners/client/ApiContentPartnersClient';
+import { ApiChannelsClient } from './sub-clients/channels/client/ApiChannelsClient';
 import { ApiContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ApiContractLegalRestrictionsClient';
 import { ContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ContractLegalRestrictionsClient';
 import { ApiEduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/ApiEduAgeRangesClient';
@@ -35,7 +35,7 @@ import { ApiContentWarningsClient } from './sub-clients/contentWarnings/client/A
 
 export class ApiBoclipsClient implements BoclipsClient {
   public legalRestrictions: ApiLegalRestrictionsClient;
-  public contentPartners: ApiContentPartnersClient;
+  public channels: ApiChannelsClient;
   public subjects: ApiSubjectsClient;
   public collections: ApiCollectionsClient;
   public orders: ApiOrdersClient;
@@ -56,7 +56,7 @@ export class ApiBoclipsClient implements BoclipsClient {
 
   constructor(axios: AxiosInstance, adminLinks: AdminLinks) {
     this.legalRestrictions = new ApiLegalRestrictionsClient(adminLinks, axios);
-    this.contentPartners = new ApiContentPartnersClient(adminLinks, axios);
+    this.channels = new ApiChannelsClient(adminLinks, axios);
     this.subjects = new ApiSubjectsClient(adminLinks, axios);
     this.collections = new ApiCollectionsClient(adminLinks, axios);
     this.orders = new ApiOrdersClient(adminLinks, axios);

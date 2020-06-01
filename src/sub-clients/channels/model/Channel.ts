@@ -8,7 +8,7 @@ import { Language } from './Language';
 import { MarketingInformation } from './MarketingInformation';
 import { PedagogyInformation } from './PedagogyInformation';
 
-export interface ContentPartner {
+export interface Channel {
   id: string;
   name: string;
   official: boolean;

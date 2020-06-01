@@ -1,15 +1,14 @@
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
-import { ContentPartnersConverter } from '../ContentPartnersConverter';
+import { ChannelsConverter } from '../ChannelsConverter';
 import { ContentCategories } from '../model/ContentCategories';
-import { ContentPartner } from '../model/ContentPartner';
+import { Channel } from '../model/Channel';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
-import { ContentPartnersClient } from './ContentPartnersClient';
+import { ChannelsClient } from './ChannelsClient';
 
-export class ApiContentPartnersClient extends ApiSubClient
-  implements ContentPartnersClient {
+export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
   public async create(request: ContentPartnerRequest): Promise<void> {
-    const contentPartnersLink = this.getLinkOrThrow('contentPartners');
+    const contentPartnersLink = this.getLinkOrThrow('channels');
 
     return this.axios.post(
       expandUrlTemplate(contentPartnersLink.href, {}),
@@ -17,20 +16,20 @@ export class ApiContentPartnersClient extends ApiSubClient
     );
   }
 
-  public async getAll(): Promise<ContentPartner[]> {
-    const contentPartnersLink = this.getLinkOrThrow('contentPartners');
+  public async getAll(): Promise<Channel[]> {
+    const contentPartnersLink = this.getLinkOrThrow('channels');
 
     return this.axios
       .get(expandUrlTemplate(contentPartnersLink.href, {}))
-      .then(ContentPartnersConverter.convertEmbeddedResources);
+      .then(ChannelsConverter.convertEmbeddedResources);
   }
 
-  public async get(id: string): Promise<ContentPartner> {
-    const contentPartnerLink = this.getLinkOrThrow('contentPartner');
+  public async get(id: string): Promise<Channel> {
+    const contentPartnerLink = this.getLinkOrThrow('channel');
 
     return this.axios
       .get(expandUrlTemplate(contentPartnerLink.href, { id }))
-      .then(ContentPartnersConverter.convertResponse);
+      .then(ChannelsConverter.convertResponse);
   }
 
   public async getContentCategories(): Promise<ContentCategories> {
@@ -45,7 +44,7 @@ export class ApiContentPartnersClient extends ApiSubClient
     id: string,
     contentPartner: ContentPartnerRequest,
   ): Promise<void> {
-    const contentPartnerLink = this.getLinkOrThrow('contentPartner');
+    const contentPartnerLink = this.getLinkOrThrow('channel');
 
     await this.axios.patch(
       expandUrlTemplate(contentPartnerLink.href, { id }),
@@ -59,7 +58,7 @@ export class ApiContentPartnersClient extends ApiSubClient
   }
 
   public async getSignedLink(filename: string): Promise<string> {
-    const link = this.getLinkOrThrow('contentPartnersSignedUploadLink').href;
+    const link = this.getLinkOrThrow('channelsSignedUploadLink').href;
     return this.axios
       .post(link, {
         filename,

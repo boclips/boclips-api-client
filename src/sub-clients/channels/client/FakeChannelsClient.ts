@@ -1,15 +1,14 @@
 import moment from 'moment';
-import { ContentPartnerFactory } from '../../../test-support';
+import { ChannelFactory } from '../../../test-support';
 import { BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentCategories, ContentCategory } from '../model/ContentCategories';
-import { ContentPartner } from '../model/ContentPartner';
+import { Channel } from '../model/Channel';
 import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
-import { ContentPartnersClient } from './ContentPartnersClient';
+import { ChannelsClient } from './ChannelsClient';
 
-export class FakeContentPartnersClient
-  implements ContentPartnersClient, Clearable {
-  private contentPartners: ContentPartner[] = [];
+export class FakeChannelsClient implements ChannelsClient, Clearable {
+  private channels: Channel[] = [];
 
   private contentCategories: ContentCategory[] = [
     { key: 'key 1', label: 'label 1' },
@@ -26,7 +25,7 @@ export class FakeContentPartnersClient
       ids: ['early-years'],
     };
 
-    this.contentPartners.push({
+    this.channels.push({
       id,
       name: request.name!,
       official: request.accreditedToYtChannelId == null,
@@ -55,26 +54,26 @@ export class FakeContentPartnersClient
       },
       ingest: { type: 'MANUAL' },
       deliveryFrequency: moment.duration(6, 'months'),
-      links: { self: new Link({ href: `/v1/content-partners/${id}` }) },
+      links: { self: new Link({ href: `/v1/channels/${id}` }) },
     });
 
     return Promise.resolve();
   }
 
-  public insertContentPartnerFixture(contentPartner: Partial<ContentPartner>) {
-    this.contentPartners.push(ContentPartnerFactory.sample(contentPartner));
+  public insertFixture(channel: Partial<Channel>) {
+    this.channels.push(ChannelFactory.sample(channel));
   }
 
   public getContentCategories(): Promise<ContentCategories> {
     return Promise.resolve({ categories: this.contentCategories });
   }
 
-  public getAll(): Promise<ContentPartner[]> {
-    return Promise.resolve(this.contentPartners);
+  public getAll(): Promise<Channel[]> {
+    return Promise.resolve(this.channels);
   }
 
-  public get(id: string): Promise<ContentPartner> {
-    const retrievedContentPartner = this.contentPartners.find(i => i.id === id);
+  public get(id: string): Promise<Channel> {
+    const retrievedContentPartner = this.channels.find(i => i.id === id);
 
     if (retrievedContentPartner != undefined) {
       return Promise.resolve(retrievedContentPartner);
@@ -91,13 +90,13 @@ export class FakeContentPartnersClient
   }
 
   public update(id: string, contentPartner: ContentPartnerRequest) {
-    const index = this.contentPartners.findIndex(i => i.id === id);
+    const index = this.channels.findIndex(i => i.id === id);
 
     if (index < 0) {
       return Promise.reject();
     }
 
-    const updatedFields: Partial<ContentPartner> = {};
+    const updatedFields: Partial<Channel> = {};
 
     Object.keys(contentPartner).forEach(key => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -105,8 +104,8 @@ export class FakeContentPartnersClient
       updatedFields[key] = contentPartner[key];
     });
 
-    this.contentPartners[index] = {
-      ...this.contentPartners[index],
+    this.channels[index] = {
+      ...this.channels[index],
       ...updatedFields,
     };
 
@@ -114,7 +113,7 @@ export class FakeContentPartnersClient
   }
 
   public clear() {
-    this.contentPartners = [];
+    this.channels = [];
   }
 
   public async getSignedLink(filename: string): Promise<string> {
