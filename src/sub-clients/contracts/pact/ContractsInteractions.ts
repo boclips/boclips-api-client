@@ -5,14 +5,13 @@ import {
   term,
 } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
-import { PageRequest } from './../../common/model/PageRequest';
+import { PageRequest } from '../../common/model/PageRequest';
 
 const { like } = Matchers;
 
-export const existingContentPartnerContractFromStaging =
-  '5e7cbc9ddb7790aa17629972';
+export const existingContractFromStaging = '5e7cbc9ddb7790aa17629972';
 
-const createContentPartnerContractWithMandatoryFields = (id: string) => ({
+const createContractWithMandatoryFields = (id: string) => ({
   id: like(id),
   contentPartnerName: 'a name',
   _links: like({
@@ -22,9 +21,7 @@ const createContentPartnerContractWithMandatoryFields = (id: string) => ({
   }),
 });
 
-export const getContentPartnerContractInteraction = (
-  id: string,
-): InteractionObject => ({
+export const getContractInteraction = (id: string): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET a content partner contract',
   withRequest: {
@@ -37,7 +34,7 @@ export const getContentPartnerContractInteraction = (
       'Content-Type': 'application/hal+json;charset=UTF-8',
     },
     body: like({
-      ...createContentPartnerContractWithMandatoryFields(id),
+      ...createContractWithMandatoryFields(id),
       ...{
         contentPartnerName: 'some-name',
         contractDocument: 'http://somedocument.com',
@@ -79,9 +76,7 @@ export const getContentPartnerContractInteraction = (
   },
 });
 
-export const updateContentPartnerContract = (
-  id: string,
-): InteractionObject => ({
+export const updateContract = (id: string): InteractionObject => ({
   state: undefined,
   uponReceiving: 'PATCH contract content partner',
   withRequest: {
@@ -102,7 +97,7 @@ export const updateContentPartnerContract = (
   },
 });
 
-export const getContentPartnerContractsInteraction = (
+export const getContractsInteraction = (
   pageRequest: PageRequest,
 ): InteractionObject => ({
   state: undefined,
@@ -123,7 +118,7 @@ export const getContentPartnerContractsInteraction = (
     body: like({
       _embedded: like({
         contracts: eachLike({
-          ...createContentPartnerContractWithMandatoryFields('123'),
+          ...createContractWithMandatoryFields('123'),
         }),
       }),
       page: like({

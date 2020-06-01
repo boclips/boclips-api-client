@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [11.0.0] - 2020-06-01
 
 - Rename ContentPartnersClient -> ChannelsClient
-- Rename ContentPartner -> Client
+- Rename ContentPartner -> Channel
+- Rename ContentPartnerContractsClient -> ContractsClient
+- Rename ContentPartnerContract -> Contract
 
 ## [10.7.0] - 2020-05-30
 

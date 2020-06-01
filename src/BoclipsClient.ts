@@ -1,6 +1,5 @@
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
-import { ContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ContentPartnerContractsClient';
 import { ChannelsClient } from './sub-clients/channels/client/ChannelsClient';
 import { ContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ContractLegalRestrictionsClient';
 import { EduAgeRangesClient } from './sub-clients/educationalAgeRanges/client/EduAgeRangesClient';
@@ -17,11 +16,12 @@ import { VideoTypesClient } from './sub-clients/videoTypes/client/VideoTypesClie
 import { VideosClient } from './sub-clients/videos/client/VideosClient';
 import { SuggestionsClient } from './sub-clients/suggestions/client/SuggestionsClient';
 import { ContentWarningsClient } from './sub-clients/contentWarnings/client/ContentWarningsClient';
+import { ContractsClient } from './sub-clients/contracts/client/ContractsClient';
 
 export interface BoclipsClient {
   legalRestrictions: LegalRestrictionsClient;
   channels: ChannelsClient;
-  contentPartnerContracts: ContentPartnerContractsClient;
+  contracts: ContractsClient;
   subjects: SubjectsClient;
   collections: CollectionsClient;
   orders: OrdersClient;

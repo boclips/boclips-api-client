@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 
-export interface ContentPartnerContractDates {
+export interface ContractDates {
   start?: Moment;
   end?: Moment;
 }

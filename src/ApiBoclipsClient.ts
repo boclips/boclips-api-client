@@ -6,8 +6,6 @@ import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
 import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestForClients';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
-import { ApiContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ApiContentPartnerContractsClient';
-import { ContentPartnerContractsClient } from './sub-clients/contentPartnerContracts/client/ContentPartnerContractsClient';
 import { ApiChannelsClient } from './sub-clients/channels/client/ApiChannelsClient';
 import { ApiContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ApiContractLegalRestrictionsClient';
 import { ContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ContractLegalRestrictionsClient';
@@ -32,6 +30,8 @@ import { SuggestionsClient } from './sub-clients/suggestions/client/SuggestionsC
 import { ApiSuggestionsClient } from './sub-clients/suggestions/client/ApiSuggestionsClient';
 import { ContentWarningsClient } from './sub-clients/contentWarnings/client/ContentWarningsClient';
 import { ApiContentWarningsClient } from './sub-clients/contentWarnings/client/ApiContentWarningsClient';
+import { ContractsClient } from './sub-clients/contracts/client/ContractsClient';
+import { ApiContractsClient } from './sub-clients/contracts/client/ApiContractsClient';
 
 export class ApiBoclipsClient implements BoclipsClient {
   public legalRestrictions: ApiLegalRestrictionsClient;
@@ -48,7 +48,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public marketingStatuses: MarketingStatusesClient;
   public eduAgeRanges: EduAgeRangesClient;
   public ingestVideoStatuses: ApiIngestVideoStatusesClient;
-  public contentPartnerContracts: ContentPartnerContractsClient;
+  public contracts: ContractsClient;
   public contractLegalRestrictions: ContractLegalRestrictionsClient;
   public videos: VideosClient;
   public suggestions: SuggestionsClient;
@@ -72,10 +72,7 @@ export class ApiBoclipsClient implements BoclipsClient {
       adminLinks,
       axios,
     );
-    this.contentPartnerContracts = new ApiContentPartnerContractsClient(
-      adminLinks,
-      axios,
-    );
+    this.contracts = new ApiContractsClient(adminLinks, axios);
     this.contractLegalRestrictions = new ApiContractLegalRestrictionsClient(
       adminLinks,
       axios,

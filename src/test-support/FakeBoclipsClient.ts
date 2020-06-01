@@ -1,7 +1,6 @@
 import { BoclipsClient } from '../BoclipsClient';
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
 import { Clearable } from '../sub-clients/common/utils/Clearable';
-import { FakeContentPartnerContractsClient } from '../sub-clients/contentPartnerContracts/client/FakeContentPartnerContractsClient';
 import { FakeChannelsClient } from '../sub-clients/channels/client/FakeChannelsClient';
 import { FakeContractLegalRestrictionsClient } from '../sub-clients/contractLegalRestrictions/client/FakeContractLegalRestrictionsClient';
 import { FakeEduAgeRangesClient } from '../sub-clients/educationalAgeRanges/client/FakeEduAgeRangesClient';
@@ -19,11 +18,12 @@ import { FakeIngestVideosClient } from '../sub-clients/ingestVideos/client/FakeI
 import { FakeVideosClient } from '../sub-clients/videos/client/FakeVideosClient';
 import { FakeSuggestionsClient } from '../sub-clients/suggestions/client/FakeSubjectsClient';
 import { FakeContentWarningsClient } from '../sub-clients/contentWarnings/client/FakeContentWarningsClient';
+import { FakeContractsClient } from '../sub-clients/contracts/client/FakeContractsClient';
 
 export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public legalRestrictions: FakeLegalRestrictionsClient = new FakeLegalRestrictionsClient();
   public channels: FakeChannelsClient = new FakeChannelsClient();
-  public contentPartnerContracts: FakeContentPartnerContractsClient = new FakeContentPartnerContractsClient();
+  public contracts: FakeContractsClient = new FakeContractsClient();
   public subjects: FakeSubjectsClient = new FakeSubjectsClient();
   public collections: FakeCollectionsClient = new FakeCollectionsClient();
   public videos: FakeVideosClient = new FakeVideosClient();
@@ -44,7 +44,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public clear() {
     this.legalRestrictions.clear();
     this.channels.clear();
-    this.contentPartnerContracts.clear();
+    this.contracts.clear();
     this.subjects.clear();
     this.collections.clear();
     this.videos.clear();

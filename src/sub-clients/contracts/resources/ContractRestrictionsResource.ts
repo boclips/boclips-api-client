@@ -1,4 +1,4 @@
-export interface ContentPartnerContractRestrictionsResource {
+export interface ContractRestrictionsResource {
   clientFacing: string[];
   territory: string;
   licensing: string;

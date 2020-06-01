@@ -1,11 +1,11 @@
-import { ContentPartnerContractResourceFactory } from '../../test-support/ContentPartnerContractsFactory';
-import { ContentPartnerContractsConverter } from './ContentPartnerContractsConverter';
+import { ContractResourceFactory } from '../../test-support/ContractsFactory';
+import { ContractsConverter } from './ContractsConverter';
 
 describe('converting a content partner contract', () => {
   it('coverts from a resource to a contract and then to a request', () => {
-    const resource = ContentPartnerContractResourceFactory.sample();
-    const request = ContentPartnerContractsConverter.toRequest(
-      ContentPartnerContractsConverter.fromResource(resource),
+    const resource = ContractResourceFactory.sample();
+    const request = ContractsConverter.toRequest(
+      ContractsConverter.fromResource(resource),
     );
 
     expect(request.contentPartnerName).toEqual(resource.contentPartnerName);

@@ -1,9 +1,9 @@
 import moment from 'moment';
-import { ContentPartnerContract } from '../sub-clients/contentPartnerContracts/model/ContentPartnerContract';
-import { ContentPartnerContractResource } from '../sub-clients/contentPartnerContracts/resources/ContentPartnerContractResource';
+import { Contract } from '../types';
+import { ContractResource } from '../sub-clients/contracts/resources/ContractResource';
 
-export class ContentPartnerContractFactory {
-  public static sample(contract: Partial<ContentPartnerContract> = {}) {
+export class ContractFactory {
+  public static sample(contract: Partial<Contract> = {}) {
     return {
       id: 'some-id',
       contentPartnerName: 'some-name',
@@ -43,10 +43,10 @@ export class ContentPartnerContractFactory {
   }
 }
 
-export class ContentPartnerContractResourceFactory {
+export class ContractResourceFactory {
   public static sample(
-    resource: Partial<ContentPartnerContractResource> = {},
-  ): ContentPartnerContractResource {
+    resource: Partial<ContractResource> = {},
+  ): ContractResource {
     return {
       id: 'some-id',
       contentPartnerName: 'some-name',

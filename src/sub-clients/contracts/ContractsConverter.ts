@@ -1,13 +1,11 @@
-import { ContentPartnerContractDates } from './model/ContentPartnerContractDates';
+import { ContractDates } from './model/ContractDates';
 import moment from 'moment';
-import { ContentPartnerContract } from './model/ContentPartnerContract';
-import { ContentPartnerContractRequest } from './requests/ContentPartnerContractRequest';
-import { ContentPartnerContractResource } from './resources/ContentPartnerContractResource';
+import { Contract } from './model/Contract';
+import { ContractRequest } from './requests/ContractRequest';
+import { ContractResource } from './resources/ContractResource';
 
-export class ContentPartnerContractsConverter {
-  public static toRequest(
-    contract: Omit<ContentPartnerContract, 'id'>,
-  ): ContentPartnerContractRequest {
+export class ContractsConverter {
+  public static toRequest(contract: Omit<Contract, 'id'>): ContractRequest {
     const { contractDates, ...rest } = contract;
     const datesRequest = this.formatDates(contractDates);
     return {
@@ -17,7 +15,7 @@ export class ContentPartnerContractsConverter {
   }
 
   public static formatDates(
-    contractDates?: ContentPartnerContractDates,
+    contractDates?: ContractDates,
   ): { start?: string; end?: string } {
     return {
       start: contractDates?.start?.format('YYYY-MM-DD'),
@@ -25,9 +23,7 @@ export class ContentPartnerContractsConverter {
     };
   }
 
-  public static fromResource(
-    resource: ContentPartnerContractResource,
-  ): ContentPartnerContract {
+  public static fromResource(resource: ContractResource): Contract {
     const { contractDates, _links, ...rest } = resource;
     const startDate = contractDates?.start;
     const endDate = contractDates?.end;

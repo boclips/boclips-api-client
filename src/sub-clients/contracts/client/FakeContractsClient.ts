@@ -1,16 +1,15 @@
-import { UpdateContractRequest } from './../model/UpdateContractRequest';
+import { UpdateContractRequest } from '../model/UpdateContractRequest';
 import { Clearable } from '../../common/utils/Clearable';
 import { Channel } from '../../channels/model/Channel';
-import { ContentPartnerContract } from '../model/ContentPartnerContract';
-import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
+import { Contract } from '../model/Contract';
+import { ContractsClient } from './ContractsClient';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
 
-export class FakeContentPartnerContractsClient
-  implements ContentPartnerContractsClient, Clearable {
-  private contracts: ContentPartnerContract[] = [];
+export class FakeContractsClient implements ContractsClient, Clearable {
+  private contracts: Contract[] = [];
 
-  getAll(page: PageRequest): Promise<Pageable<ContentPartnerContract>> {
+  getAll(page: PageRequest): Promise<Pageable<Contract>> {
     return Promise.resolve({
       page: this.contracts,
       pageSpec: {
@@ -53,17 +52,17 @@ export class FakeContentPartnerContractsClient
     return Promise.resolve();
   }
 
-  get(): Promise<ContentPartnerContract> {
+  get(): Promise<Contract> {
     if (this.contracts[0]) {
       return Promise.resolve(this.contracts[0]);
     } else {
       throw new Error(
-        'No content partner contracts have been set on the FakeContentPartnerContractsClient',
+        'No content partner contracts have been set on the FakeContractsClient',
       );
     }
   }
 
-  insertContentPartnerContractFixture(contract: ContentPartnerContract) {
+  insertFixture(contract: Contract) {
     this.contracts = [contract];
   }
 

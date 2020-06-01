@@ -2,21 +2,21 @@ import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
-import { ContentPartnerContractFactory } from '../../../test-support/ContentPartnerContractsFactory';
+import { ContractFactory } from '../../../test-support/ContractsFactory';
 import {
-  existingContentPartnerContractFromStaging,
-  getContentPartnerContractInteraction,
-  getContentPartnerContractsInteraction,
+  existingContractFromStaging,
+  getContractInteraction,
+  getContractsInteraction,
   getSignedLink,
-  updateContentPartnerContract,
-} from '../pact/ContentPartnerContractsInteractions';
+  updateContract,
+} from '../pact/ContractsInteractions';
 import moment = require('moment');
 
-const sampleContract = ContentPartnerContractFactory.sample({
-  id: existingContentPartnerContractFromStaging,
+const sampleContract = ContractFactory.sample({
+  id: existingContractFromStaging,
 });
 
-describe('ContentPartnerContracts', () => {
+describe('Contracts', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
       let client: FakeBoclipsClient | ApiBoclipsClient;
@@ -25,23 +25,19 @@ describe('ContentPartnerContracts', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          client.contentPartnerContracts.insertContentPartnerContractFixture(
-            sampleContract,
-          );
+          client.contracts.insertFixture(sampleContract);
         }
       });
 
-      it('can fetch a content partner contract', async () => {
+      it('can fetch a  contract', async () => {
         await provider.addInteraction(
-          getContentPartnerContractInteraction(
-            existingContentPartnerContractFromStaging,
-          ),
+          getContractInteraction(existingContractFromStaging),
         );
-        const contract = await client.contentPartnerContracts.get(
-          existingContentPartnerContractFromStaging,
+        const contract = await client.contracts.get(
+          existingContractFromStaging,
         );
 
-        expect(contract.id).toEqual(existingContentPartnerContractFromStaging);
+        expect(contract.id).toEqual(existingContractFromStaging);
         expect(contract.contentPartnerName).toEqual(
           sampleContract.contentPartnerName,
         );
@@ -116,13 +112,9 @@ describe('ContentPartnerContracts', () => {
           page: 0,
           size: 1,
         };
-        await provider.addInteraction(
-          getContentPartnerContractsInteraction(pageRequest),
-        );
+        await provider.addInteraction(getContractsInteraction(pageRequest));
 
-        const contracts = await client.contentPartnerContracts.getAll(
-          pageRequest,
-        );
+        const contracts = await client.contracts.getAll(pageRequest);
 
         expect(contracts.page).toHaveLength(1);
         expect(contracts.pageSpec.size).toEqual(1);
@@ -133,29 +125,22 @@ describe('ContentPartnerContracts', () => {
         const filename = 'file.png';
         await provider.addInteraction(getSignedLink(filename));
 
-        const signedLink = await client.contentPartnerContracts.getSignedLink(
-          filename,
-        );
+        const signedLink = await client.contracts.getSignedLink(filename);
 
         expect(typeof signedLink).toEqual('string');
       });
 
       it('can update contract', async () => {
         await provider.addInteraction(
-          updateContentPartnerContract(
-            existingContentPartnerContractFromStaging,
-          ),
+          updateContract(existingContractFromStaging),
         );
 
-        await client.contentPartnerContracts.update(
-          existingContentPartnerContractFromStaging,
-          {
-            contractDates: {
-              start: moment('2012-01-31'),
-              end: moment('2012-02-01'),
-            },
+        await client.contracts.update(existingContractFromStaging, {
+          contractDates: {
+            start: moment('2012-01-31'),
+            end: moment('2012-02-01'),
           },
-        );
+        });
       });
     },
   );

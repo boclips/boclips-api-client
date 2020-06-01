@@ -1,17 +1,17 @@
-import { UpdateContractRequest } from './../model/UpdateContractRequest';
+import { UpdateContractRequest } from '../model/UpdateContractRequest';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
-import { ContentPartnerContractsConverter } from '../ContentPartnerContractsConverter';
-import { ContentPartnerContract } from '../model/ContentPartnerContract';
-import { ContentPartnerContractsClient } from './ContentPartnerContractsClient';
+import { ContractsConverter } from '../ContractsConverter';
+import { Contract } from '../model/Contract';
+import { ContractsClient } from './ContractsClient';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
 import { PageableConverter } from '../../common/model/PageableConverter';
 import { AxiosResponse } from 'axios';
 
-export class ApiContentPartnerContractsClient extends ApiSubClient
-  implements ContentPartnerContractsClient {
-  getAll(page: PageRequest): Promise<Pageable<ContentPartnerContract>> {
+export class ApiContractsClient extends ApiSubClient
+  implements ContractsClient {
+  getAll(page: PageRequest): Promise<Pageable<Contract>> {
     const contentPartnerContractsLink = this.getLinkOrThrow(
       'contentPartnerContracts',
     );
@@ -27,19 +27,19 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
         PageableConverter.convert(
           data,
           'contracts',
-          ContentPartnerContractsConverter.fromResource,
+          ContractsConverter.fromResource,
         ),
       );
   }
 
-  create(contract: Omit<ContentPartnerContract, 'id'>): Promise<void> {
+  create(contract: Omit<Contract, 'id'>): Promise<void> {
     const contentPartnerContractsLink = this.getLinkOrThrow(
       'createContentPartnerContracts',
     );
 
     return this.axios.post(
       expandUrlTemplate(contentPartnerContractsLink.href, {}),
-      ContentPartnerContractsConverter.toRequest(contract),
+      ContractsConverter.toRequest(contract),
     );
   }
 
@@ -53,7 +53,7 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
       expandUrlTemplate(contractLink.href, { id }),
       {
         ...updateRequest,
-        contractDates: ContentPartnerContractsConverter.formatDates(
+        contractDates: ContractsConverter.formatDates(
           updateRequest.contractDates,
         ),
       },
@@ -65,16 +65,14 @@ export class ApiContentPartnerContractsClient extends ApiSubClient
     );
   }
 
-  get(id: string): Promise<ContentPartnerContract> {
+  get(id: string): Promise<Contract> {
     const contentPartnerContractLink = this.getLinkOrThrow(
       'contentPartnerContract',
     );
 
     return this.axios
       .get(expandUrlTemplate(contentPartnerContractLink.href, { id }))
-      .then(response =>
-        ContentPartnerContractsConverter.fromResource(response.data),
-      );
+      .then(response => ContractsConverter.fromResource(response.data));
   }
 
   getSignedLink(filename: string): Promise<string> {
