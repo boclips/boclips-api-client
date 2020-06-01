@@ -4,7 +4,7 @@ import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRest
 import { IngestDetails } from './IngestDetails';
 import { MarketingInformationRequest } from './MarketingInformationRequest';
 
-export interface ContentPartnerRequest {
+export interface ChannelRequest {
   name?: string;
   accreditedToYtChannelId?: string;
   legalRestrictions?: LegalRestrictionRequest;

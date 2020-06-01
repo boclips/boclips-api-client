@@ -3,11 +3,11 @@ import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { ChannelsConverter } from '../ChannelsConverter';
 import { ContentCategories } from '../model/ContentCategories';
 import { Channel } from '../model/Channel';
-import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
+import { ChannelRequest } from '../model/ChannelRequest';
 import { ChannelsClient } from './ChannelsClient';
 
 export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
-  public async create(request: ContentPartnerRequest): Promise<void> {
+  public async create(request: ChannelRequest): Promise<void> {
     const contentPartnersLink = this.getLinkOrThrow('channels');
 
     return this.axios.post(
@@ -42,7 +42,7 @@ export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
 
   public async update(
     id: string,
-    contentPartner: ContentPartnerRequest,
+    contentPartner: ChannelRequest,
   ): Promise<void> {
     const contentPartnerLink = this.getLinkOrThrow('channel');
 

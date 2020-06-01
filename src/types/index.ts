@@ -5,7 +5,7 @@ export { Link } from '../sub-clients/common/model/LinkEntity';
 export { AdminLinks } from '../sub-clients/adminLinks/model/AdminLinks';
 export { Collection } from '../sub-clients/collections/model/Collection';
 export { Channel } from '../sub-clients/channels/model/Channel';
-export { ContentPartnerRequest } from '../sub-clients/channels/model/ContentPartnerRequest';
+export { ChannelRequest as ContentPartnerRequest } from '../sub-clients/channels/model/ChannelRequest';
 export { LegalRestriction } from '../sub-clients/legalRestrictions/model/LegalRestriction';
 export { Subject } from '../sub-clients/subjects/model/Subject';
 export { Order } from '../sub-clients/orders/model/Order';

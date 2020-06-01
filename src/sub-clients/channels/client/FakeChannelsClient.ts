@@ -4,7 +4,7 @@ import { BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
 import { ContentCategories, ContentCategory } from '../model/ContentCategories';
 import { Channel } from '../model/Channel';
-import { ContentPartnerRequest } from '../model/ContentPartnerRequest';
+import { ChannelRequest } from '../model/ChannelRequest';
 import { ChannelsClient } from './ChannelsClient';
 
 export class FakeChannelsClient implements ChannelsClient, Clearable {
@@ -15,7 +15,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
     { key: 'key 2', label: 'label 2' },
   ];
 
-  public create(request: ContentPartnerRequest): Promise<void> {
+  public create(request: ChannelRequest): Promise<void> {
     const id = request.name! + Date.now();
 
     const fakeAgeRangeRequest = {
@@ -89,7 +89,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
     }
   }
 
-  public update(id: string, contentPartner: ContentPartnerRequest) {
+  public update(id: string, contentPartner: ChannelRequest) {
     const index = this.channels.findIndex(i => i.id === id);
 
     if (index < 0) {
