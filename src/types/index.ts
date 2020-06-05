@@ -18,7 +18,7 @@ export {
 } from '../sub-clients/events/model/CollectionInteractedWithRequest';
 export { Organisation } from '../sub-clients/organisations/model/Organisation';
 export { UpdateOrganisationRequest } from '../sub-clients/organisations/model/UpdateOrganisationRequest';
-export { ContentPartner as IngestContentPartner } from '../sub-clients/ingestVideos/model/ContentPartner';
+export { Channel as IngestChannel } from '../sub-clients/ingestVideos/model/Channel';
 export { IngestJob } from '../sub-clients/ingestVideos/model/IngestJob';
 export { IngestVideo } from '../sub-clients/ingestVideos/model/IngestVideo';
 export { BoclipsApiError, isBoclipsApiError } from './BoclipsApiError';

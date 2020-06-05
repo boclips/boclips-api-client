@@ -42,7 +42,7 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: true,
         }),
         ingestVideos: like({
-          href: `${provider.mockService.baseUrl}/v1/ingest-videos{?page,size,content_partner}`,
+          href: `${provider.mockService.baseUrl}/v1/ingest-videos{?page,size,channel}`,
           templated: true,
         }),
         jobDetails: like({

@@ -23,23 +23,18 @@ export class ApiIngestVideosClient extends ApiSubClient
       throw Error('Not authorized to view ingest videos');
     }
 
-    const interpolationParams = {
+    const interpolationParams: any = {
       page: pageRequest.page,
       size: pageRequest.size,
     };
 
-    if (filterRequest && isNotEmpty(filterRequest.contentPartnerName)) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      interpolationParams['content_partner'] = filterRequest.contentPartnerName;
+    if (filterRequest && isNotEmpty(filterRequest.channelName)) {
+      interpolationParams.channel = filterRequest.channelName;
     }
 
     if (filterRequest && filterRequest.statuses) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      interpolationParams['status'] = filterRequest.statuses;
+      interpolationParams.status = filterRequest.statuses;
     }
-
     return this.axios
       .get(expandUrlTemplate(ingestVideosLink.href, interpolationParams))
       .then(
@@ -52,9 +47,9 @@ export class ApiIngestVideosClient extends ApiSubClient
                 id: response.id,
                 title: response.title,
                 ingestJob: { id: response.ingestJob.id },
-                contentPartner: {
-                  id: response.contentPartner.id,
-                  name: response.contentPartner.name,
+                channel: {
+                  id: response.channel.id,
+                  name: response.channel.name,
                 },
                 status: response.status,
                 ingestStartedAt: new Date(response.ingestStartedAt),

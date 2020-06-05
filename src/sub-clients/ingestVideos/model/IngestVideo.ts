@@ -1,4 +1,4 @@
-import { ContentPartner } from './ContentPartner';
+import { Channel } from './Channel';
 import { IngestJob } from './IngestJob';
 
 export interface IngestVideo {
@@ -6,6 +6,6 @@ export interface IngestVideo {
   title: string;
   status: string;
   ingestStartedAt: Date;
-  contentPartner: ContentPartner;
+  channel: Channel;
   ingestJob: IngestJob;
 }

@@ -4,7 +4,7 @@ export class IngestVideosFactory {
   public static sample(video: Partial<IngestVideo> = {}): IngestVideo {
     return {
       id: video.id || '12345678',
-      contentPartner: video.contentPartner || {
+      channel: video.channel || {
         id: '098765',
         name: 'How much wood would a woodchuck chuk',
       },

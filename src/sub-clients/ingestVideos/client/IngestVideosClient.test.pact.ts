@@ -38,11 +38,9 @@ describe('IngestVideosClient', () => {
 
         expect(firstVideo.id).toEqual(ingestVideoFixture.id);
         expect(firstVideo.title).toEqual(ingestVideoFixture.title);
-        expect(firstVideo.contentPartner.id).toEqual(
-          ingestVideoFixture.contentPartner.id,
-        );
-        expect(firstVideo.contentPartner.name).toEqual(
-          ingestVideoFixture.contentPartner.name,
+        expect(firstVideo.channel.id).toEqual(ingestVideoFixture.channel.id);
+        expect(firstVideo.channel.name).toEqual(
+          ingestVideoFixture.channel.name,
         );
         expect(firstVideo.ingestJob.id).toEqual(
           ingestVideoFixture.ingestJob.id,
@@ -58,17 +56,17 @@ describe('IngestVideosClient', () => {
           const fakeClient = client as FakeBoclipsClient;
           fakeClient.ingestVidoes.insertIngestVideoFixture(
             IngestVideosFactory.sample({
-              contentPartner: { id: '1', name: 'AP' },
+              channel: { id: '1', name: 'AP' },
             }),
           );
           fakeClient.ingestVidoes.insertIngestVideoFixture(
             IngestVideosFactory.sample({
-              contentPartner: { id: '2', name: 'AP' },
+              channel: { id: '2', name: 'AP' },
             }),
           );
         }
 
-        const filter = { contentPartnerName: 'AP' };
+        const filter = { channelName: 'AP' };
 
         await provider.addInteraction(
           getFilteredIngestVideosInteraction(filter),
@@ -83,7 +81,7 @@ describe('IngestVideosClient', () => {
         );
 
         filteredIngestVideos.page.forEach(it =>
-          expect(it.contentPartner.name).toBe('AP'),
+          expect(it.channel.name).toBe('AP'),
         );
       });
     },

@@ -3,7 +3,7 @@ import Pageable from '../../common/model/Pageable';
 import { IngestVideo } from '../model/IngestVideo';
 
 export interface IngestVideosFilterRequest {
-  contentPartnerName?: string;
+  channelName?: string;
   statuses?: string[];
 }
 

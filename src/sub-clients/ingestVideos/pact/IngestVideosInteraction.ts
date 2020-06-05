@@ -24,7 +24,7 @@ export const getIngestVideosInteraction = (): InteractionObject => ({
           title: ingestVideoFixture.title,
           status: ingestVideoFixture.status,
           ingestStartedAt: ingestVideoFixture.ingestStartedAt.toISOString(),
-          contentPartner: like({ ...ingestVideoFixture.contentPartner }),
+          channel: like({ ...ingestVideoFixture.channel }),
           ingestJob: like({ ...ingestVideoFixture.ingestJob }),
         }),
       },
@@ -50,8 +50,8 @@ export const getFilteredIngestVideosInteraction = (
   withRequest: {
     method: 'GET',
     path: '/v1/ingest-videos',
-    query: `page=1&size=2&content_partner=${encodeURI(
-      ingestVideosFilterRequest.contentPartnerName!,
+    query: `page=1&size=2&channel=${encodeURI(
+      ingestVideosFilterRequest.channelName!,
     )}`,
   },
   willRespondWith: {
@@ -67,9 +67,9 @@ export const getFilteredIngestVideosInteraction = (
           title: ingestVideoFixture.title,
           status: ingestVideoFixture.status,
           ingestStartedAt: ingestVideoFixture.ingestStartedAt.toISOString(),
-          contentPartner: like({
-            id: ingestVideoFixture.contentPartner.id,
-            name: ingestVideosFilterRequest.contentPartnerName,
+          channel: like({
+            id: ingestVideoFixture.channel.id,
+            name: ingestVideosFilterRequest.channelName,
           }),
           ingestJob: like({ ...ingestVideoFixture.ingestJob }),
         }),
@@ -77,17 +77,17 @@ export const getFilteredIngestVideosInteraction = (
       _links: like({
         self: {
           href: `https://api.staging-boclips.com/v1/ingest-videos?page=1&size=2${encodeURI(
-            ingestVideosFilterRequest.contentPartnerName!,
+            ingestVideosFilterRequest.channelName!,
           )}`,
         },
         next: {
           href: `https://api.staging-boclips.com/v1/ingest-videos?page=2&size=2${encodeURI(
-            ingestVideosFilterRequest.contentPartnerName!,
+            ingestVideosFilterRequest.channelName!,
           )}`,
         },
         prev: {
           href: `https://api.staging-boclips.com/v1/ingest-videos?page=0&size=2${encodeURI(
-            ingestVideosFilterRequest.contentPartnerName!,
+            ingestVideosFilterRequest.channelName!,
           )}`,
         },
       }),
