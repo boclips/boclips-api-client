@@ -11,7 +11,7 @@ export interface OrderItem {
   transcriptRequested: boolean;
   video: OrderItemVideo;
   trim?: string;
-  contentPartner: OrderItemContentPartner;
+  channel: OrderItemChannel;
   license?: OrderItemLicense;
 }
 
@@ -20,7 +20,7 @@ export interface OrderItemLicense {
   territory: string;
 }
 
-export interface OrderItemContentPartner {
+export interface OrderItemChannel {
   id: string;
   name: string;
 }

@@ -52,7 +52,7 @@ export class OrderConverter {
     return items.map((item: any) => {
       const {
         id,
-        contentPartner,
+        channel,
         licenseDuration,
         licenseTerritory,
         price,
@@ -63,7 +63,7 @@ export class OrderConverter {
 
       return {
         id,
-        contentPartner,
+        channel: channel,
         license: { duration: licenseDuration, territory: licenseTerritory },
         price,
         transcriptRequested,

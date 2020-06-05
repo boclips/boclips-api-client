@@ -47,7 +47,7 @@ export class OrderItemFactory {
             }),
           },
         },
-        contentPartner: {
+        channel: {
           id: 'contentPartner-123',
           name: 'contentPartner-name',
         },

@@ -56,7 +56,7 @@ describe('OrdersClient', () => {
                     }),
                   },
                 },
-                contentPartner: {
+                channel: {
                   id: 'content-partner id',
                   name: 'content-partner name',
                 },
@@ -98,7 +98,7 @@ describe('OrdersClient', () => {
         const firstOrderItem = order.items[0];
 
         expect(firstOrderItem.id).toEqual(exisitngOrderItemIdForStaging);
-        expect(firstOrderItem.contentPartner).toEqual({
+        expect(firstOrderItem.channel).toEqual({
           id: 'content-partner id',
           name: 'content-partner name',
         });

@@ -18,7 +18,7 @@ const createOrderItemWithMandatoryFields = (id: string) => ({
       fullProjection: { href: '/v1/vieos/123?projection=full' },
     },
   },
-  contentPartner: like({
+  channel: like({
     name: 'content-partner name',
     id: 'content-partner id',
   }),
