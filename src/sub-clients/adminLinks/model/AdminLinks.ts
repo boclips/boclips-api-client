@@ -16,10 +16,10 @@ export interface AdminLinks {
   channels: LinkEntity;
   channel: LinkEntity;
   channelsSignedUploadLink: LinkEntity;
-  contentPartnerContract: LinkEntity;
-  createContentPartnerContracts: LinkEntity;
-  createContentPartnerContractsSignedUploadLink: LinkEntity;
-  contentPartnerContracts: LinkEntity;
+  contract: LinkEntity;
+  createContracts: LinkEntity;
+  createContractsSignedUploadLink: LinkEntity;
+  contracts: LinkEntity;
   legalRestrictions: LinkEntity;
   youtubeFeeds: LinkEntity;
   createHttpFeed: LinkEntity;

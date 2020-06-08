@@ -12,13 +12,11 @@ import { AxiosResponse } from 'axios';
 export class ApiContractsClient extends ApiSubClient
   implements ContractsClient {
   getAll(page: PageRequest): Promise<Pageable<Contract>> {
-    const contentPartnerContractsLink = this.getLinkOrThrow(
-      'contentPartnerContracts',
-    );
+    const contractsLink = this.getLinkOrThrow('contracts');
 
     return this.axios
       .get(
-        expandUrlTemplate(contentPartnerContractsLink.href, {
+        expandUrlTemplate(contractsLink.href, {
           page: page.page,
           size: page.size,
         }),
@@ -33,12 +31,10 @@ export class ApiContractsClient extends ApiSubClient
   }
 
   create(contract: Omit<Contract, 'id'>): Promise<void> {
-    const contentPartnerContractsLink = this.getLinkOrThrow(
-      'createContentPartnerContracts',
-    );
+    const contractsLink = this.getLinkOrThrow('createContracts');
 
     return this.axios.post(
-      expandUrlTemplate(contentPartnerContractsLink.href, {}),
+      expandUrlTemplate(contractsLink.href, {}),
       ContractsConverter.toRequest(contract),
     );
   }
@@ -47,7 +43,7 @@ export class ApiContractsClient extends ApiSubClient
     id: string,
     updateRequest: UpdateContractRequest,
   ): Promise<void> {
-    const contractLink = this.getLinkOrThrow('contentPartnerContract');
+    const contractLink = this.getLinkOrThrow('contract');
 
     await this.axios.patch(
       expandUrlTemplate(contractLink.href, { id }),
@@ -66,12 +62,10 @@ export class ApiContractsClient extends ApiSubClient
   }
 
   get(id: string): Promise<Contract> {
-    const contentPartnerContractLink = this.getLinkOrThrow(
-      'contentPartnerContract',
-    );
+    const contractLink = this.getLinkOrThrow('contract');
 
     return this.axios
-      .get(expandUrlTemplate(contentPartnerContractLink.href, { id }))
+      .get(expandUrlTemplate(contractLink.href, { id }))
       .then(response => ContractsConverter.fromResource(response.data));
   }
 
@@ -84,9 +78,7 @@ export class ApiContractsClient extends ApiSubClient
       return response;
     });
 
-    const link = this.getLinkOrThrow(
-      'createContentPartnerContractsSignedUploadLink',
-    ).href;
+    const link = this.getLinkOrThrow('createContractsSignedUploadLink').href;
 
     return this.axios
       .post(link, {

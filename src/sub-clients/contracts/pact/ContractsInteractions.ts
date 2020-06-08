@@ -16,17 +16,17 @@ const createContractWithMandatoryFields = (id: string) => ({
   contentPartnerName: 'a name',
   _links: like({
     self: {
-      href: `${provider.mockService.baseUrl}/v1/content-partners-contracts/${id}`,
+      href: `${provider.mockService.baseUrl}/v1/contracts/${id}`,
     },
   }),
 });
 
 export const getContractInteraction = (id: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET a content partner contract',
+  uponReceiving: 'GET a contract',
   withRequest: {
     method: 'GET',
-    path: `/v1/content-partner-contracts/${id}`,
+    path: `/v1/contracts/${id}`,
   },
   willRespondWith: {
     status: 200,
@@ -78,10 +78,10 @@ export const getContractInteraction = (id: string): InteractionObject => ({
 
 export const updateContract = (id: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'PATCH contract content partner',
+  uponReceiving: 'PATCH contract',
   withRequest: {
     method: 'PATCH',
-    path: `/v1/content-partner-contracts/${id}`,
+    path: `/v1/contracts/${id}`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
@@ -101,10 +101,10 @@ export const getContractsInteraction = (
   pageRequest: PageRequest,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'GET all content partner contracts',
+  uponReceiving: 'GET all contracts',
   withRequest: {
     method: 'GET',
-    path: `/v1/content-partner-contracts`,
+    path: `/v1/contracts`,
     query: {
       page: pageRequest.page + '',
       size: pageRequest.size + '',
@@ -133,10 +133,10 @@ export const getContractsInteraction = (
 
 export const getSignedLink = (filename: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'POST content partner contracts signed upload link',
+  uponReceiving: 'POST contracts signed upload link',
   withRequest: {
     method: 'POST',
-    path: `/v1/content-partner-contracts/signed-upload-link`,
+    path: `/v1/contracts/signed-upload-link`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },

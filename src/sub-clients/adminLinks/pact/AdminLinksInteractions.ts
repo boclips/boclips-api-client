@@ -70,20 +70,20 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/channels/signed-upload-link`,
           templated: false,
         }),
-        contentPartnerContracts: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partner-contracts{?size,page}`,
+        contracts: like({
+          href: `${provider.mockService.baseUrl}/v1/contracts{?size,page}`,
           templated: true,
         }),
-        createContentPartnerContracts: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partner-contracts`,
+        createContracts: like({
+          href: `${provider.mockService.baseUrl}/v1/contracts`,
           templated: false,
         }),
-        contentPartnerContract: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partner-contracts/{id}`,
+        contract: like({
+          href: `${provider.mockService.baseUrl}/v1/contracts/{id}`,
           templated: true,
         }),
-        createContentPartnerContractsSignedUploadLink: like({
-          href: `${provider.mockService.baseUrl}/v1/content-partner-contracts/signed-upload-link`,
+        createContractsSignedUploadLink: like({
+          href: `${provider.mockService.baseUrl}/v1/contracts/signed-upload-link`,
           templated: false,
         }),
         legalRestrictions: like({
