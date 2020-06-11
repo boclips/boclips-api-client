@@ -324,6 +324,7 @@ const sampleVideoResponse = (id: string) => ({
   }),
   subjects: eachLike({ id: '5cb499c9fd5beb428189454d', name: 'History' }),
   badges: like(['youtube']),
+  types: eachLike({ id: 1, name: 'INSTRUCTIONAL' }),
   legalRestrictions: like(''),
   bestFor: like([{ label: 'Context builder' }]),
   attachments: like([

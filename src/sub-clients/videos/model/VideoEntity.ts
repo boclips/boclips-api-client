@@ -75,5 +75,5 @@ export interface VideoEntity extends EntityWithLinks {
   contentPartner?: string;
   contentPartnerId?: string;
   contentPartnerVideoId?: string;
-  type?: { id: string; name: string };
+  types?: [{ id: string; name: string }];
 }

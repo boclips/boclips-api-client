@@ -55,6 +55,7 @@ describe('VideosConverter', () => {
     promoted: true,
     language: null,
     captionStatus: 'PROCESSING',
+    types: [{ id: '1', name: 'INSTRUCTIONAL' }],
     attachments: [
       {
         id: 'attachment-id-123',
@@ -176,10 +177,12 @@ describe('VideosConverter', () => {
       contentPartner: 'TED-Ed',
       contentPartnerId: '5cf141cbc1475c47f717870d',
       contentPartnerVideoId: '1805_08_A',
-      type: {
-        id: 3,
-        name: 'Instructional Clips',
-      },
+      types: [
+        {
+          id: 3,
+          name: 'Instructional Clips',
+        },
+      ],
     };
 
     const video = VideosConverter.convert(entityWithBoclipsProjection);
@@ -187,7 +190,7 @@ describe('VideosConverter', () => {
     expect(video.contentPartner).toEqual('TED-Ed');
     expect(video.contentPartnerId).toEqual('5cf141cbc1475c47f717870d');
     expect(video.contentPartnerVideoId).toEqual('1805_08_A');
-    expect(video.type?.id).toEqual(3);
-    expect(video.type?.name).toEqual('Instructional Clips');
+    expect(video.types!![0].id).toEqual(3);
+    expect(video.types!![0].name).toEqual('Instructional Clips');
   });
 });

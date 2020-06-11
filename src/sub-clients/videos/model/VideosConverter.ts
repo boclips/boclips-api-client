@@ -26,7 +26,7 @@ export class VideosConverter {
       contentPartner: entity.contentPartner,
       contentPartnerId: entity.contentPartnerId,
       contentPartnerVideoId: entity.contentPartnerVideoId,
-      type: entity.type,
+      types: entity.types,
       attachments: entity.attachments.map(convertAttachment) || [],
       contentWarnings: entity.contentWarnings,
       captionStatus: (CaptionStatus as any)[entity.captionStatus] ?? undefined,

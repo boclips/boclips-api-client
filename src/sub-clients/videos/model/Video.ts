@@ -41,7 +41,7 @@ export interface Video extends ModelWithLinks {
   contentPartner?: string;
   contentPartnerId?: string;
   contentPartnerVideoId?: string;
-  type?: VideoType;
+  types?: VideoType[];
   captionStatus?: CaptionStatus;
   contentWarnings?: ContentWarning[];
 }

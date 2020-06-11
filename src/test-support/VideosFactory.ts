@@ -46,6 +46,6 @@ export class VideoWithBoclipsProjectionFactory extends VideoFactory {
     contentPartner: 'some content partner',
     contentPartnerId: 'partner-1',
     contentPartnerVideoId: 'video-id',
-    type: { id: 1, name: 'INSTRUCTIONAL' },
+    types: [{ id: 1, name: 'INSTRUCTIONAL' }],
   });
 }
