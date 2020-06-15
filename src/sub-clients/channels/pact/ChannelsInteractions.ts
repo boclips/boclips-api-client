@@ -1,3 +1,4 @@
+import { existingContractFromStaging } from './../../contracts/pact/ContractsInteractions';
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { term } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
@@ -9,7 +10,6 @@ export const existingChannelFromStaging = '5cf140c4c1475c47f7178678';
 const createChannelWithMandatoryFields = (id: string) => ({
   id: like(id),
   name: 'a name',
-  official: true,
   _links: like({
     self: {
       href: `${provider.mockService.baseUrl}/v1/channels/${id}`,
@@ -52,6 +52,7 @@ export const updateChannel = (id: string): InteractionObject => ({
       name: 'TED',
       ageRanges: ['early-years'],
       deliveryFrequency: 'P3M',
+      contractId: existingContractFromStaging,
       ingest: {
         type: 'MRSS',
         urls: ['https://mrss.feed'],

@@ -28,7 +28,6 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
     this.channels.push({
       id,
       name: request.name!,
-      official: request.accreditedToYtChannelId == null,
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods!,

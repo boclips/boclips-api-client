@@ -59,7 +59,7 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: false,
         }),
         channels: like({
-          href: `${provider.mockService.baseUrl}/v1/channels{?name,official,accreditedToYtChannelId}`,
+          href: `${provider.mockService.baseUrl}/v1/channels{?name}`,
           templated: true,
         }),
         channel: like({

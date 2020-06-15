@@ -21,7 +21,6 @@ export class ChannelsConverter {
     const {
       id,
       name,
-      official,
       currency,
       legalRestriction,
       _links,
@@ -45,7 +44,6 @@ export class ChannelsConverter {
     return {
       id,
       name,
-      official,
       currency,
       legalRestriction,
       distributionMethods,

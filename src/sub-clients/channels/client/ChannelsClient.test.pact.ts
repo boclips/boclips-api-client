@@ -1,3 +1,4 @@
+import { existingContractFromStaging } from './../../contracts/pact/ContractsInteractions';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
@@ -31,7 +32,6 @@ describe('ChannelsClient', () => {
             ChannelFactory.sample({
               id: existingChannelFromStaging,
               name: 'a name',
-              official: true,
               ingest: {
                 type: 'MANUAL',
               },
@@ -47,7 +47,6 @@ describe('ChannelsClient', () => {
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual(existingChannelFromStaging);
         expect(response[0].name).toEqual('a name');
-        expect(response[0].official).toEqual(true);
         expect(response[0].links.self.getOriginalLink()).toContain(
           `/v1/channels/${existingChannelFromStaging}`,
         );
@@ -70,7 +69,6 @@ describe('ChannelsClient', () => {
 
         expect(channel.id).toEqual(existingChannelFromStaging);
         expect(channel.name).toEqual('a name');
-        expect(channel.official).toEqual(true);
         expect(channel.currency).toEqual('USD');
         expect(channel.legalRestriction?.id).toEqual('2');
         expect(channel.legalRestriction?.text).toEqual('a legal restriction');
@@ -130,6 +128,7 @@ describe('ChannelsClient', () => {
         await client.channels.update(existingChannelFromStaging, {
           name: 'TED',
           ageRanges: ['early-years'],
+          contractId: existingContractFromStaging,
           ingest: {
             type: 'MRSS',
             urls: ['https://mrss.feed'],

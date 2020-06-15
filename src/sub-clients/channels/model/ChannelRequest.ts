@@ -6,7 +6,6 @@ import { MarketingInformationRequest } from './MarketingInformationRequest';
 
 export interface ChannelRequest {
   name?: string;
-  accreditedToYtChannelId?: string;
   legalRestrictions?: LegalRestrictionRequest;
   ageRanges?: string[];
   distributionMethods?: DistributionMethod[];

@@ -20,7 +20,6 @@ export class ChannelFactory {
     return {
       id,
       name: channel.name || 'Test name',
-      official: channel.official || true,
       currency: channel.currency || 'USD',
       legalRestriction: channel.legalRestriction || {
         id: '2',

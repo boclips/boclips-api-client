@@ -11,7 +11,6 @@ import { PedagogyInformation } from './PedagogyInformation';
 export interface Channel {
   id: string;
   name: string;
-  official: boolean;
   currency?: string;
   legalRestriction?: LegalRestriction;
   distributionMethods: DistributionMethod[];
