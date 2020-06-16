@@ -17,6 +17,7 @@ import { VideosClient } from './sub-clients/videos/client/VideosClient';
 import { SuggestionsClient } from './sub-clients/suggestions/client/SuggestionsClient';
 import { ContentWarningsClient } from './sub-clients/contentWarnings/client/ContentWarningsClient';
 import { ContractsClient } from './sub-clients/contracts/client/ContractsClient';
+import { ShareCodesClient } from './sub-clients/shareCodes/client/ShareCodesClient';
 
 export interface BoclipsClient {
   legalRestrictions: LegalRestrictionsClient;
@@ -38,4 +39,5 @@ export interface BoclipsClient {
   contractLegalRestrictions: ContractLegalRestrictionsClient;
   contentWarnings: ContentWarningsClient;
   suggestions: SuggestionsClient;
+  shareCodes: ShareCodesClient;
 }

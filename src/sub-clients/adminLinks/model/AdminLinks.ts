@@ -41,4 +41,5 @@ export interface AdminLinks {
   contractLegalRestrictions: LinkEntity;
   getCaptions: LinkEntity;
   contentWarnings: LinkEntity;
+  validateShareCode: LinkEntity;
 }

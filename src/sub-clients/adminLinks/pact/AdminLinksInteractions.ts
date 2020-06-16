@@ -156,6 +156,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/content-warnings`,
           templated: false,
         }),
+        validateShareCode: like({
+          href: `${provider.mockService.baseUrl}/v1/users/{id}/shareCode/{shareCode}`,
+          templated: true,
+        }),
       },
     },
   },
