@@ -1,5 +1,4 @@
 import { InteractionObject } from '@pact-foundation/pact';
-import { like } from '@pact-foundation/pact/dsl/matchers';
 
 export const invalidShareCode = (
   id: string,
@@ -13,16 +12,6 @@ export const invalidShareCode = (
   },
   willRespondWith: {
     status: 403,
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    },
-    body: like({
-      error: 'Forbidden',
-      message: 'Request failed',
-      path: `/v1/users/${id}/shareCode/${shareCode}`,
-      status: 404,
-      timestamp: new Date(Date.parse('01/01/2000')).toUTCString(),
-    }),
   },
 });
 
@@ -38,8 +27,5 @@ export const validShareCode = (
   },
   willRespondWith: {
     status: 200,
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    },
   },
 });
