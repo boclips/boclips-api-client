@@ -160,6 +160,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/users/{id}/shareCode/{shareCode}`,
           templated: true,
         }),
+        attachmentTypes: like({
+          href: `${provider.mockService.baseUrl}/v1/attachment-types`,
+          templated: false,
+        }),
       },
     },
   },

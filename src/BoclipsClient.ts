@@ -1,3 +1,4 @@
+import { AttachmentsClient } from './sub-clients/attachments/client/AttachmentsClient';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { CollectionsClient } from './sub-clients/collections/client/CollectionsClient';
 import { ChannelsClient } from './sub-clients/channels/client/ChannelsClient';
@@ -40,4 +41,5 @@ export interface BoclipsClient {
   contentWarnings: ContentWarningsClient;
   suggestions: SuggestionsClient;
   shareCodes: ShareCodesClient;
+  attachments: AttachmentsClient;
 }

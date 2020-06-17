@@ -42,4 +42,5 @@ export interface AdminLinks {
   getCaptions: LinkEntity;
   contentWarnings: LinkEntity;
   validateShareCode: LinkEntity;
+  attachmentTypes: LinkEntity;
 }

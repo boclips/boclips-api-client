@@ -1,4 +1,5 @@
 import { BoclipsClient } from '../BoclipsClient';
+import { FakeAttachmentsClient } from '../sub-clients/attachments/client/FakeAttachmentsClient';
 import { FakeCollectionsClient } from '../sub-clients/collections/client/FakeCollectionsClient';
 import { Clearable } from '../sub-clients/common/utils/Clearable';
 import { FakeChannelsClient } from '../sub-clients/channels/client/FakeChannelsClient';
@@ -42,6 +43,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public suggestions: FakeSuggestionsClient = new FakeSuggestionsClient();
   public contentWarnings: FakeContentWarningsClient = new FakeContentWarningsClient();
   public shareCodes: FakeShareCodesClient = new FakeShareCodesClient();
+  public attachments: FakeAttachmentsClient = new FakeAttachmentsClient();
 
   public clear() {
     this.legalRestrictions.clear();
@@ -63,5 +65,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.suggestions.clear();
     this.contentWarnings.clear();
     this.shareCodes.clear();
+    this.attachments.clear();
   }
 }

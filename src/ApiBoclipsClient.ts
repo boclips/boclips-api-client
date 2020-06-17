@@ -3,6 +3,7 @@ import createAxiosInstanceFrom from './axios/createAxiosInstanceFrom';
 import { BoclipsClient } from './BoclipsClient';
 import { AdminLinksConverter } from './sub-clients/adminLinks/AdminLinksConverter';
 import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
+import { ApiAttachmentsClient } from './sub-clients/attachments/client/ApiAttachmentsClient';
 import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestForClients';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
@@ -55,6 +56,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public suggestions: SuggestionsClient;
   public contentWarnings: ContentWarningsClient;
   public shareCodes: ApiShareCodesClient;
+  public attachments: ApiAttachmentsClient;
 
   constructor(axios: AxiosInstance, adminLinks: AdminLinks) {
     this.legalRestrictions = new ApiLegalRestrictionsClient(adminLinks, axios);
@@ -83,6 +85,7 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.suggestions = new ApiSuggestionsClient(adminLinks, axios);
     this.contentWarnings = new ApiContentWarningsClient(adminLinks, axios);
     this.shareCodes = new ApiShareCodesClient(adminLinks, axios);
+    this.attachments = new ApiAttachmentsClient(adminLinks, axios);
   }
 
   public static create = async (
