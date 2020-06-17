@@ -43,9 +43,9 @@ export class VideoWithBoclipsProjectionFactory extends VideoFactory {
 
   protected static defaultFields = (): Video => ({
     ...VideoFactory.defaultFields(),
-    contentPartner: 'some content partner',
-    contentPartnerId: 'partner-1',
-    contentPartnerVideoId: 'video-id',
+    channel: 'some content partner',
+    channelId: 'partner-1',
+    channelVideoId: 'video-id',
     types: [{ id: 1, name: 'INSTRUCTIONAL' }],
   });
 }

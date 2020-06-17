@@ -174,9 +174,9 @@ describe('VideosConverter', () => {
   it('converts a Video with Boclips projection', () => {
     const entityWithBoclipsProjection = {
       ...baseVideoEntity,
-      contentPartner: 'TED-Ed',
-      contentPartnerId: '5cf141cbc1475c47f717870d',
-      contentPartnerVideoId: '1805_08_A',
+      channel: 'TED-Ed',
+      channelId: '5cf141cbc1475c47f717870d',
+      channelVideoId: '1805_08_A',
       types: [
         {
           id: 3,
@@ -187,9 +187,9 @@ describe('VideosConverter', () => {
 
     const video = VideosConverter.convert(entityWithBoclipsProjection);
 
-    expect(video.contentPartner).toEqual('TED-Ed');
-    expect(video.contentPartnerId).toEqual('5cf141cbc1475c47f717870d');
-    expect(video.contentPartnerVideoId).toEqual('1805_08_A');
+    expect(video.channel).toEqual('TED-Ed');
+    expect(video.channelId).toEqual('5cf141cbc1475c47f717870d');
+    expect(video.channelVideoId).toEqual('1805_08_A');
     expect(video.types!![0].id).toEqual(3);
     expect(video.types!![0].name).toEqual('Instructional Clips');
   });

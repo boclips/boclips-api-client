@@ -226,7 +226,7 @@ describe('VideosClient', () => {
           client.videos.insertVideo({
             ...testVideo,
             id: 'video2',
-            contentPartner: 'TED',
+            channel: 'TED',
           });
         }
 
