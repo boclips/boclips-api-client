@@ -21,6 +21,7 @@ export interface Attachment {
 
 export enum AttachmentType {
   LESSON_PLAN = 'LESSON_PLAN',
+  FINAL_PROJECT = 'FINAL_PROJECT',
   ACTIVITY = 'ACTIVITY',
 }
 

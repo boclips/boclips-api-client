@@ -11,6 +11,12 @@ describe('getAttachmentType', () => {
     );
   });
 
+  it('look up FINAL_PROJECT', () => {
+    expect(getAttachmentType('FINAL_PROJECT')).toEqual(
+      AttachmentType.FINAL_PROJECT,
+    );
+  });
+
   it('look up invalid type', () => {
     expect(() => {
       getAttachmentType('BOO');
