@@ -24,14 +24,14 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
   public getCollections(
     filter: CollectionFilter,
   ): Promise<Pageable<Collection>> {
-    const fromIndex = filter.page * filter.size;
-    const untilIndex = (filter.page + 1) * filter.size;
+    const fromIndex = filter.page! * filter.size!;
+    const untilIndex = (filter.page! + 1) * filter.size!;
     return Promise.resolve({
       pageSpec: {
-        number: filter.page,
-        size: filter.size,
+        number: filter.page!,
+        size: filter.size!,
         totalElements: this.collections.length,
-        totalPages: Math.floor(this.collections.length / filter.size),
+        totalPages: Math.floor(this.collections.length / filter.size!),
       },
       page: this.collections.slice(fromIndex, untilIndex),
     });

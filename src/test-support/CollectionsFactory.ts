@@ -58,12 +58,14 @@ export class PageableCollectionsEntityFactory {
     collections: CollectionEntity[] = [],
   ): PageableEntity<CollectionEntity> {
     const { page, size, projection } = filters;
+    const sizeOrDefault = size ? size : 0;
+    const projectionOrDefault = projection ? projection : 'details';
     return {
       page: {
-        number: page,
-        size,
+        number: page ? page : 0,
+        size: sizeOrDefault,
         totalElements: collections.length,
-        totalPages: Math.floor(collections.length / size),
+        totalPages: Math.floor(collections.length / sizeOrDefault),
       },
       _embedded: { collections },
       _links: {
@@ -82,13 +84,13 @@ export class PageableCollectionsEntityFactory {
         next: {
           href: `/v1/collections?${getFilteredCollectionsQuery(
             filters,
-            projection,
+            projectionOrDefault,
           )}`,
         },
         self: {
           href: `/v1/collections?${getFilteredCollectionsQuery(
             filters,
-            projection,
+            projectionOrDefault,
           )}`,
         },
       },

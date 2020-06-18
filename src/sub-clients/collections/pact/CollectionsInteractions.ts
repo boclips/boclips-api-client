@@ -58,7 +58,10 @@ export const getFilteredCollections = (
     withRequest: {
       method: 'GET',
       path: `/v1/collections`,
-      query: getFilteredCollectionsQuery(filters, projection),
+      query: getFilteredCollectionsQuery(
+        filters,
+        projection ? projection : 'details',
+      ),
     },
     willRespondWith: {
       status: 200,
@@ -111,7 +114,7 @@ export const getFilteredCollections = (
               provider.mockService.baseUrl
             }/v1/collections?${getFilteredCollectionsQuery(
               filters,
-              projection,
+              projection ? projection : 'details',
             )}`,
           },
         }),

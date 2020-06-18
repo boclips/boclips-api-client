@@ -5,6 +5,7 @@ export interface AdminLinks {
   createCollection: LinkEntity;
   myCollections: LinkEntity;
   searchCollections: LinkEntity;
+  searchAllCollections: LinkEntity;
   video: LinkEntity;
   searchVideos: LinkEntity;
   jobs: LinkEntity;
