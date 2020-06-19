@@ -17,7 +17,7 @@ describe('SuggestionsClient', () => {
         if (isATestClient(client)) {
           client.suggestions.populate({
             suggestionTerm: 'ted',
-            contentPartners: [
+            channels: [
               {
                 name: 'Teddy',
                 links: {
@@ -37,7 +37,7 @@ describe('SuggestionsClient', () => {
         );
 
         expect(suggestions.suggestionTerm).toEqual('ted');
-        expect(suggestions.contentPartners.length).toBeGreaterThanOrEqual(1);
+        expect(suggestions.channels.length).toBeGreaterThanOrEqual(1);
       });
     },
   );

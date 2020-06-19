@@ -213,14 +213,13 @@ describe('VideosClient', () => {
 
       it(`can search videos by content partner`, async () => {
         const searchRequest: VideoSearchRequest = {
-          // eslint-disable-next-line @typescript-eslint/camelcase
-          content_partner: ['TED'],
+          channel: ['TED'],
           page: 0,
           size: 10,
         };
 
         await provider.addInteraction(
-          searchVideo(searchRequest, 'filtering by content partner'),
+          searchVideo(searchRequest, 'filtering by channel'),
         );
         if (isATestClient(client)) {
           client.videos.insertVideo({

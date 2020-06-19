@@ -6,7 +6,7 @@ const { like } = Matchers;
 
 export const sampleLink: LinkEntity = { href: 'href', templated: false };
 export const VIDEO_SEARCH_URL =
-  '/v1/videos{?query,id,sort_by,duration,duration_facets,duration_min,duration_max,released_date_from,released_date_to,source,age_range_min,age_range_max,age_range,age_range_facets,size,page,subject,subjects_set_manually,promoted,content_partner,type}';
+  '/v1/videos{?query,id,sort_by,duration,duration_facets,duration_min,duration_max,released_date_from,released_date_to,source,age_range_min,age_range_max,age_range,age_range_facets,size,page,subject,subjects_set_manually,promoted,content_partner,channel,type}';
 export const getAdminLinks = (): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET Admin Links',

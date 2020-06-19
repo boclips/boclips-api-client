@@ -16,7 +16,7 @@ export const getSuggestions = (): InteractionObject => ({
     },
     body: {
       suggestionTerm: 'ted',
-      contentPartners: eachLike({
+      channels: eachLike({
         name: 'TED Talks',
         _links: {
           searchVideos: {

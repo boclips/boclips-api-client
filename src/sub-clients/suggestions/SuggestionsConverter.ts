@@ -1,6 +1,6 @@
 import {
-  ContentPartnerSuggestion,
-  ContentPartnerSuggestionEntity,
+  ChannelSuggestion,
+  ChannelSuggestionEntity,
   Suggestions,
   SuggestionsEntity,
 } from './model/Suggestions';
@@ -10,22 +10,20 @@ export class SuggestionsConverter {
   public static convert(response: SuggestionsEntity): Suggestions {
     return {
       suggestionTerm: response.suggestionTerm,
-      contentPartners: response.contentPartners.map(
-        convertContentPartnerSuggestion,
-      ),
+      channels: response.channels.map(convertChannelSuggestion),
     };
   }
 }
 
-function convertContentPartnerSuggestion(
-  contentPartner: ContentPartnerSuggestionEntity,
-): ContentPartnerSuggestion {
+function convertChannelSuggestion(
+  channel: ChannelSuggestionEntity,
+): ChannelSuggestion {
   return {
-    name: contentPartner.name,
+    name: channel.name,
     links: {
       searchVideos: new Link({
-        href: contentPartner._links.searchVideos.href,
-        templated: contentPartner._links.searchVideos.templated,
+        href: channel._links.searchVideos.href,
+        templated: channel._links.searchVideos.templated,
       }),
     },
   };

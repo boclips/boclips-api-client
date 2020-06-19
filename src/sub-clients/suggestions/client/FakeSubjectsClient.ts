@@ -23,7 +23,7 @@ export class FakeSuggestionsClient implements SuggestionsClient, Clearable {
   private populateDefault(): Suggestions {
     return {
       suggestionTerm: 'ted',
-      contentPartners: [
+      channels: [
         {
           name: 'Ted',
         },

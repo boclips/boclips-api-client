@@ -2,7 +2,7 @@ import { SortKey } from './SortKey';
 
 export interface VideoSearchRequest {
   query?: string;
-  content_partner?: string[];
+  channel?: string[];
   id?: string[];
   page?: number;
   size?: number;

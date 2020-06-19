@@ -3,10 +3,10 @@ import { EntityWithLinks } from '../../common/model/common';
 
 export interface Suggestions {
   suggestionTerm: string;
-  contentPartners: ContentPartnerSuggestion[];
+  channels: ChannelSuggestion[];
 }
 
-export interface ContentPartnerSuggestion {
+export interface ChannelSuggestion {
   name: string;
   links?: {
     searchVideos?: Link;
@@ -15,10 +15,10 @@ export interface ContentPartnerSuggestion {
 
 export interface SuggestionsEntity {
   suggestionTerm: string;
-  contentPartners: ContentPartnerSuggestionEntity[];
+  channels: ChannelSuggestionEntity[];
 }
 
-export interface ContentPartnerSuggestionEntity extends EntityWithLinks {
+export interface ChannelSuggestionEntity extends EntityWithLinks {
   name: string;
   _links: {
     searchVideos: {
