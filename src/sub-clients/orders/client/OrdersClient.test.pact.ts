@@ -16,6 +16,7 @@ import {
   updateOrderCurrency,
   updateOrderItem,
 } from '../pact/OrderInteractions';
+import { OrderCaptionStatus } from '../model/OrderItem';
 
 describe('OrdersClient', () => {
   withClients(
@@ -50,10 +51,16 @@ describe('OrdersClient', () => {
                   type: 'NEWS',
                   title: 'The video title',
                   videoReference: 'The video is a good one',
+                  captionStatus: OrderCaptionStatus.AVAILABLE,
+                  maxResolutionAvailable: false,
                   _links: {
                     fullProjection: new Link({
                       href: '/v1/vieos/123?projection=full',
                     }),
+                    captionAdmin: new Link({
+                      href: 'https://greatcaptionz4u.edu',
+                    }),
+                    videoUpload: new Link({ href: 'https://greatvids4me.io' }),
                   },
                 },
                 channel: {
@@ -107,8 +114,14 @@ describe('OrdersClient', () => {
           type: 'NEWS',
           title: 'The video title',
           videoReference: 'The video is a good one',
+          captionStatus: OrderCaptionStatus.AVAILABLE,
+          maxResolutionAvailable: false,
           _links: {
             fullProjection: new Link({ href: '/v1/vieos/123?projection=full' }),
+            captionAdmin: new Link({
+              href: 'https://greatcaptionz4u.edu',
+            }),
+            videoUpload: new Link({ href: 'https://greatvids4me.io' }),
           },
         });
         expect(firstOrderItem.links.updatePrice.getOriginalLink()).toEqual(

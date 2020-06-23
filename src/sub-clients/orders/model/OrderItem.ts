@@ -25,12 +25,22 @@ export interface OrderItemChannel {
   name: string;
 }
 
+export enum OrderCaptionStatus {
+  PROCESSING,
+  UNAVAILABLE,
+  AVAILABLE,
+}
+
 export interface OrderItemVideo {
   id: string;
   type: string;
   title: string;
   videoReference: string;
+  maxResolutionAvailable: boolean;
+  captionStatus: OrderCaptionStatus;
   _links: {
     fullProjection: Link;
+    videoUpload: Link;
+    captionAdmin: Link;
   };
 }

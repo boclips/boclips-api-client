@@ -1,5 +1,8 @@
 import { Order } from '../sub-clients/orders/model/Order';
-import { OrderItem } from '../sub-clients/orders/model/OrderItem';
+import {
+  OrderItem,
+  OrderCaptionStatus,
+} from '../sub-clients/orders/model/OrderItem';
 import { OrderPrice } from '../sub-clients/orders/model/OrderPrice';
 import { Link } from '../types';
 
@@ -41,8 +44,16 @@ export class OrderItemFactory {
           type: 'NEWS',
           title: 'The video title',
           videoReference: 'The video reference',
+          maxResolutionAvailable: false,
+          captionStatus: OrderCaptionStatus.AVAILABLE,
           _links: {
             fullProjection: new Link({
+              href: '/v1/videos/123?projection=full',
+            }),
+            videoUpload: new Link({
+              href: '/v1/videos/123?projection=full',
+            }),
+            captionAdmin: new Link({
               href: '/v1/videos/123?projection=full',
             }),
           },

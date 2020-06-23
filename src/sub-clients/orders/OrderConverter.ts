@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { Link } from '../../types';
 import { Order } from './model/Order';
-import { OrderItem } from './model/OrderItem';
+import { OrderItem, OrderCaptionStatus } from './model/OrderItem';
 export class OrderConverter {
   public static convertEmbeddedResource(response: AxiosResponse): Order[] {
     return response.data._embedded.orders.map(OrderConverter.convert);
@@ -49,35 +49,40 @@ export class OrderConverter {
     };
   }
   private static orderItemsConverter(items: any): OrderItem[] {
-    return items.map((item: any) => {
-      const {
-        id,
-        channel,
-        licenseDuration,
-        licenseTerritory,
-        price,
-        transcriptRequested,
-        video,
-        _links,
-      } = item;
+    return items.map(
+      (item: any): OrderItem => {
+        const {
+          id,
+          channel,
+          licenseDuration,
+          licenseTerritory,
+          price,
+          transcriptRequested,
+          video,
+          _links,
+        } = item;
 
-      return {
-        id,
-        channel: channel,
-        license: { duration: licenseDuration, territory: licenseTerritory },
-        price,
-        transcriptRequested,
-        video: {
-          ...video,
-          _links: {
-            fullProjection: new Link(video._links.fullProjection),
+        return {
+          id,
+          channel: channel,
+          license: { duration: licenseDuration, territory: licenseTerritory },
+          price,
+          transcriptRequested,
+          video: {
+            ...video,
+            captionStatus: OrderCaptionStatus[video.captionStatus],
+            _links: {
+              fullProjection: new Link(video._links.fullProjection),
+              videoUpload: new Link(video._links.videoUpload),
+              captionAdmin: new Link(video._links.captionAdmin),
+            },
           },
-        },
-        links: {
-          updatePrice: new Link(_links.updatePrice),
-          update: new Link(_links.update),
-        },
-      } as OrderItem;
-    });
+          links: {
+            updatePrice: new Link(_links.updatePrice),
+            update: new Link(_links.update),
+          },
+        };
+      },
+    );
   }
 }

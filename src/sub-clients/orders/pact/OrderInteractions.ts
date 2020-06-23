@@ -14,8 +14,14 @@ const createOrderItemWithMandatoryFields = (id: string) => ({
     type: 'NEWS',
     title: 'The video title',
     videoReference: 'The video is a good one',
+    maxResolutionAvailable: false,
+    captionStatus: 'AVAILABLE',
     _links: {
       fullProjection: { href: '/v1/vieos/123?projection=full' },
+      captionAdmin: {
+        href: 'https://greatcaptionz4u.edu',
+      },
+      videoUpload: { href: 'https://greatvids4me.io' },
     },
   },
   channel: like({
