@@ -27,6 +27,7 @@ export interface OrderItemChannel {
 
 export enum OrderCaptionStatus {
   PROCESSING,
+  REQUESTED,
   UNAVAILABLE,
   AVAILABLE,
 }
