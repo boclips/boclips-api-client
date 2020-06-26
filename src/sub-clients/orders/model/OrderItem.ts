@@ -39,9 +39,11 @@ export interface OrderItemVideo {
   videoReference: string;
   maxResolutionAvailable: boolean;
   captionStatus: OrderCaptionStatus;
-  _links: {
-    fullProjection: Link;
-    videoUpload: Link;
-    captionAdmin: Link;
-  };
+  _links: OrderItemVideoLinks;
+}
+
+export interface OrderItemVideoLinks {
+  fullProjection: Link;
+  videoUpload: Link;
+  captionAdmin: Link;
 }

@@ -1,7 +1,9 @@
+import { OrderItemVideoLinks } from './../sub-clients/orders/model/OrderItem';
 import { Order, OrderStatus } from '../sub-clients/orders/model/Order';
 import {
   OrderItem,
   OrderCaptionStatus,
+  OrderItemVideo,
 } from '../sub-clients/orders/model/OrderItem';
 import { OrderPrice } from '../sub-clients/orders/model/OrderPrice';
 import { Link } from '../types';
@@ -39,25 +41,7 @@ export class OrderItemFactory {
     return {
       ...{
         id: 'order-id',
-        video: {
-          id: '123',
-          type: 'NEWS',
-          title: 'The video title',
-          videoReference: 'The video reference',
-          maxResolutionAvailable: false,
-          captionStatus: OrderCaptionStatus.AVAILABLE,
-          _links: {
-            fullProjection: new Link({
-              href: '/v1/videos/123?projection=full',
-            }),
-            videoUpload: new Link({
-              href: '/v1/videos/123?projection=full',
-            }),
-            captionAdmin: new Link({
-              href: '/v1/videos/123?projection=full',
-            }),
-          },
-        },
+        video: OrderItemFactory.sampleVideo(),
         channel: {
           id: 'contentPartner-123',
           name: 'contentPartner-name',
@@ -76,6 +60,38 @@ export class OrderItemFactory {
         },
       },
       ...item,
+    };
+  }
+
+  public static sampleVideo(
+    video: Partial<OrderItemVideo> = {},
+  ): OrderItemVideo {
+    return {
+      id: '123',
+      type: 'NEWS',
+      title: 'The video title',
+      videoReference: 'The video reference',
+      maxResolutionAvailable: false,
+      captionStatus: OrderCaptionStatus.AVAILABLE,
+      _links: OrderItemFactory.sampleVideoLinks(video._links),
+      ...video,
+    };
+  }
+
+  public static sampleVideoLinks(
+    links: Partial<OrderItemVideoLinks> = {},
+  ): OrderItemVideoLinks {
+    return {
+      fullProjection: new Link({
+        href: '/v1/videos/123?projection=full',
+      }),
+      videoUpload: new Link({
+        href: '/v1/videos/123?projection=full',
+      }),
+      captionAdmin: new Link({
+        href: '/v1/videos/123?projection=full',
+      }),
+      ...links,
     };
   }
 }
