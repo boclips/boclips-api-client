@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [14.3.0] - 2020-06-26
 
 - Add type to Order Status
+- Add more order factories
 
 ## [14.2.0] - 2020-06-26
 
