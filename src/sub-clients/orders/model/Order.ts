@@ -8,7 +8,7 @@ export interface Order {
   updatedAt: Date;
   isbnNumber?: string;
   legacyOrderId: string;
-  status: string;
+  status: OrderStatus;
   throughPlatform?: boolean;
   totalPrice: OrderPrice;
   userDetails: UserDetails;
@@ -17,6 +17,14 @@ export interface Order {
   };
   items: OrderItem[];
   transcriptRequested?: boolean;
+}
+
+export enum OrderStatus {
+  READY,
+  IN_PROGRESS,
+  INCOMPLETED,
+  CANCELLED,
+  INVALID,
 }
 
 interface UserDetails {

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { Link } from '../../types';
-import { Order } from './model/Order';
+import { Order, OrderStatus } from './model/Order';
 import { OrderItem, OrderCaptionStatus } from './model/OrderItem';
 export class OrderConverter {
   public static convertEmbeddedResource(response: AxiosResponse): Order[] {
@@ -32,7 +32,7 @@ export class OrderConverter {
       createdAt: new Date(createdAt),
       updatedAt: new Date(updatedAt),
       totalPrice,
-      status,
+      status: OrderStatus[status as keyof typeof OrderStatus],
       userDetails: {
         authorisingUser: userDetails.authorisingUserLabel,
         requestingUser: userDetails.requestingUserLabel,

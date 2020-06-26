@@ -1,4 +1,4 @@
-import { Order } from '../sub-clients/orders/model/Order';
+import { Order, OrderStatus } from '../sub-clients/orders/model/Order';
 import {
   OrderItem,
   OrderCaptionStatus,
@@ -16,7 +16,7 @@ export class OrdersFactory {
         updatedAt: new Date(),
         isbnNumber: '123',
         legacyOrderId: 'legacy-order-id',
-        status: 'COMPLETED',
+        status: OrderStatus.READY,
         throughPlatform: true,
         totalPrice: OrderPriceFactory.sample(),
         userDetails: {

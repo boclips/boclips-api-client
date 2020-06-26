@@ -7,7 +7,7 @@ import {
   OrderItemFactory,
 } from '../../../test-support';
 import { Link } from '../../../types';
-import { Order } from '../model/Order';
+import { Order, OrderStatus } from '../model/Order';
 import {
   exisitngOrderItemIdForStaging,
   existingOrderIdFromStaging,
@@ -32,7 +32,7 @@ describe('OrdersClient', () => {
             id: existingOrderIdFromStaging,
             createdAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)),
             updatedAt: new Date(Date.UTC(2020, 1, 2, 3, 4, 5)),
-            status: 'COMPLETED',
+            status: OrderStatus.READY,
             userDetails: {
               authorisingUser: 'Authoriser Dobinson <authoriser@gmail.com>',
               requestingUser: 'Requestor Sharma <requestor@gmail.com>',
@@ -92,7 +92,7 @@ describe('OrdersClient', () => {
           'Sun, 02 Feb 2020 03:04:05 GMT',
         );
         expect(order.legacyOrderId).toEqual('legacy-order-id');
-        expect(order.status).toEqual('COMPLETED');
+        expect(order.status).toEqual(OrderStatus.READY);
         expect(order.totalPrice.displayValue).toEqual('USD 123');
         expect(order.totalPrice.value).toEqual(123);
         expect(order.userDetails).toEqual({
