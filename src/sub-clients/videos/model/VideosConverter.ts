@@ -10,6 +10,7 @@ export class VideosConverter {
       id: entity.id,
       title: entity.title,
       description: entity.description,
+      additionalDescription: entity.additionalDescription,
       releasedOn: new Date(entity.releasedOn),
       playback: PlaybackConverter.convert(entity.playback),
       subjects: entity.subjects,

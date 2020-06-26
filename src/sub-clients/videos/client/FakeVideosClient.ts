@@ -50,6 +50,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
     const {
       title,
       description,
+      additionalDescription,
       promoted,
       subjectIds,
       contentWarningIds,
@@ -63,6 +64,9 @@ export class FakeVideosClient implements VideosClient, Clearable {
       ...originalVideo,
       title: title ? title : originalVideo.title,
       description: description ? description : originalVideo.description,
+      additionalDescription: additionalDescription
+        ? additionalDescription
+        : originalVideo.additionalDescription,
       promoted: promoted !== undefined ? promoted : originalVideo.promoted,
       ageRange:
         ageRangeMin || ageRangeMax

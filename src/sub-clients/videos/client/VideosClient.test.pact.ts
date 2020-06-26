@@ -316,6 +316,7 @@ const testVideo: Video = {
   id: existingVideoWithAttachmentAndBestForFromStaging,
   title: 'Test Video',
   description: 'Test description',
+  additionalDescription: undefined,
   releasedOn: new Date('2020-02-03T23:11:19.074Z'),
   playback: {
     type: 'YOUTUBE',

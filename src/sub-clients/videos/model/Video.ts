@@ -14,6 +14,7 @@ export interface Video extends ModelWithLinks {
   id: string;
   title: string;
   description: string;
+  additionalDescription?: string;
   releasedOn: Date;
   playback: Playback;
   subjects: Subject[];
