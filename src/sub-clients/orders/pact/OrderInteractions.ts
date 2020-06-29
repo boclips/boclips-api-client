@@ -11,7 +11,7 @@ const createOrderItemWithMandatoryFields = (id: string) => ({
   id,
   video: {
     id: '123',
-    type: 'NEWS',
+    types: ['NEWS'],
     title: 'The video title',
     videoReference: 'The video is a good one',
     maxResolutionAvailable: false,

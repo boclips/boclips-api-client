@@ -48,7 +48,7 @@ describe('OrdersClient', () => {
                 id: exisitngOrderItemIdForStaging,
                 video: {
                   id: '123',
-                  type: 'NEWS',
+                  types: ['NEWS'],
                   title: 'The video title',
                   videoReference: 'The video is a good one',
                   captionStatus: OrderCaptionStatus.AVAILABLE,
@@ -111,7 +111,7 @@ describe('OrdersClient', () => {
         });
         expect(firstOrderItem.video).toEqual({
           id: '123',
-          type: 'NEWS',
+          types: ['NEWS'],
           title: 'The video title',
           videoReference: 'The video is a good one',
           captionStatus: OrderCaptionStatus.AVAILABLE,

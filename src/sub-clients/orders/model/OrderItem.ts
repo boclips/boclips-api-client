@@ -34,7 +34,7 @@ export enum OrderCaptionStatus {
 
 export interface OrderItemVideo {
   id: string;
-  type: string;
+  types: string[];
   title: string;
   videoReference: string;
   maxResolutionAvailable: boolean;

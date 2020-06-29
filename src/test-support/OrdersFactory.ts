@@ -68,7 +68,7 @@ export class OrderItemFactory {
   ): OrderItemVideo {
     return {
       id: '123',
-      type: 'NEWS',
+      types: ['NEWS'],
       title: 'The video title',
       videoReference: 'The video reference',
       maxResolutionAvailable: false,
