@@ -283,7 +283,6 @@ export const searchVideo = (
             }),
             badges: like(['youtube']),
             legalRestrictions: like(''),
-            bestFor: eachLike({ label: 'blue' }),
             attachments: like([]),
             createdBy: like('BFI'),
             _links: like({
