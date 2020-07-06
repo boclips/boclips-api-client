@@ -8,7 +8,7 @@ import {
   getCaptions,
   getVideo,
   searchVideo,
-  setThumbnail,
+  setThumbnailBySecond,
   updateCaptions,
   updateVideo,
 } from '../pact/VideoInteractions';
@@ -271,20 +271,20 @@ describe('VideosClient', () => {
           id: existingKalturaVideoFromStaging,
         };
 
-        video.playback.links.setThumbnail = new Link({
+        video.playback.links.setThumbnailBySecond = new Link({
           href: `${provider.mockService.baseUrl}/v1/videos/${video.id}/playback{?thumbnailSecond}`,
           templated: true,
         });
 
-        await provider.addInteraction(setThumbnail(video.id, 20));
+        await provider.addInteraction(setThumbnailBySecond(video.id, 20));
 
         if (isATestClient(client)) {
           client.videos.insertVideo(video);
         }
 
-        const updatedVideo = await client.videos.setThumbnail(video, 20);
+        const updatedVideo = await client.videos.setThumbnailBySecond(video, 20);
         expect(updatedVideo.playback.links.deleteThumbnail).not.toBeUndefined();
-        expect(updatedVideo.playback.links.setThumbnail).toBeUndefined();
+        expect(updatedVideo.playback.links.setThumbnailBySecond).toBeUndefined();
       });
 
       it(`can delete video thumbnail`, async () => {
@@ -306,7 +306,7 @@ describe('VideosClient', () => {
 
         const updatedVideo = await client.videos.deleteThumbnail(video);
         expect(updatedVideo.playback.links.deleteThumbnail).toBeUndefined();
-        expect(updatedVideo.playback.links.setThumbnail).not.toBeUndefined();
+        expect(updatedVideo.playback.links.setThumbnailBySecond).not.toBeUndefined();
       });
     },
   );

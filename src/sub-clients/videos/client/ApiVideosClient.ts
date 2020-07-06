@@ -96,8 +96,8 @@ export class ApiVideosClient extends ApiSubClient implements VideosClient {
     return VideosConverter.convert(response.data);
   }
 
-  public async setThumbnail(video: Video, second: number): Promise<Video> {
-    const link = video.playback.links?.setThumbnail;
+  public async setThumbnailBySecond(video: Video, second: number): Promise<Video> {
+    const link = video.playback.links?.setThumbnailBySecond;
     if (!link) throw new Error(`Not authorized`);
 
     const response = await this.axios.patch(

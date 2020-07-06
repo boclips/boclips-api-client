@@ -61,7 +61,7 @@ export const updateCaptions = (
   },
 });
 
-export const setThumbnail = (id: string, second: number): InteractionObject => {
+export const setThumbnailBySecond = (id: string, second: number): InteractionObject => {
   return {
     state: undefined,
     uponReceiving: 'PATCH thumbnail',
@@ -105,8 +105,8 @@ export const deleteThumbnail = (id: string): InteractionObject => {
         playback: like({
           _links: {
             thumbnail: { href: 'https://thumbnail', templated: true },
-            setThumbnail: {
-              href: 'https://setThumbnail',
+            setThumbnailBySecond: {
+              href: 'https://setThumbnailBySecond',
               templated: true,
             },
           },
