@@ -61,7 +61,10 @@ export const updateCaptions = (
   },
 });
 
-export const setThumbnailBySecond = (id: string, second: number): InteractionObject => {
+export const setThumbnailBySecond = (
+  id: string,
+  second: number,
+): InteractionObject => {
   return {
     state: undefined,
     uponReceiving: 'PATCH thumbnail',

@@ -26,6 +26,10 @@ describe('PlaybackConverter', () => {
           href: 'https://setThumbnailBySecond',
           templated: true,
         },
+        setCustomThumbnail: {
+          href: 'https://setCustomThumbnail',
+          templated: true,
+        },
         deleteThumbnail: {
           href: 'https://deleteThumbnail',
           templated: false,
@@ -56,6 +60,7 @@ describe('PlaybackConverter', () => {
       createPlayerInteractedWithEvent: link('https://player-interaction'),
       thumbnail: link('https://thumbnail', true),
       setThumbnailBySecond: link('https://setThumbnailBySecond', true),
+      setCustomThumbnail: link('https://setCustomThumbnail', true),
       deleteThumbnail: link('https://deleteThumbnail', false),
       videoPreview: link('https://videoPreview', true),
       hlsStream: link('https://hlsStream'),

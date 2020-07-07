@@ -13,6 +13,7 @@ export interface Playback extends ModelWithLinks {
     download?: Link;
     thumbnail: Link;
     setThumbnailBySecond?: Link;
+    setCustomThumbnail?: Link;
     deleteThumbnail?: Link;
     videoPreview?: Link;
     hlsStream?: Link;

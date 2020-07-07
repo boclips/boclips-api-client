@@ -130,11 +130,26 @@ export class FakeVideosClient implements VideosClient, Clearable {
     return Promise.resolve(this.videos[videoIndex]);
   }
 
-  public async setThumbnailBySecond(video: Video, second: number): Promise<Video> {
+  public async setThumbnailBySecond(
+    video: Video,
+    second: number,
+  ): Promise<Video> {
     const videoIndex = await this.findVideoIndexById(video.id);
     this.videos[videoIndex].playback.links = {
       ...this.videos[videoIndex].playback.links,
       thumbnail: new Link({ href: `thumbnailAt${second}` }),
+      setThumbnailBySecond: undefined,
+      deleteThumbnail: new Link({ href: `deleteThumbnail` }),
+    };
+
+    return Promise.resolve(this.videos[videoIndex]);
+  }
+
+  public async setCustomThumbnail(video: Video, file: File): Promise<Video> {
+    const videoIndex = await this.findVideoIndexById(video.id);
+    this.videos[videoIndex].playback.links = {
+      ...this.videos[videoIndex].playback.links,
+      thumbnail: new Link({ href: `defaultThumbnail_${file.name}` }),
       setThumbnailBySecond: undefined,
       deleteThumbnail: new Link({ href: `deleteThumbnail` }),
     };

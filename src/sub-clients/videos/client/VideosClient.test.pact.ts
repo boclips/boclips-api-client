@@ -282,9 +282,14 @@ describe('VideosClient', () => {
           client.videos.insertVideo(video);
         }
 
-        const updatedVideo = await client.videos.setThumbnailBySecond(video, 20);
+        const updatedVideo = await client.videos.setThumbnailBySecond(
+          video,
+          20,
+        );
         expect(updatedVideo.playback.links.deleteThumbnail).not.toBeUndefined();
-        expect(updatedVideo.playback.links.setThumbnailBySecond).toBeUndefined();
+        expect(
+          updatedVideo.playback.links.setThumbnailBySecond,
+        ).toBeUndefined();
       });
 
       it(`can delete video thumbnail`, async () => {
@@ -306,7 +311,9 @@ describe('VideosClient', () => {
 
         const updatedVideo = await client.videos.deleteThumbnail(video);
         expect(updatedVideo.playback.links.deleteThumbnail).toBeUndefined();
-        expect(updatedVideo.playback.links.setThumbnailBySecond).not.toBeUndefined();
+        expect(
+          updatedVideo.playback.links.setThumbnailBySecond,
+        ).not.toBeUndefined();
       });
     },
   );
