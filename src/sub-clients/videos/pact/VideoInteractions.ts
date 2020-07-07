@@ -261,6 +261,12 @@ export const searchVideo = (
           totalPages: like(0),
         },
         _embedded: like({
+          facets: like({
+            subjects: {},
+            ageRanges: {},
+            durations: {},
+            resourceTypes: {},
+          }),
           videos: eachLike({
             id: like('id'),
             title: like('Test Video'),

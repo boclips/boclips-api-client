@@ -1,9 +1,10 @@
+import { VideoFacets } from '../model/VideoFacets';
+import { VideoSearchResults } from '../model/VideoSearchResults';
 import { VideosClient } from './VideosClient';
 import { Video } from '../model/Video';
 import { Clearable } from '../../common/utils/Clearable';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
-import Pageable from '../../common/model/Pageable';
 import { PageableFactory } from '../../common/model/PageableFactory';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 import { CaptionContent } from '../model/CaptionContent';
@@ -22,7 +23,9 @@ export class FakeVideosClient implements VideosClient, Clearable {
     return Promise.resolve(this.videos[0]);
   }
 
-  public search(searchRequest: VideoSearchRequest): Promise<Pageable<Video>> {
+  public search(
+    searchRequest: VideoSearchRequest,
+  ): Promise<VideoSearchResults> {
     const matchingVideos = this.videos.filter(video => {
       const matchedContentPartner = searchRequest.channel?.find(
         contentPartnerName => contentPartnerName === video.channel,
@@ -33,12 +36,42 @@ export class FakeVideosClient implements VideosClient, Clearable {
       return matchedContentPartner || matchedId;
     });
 
-    const payload = PageableFactory.sample<Video>(matchingVideos, {
+    const pageableVideos = PageableFactory.sample<Video>(matchingVideos, {
       number: searchRequest.page,
       size: searchRequest.size,
     });
 
-    return Promise.resolve(payload);
+    const facets: VideoFacets = {
+      ageRanges: {},
+      subjects: {},
+      durations: {},
+      resourceTypes: {},
+    };
+
+    if (searchRequest.age_range_facets) {
+      searchRequest.age_range_facets.forEach(key => {
+        facets.ageRanges[key] = { hits: 3 };
+      });
+    }
+
+    if (searchRequest.duration_facets) {
+      searchRequest.duration_facets.forEach(key => {
+        facets.durations[key] = { hits: 3 };
+      });
+    }
+
+    if (searchRequest.resource_type_facets) {
+      searchRequest.resource_type_facets.forEach(key => {
+        facets.ageRanges[key] = { hits: 3 };
+      });
+    }
+
+    const searchResults: VideoSearchResults = {
+      ...pageableVideos,
+      facets,
+    };
+
+    return Promise.resolve(searchResults);
   }
 
   public async update(
