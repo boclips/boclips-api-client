@@ -44,7 +44,11 @@ export class FakeVideosClient implements VideosClient, Clearable {
           video.description.indexOf(searchRequest.query) > -1
         : false;
 
-      return matchedContentPartner || matchedId || matchedTitle;
+      const matchedPromoted = searchRequest.promoted ? video.promoted : false;
+
+      return (
+        matchedContentPartner || matchedId || matchedTitle || matchedPromoted
+      );
     });
 
     const pageableVideos = PageableFactory.sample<Video>(matchingVideos, {
