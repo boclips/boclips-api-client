@@ -122,6 +122,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
   public insertVideo(video: Video): void {
     this.videos.push(video);
   }
+
   public clear() {
     this.videos = [];
   }
@@ -158,6 +159,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       thumbnail: new Link({ href: 'thumbnailAfterDelete' }),
       deleteThumbnail: undefined,
       setThumbnailBySecond: new Link({ href: `setThumbnailBySecond` }),
+      setCustomThumbnail: new Link({ href: `setCustomThumbnail` }),
     };
 
     return Promise.resolve(this.videos[videoIndex]);
@@ -172,6 +174,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       ...this.videos[videoIndex].playback.links,
       thumbnail: new Link({ href: `thumbnailAt${second}` }),
       setThumbnailBySecond: undefined,
+      setCustomThumbnail: undefined,
       deleteThumbnail: new Link({ href: `deleteThumbnail` }),
     };
 
@@ -184,6 +187,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       ...this.videos[videoIndex].playback.links,
       thumbnail: new Link({ href: `defaultThumbnail_${file.name}` }),
       setThumbnailBySecond: undefined,
+      setCustomThumbnail: undefined,
       deleteThumbnail: new Link({ href: `deleteThumbnail` }),
     };
 

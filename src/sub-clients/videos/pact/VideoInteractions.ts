@@ -112,6 +112,10 @@ export const deleteThumbnail = (id: string): InteractionObject => {
               href: 'https://setThumbnailBySecond',
               templated: true,
             },
+            setCustomThumbnail: {
+              href: 'https://setCustomThumbnail',
+              templated: true,
+            },
           },
         }),
         bestFor: like([]),

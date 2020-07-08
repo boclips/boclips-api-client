@@ -290,6 +290,7 @@ describe('VideosClient', () => {
         expect(
           updatedVideo.playback.links.setThumbnailBySecond,
         ).toBeUndefined();
+        expect(updatedVideo.playback.links.setCustomThumbnail).toBeUndefined();
       });
 
       it(`can delete video thumbnail`, async () => {
@@ -313,6 +314,9 @@ describe('VideosClient', () => {
         expect(updatedVideo.playback.links.deleteThumbnail).toBeUndefined();
         expect(
           updatedVideo.playback.links.setThumbnailBySecond,
+        ).not.toBeUndefined();
+        expect(
+          updatedVideo.playback.links.setCustomThumbnail,
         ).not.toBeUndefined();
       });
     },
