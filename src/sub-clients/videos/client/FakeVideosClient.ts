@@ -33,7 +33,12 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
       const matchedId = searchRequest.id?.find(id => id === video.id);
 
-      return matchedContentPartner || matchedId;
+      const matchedTitle = searchRequest.query
+        ? video.title.indexOf(searchRequest.query) > -1 ||
+          video.description.indexOf(searchRequest.query) > -1
+        : false;
+
+      return matchedContentPartner || matchedId || matchedTitle;
     });
 
     const pageableVideos = PageableFactory.sample<Video>(matchingVideos, {
@@ -62,7 +67,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
     if (searchRequest.resource_type_facets) {
       searchRequest.resource_type_facets.forEach(key => {
-        facets.ageRanges[key] = { hits: 3 };
+        facets.resourceTypes[key] = { hits: 3 };
       });
     }
 
