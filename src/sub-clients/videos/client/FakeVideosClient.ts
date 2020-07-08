@@ -13,6 +13,12 @@ import { Link } from '../../common/model/LinkEntity';
 export class FakeVideosClient implements VideosClient, Clearable {
   private videos: Video[] = [];
   private videoCaptions: { videoId: string; content: string }[] = [];
+  private facets: VideoFacets = {
+    ageRanges: {},
+    subjects: {},
+    durations: {},
+    resourceTypes: {},
+  };
 
   public get(id: string): Promise<Video> {
     const video = this.videos.find(video => video.id === id);
@@ -46,34 +52,9 @@ export class FakeVideosClient implements VideosClient, Clearable {
       size: searchRequest.size,
     });
 
-    const facets: VideoFacets = {
-      ageRanges: {},
-      subjects: {},
-      durations: {},
-      resourceTypes: {},
-    };
-
-    if (searchRequest.age_range_facets) {
-      searchRequest.age_range_facets.forEach(key => {
-        facets.ageRanges[key] = { hits: 3 };
-      });
-    }
-
-    if (searchRequest.duration_facets) {
-      searchRequest.duration_facets.forEach(key => {
-        facets.durations[key] = { hits: 3 };
-      });
-    }
-
-    if (searchRequest.resource_type_facets) {
-      searchRequest.resource_type_facets.forEach(key => {
-        facets.resourceTypes[key] = { hits: 3 };
-      });
-    }
-
     const searchResults: VideoSearchResults = {
       ...pageableVideos,
-      facets,
+      facets: this.facets,
     };
 
     return Promise.resolve(searchResults);
@@ -126,6 +107,10 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
   public insertVideo(video: Video): void {
     this.videos.push(video);
+  }
+
+  public setFacets(facets: VideoFacets): void {
+    this.facets = facets;
   }
 
   public clear() {
