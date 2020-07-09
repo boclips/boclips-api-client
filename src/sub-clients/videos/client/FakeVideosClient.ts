@@ -176,6 +176,10 @@ export class FakeVideosClient implements VideosClient, Clearable {
   }
 
   public async setCustomThumbnail(video: Video, file: File): Promise<Video> {
+    if (file.name === 'error-file.jpg') {
+      return Promise.reject('Error uploading file');
+    }
+
     const videoIndex = await this.findVideoIndexById(video.id);
     this.videos[videoIndex].playback.links = {
       ...this.videos[videoIndex].playback.links,
