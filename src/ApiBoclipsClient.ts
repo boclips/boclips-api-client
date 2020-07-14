@@ -34,6 +34,7 @@ import { ApiContentWarningsClient } from './sub-clients/contentWarnings/client/A
 import { ContractsClient } from './sub-clients/contracts/client/ContractsClient';
 import { ApiContractsClient } from './sub-clients/contracts/client/ApiContractsClient';
 import { ApiShareCodesClient } from './sub-clients/shareCodes/client/ApiShareCodesClient';
+import { ApiContentPackagesClient } from './sub-clients/contentPackages/client/ApiContentPackagesClient';
 
 export class ApiBoclipsClient implements BoclipsClient {
   public legalRestrictions: ApiLegalRestrictionsClient;
@@ -57,6 +58,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public contentWarnings: ContentWarningsClient;
   public shareCodes: ApiShareCodesClient;
   public attachments: ApiAttachmentsClient;
+  public contentPackages: ApiContentPackagesClient;
 
   constructor(axios: AxiosInstance, adminLinks: AdminLinks) {
     this.legalRestrictions = new ApiLegalRestrictionsClient(adminLinks, axios);
@@ -86,6 +88,7 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.contentWarnings = new ApiContentWarningsClient(adminLinks, axios);
     this.shareCodes = new ApiShareCodesClient(adminLinks, axios);
     this.attachments = new ApiAttachmentsClient(adminLinks, axios);
+    this.contentPackages = new ApiContentPackagesClient(adminLinks, axios);
   }
 
   public static create = async (

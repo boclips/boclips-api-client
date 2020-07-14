@@ -19,6 +19,7 @@ import { SuggestionsClient } from './sub-clients/suggestions/client/SuggestionsC
 import { ContentWarningsClient } from './sub-clients/contentWarnings/client/ContentWarningsClient';
 import { ContractsClient } from './sub-clients/contracts/client/ContractsClient';
 import { ShareCodesClient } from './sub-clients/shareCodes/client/ShareCodesClient';
+import { ContentPackagesClient } from './sub-clients/contentPackages/client/ContentPackagesClient';
 
 export interface BoclipsClient {
   legalRestrictions: LegalRestrictionsClient;
@@ -42,4 +43,5 @@ export interface BoclipsClient {
   suggestions: SuggestionsClient;
   shareCodes: ShareCodesClient;
   attachments: AttachmentsClient;
+  contentPackages: ContentPackagesClient;
 }
