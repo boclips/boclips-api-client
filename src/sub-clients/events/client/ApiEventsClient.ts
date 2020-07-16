@@ -2,10 +2,24 @@ import { Collection } from '../../collections/model/Collection';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
+import { SearchQueryCompletionsSuggestedRequest } from '../model/SearchQueryCompletionsSuggestedRequest';
 import { EventsClient } from './EventsClient';
 import { Link } from '../../common/model/LinkEntity';
 
 export class ApiEventsClient extends ApiSubClient implements EventsClient {
+  public trackSearchQueryCompletionsSuggested(
+    request: SearchQueryCompletionsSuggestedRequest,
+  ): Promise<void> {
+    const trackSearchQueryCompletionsSuggestedLink = this.getLinkOrThrow(
+      'createSearchQueryCompletionsSuggestedEvent',
+    );
+
+    return this.axios.post(
+      trackSearchQueryCompletionsSuggestedLink.href,
+      request,
+    );
+  }
+
   public trackPageRendered(request: PageRenderedRequest): Promise<void> {
     const trackPageRenderedLink = this.getLinkOrThrow('trackPageRendered');
 

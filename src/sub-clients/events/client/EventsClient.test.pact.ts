@@ -18,6 +18,7 @@ import {
   trackCollectionInteraction,
   trackPageRendered,
   trackPlatformInteraction,
+  trackSearchQueryCompletionsSuggested,
 } from '../pact/EventsInteractions';
 
 describe('EventsClient', () => {
@@ -128,6 +129,33 @@ describe('EventsClient', () => {
             type: 'PLATFORM_INTERACTED_WITH',
             subtype: 'CONTRACT_TEST_CLICK',
             anonymous: true,
+          });
+        }
+      });
+
+      it(`can track suggested search query completion events`, async () => {
+        const request = {
+          searchQuery: 'bio',
+          impressions: ['biology', 'biodiversity'],
+          componentId: 'component-id',
+          completionId: 'completion-id',
+        };
+
+        await provider.addInteraction(
+          trackSearchQueryCompletionsSuggested(request),
+        );
+
+        await client.events.trackSearchQueryCompletionsSuggested(request);
+
+        if (isATestClient(client)) {
+          const events = client.events.getEvents();
+
+          expect(events.length).toEqual(1);
+          expect(events[0]).toEqual({
+            searchQuery: 'bio',
+            impressions: ['biology', 'biodiversity'],
+            componentId: 'component-id',
+            completionId: 'completion-id',
           });
         }
       });

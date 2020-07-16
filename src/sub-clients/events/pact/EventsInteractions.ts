@@ -2,6 +2,7 @@ import { InteractionObject } from '@pact-foundation/pact';
 import { Collection } from '../../collections/model/Collection';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
+import { SearchQueryCompletionsSuggestedRequest } from '../model/SearchQueryCompletionsSuggestedRequest';
 
 export const collectionID = '5ddfb388cb01742ee5b6366b';
 
@@ -84,6 +85,29 @@ export const trackAnonymousPlatformInteraction = (
     method: 'POST',
     path: `/v1/events/platform-interaction`,
     query: `subtype=${subtype}&anonymous=true`,
+  },
+  willRespondWith: {
+    status: 201,
+  },
+});
+
+export const trackSearchQueryCompletionsSuggested = (
+  request: SearchQueryCompletionsSuggestedRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST searchQueryCompletionsSuggested event',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/events/suggested-search-completions`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      searchQuery: request.searchQuery,
+      impressions: request.impressions,
+      componentId: request.componentId,
+      completionId: request.completionId,
+    },
   },
   willRespondWith: {
     status: 201,

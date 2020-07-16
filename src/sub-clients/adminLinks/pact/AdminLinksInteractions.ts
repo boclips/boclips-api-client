@@ -104,6 +104,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/events/platform-interaction{?subtype,anonymous}`,
           templated: true,
         }),
+        createSearchQueryCompletionsSuggestedEvent: like({
+          href: `${provider.mockService.baseUrl}/v1/events/suggested-search-completions`,
+          templated: false,
+        }),
         organisations: like({
           href: `${provider.mockService.baseUrl}/v1/organisations{?countryCode,page,size}`,
           templated: true,

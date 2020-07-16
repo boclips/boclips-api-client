@@ -1,6 +1,7 @@
 import { Collection } from '../../collections/model/Collection';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
+import { SearchQueryCompletionsSuggestedRequest } from '../model/SearchQueryCompletionsSuggestedRequest';
 
 export interface EventsClient {
   trackPageRendered(request: PageRenderedRequest): Promise<void>;
@@ -11,4 +12,7 @@ export interface EventsClient {
   ): Promise<void>;
   trackUserExpired(): Promise<void>;
   trackPlatformInteraction(subtype: string, anonymous?: boolean): Promise<void>;
+  trackSearchQueryCompletionsSuggested(
+    request: SearchQueryCompletionsSuggestedRequest,
+  ): Promise<void>;
 }

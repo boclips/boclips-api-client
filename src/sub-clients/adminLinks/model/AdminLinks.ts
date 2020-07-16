@@ -27,6 +27,7 @@ export interface AdminLinks {
   distributionMethods: LinkEntity;
   trackPageRendered: LinkEntity;
   trackPlatformInteractedWith: LinkEntity;
+  createSearchQueryCompletionsSuggestedEvent: LinkEntity;
   subjects: LinkEntity;
   searchAccessRules: LinkEntity;
   reportAccessExpired: LinkEntity;
