@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [16.3.0] - 2020-07-16
+
+- Add `SearchQueryCompletionsSuggested` to events client
+
 ## [16.2.0] - 2020-07-15
 
 - Add content packages client (list only)
