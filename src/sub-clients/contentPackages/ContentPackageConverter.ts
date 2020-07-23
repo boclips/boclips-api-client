@@ -9,7 +9,18 @@ export class ContentPackageConverter {
     return {
       id: data.id,
       name: data.name,
-      accessRules: []
+      accessRules: data.accessRules.map((accessRule: any) => ({
+        type: accessRule.type,
+        videoIds: accessRule.videoIds || undefined,
+        collectionIds: accessRule.collectionIds || undefined,
+        channelIds: accessRule.channelIds || undefined,
+        videoTypes: accessRule.videoTypes || undefined,
+        distributionMethods: accessRule.distributionMethods || undefined,
+      }))
     }
   }
+
+  // public static convertAccessRules(accessRules: any[]): AccessRule[] {
+  //   return
+  // }
 }

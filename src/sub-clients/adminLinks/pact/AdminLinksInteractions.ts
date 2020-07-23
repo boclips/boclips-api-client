@@ -172,6 +172,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/content-packages`,
           templated: false,
         }),
+        contentPackage: like({
+          href: `${provider.mockService.baseUrl}/v1/content-packages/{id}`,
+          templated: true,
+        }),
       },
     },
   },

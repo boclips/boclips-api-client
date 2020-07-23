@@ -22,4 +22,15 @@ export class FakeContentPackagesClient
       return Promise.reject(`Package with id ${id} not found`);
     }
   }
+
+  replace(id: string, newContentPackage: ContentPackage): Promise<ContentPackage> {
+    const contentPackage = this.contentPackages.find(it => it.id === id);
+    if (contentPackage) {
+      newContentPackage['id'] = id;
+      this.contentPackages[this.contentPackages.indexOf(contentPackage)] = newContentPackage;
+      return Promise.resolve(newContentPackage);
+    } else {
+      return Promise.reject(`Package with id ${id} not found`);
+    }
+  }
 }

@@ -1,8 +1,9 @@
 export interface ContentPackage {
-  id: string;
+  id?: string;
   name: string;
   accessRules: AccessRule[];
 }
+
 export interface AccessRule {
   type:  AccessRuleType;
   videoIds?: string[];
@@ -11,5 +12,6 @@ export interface AccessRule {
   distributionMethods?: string[];
   videoTypes?: string[];
 }
-export type AccessRuleType = 'ExcludedVideos' | "IncludedVideos" | "IncludedCollections" | "IncludedChannels" |
-    "IncludedDistributionMethods" | "ExcludedChannels" | "ExcludedVideoTypes"
+
+export type AccessRuleType = 'ExcludedVideos' | 'IncludedVideos' | 'IncludedCollections' | 'IncludedChannels' |
+    'IncludedDistributionMethods' | 'ExcludedChannels' | 'ExcludedVideoTypes'

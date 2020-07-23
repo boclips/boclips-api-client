@@ -19,6 +19,14 @@ export class ApiContentPackagesClient extends ApiSubClient
 
     return this.axios
         .get(expandUrlTemplate(contentPackages.href, { id }))
-        .then(ContentPackageConverter.convertPackage);
+        .then(it => ContentPackageConverter.convertPackage(it.data));
+  }
+
+  replace(id: string, newContentPackage: ContentPackage): Promise<ContentPackage> {
+    const contentPackages = this.getLinkOrThrow('contentPackage');
+
+    return this.axios
+        .put(expandUrlTemplate(contentPackages.href, { id }), newContentPackage)
+        .then(it => ContentPackageConverter.convertPackage(it.data));
   }
 }
