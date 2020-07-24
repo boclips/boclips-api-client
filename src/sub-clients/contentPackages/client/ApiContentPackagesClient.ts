@@ -6,7 +6,7 @@ import { ContentPackagesConverter } from '../ContentPackagesConverter';
 export class ApiContentPackagesClient extends ApiSubClient
   implements ContentPackagesClient {
   getAll(): Promise<ContentPackage[]> {
-    const contentPackages = this.getLinkOrThrow('contentPackages');
+    const contentPackages = this.getLinkOrThrow('getContentPackages');
 
     return this.axios
       .get(contentPackages.href)

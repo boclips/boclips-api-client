@@ -45,5 +45,5 @@ export interface AdminLinks {
   contentWarnings: LinkEntity;
   validateShareCode: LinkEntity;
   attachmentTypes: LinkEntity;
-  contentPackages: LinkEntity;
+  getContentPackages: LinkEntity;
 }
