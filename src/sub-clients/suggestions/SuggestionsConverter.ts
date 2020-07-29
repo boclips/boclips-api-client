@@ -1,6 +1,8 @@
 import {
   ChannelSuggestion,
   ChannelSuggestionEntity,
+  SubjectSuggestion,
+  SubjectSuggestionEntity,
   Suggestions,
   SuggestionsEntity,
 } from './model/Suggestions';
@@ -11,6 +13,7 @@ export class SuggestionsConverter {
     return {
       suggestionTerm: response.suggestionTerm,
       channels: response.channels.map(convertChannelSuggestion),
+      subjects: response.subjects.map(convertSubjectSuggestion),
     };
   }
 }
@@ -24,6 +27,21 @@ function convertChannelSuggestion(
       searchVideos: new Link({
         href: channel._links.searchVideos.href,
         templated: channel._links.searchVideos.templated,
+      }),
+    },
+  };
+}
+
+function convertSubjectSuggestion(
+  subject: SubjectSuggestionEntity,
+): SubjectSuggestion {
+  return {
+    id: subject.id,
+    name: subject.name,
+    links: {
+      searchVideos: new Link({
+        href: subject._links.searchVideos.href,
+        templated: subject._links.searchVideos.templated,
       }),
     },
   };

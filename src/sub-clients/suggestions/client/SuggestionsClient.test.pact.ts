@@ -16,10 +16,19 @@ describe('SuggestionsClient', () => {
 
         if (isATestClient(client)) {
           client.suggestions.populate({
-            suggestionTerm: 'ted',
+            suggestionTerm: 'his',
             channels: [
               {
-                name: 'Teddy',
+                name: 'The History Channel',
+                links: {
+                  searchVideos: new Link({ href: 'x', templated: true }),
+                },
+              },
+            ],
+            subjects: [
+              {
+                id: 'subject-id',
+                name: 'Art History',
                 links: {
                   searchVideos: new Link({ href: 'x', templated: true }),
                 },
@@ -33,11 +42,12 @@ describe('SuggestionsClient', () => {
         await provider.addInteraction(getSuggestions());
 
         const suggestions: Suggestions = await client.suggestions.suggest(
-          'ted',
+          'his',
         );
 
-        expect(suggestions.suggestionTerm).toEqual('ted');
+        expect(suggestions.suggestionTerm).toEqual('his');
         expect(suggestions.channels.length).toBeGreaterThanOrEqual(1);
+        expect(suggestions.subjects.length).toBeGreaterThanOrEqual(1);
       });
     },
   );

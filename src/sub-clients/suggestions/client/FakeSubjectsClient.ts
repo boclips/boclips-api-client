@@ -22,10 +22,16 @@ export class FakeSuggestionsClient implements SuggestionsClient, Clearable {
 
   private populateDefault(): Suggestions {
     return {
-      suggestionTerm: 'ted',
+      suggestionTerm: 'his',
       channels: [
         {
-          name: 'Ted',
+          name: 'The History Channel',
+        },
+      ],
+      subjects: [
+        {
+          id: 'subject-id',
+          name: 'Art History',
         },
       ],
     };
