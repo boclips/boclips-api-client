@@ -39,8 +39,8 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
       const matchedId = searchRequest.id?.find(id => id === video.id);
 
-      const matchedSubject = searchRequest.subject?.some(subject =>
-        video.subjects.map(s => s.id).includes(subject),
+      const matchedSubject = searchRequest.subject?.find(subject =>
+        video.subjects?.map(s => s.id).includes(subject),
       );
 
       const matchedTitle = searchRequest.query
