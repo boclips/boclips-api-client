@@ -12,6 +12,7 @@ import { Link } from '../../common/model/LinkEntity';
 
 export class FakeVideosClient implements VideosClient, Clearable {
   private videos: Video[] = [];
+  private validShareCode: { [id: string]: string } = {};
   private videoCaptions: { videoId: string; content: string }[] = [];
   private facets: VideoFacets = {
     ageRanges: {},
@@ -20,9 +21,16 @@ export class FakeVideosClient implements VideosClient, Clearable {
     resourceTypes: {},
   };
 
-  public get(id: string): Promise<Video> {
+  public get(id: string, referer?: string, shareCode?: string): Promise<Video> {
     const video = this.videos.find(video => video.id === id);
-    return video === undefined ? Promise.reject() : Promise.resolve(video);
+    if (video === undefined) return Promise.reject();
+
+    const isAuthenticatedUser = !(referer || shareCode);
+    const isShareCodeValid = this.validShareCode[referer || ''] === shareCode;
+
+    return isAuthenticatedUser || isShareCodeValid
+      ? Promise.resolve(video)
+      : Promise.resolve(this.getVideoWithoutProtectedData(video));
   }
 
   public getVideoProjection(): Promise<Video> {
@@ -127,6 +135,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
   public clear() {
     this.videos = [];
+    this.validShareCode = {};
   }
 
   public getCaptions(id: string): Promise<CaptionContent> {
@@ -198,6 +207,26 @@ export class FakeVideosClient implements VideosClient, Clearable {
     };
 
     return Promise.resolve(this.videos[videoIndex]);
+  }
+
+  public addValidShareCode(referer: string, shareCode: string) {
+    this.validShareCode[referer] = shareCode;
+  }
+
+  private getVideoWithoutProtectedData(video: Video) {
+    const newVideo: Video = {
+      ...video,
+      playback: {
+        ...video.playback,
+        links: {
+          createPlayerInteractedWithEvent:
+            video.playback.links.createPlayerInteractedWithEvent,
+          thumbnail: video.playback.links.thumbnail,
+        },
+      },
+      attachments: [],
+    };
+    return newVideo;
   }
 
   private findVideoIndexById(id: string): Promise<number> {

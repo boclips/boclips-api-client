@@ -15,10 +15,14 @@ import { CaptionContent } from '../model/CaptionContent';
 import { ProjectedResource } from '../../common/model/ProjectedResource';
 
 export class ApiVideosClient extends ApiSubClient implements VideosClient {
-  public async get(id: string): Promise<Video> {
+  public async get(
+    id: string,
+    referer?: string,
+    shareCode?: string,
+  ): Promise<Video> {
     const videoLink = this.getLinkOrThrow('video');
     const response = await this.axios.get(
-      expandUrlTemplate(videoLink.href, { id }),
+      expandUrlTemplate(videoLink.href, { id, referer, shareCode }),
     );
 
     return VideosConverter.convert(response.data);

@@ -8,7 +8,7 @@ import { CaptionContent } from '../model/CaptionContent';
 import { VideoSearchResults } from '../model/VideoSearchResults';
 
 export interface VideosClient {
-  get(id: string): Promise<Video>;
+  get(id: string, referer?: string, shareCode?: string): Promise<Video>;
   search(searchRequest: VideoSearchRequest): Promise<VideoSearchResults>;
   update(id: string, updateVideoRequest: UpdateVideoRequest): Promise<Video>;
   updateCaptions(

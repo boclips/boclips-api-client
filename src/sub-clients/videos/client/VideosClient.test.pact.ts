@@ -29,6 +29,9 @@ export const existingVideoWithoutAttachmentsAndBestFor =
   '5d2856277e173c570e69c459';
 export const existingKalturaVideoFromStaging = '5c542ab85438cdbcb56ddceb';
 
+export const shareCodeFromStaging = 'BCX2';
+export const refererFromStaging = 'adb78789-a1bc-46d9-a388-0f06e8ce119f';
+
 describe('VideosClient', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
@@ -39,16 +42,26 @@ describe('VideosClient', () => {
 
         if (isATestClient(client)) {
           client.videos.insertVideo(testVideo);
+          client.videos.addValidShareCode(
+            refererFromStaging,
+            shareCodeFromStaging,
+          );
         }
       });
 
       it(`can fetch a video by id`, async () => {
         await provider.addInteraction(
-          getVideo(existingVideoWithAttachmentAndBestForFromStaging),
+          getVideo(
+            existingVideoWithAttachmentAndBestForFromStaging,
+            shareCodeFromStaging,
+            refererFromStaging,
+          ),
         );
 
         const video: Video = await client.videos.get(
           existingVideoWithAttachmentAndBestForFromStaging,
+          refererFromStaging,
+          shareCodeFromStaging,
         );
 
         expect(video.id).toEqual(

@@ -113,7 +113,7 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: true,
         }),
         video: like({
-          href: `${provider.mockService.baseUrl}/v1/videos/{id}`,
+          href: `${provider.mockService.baseUrl}/v1/videos/{id}{?referer,shareCode}`,
           templated: true,
         }),
         searchVideos: like({

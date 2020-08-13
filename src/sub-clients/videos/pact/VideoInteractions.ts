@@ -6,12 +6,17 @@ import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import { VIDEO_SEARCH_URL } from '../../adminLinks/pact/AdminLinksInteractions';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 
-export const getVideo = (id: string): InteractionObject => ({
+export const getVideo = (
+  id: string,
+  shareCode: string,
+  referer: string,
+): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET video',
   withRequest: {
     method: 'GET',
     path: `/v1/videos/${id}`,
+    query: `referer=${referer}&shareCode=${shareCode}`,
   },
   willRespondWith: {
     status: 200,
