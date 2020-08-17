@@ -22,6 +22,7 @@ import { FakeContentWarningsClient } from '../sub-clients/contentWarnings/client
 import { FakeContractsClient } from '../sub-clients/contracts/client/FakeContractsClient';
 import { FakeShareCodesClient } from '../sub-clients/shareCodes/client/FakeShareCodesClient';
 import { FakeContentPackagesClient } from '../sub-clients/contentPackages/client/FakeContentPackagesClient';
+import { FakeUsersClient } from '../sub-clients/users/client/FakeUsersClient';
 
 export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public legalRestrictions: FakeLegalRestrictionsClient = new FakeLegalRestrictionsClient();
@@ -46,6 +47,7 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
   public shareCodes: FakeShareCodesClient = new FakeShareCodesClient();
   public attachments: FakeAttachmentsClient = new FakeAttachmentsClient();
   public contentPackages: FakeContentPackagesClient = new FakeContentPackagesClient();
+  public users: FakeUsersClient = new FakeUsersClient();
 
   public clear() {
     this.legalRestrictions.clear();
@@ -69,5 +71,6 @@ export class FakeBoclipsClient implements BoclipsClient, Clearable {
     this.shareCodes.clear();
     this.attachments.clear();
     this.contentPackages.clear();
+    this.users.clear();
   }
 }

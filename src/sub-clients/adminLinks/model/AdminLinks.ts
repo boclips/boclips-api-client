@@ -48,4 +48,5 @@ export interface AdminLinks {
   getContentPackages: LinkEntity;
   getContentPackage: LinkEntity;
   updateContentPackage: LinkEntity;
+  isUserActive: LinkEntity;
 }
