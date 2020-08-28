@@ -11,6 +11,9 @@ export interface VideoFacets {
   resourceTypes: {
     [id: string]: Facet;
   };
+  channels?: {
+    [id: string]: Facet;
+  };
 }
 
 export interface Facet {
