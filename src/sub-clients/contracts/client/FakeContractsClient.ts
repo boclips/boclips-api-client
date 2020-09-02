@@ -1,17 +1,27 @@
-import { UpdateContractRequest } from '../model/UpdateContractRequest';
-import { Clearable } from '../../common/utils/Clearable';
 import { Channel } from '../../channels/model/Channel';
-import { Contract } from '../model/Contract';
-import { ContractsClient } from './ContractsClient';
 import Pageable from '../../common/model/Pageable';
 import { PageRequest } from '../../common/model/PageRequest';
+import { Projection } from '../../common/model/Projection';
+import { Clearable } from '../../common/utils/Clearable';
+import { Contract } from '../model/Contract';
+import { UpdateContractRequest } from '../model/UpdateContractRequest';
+import { ContractsClient } from './ContractsClient';
 
 export class FakeContractsClient implements ContractsClient, Clearable {
   private contracts: Contract[] = [];
 
-  getAll(page: PageRequest): Promise<Pageable<Contract>> {
+  getAll(
+    page: PageRequest,
+    projection?: Projection,
+  ): Promise<Pageable<Contract>> {
     return Promise.resolve({
-      page: this.contracts,
+      page:
+        projection === Projection.LIST
+          ? this.contracts.map(full => ({
+              id: full.id,
+              contentPartnerName: full.contentPartnerName,
+            }))
+          : this.contracts,
       pageSpec: {
         number: page.page,
         size: page.size,

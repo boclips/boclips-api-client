@@ -1,3 +1,4 @@
+import { Projection } from '../../common/model/Projection';
 import { UpdateContractRequest } from '../model/UpdateContractRequest';
 import Pageable from '../../common/model/Pageable';
 import { Contract } from '../model/Contract';
@@ -6,7 +7,10 @@ import { PageRequest } from '../../common/model/PageRequest';
 export interface ContractsClient {
   get(id: string): Promise<Contract>;
 
-  getAll(page: PageRequest): Promise<Pageable<Contract>>;
+  getAll(
+    page: PageRequest,
+    projection?: Projection,
+  ): Promise<Pageable<Contract>>;
 
   create(request: Omit<Contract, 'id'>): Promise<void>;
 

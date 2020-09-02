@@ -6,6 +6,7 @@ import {
 } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { PageRequest } from '../../common/model/PageRequest';
+import { Projection } from '../../common/model/Projection';
 
 const { like } = Matchers;
 
@@ -99,6 +100,7 @@ export const updateContract = (id: string): InteractionObject => ({
 
 export const getContractsInteraction = (
   pageRequest: PageRequest,
+  _projection: Projection,
 ): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET all contracts',
@@ -108,6 +110,7 @@ export const getContractsInteraction = (
     query: {
       page: pageRequest.page + '',
       size: pageRequest.size + '',
+      projection: 'list',
     },
   },
   willRespondWith: {

@@ -1,3 +1,4 @@
+import { Projection } from '../../common/model/Projection';
 import { UpdateContractRequest } from '../model/UpdateContractRequest';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
@@ -11,7 +12,10 @@ import { AxiosResponse } from 'axios';
 
 export class ApiContractsClient extends ApiSubClient
   implements ContractsClient {
-  getAll(page: PageRequest): Promise<Pageable<Contract>> {
+  getAll(
+    page: PageRequest,
+    projection?: Projection,
+  ): Promise<Pageable<Contract>> {
     const contractsLink = this.getLinkOrThrow('contracts');
 
     return this.axios
@@ -19,6 +23,7 @@ export class ApiContractsClient extends ApiSubClient
         expandUrlTemplate(contractsLink.href, {
           page: page.page,
           size: page.size,
+          projection: projection,
         }),
       )
       .then(({ data }: AxiosResponse) =>

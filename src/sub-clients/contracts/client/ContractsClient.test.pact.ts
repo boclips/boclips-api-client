@@ -3,6 +3,7 @@ import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { ContractFactory } from '../../../test-support/ContractsFactory';
+import { Projection } from '../../common/model/Projection';
 import {
   existingContractFromStaging,
   getContractInteraction,
@@ -112,9 +113,14 @@ describe('Contracts', () => {
           page: 0,
           size: 1,
         };
-        await provider.addInteraction(getContractsInteraction(pageRequest));
+        await provider.addInteraction(
+          getContractsInteraction(pageRequest, Projection.LIST),
+        );
 
-        const contracts = await client.contracts.getAll(pageRequest);
+        const contracts = await client.contracts.getAll(
+          pageRequest,
+          Projection.LIST,
+        );
 
         expect(contracts.page).toHaveLength(1);
         expect(contracts.pageSpec.size).toEqual(1);

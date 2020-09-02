@@ -71,7 +71,7 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: false,
         }),
         contracts: like({
-          href: `${provider.mockService.baseUrl}/v1/contracts{?size,page}`,
+          href: `${provider.mockService.baseUrl}/v1/contracts{?size,page,projection}`,
           templated: true,
         }),
         createContracts: like({
