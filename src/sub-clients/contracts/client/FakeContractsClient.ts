@@ -73,7 +73,7 @@ export class FakeContractsClient implements ContractsClient, Clearable {
   }
 
   insertFixture(contract: Contract) {
-    this.contracts = [contract];
+    this.contracts.push(contract);
   }
 
   getSignedLink(filename: string): Promise<string> {
