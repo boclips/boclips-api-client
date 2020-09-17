@@ -1,7 +1,8 @@
-import { InteractionObject } from '@pact-foundation/pact';
+import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { UpdateOrganisationRequest } from '../model/UpdateOrganisationRequest';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 export const getOrganisationsByCountryCode = (
   id: string,
@@ -21,7 +22,10 @@ export const getOrganisationsByCountryCode = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       page: {
@@ -80,7 +84,10 @@ export const updateOrganisation = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       id: like(id),
@@ -117,7 +124,10 @@ export const associateUsers = (organisationId: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       _embedded: {

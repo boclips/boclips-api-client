@@ -7,6 +7,7 @@ import {
 import { provider } from '../../../pact-support/pactSetup';
 import { PageRequest } from '../../common/model/PageRequest';
 import { Projection } from '../../common/model/Projection';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 const { like } = Matchers;
 
@@ -32,7 +33,10 @@ export const getContractInteraction = (id: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: like({
       ...createContractWithMandatoryFields(id),
@@ -116,7 +120,10 @@ export const getContractsInteraction = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: like({
       _embedded: like({

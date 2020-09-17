@@ -1,5 +1,6 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { OrderItemUpdateRequest } from './../model/OrderItemUpdateRequest';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 const { eachLike, like } = Matchers;
 
@@ -74,7 +75,10 @@ export const getOrdersInteraction = (): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       _embedded: {
@@ -98,7 +102,10 @@ export const getOrderInteraction = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: like({
       ...createOrderWithMandatoryFields(existingOrderIdFromStaging),
@@ -145,7 +152,10 @@ export const updateOrderCurrency = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: like({
       ...createOrderWithMandatoryFields(id),
@@ -172,7 +182,10 @@ export const updateOrderItem = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: like({
       ...createOrderWithMandatoryFields(orderId),

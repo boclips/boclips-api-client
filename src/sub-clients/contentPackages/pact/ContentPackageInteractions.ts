@@ -1,5 +1,6 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { like } from '@pact-foundation/pact/dsl/matchers';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 const { eachLike } = Matchers;
 
@@ -13,7 +14,10 @@ export const getContentPackages: InteractionObject = {
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       _embedded: {
@@ -42,7 +46,10 @@ export const getContentPackage = (id: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       id: id,

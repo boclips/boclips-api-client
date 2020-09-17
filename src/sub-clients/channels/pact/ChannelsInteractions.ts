@@ -2,6 +2,7 @@ import { existingContractFromStaging } from './../../contracts/pact/ContractsInt
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { term } from '@pact-foundation/pact/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 const { eachLike, like } = Matchers;
 
@@ -27,7 +28,10 @@ export const getChannelsInteraction = (): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       _embedded: {
@@ -74,7 +78,10 @@ export const getContentCategories = (): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       _embedded: {
@@ -98,7 +105,10 @@ export const getChannelInteraction = (id: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: like({
       ...createChannelWithMandatoryFields(id),

@@ -8,6 +8,7 @@ import {
   CreateCollectionRequest,
   UpdateCollectionRequest,
 } from '../model/CollectionRequest';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 const { like } = Matchers;
 
@@ -25,7 +26,10 @@ export const getCollectionById = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       id: like(id),
@@ -66,7 +70,10 @@ export const getFilteredCollections = (
     willRespondWith: {
       status: 200,
       headers: {
-        'Content-Type': 'application/hal+json;charset=UTF-8',
+        'Content-Type': Matchers.term({
+          generate: 'application/hal+json;charset=UTF-8',
+          matcher: contentTypeRegex,
+        }),
       },
       body: {
         page: {

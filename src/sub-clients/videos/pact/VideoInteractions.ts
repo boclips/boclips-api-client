@@ -1,10 +1,11 @@
-import { InteractionObject } from '@pact-foundation/pact';
+import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { Link } from '../../common/model/LinkEntity';
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import { VIDEO_SEARCH_URL } from '../../adminLinks/pact/AdminLinksInteractions';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 export const getVideo = (
   id: string,
@@ -21,7 +22,10 @@ export const getVideo = (
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: sampleVideoResponse(id),
   },
@@ -37,7 +41,10 @@ export const getCaptions = (id: string): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       content: like(
@@ -156,7 +163,10 @@ export const updateVideo = (
     willRespondWith: {
       status: 200,
       headers: {
-        'Content-Type': 'application/hal+json;charset=UTF-8',
+        'Content-Type': Matchers.term({
+          generate: 'application/hal+json;charset=UTF-8',
+          matcher: contentTypeRegex,
+        }),
       },
       body: {
         id: like(id),
@@ -260,7 +270,10 @@ export const searchVideo = (
     willRespondWith: {
       status: 200,
       headers: {
-        'Content-Type': 'application/hal+json;charset=UTF-8',
+        'Content-Type': Matchers.term({
+          generate: 'application/hal+json;charset=UTF-8',
+          matcher: contentTypeRegex,
+        }),
       },
       body: {
         page: {

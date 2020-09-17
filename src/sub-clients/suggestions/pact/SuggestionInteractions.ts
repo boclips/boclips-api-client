@@ -1,5 +1,6 @@
-import { InteractionObject } from '@pact-foundation/pact';
+import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { eachLike } from '@pact-foundation/pact/dsl/matchers';
+import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 export const getSuggestions = (): InteractionObject => ({
   state: undefined,
@@ -12,7 +13,10 @@ export const getSuggestions = (): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': 'application/hal+json;charset=UTF-8',
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
     },
     body: {
       suggestionTerm: 'his',
