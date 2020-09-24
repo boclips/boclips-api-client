@@ -58,6 +58,7 @@ export class OrderConverter {
           licenseTerritory,
           price,
           transcriptRequested,
+          trim,
           video,
           _links,
         } = item;
@@ -68,6 +69,7 @@ export class OrderConverter {
           license: { duration: licenseDuration, territory: licenseTerritory },
           price,
           transcriptRequested,
+          trim,
           video: {
             ...video,
             captionStatus: OrderCaptionStatus[video.captionStatus],
