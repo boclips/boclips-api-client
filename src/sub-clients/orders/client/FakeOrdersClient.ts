@@ -55,10 +55,9 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
               value: request.price,
               displayValue: `${itemToUpdate.price?.currency} ${request.price}`,
             };
-
-            if (request.license) {
-              itemToUpdate.license = request.license;
-            }
+          }
+          if (request.license) {
+            itemToUpdate.license = request.license;
           }
 
           return order;

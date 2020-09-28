@@ -171,7 +171,7 @@ describe('OrdersClient', () => {
         expect(updatedOrder.totalPrice.currency).toEqual('GBP');
       });
 
-      it('can update the price of an order item', async () => {
+      it('can update the price and license of an order item', async () => {
         const updateRequest = {
           price: 100,
           license: { duration: '10 years', territory: 'Europe' },
@@ -205,6 +205,42 @@ describe('OrdersClient', () => {
         const updatedItem = updatedOrder.items[0];
 
         expect(updatedItem.price?.value).toEqual(updateRequest.price);
+        expect(updatedItem.license).toEqual(updateRequest.license);
+      });
+
+      it('can update just the license of an order item', async () => {
+        const updateRequest = {
+          license: { duration: '10 years', territory: 'Europe' },
+        };
+        const orderItemToUpdate = OrderItemFactory.sample({
+          id: exisitngOrderItemIdForStaging,
+          links: {
+            update: new Link({
+              href: `${provider.mockService.baseUrl}/v1/orders/${existingOrderIdFromStaging}/items/${exisitngOrderItemIdForStaging}`,
+            }),
+            updatePrice: new Link({
+              href: '',
+            }),
+          },
+        });
+
+        await provider.addInteraction(
+          updateOrderItem(
+            existingOrderIdFromStaging,
+            exisitngOrderItemIdForStaging,
+            updateRequest,
+            'Patching just the license',
+          ),
+        );
+
+        const updatedOrder = await client.orders.updateItem(
+          orderItemToUpdate,
+          updateRequest,
+        );
+
+        expect(updatedOrder.id).toEqual(existingOrderIdFromStaging);
+        const updatedItem = updatedOrder.items[0];
+
         expect(updatedItem.license).toEqual(updateRequest.license);
       });
     },

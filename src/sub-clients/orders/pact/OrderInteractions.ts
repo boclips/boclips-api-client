@@ -168,9 +168,10 @@ export const updateOrderItem = (
   orderId: string,
   orderItemId: any,
   request: OrderItemUpdateRequest,
+  description: string = 'Patch order',
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'Patch order',
+  uponReceiving: description,
   withRequest: {
     method: 'PATCH',
     path: `/v1/orders/${orderId}/items/${orderItemId}`,
