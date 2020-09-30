@@ -19,6 +19,7 @@ describe('SuggestionsClient', () => {
             suggestionTerm: 'his',
             channels: [
               {
+                id: 'channel-id',
                 name: 'The History Channel',
                 links: {
                   searchVideos: new Link({ href: 'x', templated: true }),
@@ -47,6 +48,7 @@ describe('SuggestionsClient', () => {
 
         expect(suggestions.suggestionTerm).toEqual('his');
         expect(suggestions.channels.length).toBeGreaterThanOrEqual(1);
+        expect(suggestions.channels[0].id).toEqual('channel-id');
         expect(suggestions.subjects.length).toBeGreaterThanOrEqual(1);
       });
     },

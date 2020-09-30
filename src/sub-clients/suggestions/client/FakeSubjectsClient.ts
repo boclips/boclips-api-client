@@ -25,6 +25,7 @@ export class FakeSuggestionsClient implements SuggestionsClient, Clearable {
       suggestionTerm: 'his',
       channels: [
         {
+          id: 'channel-id',
           name: 'The History Channel',
         },
       ],

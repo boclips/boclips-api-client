@@ -22,6 +22,7 @@ function convertChannelSuggestion(
   channel: ChannelSuggestionEntity,
 ): ChannelSuggestion {
   return {
+    id: channel.id,
     name: channel.name,
     links: {
       searchVideos: new Link({

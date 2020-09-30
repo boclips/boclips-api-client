@@ -8,6 +8,7 @@ export interface Suggestions {
 }
 
 export interface ChannelSuggestion {
+  id: string;
   name: string;
   links?: {
     searchVideos?: Link;
@@ -29,6 +30,7 @@ export interface SuggestionsEntity {
 }
 
 export interface ChannelSuggestionEntity extends EntityWithLinks {
+  id: string;
   name: string;
   _links: {
     searchVideos: {

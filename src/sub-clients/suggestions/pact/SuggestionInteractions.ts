@@ -21,6 +21,7 @@ export const getSuggestions = (): InteractionObject => ({
     body: {
       suggestionTerm: 'his',
       channels: eachLike({
+        id: 'channel-id',
         name: 'The History Channel',
         _links: {
           searchVideos: {
