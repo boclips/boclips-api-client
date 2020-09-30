@@ -41,8 +41,8 @@ export class FakeVideosClient implements VideosClient, Clearable {
     searchRequest: VideoSearchRequest,
   ): Promise<VideoSearchResults> {
     const matchingVideos = this.videos.filter(video => {
-      const matchedContentPartner = searchRequest.channel?.find(
-        contentPartnerName => contentPartnerName === video.channel,
+      const matchedChannel = searchRequest.channel?.find(
+        channelId => channelId === video.channelId,
       );
 
       const matchedId = searchRequest.id?.find(id => id === video.id);
@@ -59,7 +59,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       const matchedPromoted = searchRequest.promoted ? video.promoted : false;
 
       return (
-        matchedContentPartner ||
+        matchedChannel ||
         matchedId ||
         matchedTitle ||
         matchedPromoted ||

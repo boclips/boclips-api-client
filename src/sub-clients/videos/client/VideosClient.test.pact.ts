@@ -28,6 +28,7 @@ export const existingVideoWithAttachmentAndBestForFromStaging =
 export const existingVideoWithoutAttachmentsAndBestFor =
   '5d2856277e173c570e69c459';
 export const existingKalturaVideoFromStaging = '5c542ab85438cdbcb56ddceb';
+export const tedChannelId = '5cf140c4c1475c47f7178678';
 
 export const shareCodeFromStaging = 'BCX2';
 export const refererFromStaging = 'adb78789-a1bc-46d9-a388-0f06e8ce119f';
@@ -226,7 +227,7 @@ describe('VideosClient', () => {
 
       it(`can search videos by content partner`, async () => {
         const searchRequest: VideoSearchRequest = {
-          channel: ['TED'],
+          channel: [tedChannelId],
           page: 0,
           size: 10,
         };
@@ -239,6 +240,7 @@ describe('VideosClient', () => {
             ...testVideo,
             id: 'video2',
             channel: 'TED',
+            channelId: tedChannelId,
           });
         }
 
