@@ -15,6 +15,7 @@ import {
   getOrdersInteraction,
   updateOrderCurrency,
   updateOrderItem,
+  updateOrderOrganisation,
 } from '../pact/OrderInteractions';
 import { OrderCaptionStatus } from '../model/OrderItem';
 
@@ -169,6 +170,23 @@ describe('OrdersClient', () => {
 
         assertOnMandatoryOrderFields(updatedOrder);
         expect(updatedOrder.totalPrice.currency).toEqual('GBP');
+      });
+
+      it('can update the organisation of an order', async () => {
+        await provider.addInteraction(
+          updateOrderOrganisation(existingOrderIdFromStaging, {
+            organisation: 'A super awesome org',
+          }),
+        );
+
+        const updatedOrder = await client.orders.updateOrder(
+          existingOrderIdFromStaging,
+          { organisation: 'A super awesome org' },
+        );
+
+        expect(updatedOrder.userDetails.organisation).toEqual(
+          'A super awesome org',
+        );
       });
 
       it('can update the price and license of an order item', async () => {

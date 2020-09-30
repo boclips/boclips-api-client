@@ -4,6 +4,7 @@ import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
+import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
 
 export class FakeOrdersClient implements OrdersClient, Clearable {
   private orders: Order[] = [];
@@ -30,6 +31,27 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
         totalPrice: {
           ...order.totalPrice,
           currency,
+        },
+      },
+    });
+  }
+
+  public async updateOrder(
+    id: string,
+    updateRequest: OrderUpdateRequest,
+  ): Promise<Order> {
+    const order = await this.get(id);
+
+    if (!order) {
+      throw new Error(`Cannot update order: ${id}`);
+    }
+
+    return Promise.resolve({
+      ...order,
+      ...{
+        userDetails: {
+          ...order.userDetails,
+          organisation: updateRequest?.organisation!!,
         },
       },
     });

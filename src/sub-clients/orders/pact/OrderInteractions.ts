@@ -1,6 +1,7 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
 import { OrderItemUpdateRequest } from './../model/OrderItemUpdateRequest';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
+import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
 
 const { eachLike, like } = Matchers;
 
@@ -160,6 +161,39 @@ export const updateOrderCurrency = (
     body: like({
       ...createOrderWithMandatoryFields(id),
       ...{ totalPrice: { currency, value: 123, displayValue: 'USD 123' } },
+    }),
+  },
+});
+
+export const updateOrderOrganisation = (
+  id: string,
+  updateRequest: OrderUpdateRequest,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'Patch order organisation',
+  withRequest: {
+    method: 'PATCH',
+    path: `/v1/orders/${id}`,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: updateRequest,
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
+    },
+    body: like({
+      ...createOrderWithMandatoryFields(id),
+      ...{
+        userDetails: {
+          organisationLabel: updateRequest.organisation,
+        },
+      },
     }),
   },
 });

@@ -6,6 +6,7 @@ import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrderConverter } from '../OrderConverter';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
+import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
 
 export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
   public get(id: string): Promise<Order> {
@@ -37,6 +38,28 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
         },
       )
       .then((response: AxiosResponse) => {
+        return OrderConverter.convertResource(response);
+      });
+  }
+
+  public updateOrder(
+    id: string,
+    updateRequest: OrderUpdateRequest,
+  ): Promise<Order> {
+    const orderLink = this.getLinkOrThrow('order');
+
+    return this.axios
+      .patch(
+        expandUrlTemplate(orderLink.href, { id }), // TODO this should be a HATEOAS link on the order
+        updateRequest,
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        },
+      )
+      .then((response: AxiosResponse) => {
+        console.log(response.data);
         return OrderConverter.convertResource(response);
       });
   }
