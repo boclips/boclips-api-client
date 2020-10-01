@@ -24,7 +24,7 @@ export class FakeUsersClient implements UsersClient {
 
   public getCurrentUser(): Promise<User> {
     if (this.currentUser === null) {
-      throw new Error('Current user is not set up');
+      return Promise.reject();
     }
     return Promise.resolve(this.currentUser);
   }
