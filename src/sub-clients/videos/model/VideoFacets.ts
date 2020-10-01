@@ -18,4 +18,5 @@ export interface VideoFacets {
 
 export interface Facet {
   hits: number;
+  id?: string;
 }
