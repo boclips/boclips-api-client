@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [17.5.3] - 2020-10-01
+
+- Add getCurrentUser to UsersClient
+
 ## [17.5.2] - 2020-09-30
 
 - Fix FakeVideoClient to use channel ID instead of name

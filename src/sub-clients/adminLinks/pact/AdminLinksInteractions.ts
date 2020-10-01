@@ -184,6 +184,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/users/{id}/active`,
           templated: true,
         }),
+        currentUser: like({
+          href: `${provider.mockService.baseUrl}/v1/users/_self`,
+          templated: false,
+        }),
       },
     },
   },

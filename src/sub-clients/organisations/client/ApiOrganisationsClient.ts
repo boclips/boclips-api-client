@@ -49,6 +49,6 @@ export class ApiOrganisationsClient extends ApiSubClient
   public async associateUsers(organisation: Organisation): Promise<User[]> {
     const link = organisation.links.associateUsers!.getOriginalLink();
     const response = await this.axios.post(link);
-    return UserConverter.convert(response.data);
+    return UserConverter.convertUsers(response.data);
   }
 }

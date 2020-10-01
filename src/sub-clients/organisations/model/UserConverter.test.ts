@@ -1,15 +1,20 @@
+import { User } from './User';
 import { UserConverter } from './UserConverter';
+import { UserEntity } from './UserEntity';
 
 describe('', () => {
   it('convert user entities to users', () => {
-    const entity = {
+    const entity: UserEntity = {
       id: 'bla',
       firstName: 'blub',
       lastName: 'blub',
       email: 'blipidy',
+      features: {
+        LTI_SLS_TERMS_BUTTON: true,
+      },
     };
 
-    const users = UserConverter.convert({
+    const users: User[] = UserConverter.convertUsers({
       _embedded: {
         users: [entity],
       },
@@ -20,6 +25,9 @@ describe('', () => {
       firstName: 'blub',
       lastName: 'blub',
       email: 'blipidy',
+      features: {
+        LTI_SLS_TERMS_BUTTON: true,
+      },
     });
   });
 });

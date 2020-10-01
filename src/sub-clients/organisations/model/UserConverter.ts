@@ -1,16 +1,19 @@
 import { User } from './User';
+import { UserEntity } from './UserEntity';
 
 export class UserConverter {
-  public static convert(response: any): User[] {
-    const entities = response._embedded.users as UserEntity[];
+  public static convert(userEntity: UserEntity): User {
+    return {
+      id: userEntity.id,
+      firstName: userEntity.firstName,
+      lastName: userEntity.lastName,
+      email: userEntity.email,
+      features: userEntity.features,
+    };
+  }
 
-    return entities.map(entity => {
-      return {
-        id: entity.id,
-        firstName: entity.firstName,
-        lastName: entity.lastName,
-        email: entity.email,
-      };
-    });
+  public static convertUsers(response: any): User[] {
+    const entities = response._embedded.users as UserEntity[];
+    return entities.map(this.convert);
   }
 }
