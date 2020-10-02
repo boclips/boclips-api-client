@@ -173,8 +173,8 @@ export const get404Channel = (id: string): InteractionObject => ({
     status: 404,
     headers: {
       'Content-Type': Matchers.term({
-        generate: 'application/hal+json;charset=UTF-8',
-        matcher: contentTypeRegex,
+        generate: 'application/json',
+        matcher: '^application\\/json(;charset=UTF-8)?$',
       }),
     },
     body: like({
