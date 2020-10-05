@@ -13,9 +13,8 @@ import {
   existingOrderIdFromStaging,
   getOrderInteraction,
   getOrdersInteraction,
-  updateOrderCurrency,
   updateOrderItem,
-  updateOrderOrganisation,
+  updateOrder,
 } from '../pact/OrderInteractions';
 import { OrderCaptionStatus } from '../model/OrderItem';
 
@@ -94,13 +93,15 @@ describe('OrdersClient', () => {
         );
         expect(order.legacyOrderId).toEqual('legacy-order-id');
         expect(order.status).toEqual(OrderStatus.READY);
-        expect(order.totalPrice.displayValue).toEqual('USD 123');
         expect(order.totalPrice.value).toEqual(123);
-        expect(order.userDetails).toEqual({
-          authorisingUser: 'Authoriser Dobinson <authoriser@gmail.com>',
-          requestingUser: 'Requestor Sharma <requestor@gmail.com>',
-          organisation: 'The Organisation',
-        });
+        expect(order.totalPrice.displayValue).toBeDefined();
+        expect(order.userDetails.authorisingUser).toEqual(
+          'Authoriser Dobinson <authoriser@gmail.com>',
+        );
+        expect(order.userDetails.requestingUser).toEqual(
+          'Requestor Sharma <requestor@gmail.com>',
+        );
+        expect(order.userDetails.organisation).toBeDefined();
 
         expect(order.items).toHaveLength(1);
         const firstOrderItem = order.items[0];
@@ -158,35 +159,22 @@ describe('OrdersClient', () => {
         expect(item.transcriptRequested).toBeFalsy();
       });
 
-      it('can update the currency of an order', async () => {
+      it('can update an order', async () => {
         await provider.addInteraction(
-          updateOrderCurrency(existingOrderIdFromStaging, 'GBP'),
-        );
-
-        const updatedOrder = await client.orders.updateCurrency(
-          existingOrderIdFromStaging,
-          'GBP',
-        );
-
-        assertOnMandatoryOrderFields(updatedOrder);
-        expect(updatedOrder.totalPrice.currency).toEqual('GBP');
-      });
-
-      it('can update the organisation of an order', async () => {
-        await provider.addInteraction(
-          updateOrderOrganisation(existingOrderIdFromStaging, {
-            organisation: 'A super awesome org',
+          updateOrder(existingOrderIdFromStaging, {
+            currency: 'GBP',
+            organisation: 'pb and jelly',
           }),
         );
 
         const updatedOrder = await client.orders.updateOrder(
           existingOrderIdFromStaging,
-          { organisation: 'A super awesome org' },
+          { currency: 'GBP', organisation: 'pb and jelly' },
         );
 
-        expect(updatedOrder.userDetails.organisation).toEqual(
-          'A super awesome org',
-        );
+        assertOnMandatoryOrderFields(updatedOrder);
+        expect(updatedOrder.totalPrice.currency).toEqual('GBP');
+        expect(updatedOrder.userDetails.organisation).toEqual('pb and jelly');
       });
 
       it('can update the price and license of an order item', async () => {

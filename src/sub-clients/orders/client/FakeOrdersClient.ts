@@ -16,24 +16,9 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
   public get(id: string): Promise<Order | null> {
     return Promise.resolve(this.orders.find(order => order.id === id) || null);
   }
+
   public getAll(): Promise<Order[]> {
     return Promise.resolve(this.orders);
-  }
-  public async updateCurrency(id: string, currency: string): Promise<Order> {
-    const order = await this.get(id);
-
-    if (!order) {
-      throw new Error(`Cannot update order: ${id}`);
-    }
-    return Promise.resolve({
-      ...order,
-      ...{
-        totalPrice: {
-          ...order.totalPrice,
-          currency,
-        },
-      },
-    });
   }
 
   public async updateOrder(
@@ -49,9 +34,14 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
     return Promise.resolve({
       ...order,
       ...{
+        totalPrice: {
+          ...order.totalPrice,
+          currency: updateRequest?.currency || order.totalPrice.currency,
+        },
         userDetails: {
           ...order.userDetails,
-          organisation: updateRequest?.organisation!!,
+          organisation:
+            updateRequest?.organisation || order.userDetails.organisation,
         },
       },
     });

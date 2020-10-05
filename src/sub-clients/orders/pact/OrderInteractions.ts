@@ -165,12 +165,12 @@ export const updateOrderCurrency = (
   },
 });
 
-export const updateOrderOrganisation = (
+export const updateOrder = (
   id: string,
   updateRequest: OrderUpdateRequest,
 ): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'Patch order organisation',
+  uponReceiving: 'Patch order',
   withRequest: {
     method: 'PATCH',
     path: `/v1/orders/${id}`,
@@ -189,10 +189,15 @@ export const updateOrderOrganisation = (
     },
     body: like({
       ...createOrderWithMandatoryFields(id),
-      ...{
-        userDetails: {
-          organisationLabel: updateRequest.organisation,
-        },
+      userDetails: {
+        ...createOrderWithMandatoryFields(exisitngOrderItemIdForStaging)
+          .userDetails,
+        organisationLabel: updateRequest.organisation,
+      },
+      totalPrice: {
+        ...createOrderWithMandatoryFields(exisitngOrderItemIdForStaging)
+          .totalPrice.contents,
+        currency: updateRequest.currency,
       },
     }),
   },
@@ -202,7 +207,7 @@ export const updateOrderItem = (
   orderId: string,
   orderItemId: any,
   request: OrderItemUpdateRequest,
-  description: string = 'Patch order',
+  description: string = 'Patch order item',
 ): InteractionObject => ({
   state: undefined,
   uponReceiving: description,

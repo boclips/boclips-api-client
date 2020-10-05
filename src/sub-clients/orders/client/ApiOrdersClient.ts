@@ -24,23 +24,6 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
       return OrderConverter.convertEmbeddedResource(response);
     });
   }
-  public updateCurrency(id: string, currency: string): Promise<Order> {
-    const orderLink = this.getLinkOrThrow('order');
-
-    return this.axios
-      .patch(
-        `${expandUrlTemplate(orderLink.href, { id })}?currency=${currency}`, // TODO this should be a HATEOAS link on the order
-        null,
-        {
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
-        },
-      )
-      .then((response: AxiosResponse) => {
-        return OrderConverter.convertResource(response);
-      });
-  }
 
   public updateOrder(
     id: string,
