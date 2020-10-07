@@ -44,6 +44,7 @@ export class OrderConverter {
       transcriptRequested,
       links: {
         self: new Link(_links.self),
+        update: new Link(_links.update),
       },
       items: OrderConverter.orderItemsConverter(items),
     };

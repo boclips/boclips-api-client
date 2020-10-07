@@ -28,6 +28,7 @@ export class OrdersFactory {
         },
         links: {
           self: new Link({ href: 'v1/orders/123' }),
+          update: new Link({ href: '/v1/orders' }),
         },
         items: [],
       },

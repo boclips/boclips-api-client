@@ -14,6 +14,7 @@ export interface Order {
   userDetails: UserDetails;
   links: {
     self: Link;
+    update: Link;
   };
   items: OrderItem[];
   transcriptRequested?: boolean;

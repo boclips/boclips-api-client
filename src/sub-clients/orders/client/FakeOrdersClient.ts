@@ -22,13 +22,13 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
   }
 
   public async updateOrder(
-    id: string,
+    orderToUpdate: Order,
     updateRequest: OrderUpdateRequest,
   ): Promise<Order> {
-    const order = await this.get(id);
+    const order = await this.get(orderToUpdate.id);
 
     if (!order) {
-      throw new Error(`Cannot update order: ${id}`);
+      throw new Error(`Cannot update order: ${orderToUpdate.id}`);
     }
 
     return Promise.resolve({

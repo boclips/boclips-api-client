@@ -1,3 +1,4 @@
+import { OrdersFactory } from './../../../test-support/OrdersFactory';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
@@ -167,10 +168,20 @@ describe('OrdersClient', () => {
           }),
         );
 
-        const updatedOrder = await client.orders.updateOrder(
-          existingOrderIdFromStaging,
-          { currency: 'GBP', organisation: 'pb and jelly' },
-        );
+        const order = OrdersFactory.sample({
+          id: existingOrderIdFromStaging,
+          links: {
+            self: new Link({ href: 'blah' }),
+            update: new Link({
+              href: `${provider.mockService.baseUrl}/v1/orders/${existingOrderIdFromStaging}`,
+            }),
+          },
+        });
+
+        const updatedOrder = await client.orders.updateOrder(order, {
+          currency: 'GBP',
+          organisation: 'pb and jelly',
+        });
 
         assertOnMandatoryOrderFields(updatedOrder);
         expect(updatedOrder.totalPrice.currency).toEqual('GBP');

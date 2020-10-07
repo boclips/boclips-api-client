@@ -26,21 +26,21 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
   }
 
   public updateOrder(
-    id: string,
+    order: Order,
     updateRequest: OrderUpdateRequest,
   ): Promise<Order> {
-    const orderLink = this.getLinkOrThrow('order');
+    const orderLink = order.links.update.getOriginalLink();
+
+    if (!orderLink) {
+      throw Error('Not allowed to update order');
+    }
 
     return this.axios
-      .patch(
-        expandUrlTemplate(orderLink.href, { id }), // TODO this should be a HATEOAS link on the order
-        updateRequest,
-        {
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
+      .patch(orderLink, updateRequest, {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
         },
-      )
+      })
       .then((response: AxiosResponse) => {
         console.log(response.data);
         return OrderConverter.convertResource(response);
