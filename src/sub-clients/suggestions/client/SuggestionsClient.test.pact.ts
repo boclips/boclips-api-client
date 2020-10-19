@@ -4,7 +4,6 @@ import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { Suggestions } from '../model/Suggestions';
 import { getSuggestions } from '../pact/SuggestionInteractions';
-import { Link } from '../../common/model/LinkEntity';
 
 describe('SuggestionsClient', () => {
   withClients(
