@@ -21,18 +21,12 @@ describe('SuggestionsClient', () => {
               {
                 id: 'channel-id',
                 name: 'The History Channel',
-                links: {
-                  searchVideos: new Link({ href: 'x', templated: true }),
-                },
               },
             ],
             subjects: [
               {
                 id: 'subject-id',
                 name: 'Art History',
-                links: {
-                  searchVideos: new Link({ href: 'x', templated: true }),
-                },
               },
             ],
           });
