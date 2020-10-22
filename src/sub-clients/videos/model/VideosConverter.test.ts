@@ -190,7 +190,7 @@ describe('VideosConverter', () => {
     expect(video.channel).toEqual('TED-Ed');
     expect(video.channelId).toEqual('5cf141cbc1475c47f717870d');
     expect(video.channelVideoId).toEqual('1805_08_A');
-    expect(video.types!![0].id).toEqual(3);
-    expect(video.types!![0].name).toEqual('Instructional Clips');
+    expect(video.types![0].id).toEqual(3);
+    expect(video.types![0].name).toEqual('Instructional Clips');
   });
 });

@@ -12,7 +12,7 @@ export interface Organisation {
 }
 
 export interface OrganisationDetails {
-  type: 'SCHOOL' | 'DISTRICT' | 'API';
+  type: 'SCHOOL' | 'DISTRICT' | 'API' | 'LTI_DEPLOYMENT';
   name: string;
   domain: string;
   country: Country;

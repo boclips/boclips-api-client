@@ -46,7 +46,8 @@ export class OrganisationsConverter {
     if (
       entity.type !== 'SCHOOL' &&
       entity.type !== 'DISTRICT' &&
-      entity.type !== 'API'
+      entity.type !== 'API' &&
+      entity.type !== 'LTI_DEPLOYMENT'
     ) {
       throw new Error(`Unsupported type of organisation ${entity.type}`);
     }

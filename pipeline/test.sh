@@ -9,4 +9,5 @@ cd ${app}
 npm ci
 npm run compile
 npm run test
+npm run lint
 )

@@ -22,7 +22,7 @@ function convertChannelSuggestion(
 ): ChannelSuggestion {
   return {
     id: channel.id,
-    name: channel.name
+    name: channel.name,
   };
 }
 
@@ -31,6 +31,6 @@ function convertSubjectSuggestion(
 ): SubjectSuggestion {
   return {
     id: subject.id,
-    name: subject.name
+    name: subject.name,
   };
 }

@@ -167,8 +167,8 @@ describe('VideosClient', () => {
         expect(updatedVideo.bestFor).toEqual([
           { label: 'tag-5d3ac0185b3f3b7ba335e105' },
         ]);
-        expect(updatedVideo.contentWarnings!!.length).toEqual(1);
-        expect(updatedVideo.contentWarnings!![0].id).toEqual(
+        expect(updatedVideo.contentWarnings!.length).toEqual(1);
+        expect(updatedVideo.contentWarnings![0].id).toEqual(
           '5ebeb463cb699d30b550e59b',
         );
       });

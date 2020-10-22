@@ -143,6 +143,32 @@ describe('OrganisationConverter', () => {
     expect(convertedOrganisation.organisationDetails.type).toEqual('API');
   });
 
+  it('converts lti deployment to an Organisation', () => {
+    const ltiDeploymentEntity = OrganisationEntityFactory.sample({
+      id: '5db06aec7c6c020001339eb2',
+      contentPackageId: '',
+      organisationDetails: {
+        name: 'lti-deployment',
+        domain: '',
+        country: {
+          id: 'USA',
+          name: 'United states',
+          states: null,
+        },
+        type: 'LTI_DEPLOYMENT',
+        state: null,
+      },
+    });
+
+    const convertedOrganisation: Organisation = OrganisationsConverter.convert(
+      ltiDeploymentEntity,
+    );
+
+    expect(convertedOrganisation.organisationDetails.type).toEqual(
+      'LTI_DEPLOYMENT',
+    );
+  });
+
   it('can convert a page of Organisations, and page metadata', () => {
     const pageResponse = {
       _embedded: {
