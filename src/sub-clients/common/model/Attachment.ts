@@ -34,7 +34,7 @@ export interface AttachmentRequest {
 export const getAttachmentType = (
   value: string,
 ): AttachmentType | undefined => {
-  const matchedKey = Object.keys(AttachmentType).find(type => type === value);
+  const matchedKey = Object.keys(AttachmentType).find((type) => type === value);
 
   if (!matchedKey) {
     throw Error(`${value} is not a valid attachment type`);

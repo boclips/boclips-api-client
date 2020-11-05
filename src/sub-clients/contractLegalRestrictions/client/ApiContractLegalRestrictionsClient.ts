@@ -3,7 +3,8 @@ import { ContractLegalRestrictionsConverter } from '../ContractLegalRestrictions
 import { ContractLegalRestriction } from '../model/ContractLegalRestriction';
 import { ContractLegalRestrictionsClient } from './ContractLegalRestrictionsClient';
 
-export class ApiContractLegalRestrictionsClient extends ApiSubClient
+export class ApiContractLegalRestrictionsClient
+  extends ApiSubClient
   implements ContractLegalRestrictionsClient {
   public async getAll(): Promise<ContractLegalRestriction[]> {
     const contractLegalRestrictions = this.getLinkOrThrow(
@@ -12,6 +13,6 @@ export class ApiContractLegalRestrictionsClient extends ApiSubClient
 
     return this.axios
       .get(contractLegalRestrictions.href)
-      .then(it => ContractLegalRestrictionsConverter.convert(it));
+      .then((it) => ContractLegalRestrictionsConverter.convert(it));
   }
 }

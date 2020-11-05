@@ -31,7 +31,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
       currency: request.currency,
       legalRestriction: request.legalRestrictions,
       distributionMethods: request.distributionMethods!,
-      contentCategories: request.contentCategories?.map(key => ({
+      contentCategories: request.contentCategories?.map((key) => ({
         key,
         label: `Label: ${key}`,
       })),
@@ -72,7 +72,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
   }
 
   public get(id: string): Promise<Channel> {
-    const retrievedContentPartner = this.channels.find(i => i.id === id);
+    const retrievedContentPartner = this.channels.find((i) => i.id === id);
 
     if (retrievedContentPartner != undefined) {
       return Promise.resolve(retrievedContentPartner);
@@ -89,7 +89,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
   }
 
   public update(id: string, contentPartner: ChannelRequest) {
-    const index = this.channels.findIndex(i => i.id === id);
+    const index = this.channels.findIndex((i) => i.id === id);
 
     if (index < 0) {
       return Promise.reject();
@@ -97,7 +97,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
 
     const updatedFields: Partial<Channel> = {};
 
-    Object.keys(contentPartner).forEach(key => {
+    Object.keys(contentPartner).forEach((key) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       updatedFields[key] = contentPartner[key];
@@ -118,7 +118,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
   public async getSignedLink(filename: string): Promise<string> {
     const newFilename = filename.replace('.', '_') + '_signed_link';
     const signedLinkUrl = `http://www.server.com/${newFilename}`;
-    return new Promise(resolve => resolve(signedLinkUrl));
+    return new Promise((resolve) => resolve(signedLinkUrl));
   }
 
   // private ageRange(ageRangeIds: string[]): AgeRange {

@@ -3,7 +3,8 @@ import { EduAgeRange } from '../model/EduAgeRange';
 import { EduAgeRangesClient } from './EduAgeRangesClient';
 import { AxiosResponse } from 'axios';
 
-export class ApiEduAgeRangesClient extends ApiSubClient
+export class ApiEduAgeRangesClient
+  extends ApiSubClient
   implements EduAgeRangesClient {
   public async getAll(): Promise<EduAgeRange[]> {
     const eduLink = this.getLinkOrThrow('ageRanges');
@@ -14,7 +15,7 @@ export class ApiEduAgeRangesClient extends ApiSubClient
         (eduResponse: AxiosResponse<any>) =>
           eduResponse.data._embedded.ageRanges,
       )
-      .then(ageRanges =>
+      .then((ageRanges) =>
         ageRanges.map((ageRange: any) => ({
           id: ageRange.id,
           min: ageRange.min,

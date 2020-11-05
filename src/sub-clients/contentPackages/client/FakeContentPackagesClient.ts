@@ -15,7 +15,7 @@ export class FakeContentPackagesClient
     this.contentPackages = [];
   }
   get(id: string): Promise<ContentPackage> {
-    const contentPackage = this.contentPackages.find(it => it.id === id);
+    const contentPackage = this.contentPackages.find((it) => it.id === id);
     if (contentPackage) {
       return Promise.resolve(contentPackage);
     } else {
@@ -27,7 +27,7 @@ export class FakeContentPackagesClient
     id: string,
     contentPackageRequest: ContentPackage,
   ): Promise<ContentPackage> {
-    const contentPackage = this.contentPackages.find(it => it.id === id);
+    const contentPackage = this.contentPackages.find((it) => it.id === id);
     if (contentPackage) {
       contentPackageRequest['id'] = id;
       this.contentPackages[

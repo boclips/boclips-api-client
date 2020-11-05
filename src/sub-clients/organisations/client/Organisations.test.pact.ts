@@ -45,7 +45,7 @@ describe('Organisation', () => {
         expect(organisationsPage?.page.length).toBeGreaterThanOrEqual(1);
         expect(
           organisationsPage?.page.some(
-            account => account.id === USA_ORGANISATION_ID_FROM_STAGING,
+            (account) => account.id === USA_ORGANISATION_ID_FROM_STAGING,
           ),
         ).toBeTruthy();
       });
@@ -66,7 +66,7 @@ describe('Organisation', () => {
         expect(organisationsPage?.page.length).toBeGreaterThanOrEqual(1);
         expect(
           organisationsPage?.page.some(
-            account => account.id === USA_ORGANISATION_ID_FROM_STAGING,
+            (account) => account.id === USA_ORGANISATION_ID_FROM_STAGING,
           ),
         ).toBeTruthy();
       });

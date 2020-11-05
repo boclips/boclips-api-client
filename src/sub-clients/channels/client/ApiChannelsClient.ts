@@ -35,7 +35,7 @@ export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
   public async getContentCategories(): Promise<ContentCategories> {
     const contentCategories = this.getLinkOrThrow('contentCategories');
 
-    return this.axios.get(contentCategories.href).then(res => ({
+    return this.axios.get(contentCategories.href).then((res) => ({
       categories: res.data._embedded.contentCategories,
     }));
   }
@@ -63,7 +63,7 @@ export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
       .post(link, {
         filename,
       })
-      .then(it => {
+      .then((it) => {
         return it.headers.location;
       });
   }

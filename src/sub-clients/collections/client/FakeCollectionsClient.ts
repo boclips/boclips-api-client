@@ -18,7 +18,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
   private nextId: string = '123';
 
   public get(id: string): Promise<Collection | null> {
-    return Promise.resolve(this.collections.find(c => c.id === id) || null);
+    return Promise.resolve(this.collections.find((c) => c.id === id) || null);
   }
 
   public getCollections(
@@ -47,7 +47,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
       id: this.nextId,
       title,
       description,
-      videos: videos.map(id =>
+      videos: videos.map((id) =>
         VideoWithBoclipsProjectionFactory.sample({ id }),
       ),
       discoverable: discoverable,
@@ -58,7 +58,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
   }
 
   public update(id: string, request: UpdateCollectionRequest): Promise<{}> {
-    this.collections = this.collections.map(it =>
+    this.collections = this.collections.map((it) =>
       it.id === id
         ? {
             ...it,
@@ -83,7 +83,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
     }
 
     if (request.hasOwnProperty('subjects')) {
-      partialCollection.subjects = request.subjects?.map(id =>
+      partialCollection.subjects = request.subjects?.map((id) =>
         SubjectFactory.sample({ id }),
       );
     }
@@ -93,7 +93,7 @@ export class FakeCollectionsClient implements CollectionsClient, Clearable {
     }
 
     if (request.hasOwnProperty('videos')) {
-      partialCollection.videos = request.videos?.map(id =>
+      partialCollection.videos = request.videos?.map((id) =>
         VideoWithBoclipsProjectionFactory.sample({ id }),
       );
     }

@@ -33,7 +33,7 @@ export class FakeIngestVideosClient implements IngestVideosClient, Clearable {
     page: PageRequest,
     filterRequest?: IngestVideosFilterRequest,
   ): Promise<Pageable<IngestVideo>> {
-    const videosToReturn = this.videos.filter(it =>
+    const videosToReturn = this.videos.filter((it) =>
       FakeIngestVideosClient.applyFilters(it, filterRequest),
     );
 

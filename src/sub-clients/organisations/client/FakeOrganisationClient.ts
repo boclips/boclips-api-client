@@ -21,7 +21,7 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
   ): Promise<Pageable<Organisation> | null> {
     const filteredOrganisations = !!filter.countryCode
       ? this.organisations.filter(
-          organisation =>
+          (organisation) =>
             organisation.organisationDetails.country.id === filter.countryCode,
         )
       : this.organisations;
@@ -44,7 +44,9 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
     organisation: Organisation,
     updateOrganisationRequest: UpdateOrganisationRequest,
   ): Promise<Organisation> {
-    const index = this.organisations.findIndex(it => it.id === organisation.id);
+    const index = this.organisations.findIndex(
+      (it) => it.id === organisation.id,
+    );
 
     if (index > -1) {
       this.organisations[index].accessExpiresOn =

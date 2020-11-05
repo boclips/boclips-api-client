@@ -80,7 +80,7 @@ describe('IngestVideosClient', () => {
           filter,
         );
 
-        filteredIngestVideos.page.forEach(it =>
+        filteredIngestVideos.page.forEach((it) =>
           expect(it.channel.name).toBe('AP'),
         );
       });

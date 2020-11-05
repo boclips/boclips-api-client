@@ -8,7 +8,7 @@ const createAxiosInstanceFrom = (prototype: AxiosInstance): AxiosInstance => {
   copyAxiosInterceptors(prototype, axiosInstance);
 
   axiosInstance.interceptors.response.use(
-    response => response,
+    (response) => response,
     axiosErrorToBoclipsApiError,
   );
   return axiosInstance;

@@ -22,7 +22,7 @@ describe('MarketingStatusesClient', () => {
         const response = await client.ingestVideoStatuses.getAll();
 
         expect(response).not.toEqual([]);
-        response.map(it => expect(typeof it).toEqual('string'));
+        response.map((it) => expect(typeof it).toEqual('string'));
       });
     },
   );

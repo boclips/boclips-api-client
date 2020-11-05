@@ -13,14 +13,15 @@ import {
 } from '../model/CollectionRequest';
 import { CollectionsClient } from './CollectionsClient';
 
-export class ApiCollectionsClient extends ApiSubClient
+export class ApiCollectionsClient
+  extends ApiSubClient
   implements CollectionsClient {
   public get(id: string): Promise<Collection> {
     const collectionLink = this.getLinkOrThrow('collection');
 
     return this.axios
       .get<CollectionEntity>(expandUrlTemplate(collectionLink.href, { id }))
-      .then(response => CollectionsConverter.convert(response.data));
+      .then((response) => CollectionsConverter.convert(response.data));
   }
   public getCollections(
     filter: CollectionFilter,
@@ -36,7 +37,7 @@ export class ApiCollectionsClient extends ApiSubClient
       .get<PageableEntity<CollectionEntity>>(
         expandUrlTemplate(filteredCollectionsLink.href, { ...filter }),
       )
-      .then(response => CollectionsConverter.convertPage(response.data));
+      .then((response) => CollectionsConverter.convertPage(response.data));
   }
 
   public getMyCollections(
@@ -54,14 +55,14 @@ export class ApiCollectionsClient extends ApiSubClient
           projection,
         }),
       )
-      .then(response => CollectionsConverter.convertPage(response.data));
+      .then((response) => CollectionsConverter.convertPage(response.data));
   }
 
   public create(request: CreateCollectionRequest): Promise<string> {
     const createCollectionLink = this.getLinkOrThrow('createCollection');
     return this.axios
       .post(createCollectionLink.href, request)
-      .then(response => ApiCollectionsClient.extractIdFromLocation(response));
+      .then((response) => ApiCollectionsClient.extractIdFromLocation(response));
   }
 
   public update(id: string, request: UpdateCollectionRequest): Promise<{}> {

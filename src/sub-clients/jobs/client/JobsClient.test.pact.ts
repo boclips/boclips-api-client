@@ -101,8 +101,8 @@ describe('JobsClient', () => {
           { manuallyCreated: true },
         );
 
-        expect(jobs.page.find(it => it.id === 'manual-job')).not.toBeNull();
-        expect(jobs.page.find(it => it.id === 'auto-job')).toBeUndefined();
+        expect(jobs.page.find((it) => it.id === 'manual-job')).not.toBeNull();
+        expect(jobs.page.find((it) => it.id === 'auto-job')).toBeUndefined();
       });
 
       it('can fetch a job', async () => {

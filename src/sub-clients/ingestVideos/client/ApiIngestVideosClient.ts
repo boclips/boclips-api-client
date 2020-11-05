@@ -11,7 +11,8 @@ import { AxiosResponse } from 'axios';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import { isNotEmpty } from './isNotEmpty';
 
-export class ApiIngestVideosClient extends ApiSubClient
+export class ApiIngestVideosClient
+  extends ApiSubClient
   implements IngestVideosClient {
   public async getAll(
     pageRequest: PageRequest,

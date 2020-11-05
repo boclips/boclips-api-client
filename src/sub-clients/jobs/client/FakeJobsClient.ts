@@ -61,7 +61,7 @@ export class FakeJobsClient implements JobsClient, Clearable {
   }
 
   public get(id: string): Promise<Job> {
-    const retrievedJob = this.jobs.find(job => job.id === id);
+    const retrievedJob = this.jobs.find((job) => job.id === id);
 
     if (retrievedJob != undefined) {
       return Promise.resolve(retrievedJob);

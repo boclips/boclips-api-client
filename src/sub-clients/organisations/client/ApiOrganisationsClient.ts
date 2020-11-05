@@ -13,7 +13,8 @@ import {
 import { User } from '../model/User';
 import { UserConverter } from '../model/UserConverter';
 
-export class ApiOrganisationsClient extends ApiSubClient
+export class ApiOrganisationsClient
+  extends ApiSubClient
   implements OrganisationsClient {
   public async getOrganisations(
     filter?: OrganisationFilters,

@@ -20,7 +20,7 @@ export class FakeSubjectsClient implements SubjectsClient, Clearable {
       throw new Error('Update link not available');
     }
 
-    const subject = this.subjects.find(it => it.id === currentSubject.id)!;
+    const subject = this.subjects.find((it) => it.id === currentSubject.id)!;
     subject.name = updateRequest.name;
   }
 

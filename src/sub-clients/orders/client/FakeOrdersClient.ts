@@ -14,7 +14,9 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
   }
 
   public get(id: string): Promise<Order | null> {
-    return Promise.resolve(this.orders.find(order => order.id === id) || null);
+    return Promise.resolve(
+      this.orders.find((order) => order.id === id) || null,
+    );
   }
 
   public getAll(): Promise<Order[]> {
@@ -52,8 +54,8 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
   ): Promise<Order> {
     return Promise.resolve(
       this.orders
-        .map(order => {
-          const index = order.items.findIndex(it => it.id === item.id);
+        .map((order) => {
+          const index = order.items.findIndex((it) => it.id === item.id);
 
           if (index < 0) {
             return null;
@@ -74,7 +76,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
 
           return order;
         })
-        .find(o => o != null)!,
+        .find((o) => o != null)!,
     );
   }
 

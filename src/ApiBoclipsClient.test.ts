@@ -43,7 +43,7 @@ describe('ApiBoclipsClient', () => {
   it('calls request interceptors from the original axios instance', async () => {
     const mockInterceptor = jest.fn();
     const axiosInstance = axios.create();
-    axiosInstance.interceptors.request.use(req => {
+    axiosInstance.interceptors.request.use((req) => {
       mockInterceptor();
       return req;
     });
@@ -56,7 +56,7 @@ describe('ApiBoclipsClient', () => {
   it('calls response interceptors from the original axios instance', async () => {
     const mockInterceptor = jest.fn();
     const axiosInstance = axios.create();
-    axiosInstance.interceptors.response.use(req => {
+    axiosInstance.interceptors.response.use((req) => {
       mockInterceptor();
       return req;
     });

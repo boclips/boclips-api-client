@@ -9,14 +9,14 @@ export class ApiUsersClient extends ApiSubClient implements UsersClient {
     const isUserActiveLink = this.getLinkOrThrow('isUserActive');
     return this.axios
       .get(expandUrlTemplate(isUserActiveLink.href, { id }))
-      .then(response => response.status === 200)
-      .catch(_ => false);
+      .then((response) => response.status === 200)
+      .catch((_) => false);
   }
 
   getCurrentUser(): Promise<User> {
     const currentUser = this.getLinkOrThrow('currentUser');
     return this.axios
       .get(currentUser.href)
-      .then(response => UserConverter.convert(response.data));
+      .then((response) => UserConverter.convert(response.data));
   }
 }

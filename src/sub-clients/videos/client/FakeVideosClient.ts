@@ -22,7 +22,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
   };
 
   public get(id: string, referer?: string, shareCode?: string): Promise<Video> {
-    const video = this.videos.find(video => video.id === id);
+    const video = this.videos.find((video) => video.id === id);
     if (video === undefined) return Promise.reject();
 
     const isAuthenticatedUser = !(referer || shareCode);
@@ -40,15 +40,15 @@ export class FakeVideosClient implements VideosClient, Clearable {
   public search(
     searchRequest: VideoSearchRequest,
   ): Promise<VideoSearchResults> {
-    const matchingVideos = this.videos.filter(video => {
+    const matchingVideos = this.videos.filter((video) => {
       const matchedChannel = searchRequest.channel?.find(
-        channelId => channelId === video.channelId,
+        (channelId) => channelId === video.channelId,
       );
 
-      const matchedId = searchRequest.id?.find(id => id === video.id);
+      const matchedId = searchRequest.id?.find((id) => id === video.id);
 
-      const matchedSubject = searchRequest.subject?.some(subject =>
-        video.subjects.map(s => s.id).includes(subject),
+      const matchedSubject = searchRequest.subject?.some((subject) =>
+        video.subjects.map((s) => s.id).includes(subject),
       );
 
       const matchedTitle = searchRequest.query
@@ -112,10 +112,10 @@ export class FakeVideosClient implements VideosClient, Clearable {
           ? { min: ageRangeMin, max: ageRangeMax }
           : originalVideo.ageRange,
       subjects: subjectIds
-        ? subjectIds.map(id => ({ id, name: `subject${id}` }))
+        ? subjectIds.map((id) => ({ id, name: `subject${id}` }))
         : originalVideo.subjects,
       contentWarnings: contentWarningIds
-        ? contentWarningIds.map(id => ({ id, label: `warning${id}` }))
+        ? contentWarningIds.map((id) => ({ id, label: `warning${id}` }))
         : originalVideo.contentWarnings,
       bestFor: [{ label: `tag-${tagId}` }],
     };
@@ -139,7 +139,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
   }
 
   public getCaptions(id: string): Promise<CaptionContent> {
-    const captions = this.videoCaptions.find(it => it.videoId === id);
+    const captions = this.videoCaptions.find((it) => it.videoId === id);
     return captions === undefined
       ? Promise.reject('Not found')
       : Promise.resolve({ content: captions.content });
@@ -149,7 +149,9 @@ export class FakeVideosClient implements VideosClient, Clearable {
     id: string,
     updateCaptionsRequest: UpdateCaptionRequest,
   ): Promise<string> {
-    const captionIndex = this.videoCaptions.findIndex(it => it.videoId === id);
+    const captionIndex = this.videoCaptions.findIndex(
+      (it) => it.videoId === id,
+    );
 
     if (captionIndex !== -1) {
       this.videoCaptions[captionIndex].content = updateCaptionsRequest.captions;
@@ -230,7 +232,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
   }
 
   private findVideoIndexById(id: string): Promise<number> {
-    const videoIndex = this.videos.findIndex(video => video.id === id);
+    const videoIndex = this.videos.findIndex((video) => video.id === id);
     return videoIndex < 0
       ? Promise.reject(`No video found with id: ${id}`)
       : Promise.resolve(videoIndex);

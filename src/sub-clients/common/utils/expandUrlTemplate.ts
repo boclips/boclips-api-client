@@ -14,7 +14,5 @@ export default function expandUrlTemplate(
       | null;
   },
 ) {
-  return URI.expand(template, params)
-    .normalize()
-    .href();
+  return URI.expand(template, params).normalize().href();
 }

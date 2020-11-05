@@ -9,7 +9,7 @@ export class ApiSubjectsClient extends ApiSubClient implements SubjectsClient {
 
     return this.axios
       .get(subjectsLink.href)
-      .then(response =>
+      .then((response) =>
         response.data._embedded.subjects.map((it: any) =>
           SubjectsConverter.convert(it),
         ),

@@ -17,7 +17,7 @@ export class FakeContractsClient implements ContractsClient, Clearable {
     return Promise.resolve({
       page:
         projection === Projection.LIST
-          ? this.contracts.map(full => ({
+          ? this.contracts.map((full) => ({
               id: full.id,
               contentPartnerName: full.contentPartnerName,
             }))
@@ -40,7 +40,7 @@ export class FakeContractsClient implements ContractsClient, Clearable {
   }
 
   public update(id: string, contractUpdate: UpdateContractRequest) {
-    const index = this.contracts.findIndex(i => i.id === id);
+    const index = this.contracts.findIndex((i) => i.id === id);
 
     if (index < 0) {
       return Promise.reject();
@@ -48,7 +48,7 @@ export class FakeContractsClient implements ContractsClient, Clearable {
 
     const updatedFields: Partial<Channel> = {};
 
-    Object.keys(contractUpdate).forEach(key => {
+    Object.keys(contractUpdate).forEach((key) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       updatedFields[key] = contractUpdate[key];
@@ -79,6 +79,6 @@ export class FakeContractsClient implements ContractsClient, Clearable {
   getSignedLink(filename: string): Promise<string> {
     const newFilename = filename.replace('.', '_') + '_signed_link';
     const signedLinkUrl = `http://www.server.com/${newFilename}`;
-    return new Promise(resolve => resolve(signedLinkUrl));
+    return new Promise((resolve) => resolve(signedLinkUrl));
   }
 }

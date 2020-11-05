@@ -10,7 +10,7 @@ export class FakeShareCodesClient implements ShareCodesClient, Clearable {
 
   public async validate(userId: string, shareCode: string): Promise<boolean> {
     return !!this.validShareCodes.find(
-      code => code.id === userId && code.code === shareCode,
+      (code) => code.id === userId && code.code === shareCode,
     );
   }
 

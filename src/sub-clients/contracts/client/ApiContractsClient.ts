@@ -10,7 +10,8 @@ import { PageRequest } from '../../common/model/PageRequest';
 import { PageableConverter } from '../../common/model/PageableConverter';
 import { AxiosResponse } from 'axios';
 
-export class ApiContractsClient extends ApiSubClient
+export class ApiContractsClient
+  extends ApiSubClient
   implements ContractsClient {
   getAll(
     page: PageRequest,
@@ -71,15 +72,15 @@ export class ApiContractsClient extends ApiSubClient
 
     return this.axios
       .get(expandUrlTemplate(contractLink.href, { id }))
-      .then(response => ContractsConverter.fromResource(response.data));
+      .then((response) => ContractsConverter.fromResource(response.data));
   }
 
   getSignedLink(filename: string): Promise<string> {
-    this.axios.interceptors.request.use(request => {
+    this.axios.interceptors.request.use((request) => {
       return request;
     });
 
-    this.axios.interceptors.response.use(response => {
+    this.axios.interceptors.response.use((response) => {
       return response;
     });
 
@@ -89,7 +90,7 @@ export class ApiContractsClient extends ApiSubClient
       .post(link, {
         filename,
       })
-      .then(it => {
+      .then((it) => {
         return it.headers.location;
       });
   }
