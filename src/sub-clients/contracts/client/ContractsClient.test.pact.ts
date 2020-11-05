@@ -11,7 +11,7 @@ import {
   getSignedLink,
   updateContract,
 } from '../pact/ContractsInteractions';
-import moment = require('moment');
+import dayjs from '../../../dayjs/index';
 
 const sampleContract = ContractFactory.sample({
   id: existingContractFromStaging,
@@ -143,8 +143,8 @@ describe('Contracts', () => {
 
         await client.contracts.update(existingContractFromStaging, {
           contractDates: {
-            start: moment('2012-01-31'),
-            end: moment('2012-02-01'),
+            start: dayjs('2012-01-31'),
+            end: dayjs('2012-02-01'),
           },
         });
       });

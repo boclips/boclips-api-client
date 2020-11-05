@@ -1,5 +1,5 @@
 import { Playback } from '../sub-clients/common/model/Playback';
-import moment from 'moment';
+import dayjs from '../dayjs/index';
 import { Link } from '../sub-clients/common/model/LinkEntity';
 
 export class PlaybackFactory {
@@ -11,7 +11,7 @@ export class PlaybackFactory {
   private static defaultFields = (): Playback => ({
     type: 'STREAM',
     id: 'playback-id',
-    duration: moment.duration(),
+    duration: dayjs.duration(),
     maxResolutionAvailable: true,
     links: {
       createPlayerInteractedWithEvent: new Link({ href: 'events' }),

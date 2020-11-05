@@ -1,7 +1,7 @@
 import { Playback } from './Playback';
 import { PlaybackConverter } from './PlaybackConverter';
 import { Link } from './LinkEntity';
-import moment = require('moment');
+import dayjs from '../../../dayjs/index';
 
 describe('PlaybackConverter', () => {
   it('converts', () => {
@@ -54,7 +54,7 @@ describe('PlaybackConverter', () => {
 
     expect(playback.id).toEqual('Fj5hU6SoCDA');
     expect(playback.type).toEqual('STREAM');
-    expect(playback.duration).toEqual(moment.duration('PT1M3S'));
+    expect(playback.duration).toEqual(dayjs.duration('PT1M3S'));
     expect(playback.links).toEqual({
       createPlaybackEvent: link('https://playback'),
       createPlayerInteractedWithEvent: link('https://player-interaction'),

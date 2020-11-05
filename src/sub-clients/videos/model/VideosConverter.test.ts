@@ -1,7 +1,7 @@
 import { Video } from './Video';
 import { VideosConverter } from './VideosConverter';
 import { Link } from '../../common/model/LinkEntity';
-import moment = require('moment');
+import dayjs from '../../../dayjs/index';
 import { VideoEntity } from './VideoEntity';
 import { CaptionStatus } from './CaptionStatus';
 
@@ -105,7 +105,7 @@ describe('VideosConverter', () => {
       id: 'Fj5hU6SoCDA',
       type: 'STREAM',
       maxResolutionAvailable: true,
-      duration: moment.duration('PT1M3S'),
+      duration: dayjs.duration('PT1M3S'),
       links: {
         createPlaybackEvent: new Link({
           href: 'https://api.boclips.com/v1/events/playback',

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from '../dayjs/index';
 import { Contract } from '../types';
 import { ContractResource } from '../sub-clients/contracts/resources/ContractResource';
 
@@ -8,7 +8,7 @@ export class ContractFactory {
       id: 'some-id',
       contentPartnerName: 'some-name',
       contractDocument: 'http://somedocument.com',
-      contractDates: { start: moment('2012-01-31'), end: moment('2012-02-01') },
+      contractDates: { start: dayjs('2012-01-31'), end: dayjs('2012-02-01') },
       contractIsRolling: true,
       daysBeforeTerminationWarning: 100,
       yearsForMaximumLicense: 10,

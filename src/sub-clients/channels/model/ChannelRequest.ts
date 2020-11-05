@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { Duration } from 'dayjs/plugin/duration';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { LegalRestrictionRequest } from '../../legalRestrictions/model/LegalRestriction';
 import { IngestDetails } from './IngestDetails';
@@ -24,7 +24,7 @@ export interface ChannelRequest {
   isTranscriptProvided?: boolean;
   subjects?: string[];
   bestForTags?: string[];
-  deliveryFrequency?: moment.Duration;
+  deliveryFrequency?: Duration;
   ingest?: IngestDetails;
   contractId?: string;
 }

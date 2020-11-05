@@ -1,5 +1,6 @@
+import { Duration } from 'dayjs/plugin/duration';
 import { AxiosResponse } from 'axios';
-import moment from 'moment';
+import dayjs from '../../dayjs/index';
 import { Link } from '../common/model/LinkEntity';
 import { Channel } from './model/Channel';
 import { IngestDetails } from './model/IngestDetails';
@@ -85,9 +86,7 @@ export class ChannelsConverter {
     }
   }
 
-  public static convertDeliveryFrequency(
-    iso8601String: string,
-  ): moment.Duration {
-    return moment.duration(iso8601String);
+  public static convertDeliveryFrequency(iso8601String: string): Duration {
+    return dayjs.duration(iso8601String);
   }
 }

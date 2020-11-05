@@ -56,6 +56,6 @@
     "urijs": "^1.19.2"
   },
   "dependencies": {
-    "moment": "^2.29.1"
+    "dayjs": "^1.9.5"
   }
 }

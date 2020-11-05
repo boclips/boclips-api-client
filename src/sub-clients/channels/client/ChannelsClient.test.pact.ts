@@ -17,7 +17,7 @@ import {
   updateChannel,
 } from '../pact/ChannelsInteractions';
 import { BoclipsApiError } from '../../../types';
-import moment from 'moment';
+import dayjs from '../../../dayjs/index';
 
 describe('ChannelsClient', () => {
   withClients(
@@ -133,7 +133,7 @@ describe('ChannelsClient', () => {
             type: 'MRSS',
             urls: ['https://mrss.feed'],
           },
-          deliveryFrequency: moment.duration(3, 'month'),
+          deliveryFrequency: dayjs.duration(3, 'month'),
         });
       });
 

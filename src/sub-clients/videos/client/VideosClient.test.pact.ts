@@ -16,12 +16,13 @@ import { Link } from '../../common/model/LinkEntity';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { AttachmentFactory } from '../../../test-support/AttachmentsFactory';
 import { AttachmentType } from '../../common/model/Attachment';
-import moment = require('moment');
+
 import { VideoSearchRequest } from '../model/VideoSearchRequest';
 import Pageable from '../../common/model/Pageable';
 import { CaptionStatus } from '../model/CaptionStatus';
 import { CaptionContent } from '../model/CaptionContent';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
+import dayjs from '../../../dayjs/index';
 
 export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
@@ -75,7 +76,7 @@ describe('VideosClient', () => {
         );
         expect(video.playback.id).toEqual('1_pxz2v8gx');
         expect(video.playback.type).toEqual('YOUTUBE');
-        expect(video.playback.duration).toEqual(moment.duration('PT5M4S'));
+        expect(video.playback.duration).toEqual(dayjs.duration('PT5M4S'));
         expect(video.playback.links.createPlayerInteractedWithEvent).toEqual(
           new Link({
             href: 'https://api.boclips.com/v1/events',
@@ -347,7 +348,7 @@ const testVideo: Video = {
   playback: {
     type: 'YOUTUBE',
     id: '1_pxz2v8gx',
-    duration: moment.duration('PT5M4S'),
+    duration: dayjs.duration('PT5M4S'),
     links: {
       createPlayerInteractedWithEvent: new Link({
         href: 'https://api.boclips.com/v1/events',

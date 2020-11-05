@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from '../../../dayjs/index';
 import { ChannelFactory } from '../../../test-support';
 import { BoclipsApiError, Link } from '../../../types';
 import { Clearable } from '../../common/utils/Clearable';
@@ -52,7 +52,7 @@ export class FakeChannelsClient implements ChannelsClient, Clearable {
         ageRanges: fakeAgeRangeRequest,
       },
       ingest: { type: 'MANUAL' },
-      deliveryFrequency: moment.duration(6, 'months'),
+      deliveryFrequency: dayjs.duration(6, 'months'),
       links: { self: new Link({ href: `/v1/channels/${id}` }) },
     });
 

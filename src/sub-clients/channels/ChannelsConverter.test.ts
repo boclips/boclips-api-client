@@ -1,6 +1,6 @@
 import { ChannelFactory } from '../../test-support';
 import { ChannelsConverter } from './ChannelsConverter';
-import moment from 'moment';
+import dayjs from '../../dayjs/index';
 
 describe('converting a channel', () => {
   it('converts ingest details', () => {
@@ -31,7 +31,9 @@ describe('converting a channel', () => {
 
     const channel = ChannelsConverter.convertResource(resource);
 
-    expect(channel.deliveryFrequency).toEqual(moment.duration(1, 'month'));
+    expect(channel.deliveryFrequency?.toISOString()).toEqual(
+      dayjs.duration(1, 'month').toISOString(),
+    );
   });
 
   it('can handle missing delivery frequency', () => {

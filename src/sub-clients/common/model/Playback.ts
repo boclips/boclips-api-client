@@ -1,4 +1,4 @@
-import { Duration } from 'moment';
+import { Duration } from 'dayjs/plugin/duration';
 import { ModelWithLinks } from './common';
 import { Link } from './LinkEntity';
 

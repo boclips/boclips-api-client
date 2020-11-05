@@ -1,5 +1,5 @@
 import { ContractDates } from './model/ContractDates';
-import moment from 'moment';
+import dayjs from '../..//dayjs/index';
 import { Contract } from './model/Contract';
 import { ContractRequest } from './requests/ContractRequest';
 import { ContractResource } from './resources/ContractResource';
@@ -28,8 +28,8 @@ export class ContractsConverter {
     const startDate = contractDates?.start;
     const endDate = contractDates?.end;
     const dates = {
-      start: startDate ? moment(startDate) : undefined,
-      end: endDate ? moment(endDate) : undefined,
+      start: startDate ? dayjs(startDate) : undefined,
+      end: endDate ? dayjs(endDate) : undefined,
     };
     return {
       ...rest,

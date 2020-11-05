@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { Duration } from 'dayjs/plugin/duration';
 import { DistributionMethod } from '../../common/model/DistributionMethod';
 import { Link } from '../../common/model/LinkEntity';
 import { LegalRestriction } from '../../legalRestrictions/model/LegalRestriction';
@@ -24,7 +24,7 @@ export interface Channel {
   oneLineDescription?: string;
   marketingInformation?: MarketingInformation;
   pedagogyInformation?: PedagogyInformation;
-  deliveryFrequency?: moment.Duration;
+  deliveryFrequency?: Duration;
   ingest?: IngestDetails;
   contractId?: string;
   contractName?: string;

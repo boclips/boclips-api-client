@@ -1,5 +1,5 @@
 import { Playback } from './Playback';
-import moment from 'moment';
+import dayjs from '../../../dayjs/index';
 import { convertLinks } from '../utils/convertLinks';
 
 export class PlaybackConverter {
@@ -7,7 +7,7 @@ export class PlaybackConverter {
     return {
       id: entity.id,
       type: entity.type,
-      duration: moment.duration(entity.duration),
+      duration: dayjs.duration(entity.duration),
       maxResolutionAvailable: entity.maxResolutionAvailable,
       links: convertLinks(entity),
     };
