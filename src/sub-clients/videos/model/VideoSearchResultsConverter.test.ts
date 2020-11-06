@@ -26,6 +26,9 @@ describe('VideoSearchResultsConverter', () => {
           channels: {
             'TED channel': { hits: 2, id: 'ted-id' },
           },
+          videoTypes: {
+            stock: { hits: 10 },
+          },
         },
       },
     });
@@ -55,6 +58,9 @@ describe('VideoSearchResultsConverter', () => {
       },
       channels: {
         'TED channel': { hits: 2, id: 'ted-id' },
+      },
+      videoTypes: {
+        stock: { hits: 10 },
       },
     });
   });

@@ -19,6 +19,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
     subjects: {},
     durations: {},
     resourceTypes: {},
+    videoTypes: {},
   };
 
   public get(id: string, referer?: string, shareCode?: string): Promise<Video> {

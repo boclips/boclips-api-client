@@ -14,9 +14,12 @@ export interface VideoFacets {
   channels?: {
     [id: string]: Facet;
   };
+  videoTypes?: {
+    [id: string]: Facet;
+  };
 }
 
 export interface Facet {
   hits: number;
-  id?: string;
+  id?: string | null;
 }

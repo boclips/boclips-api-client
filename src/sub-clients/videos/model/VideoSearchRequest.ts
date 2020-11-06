@@ -18,5 +18,7 @@ export interface VideoSearchRequest {
   promoted?: boolean;
   resource_types?: string[];
   resource_type_facets?: string[];
+  video_type?: string[];
+  video_type_facets?: string[];
   include_channel_facets?: boolean;
 }

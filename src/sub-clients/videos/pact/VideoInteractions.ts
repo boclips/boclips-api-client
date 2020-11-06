@@ -284,10 +284,29 @@ export const searchVideo = (
         },
         _embedded: like({
           facets: like({
-            subjects: {},
-            ageRanges: {},
-            durations: {},
+            subjects: {
+              '5cb499c9fd5beb428189454c': { hits: 1, id: null },
+              '5cb499c9fd5beb428189454f': { hits: 1, id: null },
+              '5cb499c9fd5beb428189455d': { hits: 1, id: null },
+            },
+            ageRanges: {
+              '3-5': { hits: 0, id: null },
+              '5-9': { hits: 0, id: null },
+              '9-11': { hits: 0, id: null },
+              '11-14': { hits: 0, id: null },
+              '14-16': { hits: 0, id: null },
+              '16-99': { hits: 0, id: null },
+            },
+            durations: {
+              'PT0S-PT2M': { hits: 0, id: null },
+              'PT2M-PT5M': { hits: 1, id: null },
+              'PT5M-PT10M': { hits: 0, id: null },
+              'PT10M-PT20M': { hits: 0, id: null },
+              'PT20M-PT24H': { hits: 0, id: null },
+            },
+            videoTypes: { instructional: { hits: 1, id: null } },
             resourceTypes: {},
+            channels: {},
           }),
           videos: eachLike({
             id: like('id'),

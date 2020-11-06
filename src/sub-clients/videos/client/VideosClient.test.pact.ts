@@ -23,6 +23,7 @@ import { CaptionStatus } from '../model/CaptionStatus';
 import { CaptionContent } from '../model/CaptionContent';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 import dayjs from '../../../dayjs/index';
+import { VideoSearchResults } from '../model/VideoSearchResults';
 
 export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
@@ -266,19 +267,67 @@ describe('VideosClient', () => {
           searchVideo(searchRequest, 'filtering by video ids'),
         );
         if (isATestClient(client)) {
+          client.videos.setFacets({
+            videoTypes: { instructional: { id: null, hits: 1 } },
+            subjects: {
+              '5cb499c9fd5beb428189454c': { id: null, hits: 1 },
+              '5cb499c9fd5beb428189454f': { id: null, hits: 1 },
+              '5cb499c9fd5beb428189455d': { id: null, hits: 1 },
+            },
+            ageRanges: {
+              '3-5': { id: null, hits: 0 },
+              '5-9': { id: null, hits: 0 },
+              '9-11': { id: null, hits: 0 },
+              '11-14': { id: null, hits: 0 },
+              '14-16': { id: null, hits: 0 },
+              '16-99': { id: null, hits: 0 },
+            },
+            durations: {
+              'PT0S-PT2M': { id: null, hits: 0 },
+              'PT2M-PT5M': { id: null, hits: 1 },
+              'PT5M-PT10M': { id: null, hits: 0 },
+              'PT10M-PT20M': { id: null, hits: 0 },
+              'PT20M-PT24H': { id: null, hits: 0 },
+            },
+            channels: {},
+            resourceTypes: {},
+          });
           client.videos.insertVideo({
             ...testVideo,
             id: existingVideoWithoutAttachmentsAndBestFor,
           });
         }
 
-        const results: Pageable<Video> = await client.videos.search(
+        const results: VideoSearchResults = await client.videos.search(
           searchRequest,
         );
 
         expect(results.pageSpec.number).toEqual(0);
         expect(results.pageSpec.size).toEqual(10);
         expect(results.page.length > 0).toBeTruthy();
+        expect(results.facets!!.videoTypes).toEqual({
+          instructional: { id: null, hits: 1 },
+        });
+        expect(results.facets!!.durations).toEqual({
+          'PT0S-PT2M': { id: null, hits: 0 },
+          'PT2M-PT5M': { id: null, hits: 1 },
+          'PT5M-PT10M': { id: null, hits: 0 },
+          'PT10M-PT20M': { id: null, hits: 0 },
+          'PT20M-PT24H': { id: null, hits: 0 },
+        });
+        expect(results.facets!!.subjects).toEqual({
+          '5cb499c9fd5beb428189454c': { id: null, hits: 1 },
+          '5cb499c9fd5beb428189454f': { id: null, hits: 1 },
+          '5cb499c9fd5beb428189455d': { id: null, hits: 1 },
+        });
+        expect(results.facets!!.ageRanges).toEqual({
+          '3-5': { id: null, hits: 0 },
+          '5-9': { id: null, hits: 0 },
+          '9-11': { id: null, hits: 0 },
+          '11-14': { id: null, hits: 0 },
+          '14-16': { id: null, hits: 0 },
+          '16-99': { id: null, hits: 0 },
+        });
       });
 
       it(`can set up video thumbnail by second`, async () => {
