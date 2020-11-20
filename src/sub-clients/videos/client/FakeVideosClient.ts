@@ -59,12 +59,17 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
       const matchedPromoted = searchRequest.promoted ? video.promoted : false;
 
+      const matchedType = searchRequest.video_type?.some((videoType) =>
+        video.types?.map((t) => t.name).includes(videoType),
+      );
+
       return (
         matchedChannel ||
         matchedId ||
         matchedTitle ||
         matchedPromoted ||
-        matchedSubject
+        matchedSubject ||
+        matchedType
       );
     });
 
