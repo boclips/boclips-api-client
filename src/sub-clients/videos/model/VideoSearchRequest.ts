@@ -7,7 +7,6 @@ export interface VideoSearchRequest {
   page?: number;
   size?: number;
   sort_by?: SortKey;
-  type?: string[];
   duration?: string[];
   duration_facets?: string[];
   age_range?: string[];
@@ -18,7 +17,7 @@ export interface VideoSearchRequest {
   promoted?: boolean;
   resource_types?: string[];
   resource_type_facets?: string[];
-  video_type?: string[];
+  type?: string[];
   video_type_facets?: string[];
   include_channel_facets?: boolean;
 }
