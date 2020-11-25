@@ -1,4 +1,4 @@
-import { CartItemResource } from "./CartItemResource";
+import { CartItemResource } from './CartItemResource';
 
 export interface CartResource {
   items: CartItemResource[];

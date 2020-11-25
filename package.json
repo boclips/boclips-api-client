@@ -4,7 +4,6 @@
   "description": "Boclips API client",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "scripts": {
     "compile": "tsc -p . --noEmit",
     "clean": "rm -rf dist/*",
