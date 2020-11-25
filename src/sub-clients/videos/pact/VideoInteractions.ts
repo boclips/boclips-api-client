@@ -285,9 +285,21 @@ export const searchVideo = (
         _embedded: like({
           facets: like({
             subjects: {
-              '5cb499c9fd5beb428189454c': { hits: 1, id: null },
-              '5cb499c9fd5beb428189454f': { hits: 1, id: null },
-              '5cb499c9fd5beb428189455d': { hits: 1, id: null },
+              '5cb499c9fd5beb428189454c': {
+                hits: 1,
+                id: '5cb499c9fd5beb428189454c',
+                name: 'subject name',
+              },
+              '5cb499c9fd5beb428189454f': {
+                hits: 1,
+                id: '5cb499c9fd5beb428189454f',
+                name: 'subject name 2',
+              },
+              '5cb499c9fd5beb428189455d': {
+                hits: 1,
+                id: '5cb499c9fd5beb428189455d',
+                name: 'subject name 3',
+              },
             },
             ageRanges: {
               '3-5': { hits: 0, id: null },

@@ -270,9 +270,21 @@ describe('VideosClient', () => {
           client.videos.setFacets({
             videoTypes: { instructional: { id: null, hits: 1 } },
             subjects: {
-              '5cb499c9fd5beb428189454c': { id: null, hits: 1 },
-              '5cb499c9fd5beb428189454f': { id: null, hits: 1 },
-              '5cb499c9fd5beb428189455d': { id: null, hits: 1 },
+              '5cb499c9fd5beb428189454c': {
+                id: '5cb499c9fd5beb428189454c',
+                hits: 1,
+                name: 'subject name',
+              },
+              '5cb499c9fd5beb428189454f': {
+                id: '5cb499c9fd5beb428189454f',
+                hits: 1,
+                name: 'subject name 2',
+              },
+              '5cb499c9fd5beb428189455d': {
+                id: '5cb499c9fd5beb428189455d',
+                hits: 1,
+                name: 'subject name 3',
+              },
             },
             ageRanges: {
               '3-5': { id: null, hits: 0 },
@@ -316,9 +328,21 @@ describe('VideosClient', () => {
           'PT20M-PT24H': { id: null, hits: 0 },
         });
         expect(results.facets!!.subjects).toEqual({
-          '5cb499c9fd5beb428189454c': { id: null, hits: 1 },
-          '5cb499c9fd5beb428189454f': { id: null, hits: 1 },
-          '5cb499c9fd5beb428189455d': { id: null, hits: 1 },
+          '5cb499c9fd5beb428189454c': {
+            id: '5cb499c9fd5beb428189454c',
+            hits: 1,
+            name: 'subject name',
+          },
+          '5cb499c9fd5beb428189454f': {
+            id: '5cb499c9fd5beb428189454f',
+            hits: 1,
+            name: 'subject name 2',
+          },
+          '5cb499c9fd5beb428189455d': {
+            id: '5cb499c9fd5beb428189455d',
+            hits: 1,
+            name: 'subject name 3',
+          },
         });
         expect(results.facets!!.ageRanges).toEqual({
           '3-5': { id: null, hits: 0 },
