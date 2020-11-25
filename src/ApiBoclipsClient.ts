@@ -6,6 +6,7 @@ import { AdminLinks } from './sub-clients/adminLinks/model/AdminLinks';
 import { ApiAttachmentsClient } from './sub-clients/attachments/client/ApiAttachmentsClient';
 import { ApiBestForTagsClient } from './sub-clients/bestForTags/client/ApiBestForClients';
 import { BestForTagsClient } from './sub-clients/bestForTags/client/BestForTagsClient';
+import { ApiCartsClient } from './sub-clients/carts/client/ApiCartsClient';
 import { ApiCollectionsClient } from './sub-clients/collections/client/ApiCollectionsClient';
 import { ApiChannelsClient } from './sub-clients/channels/client/ApiChannelsClient';
 import { ApiContractLegalRestrictionsClient } from './sub-clients/contractLegalRestrictions/client/ApiContractLegalRestrictionsClient';
@@ -61,6 +62,7 @@ export class ApiBoclipsClient implements BoclipsClient {
   public attachments: ApiAttachmentsClient;
   public contentPackages: ApiContentPackagesClient;
   public users: ApiUsersClient;
+  public carts: ApiCartsClient;
 
   constructor(axios: AxiosInstance, adminLinks: AdminLinks) {
     this.legalRestrictions = new ApiLegalRestrictionsClient(adminLinks, axios);
@@ -92,6 +94,7 @@ export class ApiBoclipsClient implements BoclipsClient {
     this.attachments = new ApiAttachmentsClient(adminLinks, axios);
     this.contentPackages = new ApiContentPackagesClient(adminLinks, axios);
     this.users = new ApiUsersClient(adminLinks, axios);
+    this.carts = new ApiCartsClient(adminLinks, axios);
   }
 
   public static create = async (

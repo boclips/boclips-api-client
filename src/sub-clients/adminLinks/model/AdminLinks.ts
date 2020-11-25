@@ -50,4 +50,5 @@ export interface AdminLinks {
   updateContentPackage: LinkEntity;
   isUserActive: LinkEntity;
   currentUser: LinkEntity;
+  cart: LinkEntity;
 }
