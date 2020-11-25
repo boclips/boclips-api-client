@@ -15,11 +15,12 @@ export class FakeVideosClient implements VideosClient, Clearable {
   private validShareCode: { [id: string]: string } = {};
   private videoCaptions: { videoId: string; content: string }[] = [];
   private facets: VideoFacets = {
-    ageRanges: {},
-    subjects: {},
-    durations: {},
-    resourceTypes: {},
-    videoTypes: {},
+    ageRanges: [],
+    subjects: [],
+    durations: [],
+    resourceTypes: [],
+    videoTypes: [],
+    channels: [],
   };
 
   public get(id: string, referer?: string, shareCode?: string): Promise<Video> {

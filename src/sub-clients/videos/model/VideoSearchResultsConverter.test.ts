@@ -11,23 +11,24 @@ describe('VideoSearchResultsConverter', () => {
         videos: [videoEntity],
         facets: {
           ageRanges: {
-            '3-4': { hits: 4 },
-            '5-8': { hits: 2 },
+            '3-4': { hits: 4, name: '3-4' },
+            '5-8': { hits: 2, name: '5-8' },
+            '9-12': { hits: 0, name: '9-12' },
           },
           subjects: {
-            'Art History': { hits: 4 },
+            'art-id': { name: 'Art history', hits: 4 },
           },
           durations: {
             'P20-P40': { hits: 4 },
           },
           resourceTypes: {
-            'Lesson Guide': { hits: 4 },
+            '123': { hits: 4, name: 'Lesson Guide' },
           },
           channels: {
-            'TED channel': { hits: 2, id: 'ted-id' },
+            'ted-id': { hits: 2, name: 'TED channel' },
           },
           videoTypes: {
-            stock: { hits: 10 },
+            stock: { name: 'Stock', hits: 10 },
           },
         },
       },
@@ -42,26 +43,41 @@ describe('VideoSearchResultsConverter', () => {
       VideosConverter.convert(videoEntity),
     );
 
-    expect(convertedResults.facets).toEqual({
-      ageRanges: {
-        '3-4': { hits: 4 },
-        '5-8': { hits: 2 },
+    expect(convertedResults.facets?.ageRanges).toEqual([
+      { id: '3-4', name: '3-4', hits: 4 },
+      { id: '5-8', name: '5-8', hits: 2 },
+      { id: '9-12', name: '9-12', hits: 0 },
+    ]);
+    expect(convertedResults.facets?.subjects).toEqual([
+      { name: 'Art history', hits: 4, id: 'art-id' },
+    ]);
+    expect(convertedResults.facets?.durations).toEqual([
+      {
+        id: 'P20-P40',
+        name: 'P20-P40',
+        hits: 4,
       },
-      subjects: {
-        'Art History': { hits: 4 },
+    ]);
+    expect(convertedResults.facets?.resourceTypes).toEqual([
+      {
+        name: 'Lesson Guide',
+        id: '123',
+        hits: 4,
       },
-      durations: {
-        'P20-P40': { hits: 4 },
+    ]);
+    expect(convertedResults.facets?.channels).toEqual([
+      {
+        name: 'TED channel',
+        hits: 2,
+        id: 'ted-id',
       },
-      resourceTypes: {
-        'Lesson Guide': { hits: 4 },
+    ]);
+    expect(convertedResults.facets?.videoTypes).toEqual([
+      {
+        id: 'stock',
+        hits: 10,
+        name: 'Stock',
       },
-      channels: {
-        'TED channel': { hits: 2, id: 'ted-id' },
-      },
-      videoTypes: {
-        stock: { hits: 10 },
-      },
-    });
+    ]);
   });
 });

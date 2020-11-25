@@ -24,6 +24,7 @@ import { CaptionContent } from '../model/CaptionContent';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 import dayjs from '../../../dayjs/index';
 import { VideoSearchResults } from '../model/VideoSearchResults';
+import { FacetsFactory } from '../../../test-support/FacetsFactory';
 
 export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
@@ -267,43 +268,25 @@ describe('VideosClient', () => {
           searchVideo(searchRequest, 'filtering by video ids'),
         );
         if (isATestClient(client)) {
-          client.videos.setFacets({
-            videoTypes: { instructional: { id: null, hits: 1 } },
-            subjects: {
-              '5cb499c9fd5beb428189454c': {
-                id: '5cb499c9fd5beb428189454c',
-                hits: 1,
-                name: 'subject name',
-              },
-              '5cb499c9fd5beb428189454f': {
-                id: '5cb499c9fd5beb428189454f',
-                hits: 1,
-                name: 'subject name 2',
-              },
-              '5cb499c9fd5beb428189455d': {
-                id: '5cb499c9fd5beb428189455d',
-                hits: 1,
-                name: 'subject name 3',
-              },
-            },
-            ageRanges: {
-              '3-5': { id: null, hits: 0 },
-              '5-9': { id: null, hits: 0 },
-              '9-11': { id: null, hits: 0 },
-              '11-14': { id: null, hits: 0 },
-              '14-16': { id: null, hits: 0 },
-              '16-99': { id: null, hits: 0 },
-            },
-            durations: {
-              'PT0S-PT2M': { id: null, hits: 0 },
-              'PT2M-PT5M': { id: null, hits: 1 },
-              'PT5M-PT10M': { id: null, hits: 0 },
-              'PT10M-PT20M': { id: null, hits: 0 },
-              'PT20M-PT24H': { id: null, hits: 0 },
-            },
-            channels: {},
-            resourceTypes: {},
-          });
+          client.videos.setFacets(
+            FacetsFactory.sample({
+              videoTypes: [
+                { id: 'instructional', hits: 1, name: 'instructional' },
+              ],
+              durations: [
+                { id: 'PT2M-PT5M', name: 'PT2M-PT5M', hits: 1 },
+                { id: 'PT20M-PT24H', name: 'PT20M-PT24H', hits: 0 },
+              ],
+              subjects: [
+                {
+                  id: '5cb499c9fd5beb428189454c',
+                  hits: 1,
+                  name: 'subject name',
+                },
+              ],
+              ageRanges: [],
+            }),
+          );
           client.videos.insertVideo({
             ...testVideo,
             id: existingVideoWithoutAttachmentsAndBestFor,
@@ -317,41 +300,25 @@ describe('VideosClient', () => {
         expect(results.pageSpec.number).toEqual(0);
         expect(results.pageSpec.size).toEqual(10);
         expect(results.page.length > 0).toBeTruthy();
-        expect(results.facets!!.videoTypes).toEqual({
-          instructional: { id: null, hits: 1 },
-        });
-        expect(results.facets!!.durations).toEqual({
-          'PT0S-PT2M': { id: null, hits: 0 },
-          'PT2M-PT5M': { id: null, hits: 1 },
-          'PT5M-PT10M': { id: null, hits: 0 },
-          'PT10M-PT20M': { id: null, hits: 0 },
-          'PT20M-PT24H': { id: null, hits: 0 },
-        });
-        expect(results.facets!!.subjects).toEqual({
-          '5cb499c9fd5beb428189454c': {
+        expect(results.facets!!.videoTypes).toEqual([
+          {
+            id: 'instructional',
+            name: 'instructional',
+            hits: 1,
+          },
+        ]);
+        expect(results.facets!!.durations).toEqual([
+          { id: 'PT2M-PT5M', name: 'PT2M-PT5M', hits: 1 },
+          { id: 'PT20M-PT24H', name: 'PT20M-PT24H', hits: 0 },
+        ]);
+        expect(results.facets!!.subjects).toEqual([
+          {
             id: '5cb499c9fd5beb428189454c',
             hits: 1,
             name: 'subject name',
           },
-          '5cb499c9fd5beb428189454f': {
-            id: '5cb499c9fd5beb428189454f',
-            hits: 1,
-            name: 'subject name 2',
-          },
-          '5cb499c9fd5beb428189455d': {
-            id: '5cb499c9fd5beb428189455d',
-            hits: 1,
-            name: 'subject name 3',
-          },
-        });
-        expect(results.facets!!.ageRanges).toEqual({
-          '3-5': { id: null, hits: 0 },
-          '5-9': { id: null, hits: 0 },
-          '9-11': { id: null, hits: 0 },
-          '11-14': { id: null, hits: 0 },
-          '14-16': { id: null, hits: 0 },
-          '16-99': { id: null, hits: 0 },
-        });
+        ]);
+        expect(results.facets!!.ageRanges).toEqual([]);
       });
 
       it(`can set up video thumbnail by second`, async () => {

@@ -1,26 +1,14 @@
 export interface VideoFacets {
-  subjects: {
-    [id: string]: Facet;
-  };
-  ageRanges: {
-    [id: string]: Facet;
-  };
-  durations: {
-    [id: string]: Facet;
-  };
-  resourceTypes: {
-    [id: string]: Facet;
-  };
-  channels?: {
-    [id: string]: Facet;
-  };
-  videoTypes?: {
-    [id: string]: Facet;
-  };
+  subjects: Facet[];
+  ageRanges: Facet[];
+  durations: Facet[];
+  resourceTypes: Facet[];
+  channels: Facet[];
+  videoTypes: Facet[];
 }
 
 export interface Facet {
   hits: number;
-  id?: string | null;
-  name?: string | null;
+  id: string;
+  name: string;
 }
