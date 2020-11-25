@@ -188,6 +188,10 @@ export const getAdminLinks = (): InteractionObject => ({
           href: `${provider.mockService.baseUrl}/v1/users/_self`,
           templated: false,
         }),
+        cart: like({
+          href: `${provider.mockService.baseUrl}/v1/cart`,
+          templated: false,
+        }),
       },
     },
   },
