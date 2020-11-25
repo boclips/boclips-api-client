@@ -18,11 +18,11 @@ export class FakeCartsClient implements CartsClient, Clearable {
     return (this.cart.items.length + 1).toString();
   };
 
-  public get(): Promise<Cart> {
+  public getCart(): Promise<Cart> {
     return Promise.resolve(this.cart);
   }
 
-  public addItem(_: any, videoId: string): Promise<CartItem> {
+  public addCartItem(_: any, videoId: string): Promise<CartItem> {
     const cartItem = {
       id: this.generateItemId(),
       videoId,

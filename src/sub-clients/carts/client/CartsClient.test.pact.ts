@@ -17,13 +17,13 @@ describe('CartsClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          await client.carts.addItem('', 'video-id-1');
+          await client.carts.addCartItem('', 'video-id-1');
         }
       });
 
       it('can get cart', async () => {
         await provider.addInteraction(getCartsInteraction());
-        const response = await client.carts.get();
+        const response = await client.carts.getCart();
 
         expect(response.items[0].videoId).toEqual('video-id-1');
         expect(response.items[0].links.self.getOriginalLink()).toEqual(
@@ -44,7 +44,7 @@ describe('CartsClient', () => {
             }),
           },
         };
-        const response = await client.carts.addItem(cart, videoId);
+        const response = await client.carts.addCartItem(cart, videoId);
 
         expect(response.videoId).toEqual(videoId);
         expect(response.id).not.toBeNull();

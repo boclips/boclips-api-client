@@ -6,7 +6,7 @@ import { CartItem } from '../model/CartItem';
 import { CartsClient } from './CartsClient';
 
 export class ApiCartsClient extends ApiSubClient implements CartsClient {
-  public async get(): Promise<Cart> {
+  public async getCart(): Promise<Cart> {
     const cartsLink = this.getLinkOrThrow('cart');
 
     return this.axios
@@ -14,7 +14,7 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
       .then((it) => CartConverter.convertCart(it.data));
   }
 
-  public async addItem(cart: Cart, videoId: string): Promise<CartItem> {
+  public async addCartItem(cart: Cart, videoId: string): Promise<CartItem> {
     const orderLink = cart.links.addItem.getOriginalLink();
 
     return this.axios
