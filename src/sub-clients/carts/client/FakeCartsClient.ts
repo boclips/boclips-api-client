@@ -7,8 +7,8 @@ import { CartsClient } from './CartsClient';
 const emptyCart = {
   items: [],
   links: {
-    self: new Link({ href: 'cart', templated: false }),
-    addItem: new Link({ href: 'addItem', templated: false }),
+    self: new Link({ href: '/cart', templated: false }),
+    addItem: new Link({ href: '/addItem', templated: false }),
   },
 };
 
@@ -22,11 +22,11 @@ export class FakeCartsClient implements CartsClient, Clearable {
     return Promise.resolve(this.cart);
   }
 
-  public addCartItem(_: any, videoId: string): Promise<CartItem> {
+  public addItemToCart(_: any, videoId: string): Promise<CartItem> {
     const cartItem = {
       id: this.generateItemId(),
       videoId,
-      links: { self: new Link({ href: 'cartItem', templated: false }) },
+      links: { self: new Link({ href: `/cartItem`, templated: false }) },
     };
 
     this.cart.items.push(cartItem);

@@ -17,7 +17,7 @@ describe('CartsClient', () => {
         client = await getClient();
 
         if (isATestClient(client)) {
-          await client.carts.addCartItem('', 'video-id-1');
+          await client.carts.addItemToCart('', 'video-id-1');
         }
       });
 
@@ -25,14 +25,15 @@ describe('CartsClient', () => {
         await provider.addInteraction(getCartsInteraction());
         const response = await client.carts.getCart();
 
+        expect(response.items[0].id).not.toBeNull();
         expect(response.items[0].videoId).toEqual('video-id-1');
-        expect(response.items[0].links.self.getOriginalLink()).toEqual(
-          'cartItem',
-        );
+        expect(response.items[0].links.self.getOriginalLink()).toEqual('/cartItem');
+        expect(response.links.self.getOriginalLink()).not.toBeNull()
+        expect(response.links.addItem.getOriginalLink()).not.toBeNull()
       });
 
       it('can add item to cart', async () => {
-        const videoId = 'video-id';
+        const videoId = 'new-video-id';
         await provider.addInteraction(postCartsInteraction(videoId));
         const cart = {
           items: [],
@@ -44,7 +45,7 @@ describe('CartsClient', () => {
             }),
           },
         };
-        const response = await client.carts.addCartItem(cart, videoId);
+        const response = await client.carts.addItemToCart(cart, videoId);
 
         expect(response.videoId).toEqual(videoId);
         expect(response.id).not.toBeNull();

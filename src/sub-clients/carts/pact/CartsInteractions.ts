@@ -1,6 +1,7 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
+import { eachLike, like, term } from '@pact-foundation/pact/dsl/matchers';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
+import { provider } from "../../../pact-support/pactSetup";
 
 export const getCartsInteraction = (): InteractionObject => ({
     state: undefined,
@@ -21,12 +22,12 @@ export const getCartsInteraction = (): InteractionObject => ({
             items: eachLike({
                 videoId: 'video-id-1',
                 _links: {
-                    self: like({rel: "cartItem", href: "cartItem"}),
+                    self: like({href: "/cartItem"}),
                 }
             }),
             _links: {
-                self: like({rel: "cartItem", href: "cartItem"}),
-                addItem: like({rel: "addItem", href: "addItem"}),
+                self: like({href: "/cartItem"}),
+                addItem: like({href: "/addItem"}),
             }
         },
     },
@@ -52,12 +53,16 @@ export const postCartsInteraction = (videoId: string): InteractionObject => ({
                 generate: 'application/hal+json;charset=UTF-8',
                 matcher: contentTypeRegex,
             }),
+            location: term({
+                generate: `${provider.mockService.baseUrl}/v1/cart/items/${videoId}`,
+                matcher: `.*/v1/cart/items/.+`,
+            }),
         },
         body: {
             videoId: like(videoId),
             id: like('item-id'),
             _links: {
-                self: like({rel: "cartItem", href: "cartItem"}),
+                self: like({href: "/cartItem"}),
             },
         },
     },

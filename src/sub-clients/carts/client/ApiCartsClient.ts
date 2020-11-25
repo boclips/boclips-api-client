@@ -14,7 +14,7 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
       .then((it) => CartConverter.convertCart(it.data));
   }
 
-  public async addCartItem(cart: Cart, videoId: string): Promise<CartItem> {
+  public async addItemToCart(cart: Cart, videoId: string): Promise<CartItem> {
     const orderLink = cart.links.addItem.getOriginalLink();
 
     return this.axios
