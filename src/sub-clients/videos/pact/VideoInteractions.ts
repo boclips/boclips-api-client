@@ -296,7 +296,7 @@ export const searchVideo = (
               'PT2M-PT5M': { hits: 1, id: null },
               'PT20M-PT24H': { hits: 0, id: null },
             },
-            videoTypes: { instructional: { hits: 1 } },
+            videoTypes: { INSTRUCTIONAL: { hits: 1 } },
             resourceTypes: {},
             channels: {},
           }),

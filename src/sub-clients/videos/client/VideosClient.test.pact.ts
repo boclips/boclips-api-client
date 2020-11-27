@@ -271,7 +271,7 @@ describe('VideosClient', () => {
           client.videos.setFacets(
             FacetsFactory.sample({
               videoTypes: [
-                { id: 'instructional', hits: 1, name: 'instructional' },
+                { id: 'INSTRUCTIONAL', hits: 1, name: 'INSTRUCTIONAL' },
               ],
               durations: [
                 { id: 'PT2M-PT5M', name: 'PT2M-PT5M', hits: 1 },
@@ -302,8 +302,8 @@ describe('VideosClient', () => {
         expect(results.page.length > 0).toBeTruthy();
         expect(results.facets!!.videoTypes).toEqual([
           {
-            id: 'instructional',
-            name: 'instructional',
+            id: 'INSTRUCTIONAL',
+            name: 'INSTRUCTIONAL',
             hits: 1,
           },
         ]);
