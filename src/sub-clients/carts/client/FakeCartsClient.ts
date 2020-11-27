@@ -17,18 +17,24 @@ export class FakeCartsClient implements CartsClient, Clearable {
   private generateItemId = () => {
     return (this.cart.items.length + 1).toString();
   };
+  private createCartItem = (videoId: string) => {
+    return {
+      id: this.generateItemId(),
+      videoId,
+      links: { self: new Link({ href: `/cartItem`, templated: false }) },
+    };
+  };
 
   public getCart(): Promise<Cart> {
     return Promise.resolve(this.cart);
   }
 
-  public addItemToCart(_: any, videoId: string): Promise<CartItem> {
-    const cartItem = {
-      id: this.generateItemId(),
-      videoId,
-      links: { self: new Link({ href: `/cartItem`, templated: false }) },
-    };
+  public insertCartItem(videoId: string) {
+    this.cart.items.push(this.createCartItem(videoId));
+  }
 
+  public addItemToCart(_: any, videoId: string): Promise<CartItem> {
+    const cartItem = this.createCartItem(videoId);
     this.cart.items.push(cartItem);
 
     return Promise.resolve(cartItem);
