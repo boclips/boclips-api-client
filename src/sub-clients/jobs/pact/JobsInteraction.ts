@@ -27,7 +27,6 @@ export const getJobsInteraction = (): InteractionObject => ({
           provider: 'Getty',
           status: 'INGESTING',
           videoSummary: like({
-            totalErrors: 1,
             totalErroredVideos: 1,
             totalSuccessfulVideos: 1,
             totalIgnoredVideos: 0,
@@ -74,7 +73,6 @@ export const getFilteredJobsInteraction = (
           provider: 'Getty',
           status: 'ERROR',
           videoSummary: like({
-            totalErrors: 1,
             totalErroredVideos: 1,
             totalSuccessfulVideos: 1,
             totalIgnoredVideos: 0,
@@ -111,7 +109,6 @@ export const getJobInteraction = (id: string): InteractionObject => ({
       provider: like('Getty'),
       status: like('INGESTING'),
       videoSummary: like({
-        totalErrors: 1,
         totalErroredVideos: 1,
         totalSuccessfulVideos: 1,
         totalIgnoredVideos: 0,

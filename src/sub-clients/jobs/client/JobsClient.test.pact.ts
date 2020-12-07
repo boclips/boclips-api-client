@@ -72,7 +72,6 @@ describe('JobsClient', () => {
         expect(firstJob.provider).toEqual('Getty');
         expect(firstJob.status).toEqual('INGESTING');
         expect(firstJob.videoSummary.totalErroredVideos).toEqual(1);
-        expect(firstJob.videoSummary.totalErrors).toEqual(1);
         expect(firstJob.videoSummary.totalSuccessfulVideos).toEqual(1);
         expect(firstJob.videoSummary.totalIgnoredVideos).toEqual(0);
         expect(firstJob.links.self.getOriginalLink()).toEqual(
@@ -116,7 +115,6 @@ describe('JobsClient', () => {
         expect(job.provider).toEqual('Getty');
         expect(job.status).toEqual('INGESTING');
         expect(job.videoSummary.totalErroredVideos).toEqual(1);
-        expect(job.videoSummary.totalErrors).toEqual(1);
         expect(job.videoSummary.totalSuccessfulVideos).toEqual(1);
         expect(job.videoSummary.totalIgnoredVideos).toEqual(0);
         expect(job.videos).toHaveLength(1);
