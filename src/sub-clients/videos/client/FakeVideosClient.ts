@@ -43,37 +43,95 @@ export class FakeVideosClient implements VideosClient, Clearable {
     searchRequest: VideoSearchRequest,
   ): Promise<VideoSearchResults> {
     const matchingVideos = this.videos.filter((video) => {
-      const matchedChannel = searchRequest.channel?.find(
-        (channelId) => channelId === video.channelId,
-      );
+      let matchingQuery = true;
+      let matchingChannel = true;
+      let matchingId = true;
+      let matchingSubject = true;
+      let matchingPromoted = true;
+      let matchingType = true;
 
-      const matchedId = searchRequest.id?.find((id) => id === video.id);
+      if (
+        searchRequest.channel &&
+        searchRequest.channel.length > 0 &&
+        searchRequest.channel?.find(
+          (channelId) => channelId !== video.channelId,
+        )
+      ) {
+        console.log(
+          `checking video:${video.title} Doesn't match Channel, failing out`,
+          searchRequest.channel,
+        );
+        matchingChannel = false;
+      }
 
-      const matchedSubject = searchRequest.subject?.some((subject) =>
-        video.subjects.map((s) => s.id).includes(subject),
-      );
+      if (
+        searchRequest.id &&
+        searchRequest.id.length > 0 &&
+        searchRequest.id?.find((id) => id !== video.id)
+      ) {
+        console.log(
+          `checking video:${video.title} Doesn't match Id, failing out`,
+          searchRequest.id,
+        );
+        matchingId = false;
+      }
 
-      const matchedTitle = searchRequest.query
-        ? video.title.indexOf(searchRequest.query) > -1 ||
-          video.description.indexOf(searchRequest.query) > -1
-        : false;
+      if (
+        searchRequest.subject &&
+        searchRequest.subject.length > 0 &&
+        searchRequest.subject?.some(
+          (subject) => !video.subjects.map((s) => s.id).includes(subject),
+        )
+      ) {
+        console.log(
+          `checking video:${video.title} Doesn't match Subject, failing out`,
+          searchRequest.subject,
+        );
+        matchingSubject = false;
+      }
 
-      const matchedPromoted = searchRequest.promoted ? video.promoted : false;
+      if (
+        searchRequest.query &&
+        searchRequest.query.length > 0 &&
+        video.title.indexOf(searchRequest.query) === -1 &&
+        video.description.indexOf(searchRequest.query) === -1
+      ) {
+        console.log(
+          `checking video:${video.title} Doesn't match Query, failing out`,
+          searchRequest.query,
+        );
+        matchingQuery = false;
+      }
 
-      const matchedType = searchRequest.type
-        ? searchRequest.type.length > 0 &&
-          searchRequest.type.some((videoType) =>
-            video.types?.map((t) => t.name).includes(videoType),
-          )
-        : false;
+      if (searchRequest.promoted && searchRequest.promoted !== video.promoted) {
+        console.log(
+          `checking video:${video.title} Doesn't match Promoted, failing out`,
+          searchRequest.promoted,
+        );
+        matchingPromoted = false;
+      }
+
+      if (
+        searchRequest.type &&
+        searchRequest.type.length > 0 &&
+        searchRequest.type.some(
+          (videoType) => !video.types?.map((t) => t.name).includes(videoType),
+        )
+      ) {
+        console.log(
+          `checking video:${video.title} Doesn't match Type, failing out`,
+          searchRequest.type,
+        );
+        matchingType = false;
+      }
 
       return (
-        matchedChannel ||
-        matchedId ||
-        matchedTitle ||
-        matchedPromoted ||
-        matchedSubject ||
-        matchedType
+        matchingQuery &&
+        matchingChannel &&
+        matchingId &&
+        matchingSubject &&
+        matchingPromoted &&
+        matchingType
       );
     });
 

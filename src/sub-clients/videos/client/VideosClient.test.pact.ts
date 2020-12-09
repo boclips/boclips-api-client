@@ -1,5 +1,9 @@
 import { withClients } from '../../../pact-support/pactTestWrapper';
-import { FakeBoclipsClient, isATestClient } from '../../../test-support';
+import {
+  FakeBoclipsClient,
+  isATestClient,
+  SubjectFactory,
+} from '../../../test-support';
 import { ApiBoclipsClient } from '../../../ApiBoclipsClient';
 import { provider } from '../../../pact-support/pactSetup';
 import { Video } from '../model/Video';
@@ -30,6 +34,7 @@ export const existingVideoWithAttachmentAndBestForFromStaging =
   '5c92b2f4d0f34e48bbfb40d9';
 export const existingVideoWithoutAttachmentsAndBestFor =
   '5d2856277e173c570e69c459';
+export const videoWithIdTitle = '5d68fa38820558197236704d';
 export const existingKalturaVideoFromStaging = '5c542ab85438cdbcb56ddceb';
 export const tedChannelId = '5cf140c4c1475c47f7178678';
 
@@ -319,6 +324,45 @@ describe('VideosClient', () => {
           },
         ]);
         expect(results.facets!!.ageRanges).toEqual([]);
+      });
+
+      it(`can filter by subject and query`, async () => {
+        const querySearchRequest: VideoSearchRequest = {
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          query: '5d68fa38820558197236704d',
+          page: 0,
+          subject: ['5cb499c9fd5beb428189455d'],
+          size: 10,
+        };
+
+        await provider.addInteraction(
+          searchVideo(querySearchRequest, 'filtering by query and subject'),
+        );
+        if (isATestClient(client)) {
+          client.videos.insertVideo({
+            ...testVideo,
+            id: videoWithIdTitle,
+            title: '5d68fa38820558197236704d 1',
+            subjects: [
+              SubjectFactory.sample({ id: '5cb499c9fd5beb428189455d' }),
+            ],
+          });
+          client.videos.insertVideo({
+            ...testVideo,
+            title: '5d68fa38820558197236704d 2',
+            subjects: [
+              SubjectFactory.sample({ id: '5cb499c9fd5beb428189455e' }),
+            ],
+          });
+        }
+
+        const results: VideoSearchResults = await client.videos.search(
+          querySearchRequest,
+        );
+
+        expect(results.pageSpec.number).toEqual(0);
+        expect(results.pageSpec.size).toEqual(10);
+        expect(results.page.length).toEqual(1);
       });
 
       it(`can set up video thumbnail by second`, async () => {
