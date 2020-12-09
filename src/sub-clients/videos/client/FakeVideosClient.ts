@@ -43,13 +43,6 @@ export class FakeVideosClient implements VideosClient, Clearable {
     searchRequest: VideoSearchRequest,
   ): Promise<VideoSearchResults> {
     const matchingVideos = this.videos.filter((video) => {
-      let matchingQuery = true;
-      let matchingChannel = true;
-      let matchingId = true;
-      let matchingSubject = true;
-      let matchingPromoted = true;
-      let matchingType = true;
-
       if (
         searchRequest.channel &&
         searchRequest.channel.length > 0 &&
@@ -57,11 +50,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
           (channelId) => channelId !== video.channelId,
         )
       ) {
-        console.log(
-          `checking video:${video.title} Doesn't match Channel, failing out`,
-          searchRequest.channel,
-        );
-        matchingChannel = false;
+        return false;
       }
 
       if (
@@ -69,11 +58,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
         searchRequest.id.length > 0 &&
         searchRequest.id?.find((id) => id !== video.id)
       ) {
-        console.log(
-          `checking video:${video.title} Doesn't match Id, failing out`,
-          searchRequest.id,
-        );
-        matchingId = false;
+        return false;
       }
 
       if (
@@ -83,11 +68,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
           (subject) => !video.subjects.map((s) => s.id).includes(subject),
         )
       ) {
-        console.log(
-          `checking video:${video.title} Doesn't match Subject, failing out`,
-          searchRequest.subject,
-        );
-        matchingSubject = false;
+        return false;
       }
 
       if (
@@ -96,19 +77,11 @@ export class FakeVideosClient implements VideosClient, Clearable {
         video.title.indexOf(searchRequest.query) === -1 &&
         video.description.indexOf(searchRequest.query) === -1
       ) {
-        console.log(
-          `checking video:${video.title} Doesn't match Query, failing out`,
-          searchRequest.query,
-        );
-        matchingQuery = false;
+        return false;
       }
 
       if (searchRequest.promoted && searchRequest.promoted !== video.promoted) {
-        console.log(
-          `checking video:${video.title} Doesn't match Promoted, failing out`,
-          searchRequest.promoted,
-        );
-        matchingPromoted = false;
+        return false;
       }
 
       if (
@@ -118,21 +91,10 @@ export class FakeVideosClient implements VideosClient, Clearable {
           (videoType) => !video.types?.map((t) => t.name).includes(videoType),
         )
       ) {
-        console.log(
-          `checking video:${video.title} Doesn't match Type, failing out`,
-          searchRequest.type,
-        );
-        matchingType = false;
+        return false;
       }
 
-      return (
-        matchingQuery &&
-        matchingChannel &&
-        matchingId &&
-        matchingSubject &&
-        matchingPromoted &&
-        matchingType
-      );
+      return true;
     });
 
     const pageableVideos = PageableFactory.sample<Video>(matchingVideos, {
