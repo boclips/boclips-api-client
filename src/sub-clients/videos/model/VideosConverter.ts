@@ -31,6 +31,7 @@ export class VideosConverter {
       attachments: entity.attachments.map(convertAttachment) || [],
       contentWarnings: entity.contentWarnings,
       captionStatus: (CaptionStatus as any)[entity.captionStatus] ?? undefined,
+      price: entity.price,
     };
   }
 }

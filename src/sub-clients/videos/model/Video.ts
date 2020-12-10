@@ -1,3 +1,4 @@
+import { Price } from './Price';
 import { Subject } from '../../subjects/model/Subject';
 import { Playback } from '../../common/model/Playback';
 import { AgeRange } from '../../common/model/AgeRange';
@@ -39,6 +40,7 @@ export interface Video extends ModelWithLinks {
     captions?: Link;
     assets?: Link;
   };
+  price?: Price;
   channel?: string;
   channelId?: string;
   channelVideoId?: string;

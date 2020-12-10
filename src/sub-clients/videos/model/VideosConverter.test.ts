@@ -174,6 +174,11 @@ describe('VideosConverter', () => {
   it('converts a Video with Boclips projection', () => {
     const entityWithBoclipsProjection = {
       ...baseVideoEntity,
+      price: {
+        currency: 'USD',
+        amount: 20,
+        displayValue: '$ 20',
+      },
       channel: 'TED-Ed',
       channelId: '5cf141cbc1475c47f717870d',
       channelVideoId: '1805_08_A',
@@ -186,6 +191,10 @@ describe('VideosConverter', () => {
     };
 
     const video = VideosConverter.convert(entityWithBoclipsProjection);
+
+    expect(video.price?.currency).toEqual('USD');
+    expect(video.price?.amount).toEqual(20);
+    expect(video.price?.displayValue).toEqual('$ 20');
 
     expect(video.channel).toEqual('TED-Ed');
     expect(video.channelId).toEqual('5cf141cbc1475c47f717870d');
