@@ -21,11 +21,12 @@ export interface Order {
 }
 
 export enum OrderStatus {
-  READY,
-  IN_PROGRESS,
-  INCOMPLETED,
-  CANCELLED,
-  INVALID,
+  READY = 'READY',
+  IN_PROGRESS = 'IN_PROGRESS',
+  INCOMPLETED = 'INCOMPLETED',
+  DELIVERED = 'DELIVERED',
+  CANCELLED = 'CANCELLED',
+  INVALID = 'INVALID',
 }
 
 interface UserDetails {

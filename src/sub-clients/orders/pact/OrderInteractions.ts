@@ -194,6 +194,7 @@ export const updateOrder = (
           .userDetails,
         organisationLabel: updateRequest.organisation,
       },
+      status: updateRequest.status,
       totalPrice: {
         ...createOrderWithMandatoryFields(exisitngOrderItemIdForStaging)
           .totalPrice.contents,

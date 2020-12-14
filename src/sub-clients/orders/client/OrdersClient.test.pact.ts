@@ -93,7 +93,7 @@ describe('OrdersClient', () => {
           'Sun, 02 Feb 2020 03:04:05 GMT',
         );
         expect(order.legacyOrderId).toEqual('legacy-order-id');
-        expect(order.status).toEqual(OrderStatus.READY);
+        expect(order.status).toBeDefined();
         expect(order.totalPrice.value).toEqual(123);
         expect(order.totalPrice.displayValue).toBeDefined();
         expect(order.userDetails.authorisingUser).toEqual(
@@ -165,6 +165,7 @@ describe('OrdersClient', () => {
           updateOrder(existingOrderIdFromStaging, {
             currency: 'GBP',
             organisation: 'pb and jelly',
+            status: OrderStatus.DELIVERED,
           }),
         );
 
@@ -181,11 +182,13 @@ describe('OrdersClient', () => {
         const updatedOrder = await client.orders.updateOrder(order, {
           currency: 'GBP',
           organisation: 'pb and jelly',
+          status: OrderStatus.DELIVERED,
         });
 
         assertOnMandatoryOrderFields(updatedOrder);
         expect(updatedOrder.totalPrice.currency).toEqual('GBP');
         expect(updatedOrder.userDetails.organisation).toEqual('pb and jelly');
+        expect(updatedOrder.status).toEqual(OrderStatus.DELIVERED);
       });
 
       it('can update the price and license of an order item', async () => {

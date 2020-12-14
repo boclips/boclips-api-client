@@ -40,6 +40,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
           ...order.totalPrice,
           currency: updateRequest?.currency || order.totalPrice.currency,
         },
+        status: updateRequest.status || order.status,
         userDetails: {
           ...order.userDetails,
           organisation:
