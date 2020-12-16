@@ -165,7 +165,6 @@ describe('OrdersClient', () => {
           updateOrder(existingOrderIdFromStaging, {
             currency: 'GBP',
             organisation: 'pb and jelly',
-            status: OrderStatus.DELIVERED,
           }),
         );
 
@@ -182,13 +181,11 @@ describe('OrdersClient', () => {
         const updatedOrder = await client.orders.updateOrder(order, {
           currency: 'GBP',
           organisation: 'pb and jelly',
-          status: OrderStatus.DELIVERED,
         });
 
         assertOnMandatoryOrderFields(updatedOrder);
         expect(updatedOrder.totalPrice.currency).toEqual('GBP');
         expect(updatedOrder.userDetails.organisation).toEqual('pb and jelly');
-        expect(updatedOrder.status).toEqual(OrderStatus.DELIVERED);
       });
 
       it('can update the price and license of an order item', async () => {

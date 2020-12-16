@@ -1,4 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
+import { OrderStatus } from '../model/Order';
 import { OrderItemUpdateRequest } from './../model/OrderItemUpdateRequest';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
@@ -194,7 +195,7 @@ export const updateOrder = (
           .userDetails,
         organisationLabel: updateRequest.organisation,
       },
-      status: updateRequest.status,
+      status: OrderStatus.DELIVERED,
       totalPrice: {
         ...createOrderWithMandatoryFields(exisitngOrderItemIdForStaging)
           .totalPrice.contents,
