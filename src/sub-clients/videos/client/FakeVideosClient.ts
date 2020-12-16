@@ -56,7 +56,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
       if (
         searchRequest.id &&
         searchRequest.id.length > 0 &&
-        searchRequest.id?.find((id) => id !== video.id)
+        !searchRequest.id?.includes(video.id)
       ) {
         return false;
       }
