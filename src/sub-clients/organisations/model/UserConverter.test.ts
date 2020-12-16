@@ -12,6 +12,10 @@ describe('', () => {
       features: {
         LTI_SLS_TERMS_BUTTON: true,
       },
+      organisation: {
+        id: "orgId",
+        name: "Wayne Enterprises"
+      }
     };
 
     const users: User[] = UserConverter.convertUsers({
@@ -28,6 +32,10 @@ describe('', () => {
       features: {
         LTI_SLS_TERMS_BUTTON: true,
       },
+      organisation: {
+        id: "orgId",
+        name: "Wayne Enterprises"
+      }
     });
   });
 });

@@ -4,6 +4,10 @@ export interface User {
   lastName: string;
   email: string;
   features: { [key in UserFeatureKey]?: boolean };
+  organisation: {
+    id: string;
+    name: string;
+  };
 }
 
 export type UserFeatureKey =

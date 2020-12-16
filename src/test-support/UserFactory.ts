@@ -7,6 +7,10 @@ export class UserFactory {
       firstName: user.firstName || 'blub',
       lastName: user.lastName || 'blub',
       email: user.email || 'blipidy',
+      organisation: user.organisation || {
+        id: 'org-id',
+        name: 'wayne enterprises',
+      },
       features: user.features || {
         LTI_COPY_RESOURCE_LINK: false,
         LTI_SLS_TERMS_BUTTON: false,

@@ -4,4 +4,8 @@ export interface UserEntity {
   lastName: string;
   email: string;
   features: { [key: string]: boolean };
+  organisation: {
+    id: string;
+    name: string;
+  }
 }
