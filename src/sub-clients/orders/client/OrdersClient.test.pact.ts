@@ -16,8 +16,10 @@ import {
   getOrdersInteraction,
   updateOrderItem,
   updateOrder,
+  placeOrderInteraction,
 } from '../pact/OrderInteractions';
 import { OrderCaptionStatus } from '../model/OrderItem';
+import { UserFactory } from '../../../test-support/UserFactory';
 
 describe('OrdersClient', () => {
   withClients(
@@ -134,6 +136,41 @@ describe('OrdersClient', () => {
           '/v1/orders/123/items/456',
         );
       };
+
+      it('can place an order', async () => {
+        await provider.addInteraction(placeOrderInteraction());
+        const placedOrderId = await client.orders.placeOrder(
+          [{ id: '123', videoId: '5c542ab85438cdbcb56ddcee' }],
+          UserFactory.sample({
+            id: 'b66f6f98-3c5b-49e3-ac1b-2e8def6c95c0',
+            email: 'definitely-not-batman@wayne.com',
+            firstName: 'Bruce',
+            lastName: 'Wayne',
+            organisation: {
+              id: 'org-id',
+              name: 'Wayne Enterprises',
+            },
+          }),
+        );
+
+        expect(placedOrderId).not.toBeNull();
+      });
+
+      it('can fetch an order', async () => {
+        await provider.addInteraction(
+          getOrderInteraction(existingOrderIdFromStaging),
+        );
+
+        const order = await client.orders.get(existingOrderIdFromStaging);
+        assertOnMandatoryOrderFields(order!);
+
+        expect(order!.totalPrice.currency).toEqual('USD');
+
+        const item = order!.items[0];
+        expect(item.license?.duration).toEqual('5 Years');
+        expect(item.license?.territory).toEqual('World Wide');
+        expect(item.transcriptRequested).toBeFalsy();
+      });
 
       it('can fetch all orders', async () => {
         await provider.addInteraction(getOrdersInteraction());

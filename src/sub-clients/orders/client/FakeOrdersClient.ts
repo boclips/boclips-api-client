@@ -1,10 +1,15 @@
-import { OrdersFactory } from '../../../test-support/OrdersFactory';
+import {
+  OrderItemFactory,
+  OrdersFactory,
+} from '../../../test-support/OrdersFactory';
 import { Clearable } from '../../common/utils/Clearable';
 import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
+import { User } from '../../organisations/model/User';
+import { OrderItemRequest } from '../model/OrderItemRequest';
 
 export class FakeOrdersClient implements OrdersClient, Clearable {
   private orders: Order[] = [];
@@ -83,5 +88,25 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
 
   public clear() {
     this.orders = [];
+  }
+
+  placeOrder(cartItems: OrderItemRequest[], user: User): Promise<string> {
+    const orderItems = cartItems.map((item) =>
+      OrderItemFactory.sample({
+        id: item.id,
+        video: OrderItemFactory.sampleVideo({ id: item.videoId }),
+      }),
+    );
+    const order = OrdersFactory.sample({
+      id: new Date().getMilliseconds().toString(),
+      items: orderItems,
+      userDetails: {
+        requestingUser: `${user.firstName} ${user.lastName}`,
+        authorisingUser: `${user.firstName} ${user.lastName}`,
+        organisation: user.organisation.name,
+      },
+    });
+    this.orders.push(order);
+    return Promise.resolve(order.id);
   }
 }

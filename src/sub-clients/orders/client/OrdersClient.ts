@@ -2,6 +2,8 @@ import { Order } from '../model/Order';
 import { OrderItem } from '../model/OrderItem';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
+import { User } from '../../organisations/model/User';
+import { OrderItemRequest } from '../model/OrderItemRequest';
 
 export interface OrdersClient {
   get(id: string): Promise<Order | null>;
@@ -11,4 +13,5 @@ export interface OrdersClient {
     item: OrderItem,
     updateRequest: OrderItemUpdateRequest,
   ): Promise<Order>;
+  placeOrder(cartItems: OrderItemRequest[], user: User): Promise<string>;
 }

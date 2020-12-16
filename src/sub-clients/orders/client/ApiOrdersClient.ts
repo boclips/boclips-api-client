@@ -7,8 +7,39 @@ import { OrderConverter } from '../OrderConverter';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
+import { User } from '../../organisations/model/User';
+import { OrderItemRequest } from '../model/OrderItemRequest';
 
 export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
+  public placeOrder(
+    cartItems: OrderItemRequest[],
+    user: User,
+  ): Promise<string> {
+    const orderLink = this.getLinkOrThrow('placeOrder');
+    return this.axios
+      .post(
+        orderLink.href,
+        {
+          items: cartItems,
+          user: {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            organisation: user.organisation,
+          },
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        },
+      )
+      .then((it) => {
+        return it.headers.location;
+      });
+  }
+
   public get(id: string): Promise<Order> {
     const orderLink = this.getLinkOrThrow('order');
     return this.axios
@@ -17,6 +48,7 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
         return OrderConverter.convertResource(response);
       });
   }
+
   public getAll(): Promise<Array<import('../model/Order').Order>> {
     const ordersLink = this.getLinkOrThrow('orders');
 

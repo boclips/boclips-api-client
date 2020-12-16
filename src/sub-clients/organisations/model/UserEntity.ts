@@ -7,5 +7,5 @@ export interface UserEntity {
   organisation: {
     id: string;
     name: string;
-  }
+  };
 }

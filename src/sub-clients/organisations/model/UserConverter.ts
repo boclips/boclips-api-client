@@ -9,7 +9,7 @@ export class UserConverter {
       lastName: userEntity.lastName,
       email: userEntity.email,
       features: userEntity.features,
-      organisation: {...userEntity.organisation}
+      organisation: { ...userEntity.organisation },
     };
   }
 

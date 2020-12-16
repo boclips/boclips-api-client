@@ -3,6 +3,8 @@ import { OrderStatus } from '../model/Order';
 import { OrderItemUpdateRequest } from './../model/OrderItemUpdateRequest';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
+import { term } from '@pact-foundation/pact/dsl/matchers';
+import { provider } from '../../../pact-support/pactSetup';
 
 const { eachLike, like } = Matchers;
 
@@ -88,6 +90,45 @@ export const getOrdersInteraction = (): InteractionObject => ({
           createOrderWithMandatoryFields(existingOrderIdFromStaging),
         ),
       },
+    },
+  },
+});
+
+export const placeOrderInteraction = (): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST orders',
+  withRequest: {
+    method: 'POST',
+    path: '/v1/orders',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      items: [
+        {
+          id: '123',
+          videoId: '5c542ab85438cdbcb56ddcee',
+        },
+      ],
+      user: {
+        id: 'b66f6f98-3c5b-49e3-ac1b-2e8def6c95c0',
+        email: 'definitely-not-batman@wayne.com',
+        firstName: 'Bruce',
+        lastName: 'Wayne',
+        organisation: {
+          id: 'org-id',
+          name: 'Wayne Enterprises',
+        },
+      },
+    },
+  },
+  willRespondWith: {
+    status: 201,
+    headers: {
+      location: term({
+        generate: `${provider.mockService.baseUrl}/v1/orders/5fd8e4f1dd022a5e461aecfa`,
+        matcher: `.*/v1/orders/.+`,
+      }),
     },
   },
 });

@@ -13,6 +13,7 @@ export interface AdminLinks {
   orders: LinkEntity;
   exportOrders: LinkEntity;
   order: LinkEntity;
+  placeOrder: LinkEntity;
   httpFeeds: LinkEntity;
   channels: LinkEntity;
   channel: LinkEntity;
