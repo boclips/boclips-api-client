@@ -29,4 +29,17 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
       )
       .then((it) => it.data);
   }
+
+  public async deleteItemFromCart(
+    cart: Cart,
+    cartItemId: string,
+  ): Promise<void> {
+    const orderLink = cart.links.addItem.getOriginalLink();
+
+    console.log(orderLink, cartItemId);
+    //
+    // return this.axios.delete(orderLink).then((it) => it.data);
+
+    return Promise.resolve();
+  }
 }

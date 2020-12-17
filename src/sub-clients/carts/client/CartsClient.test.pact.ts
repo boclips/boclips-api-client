@@ -4,6 +4,7 @@ import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { Link } from '../../common/model/LinkEntity';
 import {
+  deleteCartsInteraction,
   getCartsInteraction,
   postCartsInteraction,
 } from '../pact/CartsInteractions';
@@ -52,6 +53,31 @@ describe('CartsClient', () => {
         expect(response.videoId).toEqual(videoId);
         expect(response.id).not.toBeNull();
         expect(response.links).not.toBeNull();
+      });
+
+      it('can delete item from cart', async () => {
+        const cartItemId = 'new-cart-item-id';
+        const videoId = 'video-id';
+        await provider.addInteraction(postCartsInteraction(videoId));
+        const cart = {
+          items: [],
+          links: {
+            self: new Link({ href: 'self', templated: false }),
+            addItem: new Link({
+              href: `${provider.mockService.baseUrl}/v1/cart/items`,
+              templated: false,
+            }),
+          },
+        };
+        const cartItem = await client.carts.addItemToCart(cart, videoId);
+
+        await provider.addInteraction(deleteCartsInteraction(cartItemId));
+
+        await client.carts.deleteItemFromCart(cart, cartItem.id);
+
+        const getCart = await client.carts.getCart();
+
+        expect(getCart.items).toHaveLength(0);
       });
     },
   );

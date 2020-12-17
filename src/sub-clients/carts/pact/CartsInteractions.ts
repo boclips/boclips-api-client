@@ -67,3 +67,20 @@ export const postCartsInteraction = (videoId: string): InteractionObject => ({
     },
   },
 });
+
+export const deleteCartsInteraction = (
+  cartItemId: string,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'DELETE cart item',
+  withRequest: {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    path: `/v1/cart/items/${cartItemId}`,
+  },
+  willRespondWith: {
+    status: 204,
+  },
+});
