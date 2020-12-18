@@ -4,4 +4,5 @@ import { CartItem } from '../model/CartItem';
 export interface CartsClient {
   getCart(): Promise<Cart>;
   addItemToCart(cart: Cart, videoId: string): Promise<CartItem>;
+  deleteItemFromCart(cart: Cart, cartItemId: string): Promise<void>;
 }

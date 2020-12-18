@@ -4,6 +4,7 @@ import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { Link } from '../../common/model/LinkEntity';
 import {
+  deleteCartsInteraction,
   getCartsInteraction,
   postCartsInteraction,
 } from '../pact/CartsInteractions';
@@ -15,13 +16,13 @@ describe('CartsClient', () => {
 
       beforeEach(async () => {
         client = await getClient();
-
-        if (isATestClient(client)) {
-          await client.carts.addItemToCart('', 'video-id-1');
-        }
       });
 
       it('can get cart', async () => {
+        if (isATestClient(client)) {
+          await client.carts.addItemToCart('', 'video-id-1');
+        }
+
         await provider.addInteraction(getCartsInteraction());
         const response = await client.carts.getCart();
 
@@ -52,6 +53,22 @@ describe('CartsClient', () => {
         expect(response.videoId).toEqual(videoId);
         expect(response.id).not.toBeNull();
         expect(response.links).not.toBeNull();
+      });
+
+      it('can delete item from cart', async () => {
+        if (isATestClient(client)) {
+          await provider.addInteraction(getCartsInteraction());
+          const cart = await client.carts.getCart();
+
+          const cartItem = await client.carts.addItemToCart('', 'video-id-1');
+
+          await provider.addInteraction(deleteCartsInteraction(cartItem.id));
+          await client.carts.deleteItemFromCart(cart, cartItem.id);
+
+          expect(cart.items).not.toContain(
+            expect.arrayContaining([expect.objectContaining(cartItem)]),
+          );
+        }
       });
     },
   );

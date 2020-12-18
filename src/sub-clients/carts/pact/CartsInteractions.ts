@@ -20,6 +20,7 @@ export const getCartsInteraction = (): InteractionObject => ({
     },
     body: {
       items: eachLike({
+        id: 'item-id',
         videoId: 'video-id-1',
         _links: {
           self: like({ href: '/cartItem' }),
@@ -35,7 +36,7 @@ export const getCartsInteraction = (): InteractionObject => ({
 
 export const postCartsInteraction = (videoId: string): InteractionObject => ({
   state: undefined,
-  uponReceiving: 'POST cart',
+  uponReceiving: 'POST cart ' + videoId,
   withRequest: {
     method: 'POST',
     headers: {
@@ -65,5 +66,20 @@ export const postCartsInteraction = (videoId: string): InteractionObject => ({
         self: like({ href: '/cartItem' }),
       },
     },
+  },
+});
+
+export const deleteCartsInteraction = (
+  cartItemId: string,
+): //
+InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'DELETE cart item',
+  withRequest: {
+    method: 'DELETE',
+    path: '/v1/cart/items/' + cartItemId,
+  },
+  willRespondWith: {
+    status: 204,
   },
 });
