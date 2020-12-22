@@ -10,9 +10,11 @@ import { OrdersClient } from './OrdersClient';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
 import { User } from '../../organisations/model/User';
 import { OrderItemRequest } from '../model/OrderItemRequest';
+import { BoclipsApiError } from '../../../types';
 
 export class FakeOrdersClient implements OrdersClient, Clearable {
   private orders: Order[] = [];
+  private placeOrderError?: BoclipsApiError | null;
 
   public insertOrderFixture(order: Partial<Order>) {
     this.orders.push(OrdersFactory.sample(order));
@@ -88,9 +90,20 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
 
   public clear() {
     this.orders = [];
+    this.placeOrderError = null;
+  }
+
+  public rejectNextPlaceOrder(apiError: BoclipsApiError) {
+    this.placeOrderError = apiError;
   }
 
   placeOrder(cartItems: OrderItemRequest[], user: User): Promise<string> {
+    if (this.placeOrderError) {
+      const error = Promise.reject(this.placeOrderError);
+      this.placeOrderError = null;
+      return error;
+    }
+
     const orderItems = cartItems.map((item) =>
       OrderItemFactory.sample({
         id: item.id,
@@ -98,7 +111,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
       }),
     );
     const order = OrdersFactory.sample({
-      id: new Date().getMilliseconds().toString(),
+      id: Date.now().toString(),
       items: orderItems,
       userDetails: {
         requestingUser: `${user.firstName} ${user.lastName}`,
