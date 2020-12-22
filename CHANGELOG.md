@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [21.4.2] - 2020-12-22
+
+- Add method allowing for rejecting placing order
+
 ## [21.4.1] - 2020-12-22
 
-- Add 
+- Add method allowing for rejecting placing order
 
 ## [21.4.0] - 2020-12-16
 
