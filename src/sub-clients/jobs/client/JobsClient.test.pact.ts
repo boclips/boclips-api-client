@@ -8,7 +8,7 @@ import { withClients } from './../../../pact-support/pactTestWrapper';
 import { isATestClient } from './../../../test-support/index';
 import {
   existingJobIdFromStaging,
-  getFilteredJobsInteraction,
+  // getFilteredJobsInteraction,
   getJobInteraction,
   getJobsInteraction,
   get404JobInteraction,
@@ -79,30 +79,30 @@ describe('JobsClient', () => {
         );
       });
 
-      it('can fetch all jobs filtering by manuallyCreated', async () => {
-        await provider.addInteraction(
-          getFilteredJobsInteraction({ manuallyCreated: true }),
-        );
-
-        if (isATestClient(client)) {
-          client.jobs.insertJobFixture(
-            JobsFactory.sample({ id: 'manual-job' }),
-            true,
-          );
-          client.jobs.insertJobFixture(
-            JobsFactory.sample({ id: 'auto-job' }),
-            false,
-          );
-        }
-
-        const jobs = await client.jobs.getAll(
-          { page: 1, size: 2 },
-          { manuallyCreated: true },
-        );
-
-        expect(jobs.page.find((it) => it.id === 'manual-job')).not.toBeNull();
-        expect(jobs.page.find((it) => it.id === 'auto-job')).toBeUndefined();
-      });
+      // it('can fetch all jobs filtering by manuallyCreated', async () => {
+      //   await provider.addInteraction(
+      //     getFilteredJobsInteraction({ manuallyCreated: true }),
+      //   );
+      //
+      //   if (isATestClient(client)) {
+      //     client.jobs.insertJobFixture(
+      //       JobsFactory.sample({ id: 'manual-job' }),
+      //       true,
+      //     );
+      //     client.jobs.insertJobFixture(
+      //       JobsFactory.sample({ id: 'auto-job' }),
+      //       false,
+      //     );
+      //   }
+      //
+      //   const jobs = await client.jobs.getAll(
+      //     { page: 1, size: 2 },
+      //     { manuallyCreated: true },
+      //   );
+      //
+      //   expect(jobs.page.find((it) => it.id === 'manual-job')).not.toBeNull();
+      //   expect(jobs.page.find((it) => it.id === 'auto-job')).toBeUndefined();
+      // });
 
       it('can fetch a job', async () => {
         await provider.addInteraction(

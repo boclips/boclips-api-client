@@ -15,6 +15,7 @@ it('Contracts verification', async () => {
     logLevel: 'debug',
     providerBaseUrl: 'https://api.staging-boclips.com',
     customProviderHeaders: [`authorization: Bearer ${token}`],
+    logDir: resolve(process.cwd(), 'logs', `pact.log`),
     pactUrls: [
       resolve(process.cwd(), './pacts/boclips-api-client-gateway.json'),
     ],
