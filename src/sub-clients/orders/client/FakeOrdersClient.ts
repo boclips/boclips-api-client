@@ -26,7 +26,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
     );
   }
 
-  public getAll(): Promise<Order[]> {
+  public getAll(_page: number, _size: number): Promise<Order[]> {
     return Promise.resolve(this.orders);
   }
 

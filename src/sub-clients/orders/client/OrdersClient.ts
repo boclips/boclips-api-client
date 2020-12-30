@@ -7,7 +7,7 @@ import { OrderItemRequest } from '../model/OrderItemRequest';
 
 export interface OrdersClient {
   get(id: string): Promise<Order | null>;
-  getAll(): Promise<Order[]>;
+  getAll(page?: number, size?: number): Promise<Order[]>;
   updateOrder(id: Order, updateRequest: OrderUpdateRequest): Promise<Order>;
   updateItem(
     item: OrderItem,

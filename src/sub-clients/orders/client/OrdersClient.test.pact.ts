@@ -172,9 +172,9 @@ describe('OrdersClient', () => {
         expect(item.transcriptRequested).toBeFalsy();
       });
 
-      it('can fetch all orders', async () => {
+      it('can fetch paginated orders', async () => {
         await provider.addInteraction(getOrdersInteraction());
-        const orders = await client.orders.getAll();
+        const orders = await client.orders.getAll(1, 10);
 
         expect(orders).toHaveLength(1);
         const order = orders[0];

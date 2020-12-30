@@ -49,12 +49,17 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
       });
   }
 
-  public getAll(): Promise<Array<import('../model/Order').Order>> {
+  public getAll(
+    page: number,
+    size: number,
+  ): Promise<Array<import('../model/Order').Order>> {
     const ordersLink = this.getLinkOrThrow('orders');
 
-    return this.axios.get(ordersLink.href).then((response: AxiosResponse) => {
-      return OrderConverter.convertEmbeddedResource(response);
-    });
+    return this.axios
+      .get(expandUrlTemplate(ordersLink.href, { page, size }))
+      .then((response: AxiosResponse) => {
+        return OrderConverter.convertEmbeddedResource(response);
+      });
   }
 
   public updateOrder(
