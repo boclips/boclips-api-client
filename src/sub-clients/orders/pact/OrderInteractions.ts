@@ -75,6 +75,10 @@ export const getOrdersInteraction = (): InteractionObject => ({
   withRequest: {
     method: 'GET',
     path: '/v1/orders',
+    query: {
+      page: '1',
+      size: '10',
+    },
   },
   willRespondWith: {
     status: 200,

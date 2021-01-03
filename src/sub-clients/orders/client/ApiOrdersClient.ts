@@ -49,7 +49,7 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
       });
   }
 
-  public getAll(
+  public getOrders(
     page: number,
     size: number,
   ): Promise<Array<import('../model/Order').Order>> {
