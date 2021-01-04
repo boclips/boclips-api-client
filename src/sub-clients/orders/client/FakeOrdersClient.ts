@@ -27,7 +27,11 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
     );
   }
 
-  public getOrders(_page: number, _size: number): Promise<OrdersPage> {
+  public getAll(): Promise<Order[]> {
+    return Promise.resolve(this.orders);
+  }
+
+  public getUserOrders(_page: number, _size: number): Promise<OrdersPage> {
     return Promise.resolve({
       orders: this.orders,
       page: {
@@ -65,6 +69,7 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
       },
     });
   }
+
   public updateItem(
     item: OrderItem,
     request: OrderItemUpdateRequest,

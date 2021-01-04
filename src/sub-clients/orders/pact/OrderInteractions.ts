@@ -68,12 +68,34 @@ const createOrderWithMandatoryFields = (id: string) => ({
   ),
 });
 
-export const getOrdersInteraction = (): InteractionObject => ({
+export const getAllOrdersInteraction = (): InteractionObject => ({
   state: undefined,
   uponReceiving: 'GET orders',
   withRequest: {
     method: 'GET',
     path: '/v1/orders',
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/hal+json;charset=UTF-8',
+    },
+    body: {
+      _embedded: {
+        orders: eachLike(
+          createOrderWithMandatoryFields(existingOrderIdFromStaging),
+        ),
+      },
+    },
+  },
+});
+
+export const getUserOrdersInteraction = (): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'GET orders items',
+  withRequest: {
+    method: 'GET',
+    path: '/v1/orders/items',
     query: {
       page: '1',
       size: '10',

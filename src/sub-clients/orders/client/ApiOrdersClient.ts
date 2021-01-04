@@ -50,8 +50,16 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
       });
   }
 
-  public getOrders(page: number, size: number): Promise<OrdersPage> {
+  public getAll(): Promise<Array<import('../model/Order').Order>> {
     const ordersLink = this.getLinkOrThrow('orders');
+
+    return this.axios.get(ordersLink.href).then((response: AxiosResponse) => {
+      return OrderConverter.convertEmbeddedResource(response);
+    });
+  }
+
+  public getUserOrders(page: number, size: number): Promise<OrdersPage> {
+    const ordersLink = this.getLinkOrThrow('userOrders');
 
     return this.axios
       .get(expandUrlTemplate(ordersLink.href, { page, size }))

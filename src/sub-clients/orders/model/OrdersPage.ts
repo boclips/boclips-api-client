@@ -5,7 +5,7 @@ export interface OrdersPage {
   page: ResultsPage;
 }
 
-interface ResultsPage {
+export interface ResultsPage {
   number: number;
   size: number;
   totalElements: number;

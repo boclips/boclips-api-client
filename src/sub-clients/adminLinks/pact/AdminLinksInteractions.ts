@@ -50,7 +50,11 @@ export const getAdminLinks = (): InteractionObject => ({
           templated: true,
         }),
         orders: like({
-          href: `${provider.mockService.baseUrl}/v1/orders{?size,page}`,
+          href: `${provider.mockService.baseUrl}/v1/orders`,
+          templated: false,
+        }),
+        userOrders: like({
+          href: `${provider.mockService.baseUrl}/v1/orders/items{?size,page}`,
           templated: true,
         }),
         placeOrder: like({

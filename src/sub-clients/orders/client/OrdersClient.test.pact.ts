@@ -13,10 +13,11 @@ import {
   exisitngOrderItemIdForStaging,
   existingOrderIdFromStaging,
   getOrderInteraction,
-  getOrdersInteraction,
   updateOrderItem,
   updateOrder,
   placeOrderInteraction,
+  getAllOrdersInteraction,
+  getUserOrdersInteraction,
 } from '../pact/OrderInteractions';
 import { OrderCaptionStatus } from '../model/OrderItem';
 import { UserFactory } from '../../../test-support/UserFactory';
@@ -172,30 +173,24 @@ describe('OrdersClient', () => {
         expect(item.transcriptRequested).toBeFalsy();
       });
 
-      it('can fetch paginated orders', async () => {
-        await provider.addInteraction(getOrdersInteraction());
-        const response = await client.orders.getOrders(1, 10);
+      it('can fetch all orders', async () => {
+        await provider.addInteraction(getAllOrdersInteraction());
+        const orders = await client.orders.getAll();
+
+        expect(orders).toHaveLength(orders.length);
+
+        const order = orders[0];
+        assertOnMandatoryOrderFields(order);
+      });
+
+      it('can fetch paginated user orders', async () => {
+        await provider.addInteraction(getUserOrdersInteraction());
+        const response = await client.orders.getUserOrders(1, 10);
 
         expect(response.orders).toHaveLength(response.page.totalElements);
 
         const order = response.orders[0];
         assertOnMandatoryOrderFields(order);
-      });
-
-      it('can fetch an order', async () => {
-        await provider.addInteraction(
-          getOrderInteraction(existingOrderIdFromStaging),
-        );
-
-        const order = await client.orders.get(existingOrderIdFromStaging);
-        assertOnMandatoryOrderFields(order!);
-
-        expect(order!.totalPrice.currency).toEqual('USD');
-
-        const item = order!.items[0];
-        expect(item.license?.duration).toEqual('5 Years');
-        expect(item.license?.territory).toEqual('World Wide');
-        expect(item.transcriptRequested).toBeFalsy();
       });
 
       it('can update an order', async () => {

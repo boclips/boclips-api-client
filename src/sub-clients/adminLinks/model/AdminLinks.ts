@@ -11,6 +11,7 @@ export interface AdminLinks {
   jobs: LinkEntity;
   jobDetails: LinkEntity;
   orders: LinkEntity;
+  userOrders: LinkEntity;
   exportOrders: LinkEntity;
   order: LinkEntity;
   placeOrder: LinkEntity;
