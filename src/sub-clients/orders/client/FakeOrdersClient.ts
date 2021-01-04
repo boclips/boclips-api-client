@@ -5,6 +5,7 @@ import {
 import { Clearable } from '../../common/utils/Clearable';
 import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
+import { OrdersPage } from '../model/OrdersPage';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
@@ -26,8 +27,16 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
     );
   }
 
-  public getOrders(_page: number, _size: number): Promise<Order[]> {
-    return Promise.resolve(this.orders);
+  public getOrders(_page: number, _size: number): Promise<OrdersPage> {
+    return Promise.resolve({
+      orders: this.orders,
+      page: {
+        number: 10,
+        size: 10,
+        totalElements: this.orders.length,
+        totalPages: 1,
+      },
+    });
   }
 
   public async updateOrder(

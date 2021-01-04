@@ -36,7 +36,6 @@ const createOrderItemWithMandatoryFields = (id: string) => ({
   _links: {
     updatePrice: {
       href: '/v1/orders/123/items/456?price={price}',
-      templated: true,
     },
     update: {
       href: '/v1/orders/123/items/456',
@@ -83,10 +82,7 @@ export const getOrdersInteraction = (): InteractionObject => ({
   willRespondWith: {
     status: 200,
     headers: {
-      'Content-Type': Matchers.term({
-        generate: 'application/hal+json;charset=UTF-8',
-        matcher: contentTypeRegex,
-      }),
+      'Content-Type': 'application/json;charset=UTF-8',
     },
     body: {
       _embedded: {
@@ -94,6 +90,12 @@ export const getOrdersInteraction = (): InteractionObject => ({
           createOrderWithMandatoryFields(existingOrderIdFromStaging),
         ),
       },
+      page: like({
+        number: 1,
+        size: 10,
+        totalElements: 1,
+        totalPages: 1,
+      }),
     },
   },
 });

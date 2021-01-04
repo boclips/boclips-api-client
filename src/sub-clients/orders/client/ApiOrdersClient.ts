@@ -3,6 +3,7 @@ import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { Order } from '../model/Order';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
+import { OrdersPage } from '../model/OrdersPage';
 import { OrderConverter } from '../OrderConverter';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
@@ -49,16 +50,16 @@ export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
       });
   }
 
-  public getOrders(
-    page: number,
-    size: number,
-  ): Promise<Array<import('../model/Order').Order>> {
+  public getOrders(page: number, size: number): Promise<OrdersPage> {
     const ordersLink = this.getLinkOrThrow('orders');
 
     return this.axios
       .get(expandUrlTemplate(ordersLink.href, { page, size }))
       .then((response: AxiosResponse) => {
-        return OrderConverter.convertEmbeddedResource(response);
+        return {
+          orders: OrderConverter.convertEmbeddedResource(response),
+          page: response.data.page,
+        };
       });
   }
 

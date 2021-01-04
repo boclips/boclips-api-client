@@ -174,10 +174,11 @@ describe('OrdersClient', () => {
 
       it('can fetch paginated orders', async () => {
         await provider.addInteraction(getOrdersInteraction());
-        const orders = await client.orders.getOrders(1, 10);
+        const response = await client.orders.getOrders(1, 10);
 
-        expect(orders).toHaveLength(1);
-        const order = orders[0];
+        expect(response.orders).toHaveLength(response.page.totalElements);
+
+        const order = response.orders[0];
         assertOnMandatoryOrderFields(order);
       });
 
