@@ -177,7 +177,6 @@ describe('VideosConverter', () => {
       price: {
         currency: 'USD',
         amount: 20,
-        displayValue: '$ 20',
       },
       channel: 'TED-Ed',
       channelId: '5cf141cbc1475c47f717870d',
@@ -194,7 +193,6 @@ describe('VideosConverter', () => {
 
     expect(video.price?.currency).toEqual('USD');
     expect(video.price?.amount).toEqual(20);
-    expect(video.price?.displayValue).toEqual('$ 20');
 
     expect(video.channel).toEqual('TED-Ed');
     expect(video.channelId).toEqual('5cf141cbc1475c47f717870d');
