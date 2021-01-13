@@ -97,7 +97,7 @@ export const getUserOrdersInteraction = (): InteractionObject => ({
     method: 'GET',
     path: '/v1/orders/items',
     query: {
-      page: '1',
+      page: '0',
       size: '10',
     },
   },

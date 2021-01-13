@@ -31,12 +31,12 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
     return Promise.resolve(this.orders);
   }
 
-  public getUserOrders(_page: number, _size: number): Promise<OrdersPage> {
+  public getUserOrders(page: number, size: number): Promise<OrdersPage> {
     return Promise.resolve({
       orders: this.orders,
       page: {
-        number: 10,
-        size: 10,
+        number: page,
+        size: size,
         totalElements: this.orders.length,
         totalPages: 1,
       },

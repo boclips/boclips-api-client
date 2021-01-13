@@ -185,7 +185,7 @@ describe('OrdersClient', () => {
 
       it('can fetch paginated user orders', async () => {
         await provider.addInteraction(getUserOrdersInteraction());
-        const response = await client.orders.getUserOrders(1, 10);
+        const response = await client.orders.getUserOrders(0, 10);
 
         expect(response.orders).toHaveLength(response.page.totalElements);
 

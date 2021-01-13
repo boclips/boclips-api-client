@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [23.0.1] - 2020-01-13
+
+- Fix order's client to use 0 based pagination
+
 ## [23.0.0] - 2020-01-12
 
--  Remove displayValue from price on Video
+- Remove displayValue from price on Video
 
 ## [22.0.0] - 2020-01-04
 
@@ -51,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [21.0.3] - 2020-12-09
 
-- Update FakeVideoClient to make filters exclusive. 
+- Update FakeVideoClient to make filters exclusive.
   Before it would return matches on any filter specified, now it requires a match on all specified
 
 ## [21.0.2] - 2020-11-27
