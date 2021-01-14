@@ -19,7 +19,6 @@ export class OrdersFactory {
         isbnNumber: '123',
         legacyOrderId: 'legacy-order-id',
         status: OrderStatus.READY,
-        throughPlatform: true,
         totalPrice: OrderPriceFactory.sample(),
         userDetails: {
           authorisingUser: 'a user <A User@gmail.com>',

@@ -186,7 +186,6 @@ export const getOrderInteraction = (
           value: 123,
           displayValue: 'USD 123',
         }),
-        throughPlatform: true,
         isbnNumber: 'isbn-number',
         items: eachLike({
           ...createOrderItemWithMandatoryFields(exisitngOrderItemIdForStaging),

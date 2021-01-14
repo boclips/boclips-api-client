@@ -22,7 +22,6 @@ export class OrderConverter {
       status,
       userDetails,
       isbnNumber,
-      throughPlatform,
       transcriptRequested,
       items,
     } = resource;
@@ -40,7 +39,6 @@ export class OrderConverter {
       },
       legacyOrderId,
       isbnNumber,
-      throughPlatform,
       transcriptRequested,
       links: {
         self: new Link(_links.self),

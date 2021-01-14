@@ -9,7 +9,6 @@ export interface Order {
   isbnNumber?: string;
   legacyOrderId: string;
   status: OrderStatus;
-  throughPlatform?: boolean;
   totalPrice: OrderPrice;
   userDetails: UserDetails;
   links: {

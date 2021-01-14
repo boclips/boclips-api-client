@@ -71,7 +71,6 @@ describe('OrderConvert', () => {
           },
         ],
         totalPrice: { value: 0, currency: null, displayValue: '0.00' },
-        throughPlatform: true,
       },
     };
 
