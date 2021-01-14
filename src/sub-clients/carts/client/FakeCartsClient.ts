@@ -1,5 +1,6 @@
 import { Link } from '../../common/model/LinkEntity';
 import { Clearable } from '../../common/utils/Clearable';
+import { AdditionalServices } from '../model/AdditionalServices';
 import { Cart } from '../model/Cart';
 import { CartItem } from '../model/CartItem';
 import { CartsClient } from './CartsClient';
@@ -17,6 +18,7 @@ export class FakeCartsClient implements CartsClient, Clearable {
   private generateItemId = () => {
     return (this.cart.items.length + 1).toString();
   };
+
   private createCartItem = (videoId: string) => {
     return {
       id: this.generateItemId(),
@@ -47,6 +49,17 @@ export class FakeCartsClient implements CartsClient, Clearable {
     this.cart.items.splice(cartItemIndex, 1);
 
     return Promise.resolve();
+  }
+
+  public updateCartItemAdditionalServices(
+    cartItem: CartItem,
+    additionalServices: AdditionalServices,
+  ): Promise<Cart> {
+    cartItem.additionalServices = additionalServices;
+
+    this.cart.items.push(cartItem);
+
+    return Promise.resolve(this.cart);
   }
 
   public clear() {

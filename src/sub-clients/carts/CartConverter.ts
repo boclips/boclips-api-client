@@ -19,10 +19,12 @@ export class CartConverter {
     id,
     _links,
     videoId,
+    additionalServices,
   }: CartItemResource): CartItem {
     return {
       id,
       videoId,
+      additionalServices,
       links: { self: new Link(_links.self) },
     };
   }

@@ -3,10 +3,12 @@ import { provider } from '../../../pact-support/pactSetup';
 import { withClients } from '../../../pact-support/pactTestWrapper';
 import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { Link } from '../../common/model/LinkEntity';
+import { Cart } from '../model/Cart';
 import {
   deleteCartsInteraction,
   getCartsInteraction,
   postCartsInteraction,
+  updateCartItemAdditionalServices,
 } from '../pact/CartsInteractions';
 
 describe('CartsClient', () => {
@@ -69,6 +71,48 @@ describe('CartsClient', () => {
             expect.arrayContaining([expect.objectContaining(cartItem)]),
           );
         }
+      });
+
+      it('can update additional services in cart item', async () => {
+        const videoId = 'new-video-id-2';
+
+        const cart: Cart = {
+          items: [],
+          links: {
+            self: new Link({ href: 'self', templated: false }),
+            addItem: new Link({
+              href: `${provider.mockService.baseUrl}/v1/cart/items`,
+              templated: false,
+            }),
+          },
+        };
+
+        const additionalServices = {
+          trim: {
+            from: '0:21',
+            to: '1:22',
+          },
+        };
+
+        await provider.addInteraction(postCartsInteraction(videoId, '123'));
+
+        const cartItem = await client.carts.addItemToCart(cart, videoId);
+
+        await provider.addInteraction(
+          updateCartItemAdditionalServices(cartItem, additionalServices),
+        );
+
+        const updatedCart = await client.carts.updateCartItemAdditionalServices(
+          cartItem,
+          additionalServices,
+        );
+
+        const updatedItem = updatedCart.items.find(
+          (it) => it.id === cartItem.id,
+        );
+
+        expect(updatedItem?.additionalServices?.trim.from).toEqual('0:21');
+        expect(updatedItem?.additionalServices?.trim.to).toEqual('1:22');
       });
     },
   );

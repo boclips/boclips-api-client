@@ -1,6 +1,7 @@
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import expandUrlTemplate from '../../common/utils/expandUrlTemplate';
 import { CartConverter } from '../CartConverter';
+import { AdditionalServices } from '../model/AdditionalServices';
 import { Cart } from '../model/Cart';
 import { CartItem } from '../model/CartItem';
 import { CartsClient } from './CartsClient';
@@ -28,6 +29,25 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
         },
       )
       .then((it) => CartConverter.convertCartItem(it.data));
+  }
+
+  public async updateCartItemAdditionalServices(
+    cartItem: CartItem,
+    additionalServices: AdditionalServices,
+  ): Promise<Cart> {
+    const updateLink = cartItem.links.self.getOriginalLink();
+
+    return this.axios
+      .patch(
+        updateLink,
+        { additionalServices },
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        },
+      )
+      .then((it) => CartConverter.convertCart(it.data));
   }
 
   public async deleteItemFromCart(
