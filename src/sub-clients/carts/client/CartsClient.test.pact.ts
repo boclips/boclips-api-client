@@ -5,12 +5,13 @@ import { FakeBoclipsClient, isATestClient } from '../../../test-support';
 import { Link } from '../../common/model/LinkEntity';
 import { Cart } from '../model/Cart';
 import {
-  deleteCartsInteraction,
   getCartsInteraction,
   postCartsInteraction,
-  updateCartItemAdditionalServices,
 } from '../pact/CartsInteractions';
 
+/**
+ * Because we don't know the ID of items until verify stage, we can't contract test deleting/updating an item
+ */
 describe('CartsClient', () => {
   withClients(
     (getClient: () => Promise<FakeBoclipsClient | ApiBoclipsClient>) => {
@@ -59,12 +60,10 @@ describe('CartsClient', () => {
 
       it('can delete item from cart', async () => {
         if (isATestClient(client)) {
-          await provider.addInteraction(getCartsInteraction());
           const cart = await client.carts.getCart();
 
           const cartItem = await client.carts.addItemToCart('', 'video-id-1');
 
-          await provider.addInteraction(deleteCartsInteraction(cartItem.id));
           await client.carts.deleteItemFromCart(cart, cartItem.id);
 
           expect(cart.items).not.toContain(
@@ -74,45 +73,41 @@ describe('CartsClient', () => {
       });
 
       it('can update additional services in cart item', async () => {
-        const videoId = 'new-video-id-2';
+        if (isATestClient(client)) {
+          const videoId = 'new-video-id-2';
 
-        const cart: Cart = {
-          items: [],
-          links: {
-            self: new Link({ href: 'self', templated: false }),
-            addItem: new Link({
-              href: `${provider.mockService.baseUrl}/v1/cart/items`,
-              templated: false,
-            }),
-          },
-        };
+          const cart: Cart = {
+            items: [],
+            links: {
+              self: new Link({ href: 'self', templated: false }),
+              addItem: new Link({
+                href: `${provider.mockService.baseUrl}/v1/cart/items`,
+                templated: false,
+              }),
+            },
+          };
 
-        const additionalServices = {
-          trim: {
-            from: '0:21',
-            to: '1:22',
-          },
-        };
+          const additionalServices = {
+            trim: {
+              from: '0:21',
+              to: '1:22',
+            },
+          };
 
-        await provider.addInteraction(postCartsInteraction(videoId, '123'));
+          const cartItem = await client.carts.addItemToCart(cart, videoId);
 
-        const cartItem = await client.carts.addItemToCart(cart, videoId);
+          const updatedCart = await client.carts.updateCartItemAdditionalServices(
+            cartItem,
+            additionalServices,
+          );
 
-        await provider.addInteraction(
-          updateCartItemAdditionalServices(cartItem, additionalServices),
-        );
+          const updatedItem = updatedCart.items.find(
+            (it) => it.id === cartItem.id,
+          );
 
-        const updatedCart = await client.carts.updateCartItemAdditionalServices(
-          cartItem,
-          additionalServices,
-        );
-
-        const updatedItem = updatedCart.items.find(
-          (it) => it.id === cartItem.id,
-        );
-
-        expect(updatedItem?.additionalServices?.trim.from).toEqual('0:21');
-        expect(updatedItem?.additionalServices?.trim.to).toEqual('1:22');
+          expect(updatedItem?.additionalServices?.trim.from).toEqual('0:21');
+          expect(updatedItem?.additionalServices?.trim.to).toEqual('1:22');
+        }
       });
     },
   );
