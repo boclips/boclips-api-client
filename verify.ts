@@ -21,4 +21,4 @@ it('Contracts verification', async () => {
     ],
   };
   await pact.verifyPacts(opts);
-}, 60000);
+}, 600000);

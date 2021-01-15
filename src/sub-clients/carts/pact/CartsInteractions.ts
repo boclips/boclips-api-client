@@ -114,19 +114,15 @@ export const updateCartItemAdditionalServices = (
         generate: 'application/hal+json;charset=UTF-8',
         matcher: contentTypeRegex,
       }),
-      location: term({
-        generate: `${provider.mockService.baseUrl}/v1/cart/items/${cartItem.id}`,
-        matcher: `.*/v1/cart/items/.+`,
-      }),
     },
     body: {
       items: eachLike({
-        id: cartItem.id,
-        videoId: 'video-id-1',
+        id: like(cartItem.id),
+        videoId: like('video-id-1'),
         additionalServices: {
           trim: {
-            to: like(additionalServices.trim.to),
             from: like(additionalServices.trim.from),
+            to: like(additionalServices.trim.to),
           },
         },
         _links: {
