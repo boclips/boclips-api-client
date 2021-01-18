@@ -1,5 +1,5 @@
 export interface AdditionalServices {
-  trim: {
+  trim?: {
     from: string;
     to: string;
   };
