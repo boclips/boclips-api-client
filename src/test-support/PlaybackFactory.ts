@@ -11,7 +11,7 @@ export class PlaybackFactory {
   private static defaultFields = (): Playback => ({
     type: 'STREAM',
     id: 'playback-id',
-    duration: dayjs.duration(),
+    duration: dayjs.duration('PT18M39S'),
     maxResolutionAvailable: true,
     links: {
       createPlayerInteractedWithEvent: new Link({ href: 'events' }),
