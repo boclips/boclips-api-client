@@ -125,8 +125,8 @@ export const updateCartItemAdditionalServices = (
         videoId: 'video-id-1',
         additionalServices: {
           trim: {
-            to: like(additionalServices.trim.to),
-            from: like(additionalServices.trim.from),
+            to: like(additionalServices.trim!!.to),
+            from: like(additionalServices.trim!!.from),
           },
         },
         _links: {
