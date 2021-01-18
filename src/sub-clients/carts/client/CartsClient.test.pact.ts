@@ -105,8 +105,8 @@ describe('CartsClient', () => {
             (it) => it.id === cartItem.id,
           );
 
-          expect(updatedItem?.additionalServices?.trim.from).toEqual('0:21');
-          expect(updatedItem?.additionalServices?.trim.to).toEqual('1:22');
+          expect(updatedItem?.additionalServices?.trim?.from).toEqual('0:21');
+          expect(updatedItem?.additionalServices?.trim?.to).toEqual('1:22');
         }
       });
     },
