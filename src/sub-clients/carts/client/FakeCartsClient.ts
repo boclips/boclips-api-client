@@ -19,10 +19,11 @@ export class FakeCartsClient implements CartsClient, Clearable {
     return (this.cart.items.length + 1).toString();
   };
 
-  private createCartItem = (videoId: string) => {
+  private createCartItem = (videoId: string): CartItem => {
     return {
       id: this.generateItemId(),
       videoId,
+      additionalServices: null,
       links: { self: new Link({ href: `/cartItem`, templated: false }) },
     };
   };

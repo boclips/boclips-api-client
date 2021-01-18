@@ -4,6 +4,6 @@ import { AdditionalServices } from './AdditionalServices';
 export interface CartItem {
   id: string;
   videoId: string;
-  additionalServices?: AdditionalServices;
+  additionalServices?: AdditionalServices | null;
   links: { self: Link };
 }
