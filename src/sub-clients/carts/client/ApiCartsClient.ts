@@ -36,11 +36,12 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
     additionalServices: AdditionalServices,
   ): Promise<Cart> {
     const updateLink = cartItem.links.self.getOriginalLink();
+    const { trim } = additionalServices;
 
     return this.axios
       .patch(
         updateLink,
-        { additionalServices },
+        { trim },
         {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
