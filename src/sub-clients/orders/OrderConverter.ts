@@ -24,12 +24,14 @@ export class OrderConverter {
       isbnNumber,
       transcriptRequested,
       items,
+      deliveryDate,
     } = resource;
 
     return {
       id,
       createdAt: new Date(createdAt),
       updatedAt: new Date(updatedAt),
+      deliveryDate: new Date(deliveryDate),
       totalPrice,
       status: OrderStatus[status as keyof typeof OrderStatus],
       userDetails: {

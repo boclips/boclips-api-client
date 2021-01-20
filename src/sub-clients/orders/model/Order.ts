@@ -17,6 +17,7 @@ export interface Order {
   };
   items: OrderItem[];
   transcriptRequested?: boolean;
+  deliveryDate?: Date;
 }
 
 export enum OrderStatus {
