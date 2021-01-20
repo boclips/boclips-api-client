@@ -16,6 +16,7 @@ export class OrdersFactory {
         transcriptRequested: true,
         createdAt: new Date(),
         updatedAt: new Date(),
+        deliveryDate: new Date(),
         isbnNumber: '123',
         legacyOrderId: 'legacy-order-id',
         status: OrderStatus.READY,

@@ -31,7 +31,7 @@ export class OrderConverter {
       id,
       createdAt: new Date(createdAt),
       updatedAt: new Date(updatedAt),
-      deliveryDate: new Date(deliveryDate),
+      deliveryDate: deliveryDate ? new Date(deliveryDate) : null,
       totalPrice,
       status: OrderStatus[status as keyof typeof OrderStatus],
       userDetails: {
