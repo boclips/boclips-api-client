@@ -35,7 +35,7 @@ describe('OrderConvert', () => {
         },
         items: [
           {
-            transcriptRequested: true,
+            captionsRequested: true,
             channel: {
               id: '5d5d61220726b741db534ba8',
               name: 'Dow Jones',
@@ -172,8 +172,8 @@ describe('OrderConvert', () => {
     );
     expect(converted.createdAt).toEqual(new Date(orderResource.data.createdAt));
     expect(converted.updatedAt).toEqual(new Date(orderResource.data.updatedAt));
-    expect(converted.transcriptRequested).toEqual(
-      orderResource.data.transcriptRequested,
+    expect(converted.captionsRequested).toEqual(
+      orderResource.data.captionsRequested,
     );
 
     assertConvertedOrderItem(converted.items, orderResource);
@@ -193,8 +193,8 @@ describe('OrderConvert', () => {
     expect(convertedItem[0].license?.duration).toEqual(
       orderItemResource.data.items[0].licenseDuration,
     );
-    expect(convertedItem[0].transcriptRequested).toEqual(
-      orderItemResource.data.items[0].transcriptRequested,
+    expect(convertedItem[0].captionsRequested).toEqual(
+      orderItemResource.data.items[0].captionsRequested,
     );
     expect(convertedItem[0].price).toEqual(
       orderItemResource.data.items[0].price,

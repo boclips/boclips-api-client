@@ -22,7 +22,7 @@ export class OrderConverter {
       status,
       userDetails,
       isbnNumber,
-      transcriptRequested,
+      captionsRequested,
       items,
       deliveryDate,
     } = resource;
@@ -41,7 +41,7 @@ export class OrderConverter {
       },
       legacyOrderId,
       isbnNumber,
-      transcriptRequested,
+      captionsRequested,
       links: {
         self: new Link(_links.self),
         update: new Link(_links.update),
@@ -58,7 +58,7 @@ export class OrderConverter {
           licenseDuration,
           licenseTerritory,
           price,
-          transcriptRequested,
+          captionsRequested,
           trim,
           video,
           _links,
@@ -69,7 +69,7 @@ export class OrderConverter {
           channel: channel,
           license: { duration: licenseDuration, territory: licenseTerritory },
           price,
-          transcriptRequested,
+          captionsRequested,
           trim,
           video: {
             ...video,

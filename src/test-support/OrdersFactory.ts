@@ -13,7 +13,7 @@ export class OrdersFactory {
     return {
       ...{
         id: '123',
-        transcriptRequested: true,
+        captionsRequested: true,
         createdAt: new Date(),
         updatedAt: new Date(),
         deliveryDate: new Date(),
@@ -50,7 +50,7 @@ export class OrderItemFactory {
         price: OrderPriceFactory.sample(),
         trim: undefined,
         license: { duration: 'A long time', territory: 'Wrexham' },
-        transcriptRequested: false,
+        captionsRequested: false,
         links: {
           updatePrice: new Link({
             href: '/v1/orders/123/items/321?price={price}',

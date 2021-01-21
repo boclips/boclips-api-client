@@ -8,7 +8,7 @@ export interface OrderItem {
     update: Link;
   };
   price?: OrderPrice;
-  transcriptRequested: boolean;
+  captionsRequested: boolean;
   video: OrderItemVideo;
   trim?: string;
   channel: OrderItemChannel;

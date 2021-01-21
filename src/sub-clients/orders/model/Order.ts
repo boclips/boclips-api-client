@@ -16,7 +16,7 @@ export interface Order {
     update: Link;
   };
   items: OrderItem[];
-  transcriptRequested?: boolean;
+  captionsRequested?: boolean;
   deliveryDate: Date | null;
 }
 

@@ -72,7 +72,7 @@ describe('OrdersClient', () => {
                   name: 'content-partner name',
                 },
                 license: { territory: 'World Wide', duration: '5 Years' },
-                transcriptRequested: false,
+                captionsRequested: false,
                 links: {
                   update: new Link({
                     href: '/v1/orders/123/items/456',
@@ -170,7 +170,7 @@ describe('OrdersClient', () => {
         const item = order!.items[0];
         expect(item.license?.duration).toEqual('5 Years');
         expect(item.license?.territory).toEqual('World Wide');
-        expect(item.transcriptRequested).toBeFalsy();
+        expect(item.captionsRequested).toBeFalsy();
       });
 
       it('can fetch all orders', async () => {

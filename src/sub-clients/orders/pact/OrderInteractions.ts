@@ -195,7 +195,7 @@ export const getOrderInteraction = (
               currency: 'USD',
               displayValue: 'USD 123',
             },
-            transcriptRequested: false,
+            captionsRequested: false,
             licenseDuration: '5 Years',
             licenseTerritory: 'World Wide',
           },
