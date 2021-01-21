@@ -3,6 +3,7 @@ import { CartConverter } from './CartConverter';
 describe('converter', () => {
   it('converting to cart', () => {
     const resource = {
+      note: 'hi',
       items: [
         {
           id: 'item-id-1',
@@ -23,7 +24,7 @@ describe('converter', () => {
     };
 
     const cart = CartConverter.convertCart(resource);
-
+    expect(cart.note).toEqual('hi');
     expect(cart.items[0].videoId).toEqual('video-id-1');
     expect(cart.items[0].links.self.getOriginalLink()).toEqual('cartItem');
     expect(cart.items[0].additionalServices?.trim?.to).toEqual('1');

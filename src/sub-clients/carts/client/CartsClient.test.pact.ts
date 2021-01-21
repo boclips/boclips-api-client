@@ -7,6 +7,7 @@ import { Cart } from '../model/Cart';
 import {
   getCartsInteraction,
   postCartsInteraction,
+  updateCartInteraction,
 } from '../pact/CartsInteractions';
 
 /**
@@ -36,6 +37,13 @@ describe('CartsClient', () => {
         );
         expect(response.links.self.getOriginalLink()).not.toBeNull();
         expect(response.links.addItem.getOriginalLink()).not.toBeNull();
+      });
+
+      it('can save a note in a cart', async () => {
+        const note = 'hello';
+        await provider.addInteraction(updateCartInteraction(note));
+        const response = await client.carts.updateCart(note);
+        expect(response.note).toEqual(note);
       });
 
       it('can add item to cart', async () => {

@@ -43,6 +43,11 @@ export class FakeCartsClient implements CartsClient, Clearable {
     return Promise.resolve(cartItem);
   }
 
+  public async updateCart(note: string): Promise<Cart> {
+    this.cart.note = note;
+    return Promise.resolve(this.cart);
+  }
+
   public deleteItemFromCart(_: any, cartItemId: string): Promise<void> {
     const cartItemIds = this.cart.items.map((it) => it.id);
     const cartItemIndex = cartItemIds.indexOf(cartItemId);

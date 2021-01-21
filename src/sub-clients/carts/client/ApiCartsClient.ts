@@ -31,6 +31,22 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
       .then((it) => CartConverter.convertCartItem(it.data));
   }
 
+  public async updateCart(note: string): Promise<Cart> {
+    const cartsLink = this.getLinkOrThrow('cart');
+
+    return this.axios
+      .patch(
+        cartsLink.href,
+        { note },
+        {
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        },
+      )
+      .then((it) => CartConverter.convertCart(it.data));
+  }
+
   public async updateCartItemAdditionalServices(
     cartItem: CartItem,
     additionalServices: AdditionalServices,

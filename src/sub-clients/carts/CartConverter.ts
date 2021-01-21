@@ -5,8 +5,9 @@ import { CartItemResource } from './model/CartItemResource';
 import { CartResource } from './model/CartResource';
 
 export class CartConverter {
-  public static convertCart({ items, _links }: CartResource): Cart {
+  public static convertCart({ note, items, _links }: CartResource): Cart {
     return {
+      note: note,
       items: items.map((it) => this.convertCartItem(it)),
       links: {
         self: new Link(_links.self),

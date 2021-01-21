@@ -36,6 +36,44 @@ export const getCartsInteraction = (): InteractionObject => ({
   },
 });
 
+export const updateCartInteraction = (note: string): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'PATCH cart',
+  withRequest: {
+    method: 'PATCH',
+    path: '/v1/cart',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: {
+      note,
+    },
+  },
+  willRespondWith: {
+    status: 200,
+    headers: {
+      'Content-Type': Matchers.term({
+        generate: 'application/hal+json;charset=UTF-8',
+        matcher: contentTypeRegex,
+      }),
+    },
+    body: {
+      items: eachLike({
+        id: 'item-id',
+        videoId: 'video-id-1',
+        _links: {
+          self: like({ href: '/cartItem' }),
+        },
+      }),
+      note,
+      _links: {
+        self: like({ href: '/carts' }),
+        addItem: like({ href: '/addItem' }),
+      },
+    },
+  },
+});
+
 export const postCartsInteraction = (
   videoId: string,
   cartItemId: string = 'cart-item-id',
