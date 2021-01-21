@@ -132,6 +132,7 @@ export const placeOrderInteraction = (): InteractionObject => ({
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: {
+      note: 'i am a note',
       items: [
         {
           id: '123',

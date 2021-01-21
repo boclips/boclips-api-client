@@ -140,9 +140,8 @@ describe('OrdersClient', () => {
 
       it('can place an order', async () => {
         await provider.addInteraction(placeOrderInteraction());
-        const placedOrderId = await client.orders.placeOrder(
-          [{ id: '123', videoId: '5c542ab85438cdbcb56ddcee' }],
-          UserFactory.sample({
+        const placedOrderId = await client.orders.placeOrder({
+          user: UserFactory.sample({
             id: 'b66f6f98-3c5b-49e3-ac1b-2e8def6c95c0',
             email: 'definitely-not-batman@wayne.com',
             firstName: 'Bruce',
@@ -152,9 +151,17 @@ describe('OrdersClient', () => {
               name: 'Wayne Enterprises',
             },
           }),
-        );
+          cart: {
+            items: [{ id: '123', videoId: '5c542ab85438cdbcb56ddcee' }],
+            note: 'i am a note',
+          },
+        });
 
         expect(placedOrderId).not.toBeNull();
+        if (isATestClient(client)) {
+          const updatedOrder = await client.orders.get(placedOrderId);
+          expect(updatedOrder?.note).toEqual('i am a note');
+        }
       });
 
       it('can fetch an order', async () => {

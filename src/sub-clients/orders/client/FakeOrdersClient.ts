@@ -9,9 +9,10 @@ import { OrdersPage } from '../model/OrdersPage';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
-import { User } from '../../organisations/model/User';
-import { OrderItemRequest } from '../model/OrderItemRequest';
 import { BoclipsApiError } from '../../../types';
+import { PlaceOrderRequest } from '../model/PlaceOrderRequest';
+import { CartItem } from '../../carts/model/CartItem';
+import { DeepPartial } from '../../common/model/DeepPartial';
 
 export class FakeOrdersClient implements OrdersClient, Clearable {
   private orders: Order[] = [];
@@ -111,26 +112,30 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
     this.placeOrderError = apiError;
   }
 
-  placeOrder(cartItems: OrderItemRequest[], user: User): Promise<string> {
+  placeOrder(request: PlaceOrderRequest): Promise<string> {
     if (this.placeOrderError) {
       const error = Promise.reject(this.placeOrderError);
       this.placeOrderError = null;
       return error;
     }
 
-    const orderItems = cartItems.map((item) =>
-      OrderItemFactory.sample({
-        id: item.id,
-        video: OrderItemFactory.sampleVideo({ id: item.videoId }),
-      }),
+    const orderItems: OrderItem[] | undefined = request.cart?.items?.map(
+      (item: DeepPartial<CartItem> | undefined) => {
+        return OrderItemFactory.sample({
+          id: item?.id,
+          video: OrderItemFactory.sampleVideo({ id: item?.videoId }),
+        });
+      },
     );
+
     const order = OrdersFactory.sample({
       id: Date.now().toString(),
       items: orderItems,
+      note: request.cart.note,
       userDetails: {
-        requestingUser: `${user.firstName} ${user.lastName}`,
-        authorisingUser: `${user.firstName} ${user.lastName}`,
-        organisation: user.organisation.name,
+        requestingUser: `${request.user.firstName} ${request.user.lastName}`,
+        authorisingUser: `${request.user.firstName} ${request.user.lastName}`,
+        organisation: request.user.organisation.name,
       },
     });
     this.orders.push(order);

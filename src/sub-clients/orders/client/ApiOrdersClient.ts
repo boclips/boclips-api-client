@@ -8,26 +8,23 @@ import { OrderConverter } from '../OrderConverter';
 import { OrderItem } from './../model/OrderItem';
 import { OrdersClient } from './OrdersClient';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
-import { User } from '../../organisations/model/User';
-import { OrderItemRequest } from '../model/OrderItemRequest';
+import { PlaceOrderRequest } from '../model/PlaceOrderRequest';
 
 export class ApiOrdersClient extends ApiSubClient implements OrdersClient {
-  public placeOrder(
-    cartItems: OrderItemRequest[],
-    user: User,
-  ): Promise<string> {
+  public placeOrder(request: PlaceOrderRequest): Promise<string> {
     const orderLink = this.getLinkOrThrow('placeOrder');
     return this.axios
       .post(
         orderLink.href,
         {
-          items: cartItems,
+          items: request.cart.items,
+          note: request.cart.note,
           user: {
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            organisation: user.organisation,
+            id: request.user.id,
+            firstName: request.user.firstName,
+            lastName: request.user.lastName,
+            email: request.user.email,
+            organisation: request.user.organisation,
           },
         },
         {

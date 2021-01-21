@@ -3,8 +3,7 @@ import { OrderItem } from '../model/OrderItem';
 import { OrderItemUpdateRequest } from '../model/OrderItemUpdateRequest';
 import { OrdersPage } from '../model/OrdersPage';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
-import { User } from '../../organisations/model/User';
-import { OrderItemRequest } from '../model/OrderItemRequest';
+import { PlaceOrderRequest } from '../model/PlaceOrderRequest';
 
 export interface OrdersClient {
   get(id: string): Promise<Order | null>;
@@ -15,5 +14,5 @@ export interface OrdersClient {
     item: OrderItem,
     updateRequest: OrderItemUpdateRequest,
   ): Promise<Order>;
-  placeOrder(cartItems: OrderItemRequest[], user: User): Promise<string>;
+  placeOrder(request: PlaceOrderRequest): Promise<string>;
 }

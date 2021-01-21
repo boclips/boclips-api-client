@@ -4,6 +4,7 @@ import { OrderPrice } from './OrderPrice';
 
 export interface Order {
   id: string;
+  note?: string;
   createdAt: Date;
   updatedAt: Date;
   isbnNumber?: string;
