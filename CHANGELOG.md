@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add note field to the Cart and Order
 - The placeOrder function on OrdersClient takes PlaceOrderRequest object
 
+## [25.0.2] - 2020-01-22
+
+- Refactor FakeUsersClient to have a default currentUser.
+
 ## [25.0.1] - 2020-01-21
 
 - Add deliveryDate to Order
