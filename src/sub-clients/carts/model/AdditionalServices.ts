@@ -3,4 +3,5 @@ export interface AdditionalServices {
     from: string;
     to: string;
   };
+  transcriptRequested?: boolean;
 }

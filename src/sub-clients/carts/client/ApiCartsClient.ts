@@ -49,21 +49,16 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
 
   public async updateCartItemAdditionalServices(
     cartItem: CartItem,
-    additionalServices: AdditionalServices,
+    additionalServices: Partial<AdditionalServices>,
   ): Promise<Cart> {
     const updateLink = cartItem.links.self.getOriginalLink();
-    const { trim } = additionalServices;
 
     return this.axios
-      .patch(
-        updateLink,
-        { trim },
-        {
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
+      .patch(updateLink, additionalServices, {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
         },
-      )
+      })
       .then((it) => CartConverter.convertCart(it.data));
   }
 
