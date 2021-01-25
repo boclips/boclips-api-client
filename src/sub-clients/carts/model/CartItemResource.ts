@@ -10,4 +10,6 @@ export interface AdditionalServicesResource {
     from: string;
     to: string;
   };
+  captionsRequested: boolean;
+  transcriptRequested: boolean;
 }

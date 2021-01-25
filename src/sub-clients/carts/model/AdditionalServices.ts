@@ -4,4 +4,5 @@ export interface AdditionalServices {
     to: string;
   };
   transcriptRequested?: boolean;
+  captionsRequested?: boolean;
 }

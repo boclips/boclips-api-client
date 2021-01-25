@@ -14,6 +14,8 @@ describe('converter', () => {
               to: '1',
               from: '2',
             },
+            captionsRequested: true,
+            transcriptRequested: true,
           },
         },
       ],
@@ -29,6 +31,8 @@ describe('converter', () => {
     expect(cart.items[0].links.self.getOriginalLink()).toEqual('cartItem');
     expect(cart.items[0].additionalServices?.trim?.to).toEqual('1');
     expect(cart.items[0].additionalServices?.trim?.from).toEqual('2');
+    expect(cart.items[0].additionalServices?.captionsRequested).toEqual(true);
+    expect(cart.items[0].additionalServices?.transcriptRequested).toEqual(true);
     expect(cart.links.self.getOriginalLink()).toEqual('cart');
     expect(cart.links.addItem.getOriginalLink()).toEqual('addItem');
   });
