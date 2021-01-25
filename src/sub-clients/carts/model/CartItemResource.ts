@@ -1,16 +1,16 @@
 export interface CartItemResource {
   videoId: string;
   id: string;
-  additionalServices: AdditionalServicesResource;
+  additionalServices?: AdditionalServicesResource;
   _links: any;
 }
 
 export interface AdditionalServicesResource {
-  trim: {
+  trim?: {
     from: string;
     to: string;
   };
-  captionsRequested: boolean;
-  transcriptRequested: boolean;
+  captionsRequested?: boolean;
+  transcriptRequested?: boolean;
   editRequest?: string;
 }
