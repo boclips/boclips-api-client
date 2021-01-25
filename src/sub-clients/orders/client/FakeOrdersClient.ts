@@ -124,6 +124,11 @@ export class FakeOrdersClient implements OrdersClient, Clearable {
         return OrderItemFactory.sample({
           id: item?.id,
           video: OrderItemFactory.sampleVideo({ id: item?.videoId }),
+          captionsRequested: item?.additionalServices?.captionsRequested,
+          editRequest: item?.additionalServices?.editRequest,
+          trim:
+            item?.additionalServices?.trim &&
+            `${item.additionalServices?.trim?.from}-${item.additionalServices?.trim.to}`,
         });
       },
     );

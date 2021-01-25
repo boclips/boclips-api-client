@@ -9,6 +9,7 @@ export interface OrderItem {
   };
   price?: OrderPrice;
   captionsRequested: boolean;
+  editRequest?: string;
   video: OrderItemVideo;
   trim?: string;
   channel: OrderItemChannel;

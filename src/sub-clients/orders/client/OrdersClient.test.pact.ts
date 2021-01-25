@@ -140,6 +140,7 @@ describe('OrdersClient', () => {
 
       it('can place an order', async () => {
         await provider.addInteraction(placeOrderInteraction());
+
         const placedOrderId = await client.orders.placeOrder({
           user: UserFactory.sample({
             id: 'b66f6f98-3c5b-49e3-ac1b-2e8def6c95c0',
@@ -152,7 +153,20 @@ describe('OrdersClient', () => {
             },
           }),
           cart: {
-            items: [{ id: '123', videoId: '5c542ab85438cdbcb56ddcee' }],
+            items: [
+              {
+                id: '123',
+                videoId: '5c542ab85438cdbcb56ddcee',
+                additionalServices: {
+                  editRequest: 'please do some nice editing',
+                  captionsRequested: true,
+                  trim: {
+                    from: '0:30',
+                    to: '1:00',
+                  },
+                },
+              },
+            ],
             note: 'i am a note',
           },
         });
@@ -160,6 +174,12 @@ describe('OrdersClient', () => {
         expect(placedOrderId).not.toBeNull();
         if (isATestClient(client)) {
           const updatedOrder = await client.orders.get(placedOrderId);
+          expect(updatedOrder?.items[0].editRequest).toEqual(
+            'please do some nice editing',
+          );
+          expect(updatedOrder?.items[0].trim).toEqual('0:30-1:00');
+          expect(updatedOrder?.items[0].captionsRequested).toEqual(true);
+
           expect(updatedOrder?.note).toEqual('i am a note');
         }
       });

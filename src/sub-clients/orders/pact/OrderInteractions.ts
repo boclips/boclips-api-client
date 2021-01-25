@@ -137,6 +137,14 @@ export const placeOrderInteraction = (): InteractionObject => ({
         {
           id: '123',
           videoId: '5c542ab85438cdbcb56ddcee',
+          additionalServices: {
+            captionsRequested: true,
+            editRequest: 'please do some nice editing',
+            trim: {
+              from: '0:30',
+              to: '1:00',
+            },
+          },
         },
       ],
       user: {
