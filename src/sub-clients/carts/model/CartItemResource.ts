@@ -12,4 +12,5 @@ export interface AdditionalServicesResource {
   };
   captionsRequested: boolean;
   transcriptRequested: boolean;
+  editRequest?: string;
 }

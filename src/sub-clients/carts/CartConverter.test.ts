@@ -16,6 +16,7 @@ describe('converter', () => {
             },
             captionsRequested: true,
             transcriptRequested: true,
+            editRequest: 'please edit this lovely video',
           },
         },
       ],
@@ -33,6 +34,9 @@ describe('converter', () => {
     expect(cart.items[0].additionalServices?.trim?.from).toEqual('2');
     expect(cart.items[0].additionalServices?.captionsRequested).toEqual(true);
     expect(cart.items[0].additionalServices?.transcriptRequested).toEqual(true);
+    expect(cart.items[0].additionalServices?.editRequest).toEqual(
+      'please edit this lovely video',
+    );
     expect(cart.links.self.getOriginalLink()).toEqual('cart');
     expect(cart.links.addItem.getOriginalLink()).toEqual('addItem');
   });

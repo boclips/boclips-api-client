@@ -102,6 +102,7 @@ describe('CartsClient', () => {
             },
             transcriptRequested: true,
             captionsRequested: true,
+            editRequest: 'please do some editing',
           };
 
           const cartItem = await client.carts.addItemToCart(cart, videoId);
@@ -119,6 +120,9 @@ describe('CartsClient', () => {
           expect(updatedItem?.additionalServices?.trim?.to).toEqual('1:22');
           expect(updatedItem?.additionalServices?.transcriptRequested).toEqual(
             true,
+          );
+          expect(updatedItem?.additionalServices?.editRequest).toEqual(
+            'please do some editing',
           );
         }
       });
