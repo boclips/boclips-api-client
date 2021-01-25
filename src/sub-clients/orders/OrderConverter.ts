@@ -25,6 +25,7 @@ export class OrderConverter {
       captionsRequested,
       items,
       deliveryDate,
+      note,
     } = resource;
 
     return {
@@ -39,6 +40,7 @@ export class OrderConverter {
         requestingUser: userDetails.requestingUserLabel,
         organisation: userDetails.organisationLabel,
       },
+      note,
       legacyOrderId,
       isbnNumber,
       captionsRequested,

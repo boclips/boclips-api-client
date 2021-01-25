@@ -18,6 +18,7 @@ export class OrdersFactory {
         updatedAt: new Date(),
         deliveryDate: new Date(),
         isbnNumber: '123',
+        note: 'i am a note',
         legacyOrderId: 'legacy-order-id',
         status: OrderStatus.READY,
         totalPrice: OrderPriceFactory.sample(),

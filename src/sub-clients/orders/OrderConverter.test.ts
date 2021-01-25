@@ -10,6 +10,7 @@ describe('OrderConvert', () => {
       headers: '',
       config: {},
       request: 'any',
+      note: 'i am a note',
       data: {
         id: 'I am an order',
         legacyOrderId: 'I am a legacy order',
