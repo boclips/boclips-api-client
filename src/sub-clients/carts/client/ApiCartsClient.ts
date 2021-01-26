@@ -51,7 +51,7 @@ export class ApiCartsClient extends ApiSubClient implements CartsClient {
     cartItem: CartItem,
     additionalServices: Partial<AdditionalServices>,
   ): Promise<Cart> {
-    const updateLink = cartItem.links.self.getOriginalLink();
+    const updateLink = cartItem.links.additionalServices.getOriginalLink();
 
     return this.axios
       .patch(updateLink, additionalServices, {

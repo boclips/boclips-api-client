@@ -5,5 +5,5 @@ export interface CartItem {
   id: string;
   videoId: string;
   additionalServices?: AdditionalServices | null;
-  links: { self: Link };
+  links: { self: Link; additionalServices: Link };
 }

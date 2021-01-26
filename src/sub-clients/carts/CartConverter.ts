@@ -26,7 +26,10 @@ export class CartConverter {
       id,
       videoId,
       additionalServices,
-      links: { self: new Link(_links.self) },
+      links: {
+        self: new Link(_links.self),
+        additionalServices: new Link(_links.additionalServices),
+      },
     };
   }
 }

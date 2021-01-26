@@ -24,7 +24,13 @@ export class FakeCartsClient implements CartsClient, Clearable {
       id: this.generateItemId(),
       videoId,
       additionalServices: null,
-      links: { self: new Link({ href: `/cartItem`, templated: false }) },
+      links: {
+        self: new Link({ href: `/cartItem`, templated: false }),
+        additionalServices: new Link({
+          href: `/cartItem/123/additional-services`,
+          templated: true,
+        }),
+      },
     };
   };
 

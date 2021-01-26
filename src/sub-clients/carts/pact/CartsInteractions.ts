@@ -26,6 +26,7 @@ export const getCartsInteraction = (): InteractionObject => ({
         videoId: 'video-id-1',
         _links: {
           self: like({ href: '/cartItem' }),
+          additionalServices: like({ href: '/cartItem/additional-services' }),
         },
       }),
       _links: {
@@ -63,6 +64,7 @@ export const updateCartInteraction = (note: string): InteractionObject => ({
         videoId: 'video-id-1',
         _links: {
           self: like({ href: '/cartItem' }),
+          additionalServices: like({ href: '/cartItem/additional-services' }),
         },
       }),
       note,
@@ -140,7 +142,7 @@ export const updateCartItemAdditionalServices = (
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    path: `/v1/cart/items/${cartItem.id}`,
+    path: `/v1/cart/items/${cartItem.id}/additional-services`,
     body: {
       additionalServices,
     },
@@ -169,6 +171,7 @@ export const updateCartItemAdditionalServices = (
         },
         _links: {
           self: like({ href: '/cartItem' }),
+          additionalServices: like({ href: '/cartItem/additional-services' }),
         },
       }),
       _links: {
