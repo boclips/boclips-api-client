@@ -22,6 +22,7 @@ describe('OrderConvert', () => {
         status: 'READY',
         createdAt: '2020-09-18T14:19:55.612Z',
         updatedAt: '2020-09-18T14:19:55.612Z',
+        deliveredAt: '2020-09-18T14:19:55.612Z',
         deliveryDate: '2020-09-18T14:19:55.612Z',
         isbnNumber: '',
         _links: {
@@ -100,6 +101,7 @@ describe('OrderConvert', () => {
         status: 'READY',
         createdAt: '2020-09-18T14:19:55.612Z',
         updatedAt: '2020-09-18T14:19:55.612Z',
+        deliveredAt: '2020-09-18T14:19:55.612Z',
         deliveryDate: '2020-09-18T14:19:55.612Z',
         isbnNumber: '',
         _links: {
@@ -168,8 +170,8 @@ describe('OrderConvert', () => {
     expect(converted.status).toEqual(orderResource.data.status);
     expect(converted.totalPrice).toEqual(orderResource.data.totalPrice);
     expect(converted.isbnNumber).toEqual(orderResource.data.isbnNumber);
-    expect(converted.deliveryDate).toEqual(
-      new Date(orderResource.data.deliveryDate),
+    expect(converted.deliveredAt).toEqual(
+      new Date(orderResource.data.deliveredAt),
     );
     expect(converted.createdAt).toEqual(new Date(orderResource.data.createdAt));
     expect(converted.updatedAt).toEqual(new Date(orderResource.data.updatedAt));

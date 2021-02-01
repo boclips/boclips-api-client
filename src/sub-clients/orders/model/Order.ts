@@ -18,6 +18,7 @@ export interface Order {
   };
   items: OrderItem[];
   captionsRequested?: boolean;
+  deliveredAt: Date | null;
   deliveryDate: Date | null;
 }
 
