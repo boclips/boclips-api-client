@@ -17,7 +17,6 @@ export class OrdersFactory {
         createdAt: new Date(),
         updatedAt: new Date(),
         deliveredAt: new Date(),
-        deliveryDate: new Date(),
         isbnNumber: '123',
         note: 'i am a note',
         legacyOrderId: 'legacy-order-id',

@@ -25,7 +25,6 @@ export class OrderConverter {
       captionsRequested,
       items,
       deliveredAt,
-      deliveryDate,
       note,
     } = resource;
 
@@ -34,7 +33,6 @@ export class OrderConverter {
       createdAt: new Date(createdAt),
       updatedAt: new Date(updatedAt),
       deliveredAt: deliveredAt ? new Date(deliveredAt) : null,
-      deliveryDate: deliveryDate ? new Date(deliveryDate) : null,
       totalPrice,
       status: OrderStatus[status as keyof typeof OrderStatus],
       userDetails: {
