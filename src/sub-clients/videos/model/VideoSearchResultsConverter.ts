@@ -45,6 +45,7 @@ export class VideoSearchResultsConverter {
         resourceTypes: convertFacets(entity._embedded.facets?.resourceTypes),
         channels: convertFacets(entity._embedded.facets?.channels),
         durations: convertFacets(entity._embedded.facets?.durations),
+        prices: convertFacets(entity._embedded.facets?.prices),
       },
     };
   }

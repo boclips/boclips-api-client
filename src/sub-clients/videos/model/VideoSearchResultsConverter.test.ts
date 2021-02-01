@@ -30,6 +30,10 @@ describe('VideoSearchResultsConverter', () => {
           videoTypes: {
             stock: { name: 'Stock', hits: 10 },
           },
+          prices: {
+            30000: { hits: 23030, id: null, name: '30000' },
+            60000: { hits: 6900, id: null, name: '60000' },
+          },
         },
       },
     });
@@ -78,6 +82,11 @@ describe('VideoSearchResultsConverter', () => {
         hits: 10,
         name: 'Stock',
       },
+    ]);
+
+    expect(convertedResults.facets?.prices).toEqual([
+      { hits: 23030, id: '30000', name: '30000' },
+      { hits: 6900, id: '60000', name: '60000' },
     ]);
   });
 });

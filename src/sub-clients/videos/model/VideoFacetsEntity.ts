@@ -17,6 +17,9 @@ export interface VideoFacetsEntity {
   videoTypes?: {
     [id: string]: FacetEntity;
   };
+  prices?: {
+    [id: string]: FacetEntity;
+  };
 }
 
 export interface FacetEntity {

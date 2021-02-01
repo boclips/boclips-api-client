@@ -5,6 +5,7 @@ export interface VideoFacets {
   resourceTypes: Facet[];
   channels: Facet[];
   videoTypes: Facet[];
+  prices: Facet[];
 }
 
 export interface Facet {

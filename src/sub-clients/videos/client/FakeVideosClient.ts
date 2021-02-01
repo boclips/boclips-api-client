@@ -21,6 +21,7 @@ export class FakeVideosClient implements VideosClient, Clearable {
     resourceTypes: [],
     videoTypes: [],
     channels: [],
+    prices: [],
   };
 
   public get(id: string, referer?: string, shareCode?: string): Promise<Video> {
@@ -89,6 +90,16 @@ export class FakeVideosClient implements VideosClient, Clearable {
         searchRequest.type.length > 0 &&
         searchRequest.type.some(
           (videoType) => !video.types?.map((t) => t.name).includes(videoType),
+        )
+      ) {
+        return false;
+      }
+
+      if (
+        searchRequest.prices &&
+        searchRequest.prices.length > 0 &&
+        searchRequest.prices.some(
+          (price) => video.price?.amount.toString() !== price,
         )
       ) {
         return false;

@@ -10,6 +10,7 @@ export class FacetsFactory {
         resourceTypes: [FacetFactory.sample({ id: 'resource-id' })],
         subjects: [],
         videoTypes: [],
+        prices: [],
       },
       ...facets,
     };

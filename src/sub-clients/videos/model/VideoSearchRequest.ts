@@ -20,4 +20,5 @@ export interface VideoSearchRequest {
   type?: string[];
   video_type_facets?: string[];
   include_channel_facets?: boolean;
+  prices?: string[];
 }
