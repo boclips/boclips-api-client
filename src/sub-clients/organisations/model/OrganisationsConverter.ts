@@ -19,10 +19,12 @@ export class OrganisationsConverter {
   public static convert(entity: OrganisationEntity): Organisation {
     return {
       id: entity.id,
-      contentPackageId: entity.contentPackageId,
-      accessExpiresOn: entity.accessExpiresOn
-        ? new Date(entity.accessExpiresOn)
-        : null,
+      deal: {
+        contentPackageId: entity.deal.contentPackageId,
+        accessExpiresOn: entity.deal.accessExpiresOn
+          ? new Date(entity.deal.accessExpiresOn)
+          : null,
+      },
       organisationDetails: OrganisationsConverter.convertDetails(
         entity.organisationDetails,
       ),

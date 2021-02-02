@@ -44,6 +44,9 @@ export const getOrganisationsByCountryCode = (
            * @see https://github.com/DiUS/pact-jvm/issues/319
            */
 
+          deal: like({
+            billing: false,
+          }),
           organisationDetails: like({
             name: like('1st Football High School'),
             type: like('SCHOOL'),
@@ -91,10 +94,13 @@ export const updateOrganisation = (
     },
     body: {
       id: like(id),
-      accessExpiresOn: like(
-        updateOrganisationRequest.accessExpiresOn?.toISOString(),
-      ),
-      contentPackageId: like('a-content-package-id'),
+      deal: like({
+        billing: like(false),
+        accessExpiresOn: like(
+          updateOrganisationRequest.accessExpiresOn?.toISOString(),
+        ),
+        contentPackageId: like('a-content-package-id'),
+      }),
       organisationDetails: like({
         name: like('1st Football High School'),
         type: like('SCHOOL'),

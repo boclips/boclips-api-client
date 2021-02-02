@@ -2,8 +2,7 @@ import { Link } from '../../common/model/LinkEntity';
 
 export interface Organisation {
   id: string;
-  contentPackageId: string;
-  accessExpiresOn: Date | null;
+  deal: Deal;
   organisationDetails: OrganisationDetails;
   links: {
     edit?: Link;
@@ -27,4 +26,9 @@ export interface Country {
 export interface State {
   id: string;
   name: string;
+}
+
+export interface Deal {
+  contentPackageId?: string;
+  accessExpiresOn: Date | null;
 }

@@ -7,7 +7,11 @@ describe('OrganisationConverter', () => {
   it('converts a school to an Organisation', () => {
     const schoolEntity = OrganisationEntityFactory.sample({
       id: '5db06aec7c6c020001339eb2',
-      contentPackageId: 'a-content-package-id',
+      deal: {
+        billing: false,
+        contentPackageId: 'a-content-package-id',
+        accessExpiresOn: null,
+      },
       organisationDetails: {
         name: 'Towle Institute',
         domain: 'domain.com',
@@ -29,10 +33,10 @@ describe('OrganisationConverter', () => {
     );
 
     expect(convertedOrganisation.id).toEqual('5db06aec7c6c020001339eb2');
-    expect(convertedOrganisation.contentPackageId).toEqual(
+    expect(convertedOrganisation.deal.contentPackageId).toEqual(
       'a-content-package-id',
     );
-    expect(convertedOrganisation.accessExpiresOn).toBeNull();
+    expect(convertedOrganisation.deal.accessExpiresOn).toBeNull();
     expect(convertedOrganisation.organisationDetails.name).toEqual(
       'Towle Institute',
     );
@@ -61,14 +65,17 @@ describe('OrganisationConverter', () => {
     const date = new Date(iso);
 
     const organisationEntity = OrganisationEntityFactory.sample({
-      accessExpiresOn: iso,
+      deal: {
+        accessExpiresOn: iso,
+        billing: false,
+      },
     });
 
     const convertedOrganisation: Organisation = OrganisationsConverter.convert(
       organisationEntity,
     );
 
-    expect(convertedOrganisation.accessExpiresOn).toEqual(date);
+    expect(convertedOrganisation.deal.accessExpiresOn).toEqual(date);
   });
 
   it('converts an organisation without a state', () => {
@@ -146,7 +153,10 @@ describe('OrganisationConverter', () => {
   it('converts lti deployment to an Organisation', () => {
     const ltiDeploymentEntity = OrganisationEntityFactory.sample({
       id: '5db06aec7c6c020001339eb2',
-      contentPackageId: '',
+      deal: {
+        contentPackageId: '',
+        billing: false,
+      },
       organisationDetails: {
         name: 'lti-deployment',
         domain: '',

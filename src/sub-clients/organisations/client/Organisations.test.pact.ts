@@ -96,9 +96,8 @@ describe('Organisation', () => {
           updateRequest,
         );
 
-        expect(updatedOrganisation.accessExpiresOn).toEqual(
-          new Date(updatedTime),
-        );
+        const expirationDate = updatedOrganisation.deal.accessExpiresOn;
+        expect(expirationDate).toEqual(new Date(updatedTime));
       });
 
       it(`can associate users to organisations`, async () => {

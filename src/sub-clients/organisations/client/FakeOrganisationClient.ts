@@ -49,7 +49,7 @@ export class FakeOrganisationsClient implements OrganisationsClient, Clearable {
     );
 
     if (index > -1) {
-      this.organisations[index].accessExpiresOn =
+      this.organisations[index].deal.accessExpiresOn =
         updateOrganisationRequest.accessExpiresOn || null;
 
       return Promise.resolve(this.organisations[index]);

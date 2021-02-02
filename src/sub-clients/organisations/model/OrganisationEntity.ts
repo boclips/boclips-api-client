@@ -2,9 +2,8 @@ import { LinkEntity } from '../../common/model/LinkEntity';
 
 export interface OrganisationEntity {
   id: string;
-  contentPackageId: string;
-  accessExpiresOn: string | null;
   organisationDetails: OrganisationDetailsEntity;
+  deal: DealEntity;
   _links: {
     edit?: LinkEntity;
     associateUsers?: LinkEntity;
@@ -28,4 +27,10 @@ export interface CountryEntity {
   id: string;
   name: string;
   states: null;
+}
+
+export interface DealEntity {
+  billing: boolean;
+  contentPackageId?: string;
+  accessExpiresOn?: string | null;
 }

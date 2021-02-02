@@ -10,8 +10,11 @@ export class OrganisationEntityFactory {
   ): OrganisationEntity {
     return {
       id: '5db06aec7c6c020001339eb2',
-      contentPackageId: 'a-content-package-id',
-      accessExpiresOn: null,
+      deal: {
+        billing: false,
+        contentPackageId: 'a-content-package-id',
+        accessExpiresOn: null,
+      },
       organisationDetails: {
         name: 'Towle Institute',
         domain: '',
@@ -45,8 +48,10 @@ export class OrganisationFactory {
   public static sample(args: Partial<Organisation> = {}): Organisation {
     return {
       organisationDetails: OrganisationDetailsFactory.sample(),
-      accessExpiresOn: new Date(Date.parse('2019-12-10')),
-      contentPackageId: 'a-content-package-id',
+      deal: {
+        accessExpiresOn: new Date(Date.parse('2019-12-10')),
+        contentPackageId: 'a-content-package-id',
+      },
       id: 'org-account-id',
       links: {},
       ...args,
