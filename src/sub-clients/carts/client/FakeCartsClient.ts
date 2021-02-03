@@ -60,9 +60,13 @@ export class FakeCartsClient implements CartsClient, Clearable {
     cartItem: CartItem,
     additionalServices: AdditionalServices,
   ): Promise<Cart> {
-    cartItem.additionalServices = additionalServices;
+    const itemToUpdate = this.cart.items.find(
+      (item) => item.id === cartItem.id,
+    );
 
-    this.cart.items.push(cartItem);
+    if (itemToUpdate) {
+      itemToUpdate.additionalServices = additionalServices;
+    }
 
     return Promise.resolve(this.cart);
   }

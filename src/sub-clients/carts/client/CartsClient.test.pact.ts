@@ -112,9 +112,7 @@ describe('CartsClient', () => {
             additionalServices,
           );
 
-          const updatedItem = updatedCart.items.find(
-            (it) => it.id === cartItem.id,
-          );
+          const updatedItem = updatedCart.items[0];
 
           expect(updatedItem?.additionalServices?.trim?.from).toEqual('0:21');
           expect(updatedItem?.additionalServices?.trim?.to).toEqual('1:22');
