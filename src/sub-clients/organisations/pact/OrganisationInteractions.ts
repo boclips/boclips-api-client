@@ -37,14 +37,13 @@ export const getOrganisationsByCountryCode = (
       _embedded: {
         organisations: eachLike({
           id: like(id),
-          /**
-           * The accessExpiresOn and contentPackageId field should be described here, but since it's optional in
-           * the schema we cannot describe here.
-           *
-           * @see https://github.com/DiUS/pact-jvm/issues/319
-           */
-
           deal: like({
+            /**
+             * The accessExpiresOn and contentPackageId field should be described here, but since it's optional in
+             * the schema we cannot describe here.
+             *
+             * @see https://github.com/DiUS/pact-jvm/issues/319
+             */
             billing: false,
           }),
           organisationDetails: like({
