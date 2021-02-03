@@ -1,3 +1,4 @@
+import { CartsFactory } from '../../../test-support/CartsFactory';
 import { Link } from '../../common/model/LinkEntity';
 import { Clearable } from '../../common/utils/Clearable';
 import { AdditionalServices } from '../model/AdditionalServices';
@@ -5,16 +6,8 @@ import { Cart } from '../model/Cart';
 import { CartItem } from '../model/CartItem';
 import { CartsClient } from './CartsClient';
 
-const emptyCart = {
-  items: [],
-  links: {
-    self: new Link({ href: '/cart', templated: false }),
-    addItem: new Link({ href: '/addItem', templated: false }),
-  },
-};
-
 export class FakeCartsClient implements CartsClient, Clearable {
-  private cart: Cart = { ...emptyCart };
+  private cart: Cart = this.getEmptyCart();
   private generateItemId = () => {
     return (this.cart.items.length + 1).toString();
   };
@@ -75,6 +68,10 @@ export class FakeCartsClient implements CartsClient, Clearable {
   }
 
   public clear() {
-    this.cart = { ...emptyCart };
+    this.cart = this.getEmptyCart();
+  }
+
+  private getEmptyCart(): Cart {
+    return CartsFactory.sample({ items: [], note: undefined });
   }
 }
