@@ -13,7 +13,7 @@ describe('OrderConvert', () => {
       note: 'i am a note',
       data: {
         id: 'I am an order',
-        legacyOrderId: 'I am a legacy order',
+        searchableOrderId: 'I am a legacy order or maybe am I regular order?',
         userDetails: {
           requestingUserLabel: undefined,
           authorisingUserLabel: undefined,
@@ -91,7 +91,7 @@ describe('OrderConvert', () => {
       request: 'any',
       data: {
         id: 'I am an order',
-        legacyOrderId: 'I am a legacy order',
+        searchableOrderId: 'I am a legacy order or maybe am I regular order?',
         userDetails: {
           requestingUserLabel: undefined,
           authorisingUserLabel: undefined,
@@ -163,7 +163,9 @@ describe('OrderConvert', () => {
 
   const assertConvertedOrder = (converted: Order, orderResource: any) => {
     expect(converted.id).toEqual(orderResource.data.id);
-    expect(converted.legacyOrderId).toEqual(orderResource.data.legacyOrderId);
+    expect(converted.searchableOrderId).toEqual(
+      orderResource.data.searchableOrderId,
+    );
     expect(converted.userDetails).toEqual(orderResource.data.userDetails);
     expect(converted.status).toEqual(orderResource.data.status);
     expect(converted.totalPrice).toEqual(orderResource.data.totalPrice);

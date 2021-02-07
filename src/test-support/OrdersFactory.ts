@@ -19,7 +19,7 @@ export class OrdersFactory {
         deliveredAt: new Date(),
         isbnNumber: '123',
         note: 'i am a note',
-        legacyOrderId: 'legacy-order-id',
+        searchableOrderId: 'legacy-or-regular-order-id',
         status: OrderStatus.READY,
         totalPrice: OrderPriceFactory.sample(),
         userDetails: {

@@ -14,7 +14,7 @@ export class OrderConverter {
   private static convert(resource: any): Order {
     const {
       id,
-      legacyOrderId,
+      searchableOrderId,
       createdAt,
       updatedAt,
       _links,
@@ -41,7 +41,7 @@ export class OrderConverter {
         organisation: userDetails.organisationLabel,
       },
       note,
-      legacyOrderId,
+      searchableOrderId,
       isbnNumber,
       captionsRequested,
       links: {

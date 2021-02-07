@@ -95,7 +95,7 @@ describe('OrdersClient', () => {
         expect(order.updatedAt.toUTCString()).toEqual(
           'Sun, 02 Feb 2020 03:04:05 GMT',
         );
-        expect(order.legacyOrderId).toEqual('legacy-order-id');
+        expect(order.searchableOrderId).toEqual('legacy-or-regular-order-id');
         expect(order.status).toBeDefined();
         expect(order.totalPrice.value).toEqual(123);
         expect(order.totalPrice.displayValue).toBeDefined();

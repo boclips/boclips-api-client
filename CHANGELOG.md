@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [30.0.0] - 2020-02-08
+
+- Rename `legacyOrderId` to `searchableOrderId` in orders
+
 ## [29.0.3] - 2020-02-03
 
 - Fix FakeCartsClient's implementation of updating additional services

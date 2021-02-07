@@ -8,7 +8,7 @@ export interface Order {
   createdAt: Date;
   updatedAt: Date;
   isbnNumber?: string;
-  legacyOrderId: string;
+  searchableOrderId: string;
   status: OrderStatus;
   totalPrice: OrderPrice;
   userDetails: UserDetails;
