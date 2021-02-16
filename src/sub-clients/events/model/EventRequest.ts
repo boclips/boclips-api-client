@@ -1,1 +1,3 @@
-export interface EventRequest {}
+export interface EventRequest {
+  type: string;
+}

@@ -4,7 +4,9 @@ import { Video } from '../../videos/model/Video';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { EventRequest } from '../model/EventRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
+import { PlatformInteractedWith } from '../model/PlatformInteractedWith';
 import { SearchQueryCompletionsSuggestedRequest } from '../model/SearchQueryCompletionsSuggestedRequest';
+import { VideoInteractedWith } from '../model/VideoInteractedWith';
 import { EventsClient } from './EventsClient';
 
 export class FakeEventsClient implements EventsClient, Clearable {
@@ -32,7 +34,7 @@ export class FakeEventsClient implements EventsClient, Clearable {
   }
 
   public trackUserExpired(): Promise<void> {
-    this.events.push('USER_EXPIRED');
+    this.events.push({ type: 'USER_EXPIRED' });
     return Promise.resolve();
   }
 
@@ -40,19 +42,25 @@ export class FakeEventsClient implements EventsClient, Clearable {
     subtype: string,
     anonymous?: boolean,
   ): Promise<void> {
-    this.events.push({ type: 'PLATFORM_INTERACTED_WITH', subtype, anonymous });
+    const event: PlatformInteractedWith = {
+      type: 'PLATFORM_INTERACTED_WITH',
+      subtype,
+      anonymous,
+    };
+
+    this.events.push(event);
     return Promise.resolve();
   }
 
   trackVideoInteraction(
-    video: Pick<Video, 'id' | 'links'>,
+    _video: Pick<Video, 'id' | 'links'>,
     subtype: string,
   ): Promise<void> {
-    this.events.push({
+    const event: VideoInteractedWith = {
       type: 'VIDEO_INTERACTED_WITH',
       subtype,
-      videoId: video.id,
-    });
+    };
+    this.events.push(event);
     return Promise.resolve();
   }
 
