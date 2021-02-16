@@ -1,5 +1,6 @@
 import { Collection } from '../../collections/model/Collection';
 import { Clearable } from '../../common/utils/Clearable';
+import { Video } from '../../videos/model/Video';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { EventRequest } from '../model/EventRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
@@ -40,6 +41,18 @@ export class FakeEventsClient implements EventsClient, Clearable {
     anonymous?: boolean,
   ): Promise<void> {
     this.events.push({ type: 'PLATFORM_INTERACTED_WITH', subtype, anonymous });
+    return Promise.resolve();
+  }
+
+  trackVideoInteraction(
+    video: Pick<Video, 'id' | 'links'>,
+    subtype: string,
+  ): Promise<void> {
+    this.events.push({
+      type: 'VIDEO_INTERACTED_WITH',
+      subtype,
+      videoId: video.id,
+    });
     return Promise.resolve();
   }
 

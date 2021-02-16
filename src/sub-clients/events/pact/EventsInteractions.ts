@@ -113,3 +113,19 @@ export const trackSearchQueryCompletionsSuggested = (
     status: 201,
   },
 });
+
+export const trackVideoInteraction = (
+  videoId: string,
+  subtype: string,
+): InteractionObject => ({
+  state: undefined,
+  uponReceiving: 'POST VideoInteractedWith event',
+  withRequest: {
+    method: 'POST',
+    path: `/v1/videos/${videoId}/events`,
+    query: `logVideoInteraction=true&type=${subtype}`,
+  },
+  willRespondWith: {
+    status: 200,
+  },
+});

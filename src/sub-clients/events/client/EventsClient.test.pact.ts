@@ -6,7 +6,9 @@ import {
   FakeBoclipsClient,
   isATestClient,
 } from '../../../test-support';
+import { VideoFactory } from '../../../test-support/VideosFactory';
 import { Link } from '../../common/model/LinkEntity';
+import { Video } from '../../videos/model/Video';
 import {
   CollectionInteractedWithRequest,
   CollectionInteractionType,
@@ -19,6 +21,7 @@ import {
   trackPageRendered,
   trackPlatformInteraction,
   trackSearchQueryCompletionsSuggested,
+  trackVideoInteraction,
 } from '../pact/EventsInteractions';
 
 describe('EventsClient', () => {
@@ -129,6 +132,38 @@ describe('EventsClient', () => {
             type: 'PLATFORM_INTERACTED_WITH',
             subtype: 'CONTRACT_TEST_CLICK',
             anonymous: true,
+          });
+        }
+      });
+
+      it(`can track video interaction events`, async () => {
+        const stagingVideoId = '5c542ab85438cdbcb56ddceb';
+        const video: Video = VideoFactory.sample({
+          id: stagingVideoId,
+        });
+
+        video.links.logInteraction = new Link({
+          href: `${provider.mockService.baseUrl}/v1/videos/${video.id}/events?logVideoInteraction=true{&type}`,
+          templated: true,
+        });
+
+        if (isATestClient(client)) {
+          client.videos.insertVideo(video);
+        }
+
+        await provider.addInteraction(
+          trackVideoInteraction(stagingVideoId, 'CONTRACT_TEST_CLICK'),
+        );
+
+        await client.events.trackVideoInteraction(video, 'CONTRACT_TEST_CLICK');
+
+        if (isATestClient(client)) {
+          const events = client.events.getEvents();
+          expect(events.length).toEqual(1);
+          expect(events[0]).toEqual({
+            type: 'VIDEO_INTERACTED_WITH',
+            subtype: 'CONTRACT_TEST_CLICK',
+            videoId: video.id,
           });
         }
       });

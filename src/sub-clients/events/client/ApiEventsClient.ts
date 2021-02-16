@@ -1,5 +1,6 @@
 import { Collection } from '../../collections/model/Collection';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
+import { Video } from '../../videos/model/Video';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
 import { SearchQueryCompletionsSuggestedRequest } from '../model/SearchQueryCompletionsSuggestedRequest';
@@ -62,5 +63,14 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
     }).getTemplatedLink({ subtype, anonymous });
 
     return this.axios.post(expandedLink);
+  }
+
+  public trackVideoInteraction(
+    video: Pick<Video, 'id' | 'links'>,
+    subtype: string,
+  ): Promise<void> {
+    return this.axios.post(
+      video.links.logInteraction.getTemplatedLink({ type: subtype }),
+    );
   }
 }
