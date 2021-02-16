@@ -2,11 +2,13 @@ import { Collection } from '../../collections/model/Collection';
 import { Clearable } from '../../common/utils/Clearable';
 import { Video } from '../../videos/model/Video';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
-import { EventRequest } from '../model/EventRequest';
+import {
+  EventRequest,
+  PlatformInteractedWith,
+  VideoInteractedWith,
+} from '../model/EventRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
-import { PlatformInteractedWith } from '../model/PlatformInteractedWith';
 import { SearchQueryCompletionsSuggestedRequest } from '../model/SearchQueryCompletionsSuggestedRequest';
-import { VideoInteractedWith } from '../model/VideoInteractedWith';
 import { EventsClient } from './EventsClient';
 
 export class FakeEventsClient implements EventsClient, Clearable {
