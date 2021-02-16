@@ -163,7 +163,6 @@ describe('EventsClient', () => {
           expect(events[0]).toEqual({
             type: 'VIDEO_INTERACTED_WITH',
             subtype: 'CONTRACT_TEST_CLICK',
-            videoId: video.id,
           });
         }
       });
