@@ -5,6 +5,7 @@ import { ContentCategories } from '../model/ContentCategories';
 import { Channel } from '../model/Channel';
 import { ChannelRequest } from '../model/ChannelRequest';
 import { ChannelsClient } from './ChannelsClient';
+import { Projection } from '../../common/model/Projection';
 
 export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
   public async create(request: ChannelRequest): Promise<void> {
@@ -16,11 +17,15 @@ export class ApiChannelsClient extends ApiSubClient implements ChannelsClient {
     );
   }
 
-  public async getAll(): Promise<Channel[]> {
+  public async getAll(projection?: Projection): Promise<Channel[]> {
     const contentPartnersLink = this.getLinkOrThrow('channels');
 
     return this.axios
-      .get(expandUrlTemplate(contentPartnersLink.href, {}))
+      .get(
+        expandUrlTemplate(contentPartnersLink.href, {
+          projection: projection,
+        }),
+      )
       .then(ChannelsConverter.convertEmbeddedResources);
   }
 
