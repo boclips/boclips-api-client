@@ -32,9 +32,6 @@ describe('CartsClient', () => {
 
         expect(response.items[0].id).not.toBeNull();
         expect(response.items[0].videoId).toEqual('video-id-1');
-        expect(response.items[0].links.self.getOriginalLink()).toEqual(
-          '/cartItem',
-        );
         expect(response.links.self.getOriginalLink()).not.toBeNull();
         expect(response.links.addItem.getOriginalLink()).not.toBeNull();
       });

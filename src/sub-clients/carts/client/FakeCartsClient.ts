@@ -1,5 +1,7 @@
-import { CartsFactory } from '../../../test-support/CartsFactory';
-import { Link } from '../../common/model/LinkEntity';
+import {
+  CartItemFactory,
+  CartsFactory,
+} from '../../../test-support/CartsFactory';
 import { Clearable } from '../../common/utils/Clearable';
 import { AdditionalServices } from '../model/AdditionalServices';
 import { Cart } from '../model/Cart';
@@ -12,31 +14,22 @@ export class FakeCartsClient implements CartsClient, Clearable {
     return (this.cart.items.length + 1).toString();
   };
 
-  private createCartItem = (videoId: string): CartItem => {
-    return {
-      id: this.generateItemId(),
-      videoId,
-      additionalServices: null,
-      links: {
-        self: new Link({ href: `/cartItem`, templated: false }),
-        additionalServices: new Link({
-          href: `/cartItem/123/additional-services`,
-          templated: true,
-        }),
-      },
-    };
-  };
-
   public getCart(): Promise<Cart> {
     return Promise.resolve(this.cart);
   }
 
-  public insertCartItem(videoId: string) {
-    this.cart.items.push(this.createCartItem(videoId));
+  public insertCartItem(cartItem: Partial<CartItem>) {
+    this.cart.items.push(
+      CartItemFactory.sample({ ...cartItem, id: this.generateItemId() }),
+    );
   }
 
   public addItemToCart(_: any, videoId: string): Promise<CartItem> {
-    const cartItem = this.createCartItem(videoId);
+    const cartItem = CartItemFactory.sample({
+      id: this.generateItemId(),
+      videoId,
+    });
+
     this.cart.items.push(cartItem);
 
     return Promise.resolve(cartItem);
