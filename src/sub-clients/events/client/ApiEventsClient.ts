@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { Collection } from '../../collections/model/Collection';
 import { ApiSubClient } from '../../common/client/ApiSubClient';
 import { Video } from '../../videos/model/Video';
@@ -18,6 +19,7 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
     return this.axios.post(
       trackSearchQueryCompletionsSuggestedLink.href,
       request,
+      this.getHeaderWithReferer(),
     );
   }
 
@@ -62,7 +64,7 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
       templated: trackLinkEntity.templated,
     }).getTemplatedLink({ subtype, anonymous });
 
-    return this.axios.post(expandedLink);
+    return this.axios.post(expandedLink, {}, this.getHeaderWithReferer());
   }
 
   public trackVideoInteraction(
@@ -71,6 +73,14 @@ export class ApiEventsClient extends ApiSubClient implements EventsClient {
   ): Promise<void> {
     return this.axios.post(
       video.links.logInteraction.getTemplatedLink({ type: subtype }),
+      {},
+      this.getHeaderWithReferer(),
     );
+  }
+
+  private getHeaderWithReferer(): AxiosRequestConfig {
+    return {
+      headers: { 'Boclips-Referer': window.location.href },
+    };
   }
 }

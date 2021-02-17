@@ -1,4 +1,5 @@
 import { InteractionObject } from '@pact-foundation/pact';
+import { like } from '@pact-foundation/pact/dsl/matchers';
 import { Collection } from '../../collections/model/Collection';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';
@@ -70,6 +71,9 @@ export const trackPlatformInteraction = (
     method: 'POST',
     path: `/v1/events/platform-interaction`,
     query: `subtype=${subtype}`,
+    headers: {
+      'Boclips-Referer': like('contract-tests/random?hello=there'),
+    },
   },
   willRespondWith: {
     status: 201,
@@ -101,6 +105,7 @@ export const trackSearchQueryCompletionsSuggested = (
     path: `/v1/events/suggested-search-completions`,
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
+      'Boclips-Referer': like('contract-tests/random?hello=there'),
     },
     body: {
       searchQuery: request.searchQuery,
@@ -124,6 +129,9 @@ export const trackVideoInteraction = (
     method: 'POST',
     path: `/v1/videos/${videoId}/events`,
     query: `logVideoInteraction=true&type=${subtype}`,
+    headers: {
+      'Boclips-Referer': like('contract-tests/random?hello=there'),
+    },
   },
   willRespondWith: {
     status: 200,
