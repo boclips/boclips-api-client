@@ -20,7 +20,9 @@ export class FakeCartsClient implements CartsClient, Clearable {
 
   public insertCartItem(cartItem: Partial<CartItem>) {
     this.cart.items.push(
-      CartItemFactory.sample({ ...cartItem, id: this.generateItemId() }),
+      CartItemFactory.sample({
+        ...cartItem,
+      }),
     );
   }
 
