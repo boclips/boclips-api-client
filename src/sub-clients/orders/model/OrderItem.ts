@@ -9,6 +9,7 @@ export interface OrderItem {
   };
   price?: OrderPrice;
   captionsRequested: boolean;
+  transcriptRequested?: boolean;
   editRequest?: string;
   video: OrderItemVideo;
   trim?: string;

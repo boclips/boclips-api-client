@@ -127,6 +127,8 @@ describe('OrderConvert', () => {
               videoReference: '3240536A-E9F9-4470-97AB-F24EB32BA414',
               maxResolutionAvailable: true,
               captionStatus: 'REQUESTED',
+              transcriptRequested: true,
+              editRequest: '123',
               _links: {
                 updatePrice: {
                   href: '/v1/orders/123/items/456?price={price}',
@@ -198,6 +200,12 @@ describe('OrderConvert', () => {
     );
     expect(convertedItem[0].captionsRequested).toEqual(
       orderItemResource.data.items[0].captionsRequested,
+    );
+    expect(convertedItem[0].editRequest).toEqual(
+      orderItemResource.data.items[0].editRequest,
+    );
+    expect(convertedItem[0].transcriptRequested).toEqual(
+      orderItemResource.data.items[0].transcriptRequested,
     );
     expect(convertedItem[0].price).toEqual(
       orderItemResource.data.items[0].price,
