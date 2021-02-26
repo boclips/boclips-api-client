@@ -28,5 +28,5 @@ export interface Channel {
   ingest?: IngestDetails;
   contractId?: string;
   contractName?: string;
-  links: { self: Link };
+  links: { self?: Link };
 }

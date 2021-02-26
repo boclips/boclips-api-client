@@ -65,7 +65,7 @@ export class ChannelsConverter {
       contractId,
       contractName,
       links: {
-        self: new Link(_links.self),
+        self: !!_links && !!_links.self ? new Link(_links.self) : undefined,
       },
     };
   }

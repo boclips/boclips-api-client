@@ -47,7 +47,7 @@ describe('ChannelsClient', () => {
         expect(response).toHaveLength(1);
         expect(response[0].id).toEqual(existingChannelFromStaging);
         expect(response[0].name).toEqual('a name');
-        expect(response[0].links.self.getOriginalLink()).toContain(
+        expect(response[0].links.self!!.getOriginalLink()).toContain(
           `/v1/channels/${existingChannelFromStaging}`,
         );
       });
