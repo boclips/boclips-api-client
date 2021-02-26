@@ -1,6 +1,6 @@
 import { existingContractFromStaging } from './../../contracts/pact/ContractsInteractions';
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { term } from '@pact-foundation/pact/dsl/matchers';
+import { term } from '@pact-foundation/pact/src/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 

@@ -1,5 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { eachLike } from '@pact-foundation/pact/dsl/matchers';
+import { eachLike } from '@pact-foundation/pact/src/dsl/matchers';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 
 export const getSuggestions = (): InteractionObject => ({

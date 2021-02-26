@@ -1,5 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
+import { eachLike, like } from '@pact-foundation/pact/src/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { UpdateOrganisationRequest } from '../model/UpdateOrganisationRequest';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';

@@ -1,5 +1,5 @@
 import { InteractionObject } from '@pact-foundation/pact';
-import { like } from '@pact-foundation/pact/dsl/matchers';
+import { like } from '@pact-foundation/pact/src/dsl/matchers';
 import { Collection } from '../../collections/model/Collection';
 import { CollectionInteractedWithRequest } from '../model/CollectionInteractedWithRequest';
 import { PageRenderedRequest } from '../model/PageRenderedRequest';

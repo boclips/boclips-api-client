@@ -1,5 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { eachLike, like } from '@pact-foundation/pact/dsl/matchers';
+import { eachLike, like } from '@pact-foundation/pact/src/dsl/matchers';
 import { UpdateVideoRequest } from '../model/UpdateVideoRequest';
 import { Link } from '../../common/model/LinkEntity';
 import { VideoSearchRequest } from '../model/VideoSearchRequest';

@@ -1,5 +1,5 @@
 import { InteractionObject, Matchers } from '@pact-foundation/pact';
-import { eachLike, term } from '@pact-foundation/pact/dsl/matchers';
+import { eachLike, term } from '@pact-foundation/pact/src/dsl/matchers';
 import { CustomMatchers } from '../../../pact-support/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { getFilteredCollectionsQuery } from '../../../test-support';

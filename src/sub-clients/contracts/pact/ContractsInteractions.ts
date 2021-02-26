@@ -3,7 +3,7 @@ import {
   eachLike,
   somethingLike,
   term,
-} from '@pact-foundation/pact/dsl/matchers';
+} from '@pact-foundation/pact/src/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 import { PageRequest } from '../../common/model/PageRequest';
 import { Projection } from '../../common/model/Projection';

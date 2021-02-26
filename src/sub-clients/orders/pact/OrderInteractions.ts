@@ -3,7 +3,7 @@ import { OrderStatus } from '../model/Order';
 import { OrderItemUpdateRequest } from './../model/OrderItemUpdateRequest';
 import contentTypeRegex from '../../../test-support/HalJsonContentTypeRegex';
 import { OrderUpdateRequest } from '../model/OrderUpdateRequest';
-import { term } from '@pact-foundation/pact/dsl/matchers';
+import { term } from '@pact-foundation/pact/src/dsl/matchers';
 import { provider } from '../../../pact-support/pactSetup';
 
 const { eachLike, like } = Matchers;

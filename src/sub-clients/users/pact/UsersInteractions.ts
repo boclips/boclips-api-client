@@ -1,5 +1,5 @@
 import { InteractionObject } from '@pact-foundation/pact';
-import { like } from '@pact-foundation/pact/dsl/matchers';
+import { like } from '@pact-foundation/pact/src/dsl/matchers';
 
 export const inactiveUser = (id: string): InteractionObject => ({
   state: undefined,
