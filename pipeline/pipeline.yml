@@ -101,7 +101,7 @@ resources:
   type: git
   source:
     branch: master
-    private_key: ((boclips-api-client.repo-key))
+    private_key: ((versions.repo-key))
     uri: git@github.com:boclips/boclips-api-client.git
 
 - name: version
