@@ -5,120 +5,124 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [31.0.3] - 2020-02-26
+## [31.0.4] - 2021-03-08
 
 - make `self` link optional in Channel
 
-## [31.0.2] - 2020-02-17
+## [31.0.3] - 2021-02-26
+
+- make `self` link optional in Channel
+
+## [31.0.2] - 2021-02-17
 
 - Add editRequested and transcriptRequested to orderItem
 
-## [31.0.1] - 2020-02-17
+## [31.0.1] - 2021-02-17
 
 - Set Boclips-Referer header in events: `VideoInteractedWith`, `SearchQueryCompletionsSuggested` and `PlatformInteractedWith`
 
-## [31.0.0] - 2020-02-17
+## [31.0.0] - 2021-02-17
 
 - Change how FakeCartsClient can be populated with test data - now it can take a partial CartItem
 
-## [30.1.0] - 2020-02-17
+## [30.1.0] - 2021-02-17
 
 - Add possibility to project resource when calling for all channels
 
-## [30.0.0] - 2020-02-08
+## [30.0.0] - 2021-02-08
 
 - Rename `legacyOrderId` to `searchableOrderId` in orders
 
-## [29.0.3] - 2020-02-03
+## [29.0.3] - 2021-02-03
 
 - Fix FakeCartsClient's implementation of updating additional services
 
-## [29.0.2] - 2020-02-03
+## [29.0.2] - 2021-02-03
 
 - Fix FakeCartsClient so it uses an empty cart after clear or creating a new instance
 
-## [29.0.1] - 2020-02-03
+## [29.0.1] - 2021-02-03
 
 - Move comment about optional pact fields to correct place (mocking a response for fetching an organisation)
 
-## [29.0.0] - 2020-02-02
+## [29.0.0] - 2021-02-02
 
 - Return 'deal' field on organisation resource and cleanup root level of the resource object
 
-## [28.1.0] - 2020-02-02
+## [28.1.0] - 2021-02-02
 
 - Surface price facets and allow filtering by price in video search
 
-## [28.0.0] - 2020-02-01
+## [28.0.0] - 2021-02-01
 
 - Update `deliveryDate` on Order to `deliveredAt`
 
-## [27.2.2] - 2020-01-26
+## [27.2.2] - 2021-01-26
 
 - Add `CartsFactory` and `CartItemsFactory`
 
-## [27.2.1] - 2020-01-26
+## [27.2.1] - 2021-01-26
 
 - Add additionalServices link to cart item and use it for PATCH request
 
-## [27.2.0] - 2020-01-25
+## [27.2.0] - 2021-01-25
 
 - Add editRequest to Order and Cart
 
-## [27.1.2] - 2020-01-25
+## [27.1.2] - 2021-01-25
 
 - Add `note` to OrderConverter
 
-## [27.1.1] - 2020-01-25
+## [27.1.1] - 2021-01-25
 
 - Add `captionsRequested` to `AdditionalServices`
 
-## [27.1.0] - 2020-01-25
+## [27.1.0] - 2021-01-25
 
 - Add `transcriptRequested` to `AdditionalServices`
 
-## [27.0.0] - 2020-01-22
+## [27.0.0] - 2021-01-22
 
 - No change, just syncing up the version with our releases.
 
-## [26.0.1] - 2020-01-22
+## [26.0.1] - 2021-01-22
 
 - Refactor FakeUsersClient to have a default currentUser.
 
-## [26.0.0] - 2020-01-21
+## [26.0.0] - 2021-01-21
 
 - Add note field to the Cart and Order
 - The placeOrder function on OrdersClient takes PlaceOrderRequest object
 
-## [25.0.1] - 2020-01-21
+## [25.0.1] - 2021-01-21
 
 - Add deliveryDate to Order
 
-## [25.0.0] - 2020-01-21
+## [25.0.0] - 2021-01-21
 
 - Rename `transcriptRequested` to `captionsRequested` in `order`
 
-## [24.0.2] - 2020-01-19
+## [24.0.2] - 2021-01-19
 
 - Bug fixes and tsc fixed for PATCH cart item
 
-## [24.0.1] - 2020-01-13
+## [24.0.1] - 2021-01-13
 
 - Add PATCH cart item with additional services
 
-## [24.0.0] - 2020-01-13
+## [24.0.0] - 2021-01-13
 
 - Remove `throughPlatform` from `Order`
 
-## [23.0.1] - 2020-01-13
+## [23.0.1] - 2021-01-13
 
 - Fix order's client to use 0 based pagination
 
-## [23.0.0] - 2020-01-12
+## [23.0.0] - 2021-01-12
 
 - Remove displayValue from price on Video
 
-## [22.0.0] - 2020-01-04
+## [22.0.0] - 2021-01-04
 
 - Implement paginated order response with page and orders
 
