@@ -148,7 +148,7 @@ export const placeOrderInteraction = (): InteractionObject => ({
         },
       ],
       user: {
-        id: 'b66f6f98-3c5b-49e3-ac1b-2e8def6c95c0',
+        id: '332eadf7-0b69-4fad-a919-2b210b8325c4',
         email: 'definitely-not-batman@wayne.com',
         firstName: 'Bruce',
         lastName: 'Wayne',

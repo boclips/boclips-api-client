@@ -23,15 +23,10 @@ describe('CartsClient', () => {
       });
 
       it('can get cart', async () => {
-        if (isATestClient(client)) {
-          await client.carts.addItemToCart('', 'video-id-1');
-        }
-
         await provider.addInteraction(getCartsInteraction());
         const response = await client.carts.getCart();
 
-        expect(response.items[0].id).not.toBeNull();
-        expect(response.items[0].videoId).toEqual('video-id-1');
+        expect(response.items).not.toBeNull();
         expect(response.links.self.getOriginalLink()).not.toBeNull();
         expect(response.links.addItem.getOriginalLink()).not.toBeNull();
       });

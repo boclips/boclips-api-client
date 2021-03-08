@@ -21,14 +21,7 @@ export const getCartsInteraction = (): InteractionObject => ({
       }),
     },
     body: {
-      items: eachLike({
-        id: 'item-id',
-        videoId: 'video-id-1',
-        _links: {
-          self: like({ href: '/cartItem' }),
-          additionalServices: like({ href: '/cartItem/additional-services' }),
-        },
-      }),
+      items: [],
       _links: {
         self: like({ href: '/cartItem' }),
         addItem: like({ href: '/addItem' }),
@@ -59,14 +52,7 @@ export const updateCartInteraction = (note: string): InteractionObject => ({
       }),
     },
     body: {
-      items: eachLike({
-        id: 'item-id',
-        videoId: 'video-id-1',
-        _links: {
-          self: like({ href: '/cartItem' }),
-          additionalServices: like({ href: '/cartItem/additional-services' }),
-        },
-      }),
+      items: [],
       note,
       _links: {
         self: like({ href: '/carts' }),
