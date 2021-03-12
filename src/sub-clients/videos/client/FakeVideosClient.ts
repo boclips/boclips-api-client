@@ -9,6 +9,7 @@ import { PageableFactory } from '../../common/model/PageableFactory';
 import { UpdateCaptionRequest } from '../model/UpdateCaptionRequest';
 import { CaptionContent } from '../model/CaptionContent';
 import { Link } from '../../common/model/LinkEntity';
+import { BoclipsApiErrorFactory } from '../../../test-support/BoclipsApiErrorFactory';
 
 export class FakeVideosClient implements VideosClient, Clearable {
   private videos: Video[] = [];
@@ -26,7 +27,8 @@ export class FakeVideosClient implements VideosClient, Clearable {
 
   public get(id: string, referer?: string, shareCode?: string): Promise<Video> {
     const video = this.videos.find((video) => video.id === id);
-    if (video === undefined) return Promise.reject();
+    if (video === undefined)
+      return Promise.reject(BoclipsApiErrorFactory.sample({ status: 404 }));
 
     const isAuthenticatedUser = !(referer || shareCode);
     const isShareCodeValid = this.validShareCode[referer || ''] === shareCode;
